@@ -6,6 +6,12 @@
 #include "randombytes.h"
 #include "sign.h"
 #include "symmetric.h"
+
+#ifdef PQCLEAN_DILITHIUM2_RAVI_X86
+/* BEGIN HPC-X86 RAVI INCLUDE */
+#include "ravi_z_generation_x86.h"
+/* END HPC-X86 RAVI INCLUDE */
+#endif
 #include <stdint.h>
 
 /*************************************************
@@ -142,7 +148,13 @@ rej:
     /* Compute z, reject if it reveals secret */
     PQCLEAN_DILITHIUM2_CLEAN_polyvecl_pointwise_poly_montgomery(&z, &cp, &s1);
     PQCLEAN_DILITHIUM2_CLEAN_polyvecl_invntt_tomont(&z);
+#ifdef PQCLEAN_DILITHIUM2_RAVI_X86
+    /* BEGIN HPC-X86 RAVI Z HOOK */
+    PQCLEAN_DILITHIUM2_CLEAN_ravi_z_generation_apply(&z, &y);
+    /* END HPC-X86 RAVI Z HOOK */
+#else
     PQCLEAN_DILITHIUM2_CLEAN_polyvecl_add(&z, &z, &y);
+#endif
     PQCLEAN_DILITHIUM2_CLEAN_polyvecl_reduce(&z);
     if (PQCLEAN_DILITHIUM2_CLEAN_polyvecl_chknorm(&z, GAMMA1 - BETA)) {
         goto rej;
