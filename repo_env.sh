@@ -10,6 +10,5 @@ export PROFILE_DIR="${PROFILE_DIR:-$REPO_ROOT/profiles/default}"
 
 export CC="${CC:-gcc}"
 export CFLAGS="${CFLAGS:--O2 -g -std=c11 -Wall -Wextra -Wpedantic -fno-omit-frame-pointer}"
-export HPC_CPU="${HPC_CPU:--1}"
 export HPC_REPEATS="${HPC_REPEATS:-20}"
 export HPC_ITERATIONS="${HPC_ITERATIONS:-200000}"
