@@ -1,0 +1,5 @@
+pqm4 upstream: https://github.com/mupq/pqm4.git
+pqm4 branch: hpc-round3
+pqm4 commit: 26f810d332b829a2c16220294db7a882b2072f4d
+
+Imported as ordinary source files; no Git submodule relationship is retained.
