@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+export EXP_NAME="Islam_Signature_Correction_Attack"
+export EXP_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+export EXP_RESULTS_DIR="${EXP_RESULTS_DIR:-$RESULTS_DIR/$EXP_NAME}"
+
+export SIGNCORR_SAMPLES="${SIGNCORR_SAMPLES:-500}"
+export SIGNCORR_WARMUP="${SIGNCORR_WARMUP:-10}"
+export SIGNCORR_TARGET_VEC="${SIGNCORR_TARGET_VEC:-0}"
+export SIGNCORR_TARGET_COEFF="${SIGNCORR_TARGET_COEFF:-17}"
+export SIGNCORR_BIT_INDEX="${SIGNCORR_BIT_INDEX:-0}"
+export SIGNCORR_MAX_ATTEMPTS="${SIGNCORR_MAX_ATTEMPTS:-128}"
+export SIGNCORR_MIN_RUNNING="${SIGNCORR_MIN_RUNNING:-95.0}"
+export SIGNCORR_SEARCH_BITS="${SIGNCORR_SEARCH_BITS:-3}"
+
+if [[ -z "${HPC_CPU:-}" || "${HPC_CPU}" == "-1" ]]; then
+    export HPC_CPU=0
+fi

@@ -119,3 +119,7 @@ include $(REPO_ROOT)/scripts/Fault-Injection_Attacks_against_NISTs_PQC_Round_3_K
 # BEGIN HPC-X86 DELVAUX ROULETTE
 include $(REPO_ROOT)/scripts/Delvaux_Roulette/exp.mk
 # END HPC-X86 DELVAUX ROULETTE
+
+# BEGIN HPC-X86 ISLAM SIGNATURE CORRECTION
+include $(REPO_ROOT)/scripts/Islam_Signature_Correction_Attack/exp.mk
+# END HPC-X86 ISLAM SIGNATURE CORRECTION

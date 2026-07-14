@@ -6,6 +6,9 @@
 #include "randombytes.h"
 #include "sign.h"
 #include "symmetric.h"
+#ifdef PQCLEAN_DILITHIUM2_SIGNATURE_CORRECTION_X86
+#include "signature_correction_x86.h"
+#endif
 
 #ifdef PQCLEAN_DILITHIUM2_RAVI_X86
 /* BEGIN HPC-X86 RAVI INCLUDE */
@@ -116,7 +119,11 @@ int PQCLEAN_DILITHIUM2_CLEAN_crypto_sign_signature(uint8_t *sig,
 
     /* Expand matrix and transform vectors */
     PQCLEAN_DILITHIUM2_CLEAN_polyvec_matrix_expand(mat, rho);
+#ifdef PQCLEAN_DILITHIUM2_SIGNATURE_CORRECTION_X86
+    PQCLEAN_DILITHIUM2_CLEAN_signcorr_prepare_and_measure_s1(&s1);
+#else
     PQCLEAN_DILITHIUM2_CLEAN_polyvecl_ntt(&s1);
+#endif
     PQCLEAN_DILITHIUM2_CLEAN_polyveck_ntt(&s2);
     PQCLEAN_DILITHIUM2_CLEAN_polyveck_ntt(&t0);
 
