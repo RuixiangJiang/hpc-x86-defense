@@ -6,6 +6,11 @@
 #include "randombytes.h"
 #include "sign.h"
 #include "symmetric.h"
+/* BEGIN HPC-X86 FIDDLING TWIDDLE INCLUDE */
+#ifdef PQCLEAN_DILITHIUM2_FIDDLE_TWIDDLE_X86
+#include "fiddling_twiddle_x86.h"
+#endif
+/* END HPC-X86 FIDDLING TWIDDLE INCLUDE */
 #ifdef PQCLEAN_DILITHIUM2_SIGNATURE_CORRECTION_X86
 #include "signature_correction_x86.h"
 #endif
@@ -133,7 +138,13 @@ rej:
 
     /* Matrix-vector multiplication */
     z = y;
+    /* BEGIN HPC-X86 FIDDLING TWIDDLE Y NTT HOOK */
+#ifdef PQCLEAN_DILITHIUM2_FIDDLE_TWIDDLE_X86
+    PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_polyvecl_ntt(&z);
+#else
     PQCLEAN_DILITHIUM2_CLEAN_polyvecl_ntt(&z);
+#endif
+    /* END HPC-X86 FIDDLING TWIDDLE Y NTT HOOK */
     PQCLEAN_DILITHIUM2_CLEAN_polyvec_matrix_pointwise_montgomery(&w1, mat, &z);
     PQCLEAN_DILITHIUM2_CLEAN_polyveck_reduce(&w1);
     PQCLEAN_DILITHIUM2_CLEAN_polyveck_invntt_tomont(&w1);

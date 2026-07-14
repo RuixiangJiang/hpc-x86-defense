@@ -36,7 +36,16 @@ static const int32_t zetas[N] = {
     -426683,  1723600, -1803090,  1910376, -1667432, -1104333,  -260646, -3833893,
     -2939036, -2235985,  -420899, -2286327,   183443,  -976891,  1612842, -3545687,
     -554416,  3919660,   -48306, -1362209,  3937738,  1400424,  -846154,  1976782
+
 };
+
+/* BEGIN HPC-X86 FIDDLING TWIDDLE ZETA ACCESSOR */
+#ifdef PQCLEAN_DILITHIUM2_FIDDLE_TWIDDLE_X86
+const int32_t *PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_zetas(void) {
+    return zetas;
+}
+#endif
+/* END HPC-X86 FIDDLING TWIDDLE ZETA ACCESSOR */
 
 /*************************************************
 * Name:        PQCLEAN_DILITHIUM2_CLEAN_ntt

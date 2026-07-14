@@ -123,3 +123,8 @@ include $(REPO_ROOT)/scripts/Delvaux_Roulette/exp.mk
 # BEGIN HPC-X86 ISLAM SIGNATURE CORRECTION
 include $(REPO_ROOT)/scripts/Islam_Signature_Correction_Attack/exp.mk
 # END HPC-X86 ISLAM SIGNATURE CORRECTION
+
+# BEGIN HPC-X86 RAVI FIDDLING TWIDDLE
+include $(REPO_ROOT)/scripts/Fiddling_the_Twiddle_Constants/exp.mk
+# END HPC-X86 RAVI FIDDLING TWIDDLE
+
