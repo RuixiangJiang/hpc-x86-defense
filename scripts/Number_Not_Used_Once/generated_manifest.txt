@@ -1,0 +1,29 @@
+Ravi et al. Number Not Used Once x86 experiment
+
+PMU configuration:
+  retired-loads:  type=4 config=0x81d0
+  retired-stores: type=4 config=0x82d0
+
+Created or overwritten experiment files:
+  scripts/Number_Not_Used_Once/analyze.py
+  scripts/Number_Not_Used_Once/build.sh
+  scripts/Number_Not_Used_Once/exp.mk
+  scripts/Number_Not_Used_Once/exp_env.sh
+  scripts/Number_Not_Used_Once/readme.md
+  scripts/Number_Not_Used_Once/run_all.sh
+  scripts/Number_Not_Used_Once/run_attack_nonce.sh
+  scripts/Number_Not_Used_Once/run_base.sh
+  scripts/Number_Not_Used_Once/run_mode.sh
+  targets/number_not_used_once/main.c
+  third_party/pqm4/mupq/pqclean/crypto_sign/dilithium2/clean/ravi_nnuo_x86.c
+  third_party/pqm4/mupq/pqclean/crypto_sign/dilithium2/clean/ravi_nnuo_x86.h
+
+Modified project files:
+  Makefile
+
+Original PQClean implementation files modified:
+  none
+
+The original poly_uniform_eta sampler is called without changes.
+Fault selection is compile-time and outside the measured window.
+HPC window: selected target nonce update only.

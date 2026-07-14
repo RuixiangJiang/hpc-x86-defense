@@ -1,0 +1,131 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import csv
+import math
+import statistics
+from pathlib import Path
+
+EVENTS = [
+    "cycles",
+    "instructions",
+    "branches",
+    "branch-misses",
+    "retired-loads",
+    "retired-stores",
+]
+
+EXACT_EVENTS = {
+    "instructions",
+    "branches",
+    "retired-loads",
+    "retired-stores",
+}
+
+
+def read_rows(path: Path, minimum_running: float) -> list[dict[str, float]]:
+    rows: list[dict[str, float]] = []
+
+    with path.open(newline="", encoding="utf-8") as handle:
+        for raw in csv.DictReader(handle):
+            if int(raw["semantic_valid"]) != 1:
+                continue
+
+            valid_mask = int(raw["valid_mask"], 0)
+            error_code = int(raw["error_code"])
+            running = float(raw["running_percent"])
+
+            if error_code != 0:
+                continue
+            if valid_mask != (1 << len(EVENTS)) - 1:
+                continue
+            if running < minimum_running:
+                continue
+
+            rows.append({event: float(raw[event]) for event in EVENTS})
+
+    return rows
+
+
+def mean_sd(values: list[float]) -> tuple[float, float]:
+    mean = statistics.fmean(values)
+    sd = statistics.stdev(values) if len(values) > 1 else 0.0
+    return mean, sd
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--baseline", type=Path, required=True)
+    parser.add_argument("--sample", type=Path, required=True)
+    parser.add_argument("--minimum-running", type=float, default=95.0)
+    parser.add_argument("--sigma", type=float, default=5.0)
+    args = parser.parse_args()
+
+    baseline = read_rows(args.baseline, args.minimum_running)
+    sample = read_rows(args.sample, args.minimum_running)
+
+    if len(baseline) < 2:
+        raise SystemExit("[error] fewer than two valid baseline samples")
+    if not sample:
+        raise SystemExit("[error] no valid attack samples")
+
+    print(f"[input] baseline={len(baseline)} sample={len(sample)}")
+    print()
+    print(
+        f"{'event':<20} {'base mean':>14} {'base sd':>14} "
+        f"{'sample mean':>14} {'delta':>14} {'outside':>10}"
+    )
+
+    stable_events: list[tuple[str, float, float]] = []
+
+    for event in EVENTS:
+        base_values = [row[event] for row in baseline]
+        sample_values = [row[event] for row in sample]
+        base_mean, base_sd = mean_sd(base_values)
+        sample_mean = statistics.fmean(sample_values)
+        delta = sample_mean - base_mean
+
+        if event in EXACT_EVENTS and base_sd == 0.0:
+            radius = 0.0
+        else:
+            radius = max(args.sigma * base_sd, 1.0)
+
+        low = base_mean - radius
+        high = base_mean + radius
+        outside = sum(value < low or value > high for value in sample_values)
+
+        cv = math.inf if base_mean == 0 else abs(base_sd / base_mean)
+        if cv <= 0.02:
+            stable_events.append((event, low, high))
+
+        print(
+            f"{event:<20} {base_mean:14.3f} {base_sd:14.3f} "
+            f"{sample_mean:14.3f} {delta:14.3f} "
+            f"{outside:4d}/{len(sample_values):<5d}"
+        )
+
+    detected = 0
+    for row in sample:
+        if any(
+            row[event] < low or row[event] > high
+            for event, low, high in stable_events
+        ):
+            detected += 1
+
+    print()
+    print("[detector]")
+    print(
+        "  stable events: "
+        + (", ".join(event for event, _, _ in stable_events) or "none")
+    )
+    print(
+        f"  detected samples: {detected}/{len(sample)} "
+        f"({100.0 * detected / len(sample):.2f}%)"
+    )
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
