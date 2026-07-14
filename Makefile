@@ -107,3 +107,7 @@ ravi-clean:
 # BEGIN HPC-X86 RAVI NUMBER NOT USED ONCE
 include $(REPO_ROOT)/scripts/Number_Not_Used_Once/exp.mk
 # END HPC-X86 RAVI NUMBER NOT USED ONCE
+
+# BEGIN HPC-X86 PESSL CCA KEM
+include $(REPO_ROOT)/scripts/Fault_Attacks_on_CCA-secure_Lattice_KEMs/exp.mk
+# END HPC-X86 PESSL CCA KEM

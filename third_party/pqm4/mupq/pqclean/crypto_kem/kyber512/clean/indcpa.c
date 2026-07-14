@@ -3,6 +3,9 @@
 #include "params.h"
 #include "poly.h"
 #include "polyvec.h"
+#ifdef PQCLEAN_KYBER512_PESSL_X86
+#include "pessl_decode_x86.h"
+#endif
 #include "randombytes.h"
 #include "symmetric.h"
 #include <stddef.h>
@@ -326,5 +329,9 @@ void PQCLEAN_KYBER512_CLEAN_indcpa_dec(uint8_t m[KYBER_INDCPA_MSGBYTES],
     PQCLEAN_KYBER512_CLEAN_poly_sub(&mp, &v, &mp);
     PQCLEAN_KYBER512_CLEAN_poly_reduce(&mp);
 
+#ifdef PQCLEAN_KYBER512_PESSL_X86
+    PQCLEAN_KYBER512_CLEAN_pessl_decode_apply(m, &mp);
+#else
     PQCLEAN_KYBER512_CLEAN_poly_tomsg(m, &mp);
+#endif
 }
