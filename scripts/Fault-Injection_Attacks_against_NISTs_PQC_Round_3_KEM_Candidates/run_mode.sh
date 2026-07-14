@@ -1,0 +1,96 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -lt 2 || $# -gt 3 ]]; then
+    echo "usage: $0 MODE OUTPUT.csv [--create-key]" >&2
+    exit 1
+fi
+
+MODE="$1"
+OUTPUT="$2"
+CREATE_KEY="${3:-}"
+
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/../common.sh"
+source "$SCRIPT_DIR/exp_env.sh"
+
+make -C "$REPO_ROOT" xagawa-round3-kem
+mkdir -p "$EXP_RESULTS_DIR" "$(dirname -- "$OUTPUT")"
+
+case "$MODE" in
+    baseline)
+        BIN="$BUILD_DIR/bin/xagawa_round3_kem_fault/xagawa_cmov_baseline"
+        ;;
+    skip-cmov)
+        BIN="$BUILD_DIR/bin/xagawa_round3_kem_fault/xagawa_cmov_skip"
+        ;;
+    *)
+        echo "[error] unknown mode: $MODE" >&2
+        exit 1
+        ;;
+esac
+
+if [[ ! "$HPC_CPU" =~ ^[0-9]+$ ]]; then
+    echo "[error] HPC_CPU must be one logical CPU number" >&2
+    exit 1
+fi
+
+CORE_CPUS="$(cat /sys/bus/event_source/devices/cpu_core/cpus 2>/dev/null || true)"
+ATOM_CPUS="$(cat /sys/bus/event_source/devices/cpu_atom/cpus 2>/dev/null || true)"
+
+python3 - "$HPC_CPU" "$CORE_CPUS" <<'PY_CPUSET'
+import sys
+
+cpu = int(sys.argv[1])
+spec = sys.argv[2]
+allowed = set()
+
+for part in spec.split(","):
+    part = part.strip()
+    if not part:
+        continue
+    if "-" in part:
+        lo, hi = part.split("-", 1)
+        allowed.update(range(int(lo), int(hi) + 1))
+    else:
+        allowed.add(int(part))
+
+if allowed and cpu not in allowed:
+    raise SystemExit(
+        f"[error] CPU {cpu} is not in the cpu_core/P-core set: {spec}"
+    )
+PY_CPUSET
+
+KEY_FILE="$EXP_RESULTS_DIR/kyber512.key"
+LOG_FILE="${OUTPUT%.csv}.log"
+
+ARGS=(
+    --samples "$XAGAWA_SAMPLES"
+    --warmup "$XAGAWA_WARMUP"
+    --tamper-byte "$XAGAWA_TAMPER_BYTE"
+    --tamper-mask "$XAGAWA_TAMPER_MASK"
+    --key-file "$KEY_FILE"
+    --output "$OUTPUT"
+)
+
+if [[ "$CREATE_KEY" == "--create-key" ]]; then
+    ARGS+=(--create-key)
+elif [[ ! -f "$KEY_FILE" ]]; then
+    echo "[error] key file does not exist: $KEY_FILE" >&2
+    echo "[hint] run the baseline/calibration first" >&2
+    exit 1
+fi
+
+echo "[configuration]"
+echo "  mode:          $MODE"
+echo "  CPU:           $HPC_CPU"
+echo "  cpu_core CPUs: ${CORE_CPUS:-unavailable}"
+echo "  cpu_atom CPUs: ${ATOM_CPUS:-unavailable}"
+echo "  samples:       $XAGAWA_SAMPLES"
+echo "  warmup:        $XAGAWA_WARMUP"
+echo "  tamper byte:   $XAGAWA_TAMPER_BYTE"
+echo "  tamper mask:   $XAGAWA_TAMPER_MASK"
+echo "  output:        $OUTPUT"
+echo
+
+taskset -c "$HPC_CPU" "$BIN" "${ARGS[@]}" 2>&1 | tee "$LOG_FILE"

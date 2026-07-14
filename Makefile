@@ -111,3 +111,7 @@ include $(REPO_ROOT)/scripts/Number_Not_Used_Once/exp.mk
 # BEGIN HPC-X86 PESSL CCA KEM
 include $(REPO_ROOT)/scripts/Fault_Attacks_on_CCA-secure_Lattice_KEMs/exp.mk
 # END HPC-X86 PESSL CCA KEM
+
+# BEGIN HPC-X86 XAGAWA ROUND3 KEM FAULT
+include $(REPO_ROOT)/scripts/Fault-Injection_Attacks_against_NISTs_PQC_Round_3_KEM_Candidates/exp.mk
+# END HPC-X86 XAGAWA ROUND3 KEM FAULT

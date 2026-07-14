@@ -4,6 +4,9 @@
 #include "randombytes.h"
 #include "symmetric.h"
 #include "verify.h"
+#if defined(PQCLEAN_KYBER512_XAGAWA_X86)
+#include "xagawa_failure_handling_x86.h"
+#endif
 #include <stddef.h>
 #include <stdint.h>
 
@@ -118,7 +121,19 @@ int PQCLEAN_KYBER512_CLEAN_crypto_kem_dec(unsigned char ss[KYBER_SSBYTES],
     hash_h(kr + KYBER_SYMBYTES, ct, KYBER_CIPHERTEXTBYTES);
 
     /* Overwrite pre-k with z on re-encryption failure */
-    PQCLEAN_KYBER512_CLEAN_cmov(kr, sk + KYBER_SECRETKEYBYTES - KYBER_SYMBYTES, KYBER_SYMBYTES, (uint8_t)fail);
+#if defined(PQCLEAN_KYBER512_XAGAWA_X86)
+    PQCLEAN_KYBER512_CLEAN_xagawa_failure_handling_apply(
+        kr,
+        sk + KYBER_SECRETKEYBYTES - KYBER_SYMBYTES,
+        KYBER_SYMBYTES,
+        (uint8_t)fail);
+#else
+    PQCLEAN_KYBER512_CLEAN_cmov(
+        kr,
+        sk + KYBER_SECRETKEYBYTES - KYBER_SYMBYTES,
+        KYBER_SYMBYTES,
+        (uint8_t)fail);
+#endif
 
     /* hash concatenation of pre-k and H(c) to k */
     kdf(ss, kr, 2 * KYBER_SYMBYTES);

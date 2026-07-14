@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+export EXP_NAME="Fault-Injection_Attacks_against_NISTs_PQC_Round_3_KEM_Candidates"
+export EXP_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+export EXP_RESULTS_DIR="${EXP_RESULTS_DIR:-$RESULTS_DIR/$EXP_NAME}"
+
+export XAGAWA_SAMPLES="${XAGAWA_SAMPLES:-500}"
+export XAGAWA_WARMUP="${XAGAWA_WARMUP:-10}"
+export XAGAWA_TAMPER_BYTE="${XAGAWA_TAMPER_BYTE:-0}"
+export XAGAWA_TAMPER_MASK="${XAGAWA_TAMPER_MASK:-1}"
+export XAGAWA_MIN_RUNNING="${XAGAWA_MIN_RUNNING:-95.0}"
+
+export XAGAWA_CALIBRATION_SAMPLES="${XAGAWA_CALIBRATION_SAMPLES:-500}"
+export XAGAWA_VALIDATION_SAMPLES="${XAGAWA_VALIDATION_SAMPLES:-5000}"
+export XAGAWA_ATTACK_SAMPLES="${XAGAWA_ATTACK_SAMPLES:-500}"
+
+if [[ -z "${HPC_CPU:-}" || "${HPC_CPU}" == "-1" ]]; then
+    export HPC_CPU=0
+fi
