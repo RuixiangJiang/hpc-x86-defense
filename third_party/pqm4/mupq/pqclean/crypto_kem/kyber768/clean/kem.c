@@ -4,6 +4,9 @@
 #include "randombytes.h"
 #include "symmetric.h"
 #include "verify.h"
+#ifdef PQCLEAN_KYBER768_ROULETTE_X86
+#include "roulette_masked_invntt_x86.h"
+#endif
 #include <stddef.h>
 #include <stdint.h>
 
@@ -110,9 +113,18 @@ int PQCLEAN_KYBER768_CLEAN_crypto_kem_dec(unsigned char ss[KYBER_SSBYTES],
     hash_g(kr, buf, 2 * KYBER_SYMBYTES);
 
     /* coins are in kr+KYBER_SYMBYTES */
+#ifdef PQCLEAN_KYBER768_ROULETTE_X86
+    PQCLEAN_KYBER768_CLEAN_roulette_set_reencrypt_active(1);
+#endif
     PQCLEAN_KYBER768_CLEAN_indcpa_enc(cmp, buf, pk, kr + KYBER_SYMBYTES);
+#ifdef PQCLEAN_KYBER768_ROULETTE_X86
+    PQCLEAN_KYBER768_CLEAN_roulette_set_reencrypt_active(0);
+#endif
 
     fail = PQCLEAN_KYBER768_CLEAN_verify(ct, cmp, KYBER_CIPHERTEXTBYTES);
+#ifdef PQCLEAN_KYBER768_ROULETTE_X86
+    PQCLEAN_KYBER768_CLEAN_roulette_record_compare(ct, cmp, fail);
+#endif
 
     /* overwrite coins in kr with H(c) */
     hash_h(kr + KYBER_SYMBYTES, ct, KYBER_CIPHERTEXTBYTES);

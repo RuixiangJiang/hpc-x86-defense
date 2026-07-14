@@ -1,0 +1,73 @@
+ROULETTE_PQCLEAN_ROOT := $(REPO_ROOT)/third_party/pqm4/mupq/pqclean
+ROULETTE_KYBER_DIR := $(ROULETTE_PQCLEAN_ROOT)/crypto_kem/kyber768/clean
+ROULETTE_COMMON_DIR := $(ROULETTE_PQCLEAN_ROOT)/common
+ROULETTE_TARGET_DIR := $(REPO_ROOT)/targets/delvaux_roulette
+ROULETTE_BIN_DIR := $(BUILD_DIR)/bin/delvaux_roulette
+
+ROULETTE_PMU_TYPE ?= 4
+ROULETTE_LOAD_CONFIG ?= 0x81d0
+ROULETTE_STORE_CONFIG ?= 0x82d0
+
+ROULETTE_KYBER_SRCS := \
+	$(ROULETTE_KYBER_DIR)/cbd.c \
+	$(ROULETTE_KYBER_DIR)/indcpa.c \
+	$(ROULETTE_KYBER_DIR)/kem.c \
+	$(ROULETTE_KYBER_DIR)/ntt.c \
+	$(ROULETTE_KYBER_DIR)/poly.c \
+	$(ROULETTE_KYBER_DIR)/polyvec.c \
+	$(ROULETTE_KYBER_DIR)/reduce.c \
+	$(ROULETTE_KYBER_DIR)/symmetric-shake.c \
+	$(ROULETTE_KYBER_DIR)/verify.c \
+	$(ROULETTE_KYBER_DIR)/roulette_masked_invntt_x86.c
+
+ROULETTE_COMMON_SRCS := \
+	$(ROULETTE_COMMON_DIR)/fips202.c \
+	$(ROULETTE_COMMON_DIR)/randombytes.c
+
+ROULETTE_ALL_SRCS := \
+	$(ROULETTE_TARGET_DIR)/main.c \
+	$(ROULETTE_KYBER_SRCS) \
+	$(ROULETTE_COMMON_SRCS)
+
+ROULETTE_CPPFLAGS := \
+	-D_GNU_SOURCE \
+	-DPQCLEAN_KYBER768_ROULETTE_X86=1 \
+	-DROULETTE_PMU_TYPE=$(ROULETTE_PMU_TYPE) \
+	-DROULETTE_LOAD_CONFIG=$(ROULETTE_LOAD_CONFIG) \
+	-DROULETTE_STORE_CONFIG=$(ROULETTE_STORE_CONFIG) \
+	-I$(ROULETTE_KYBER_DIR) \
+	-I$(ROULETTE_COMMON_DIR)
+
+ROULETTE_CFLAGS := \
+	-O2 -g -std=c11 \
+	-Wall -Wextra -Wpedantic \
+	-fno-omit-frame-pointer \
+	-fno-lto \
+	-ffunction-sections \
+	-fdata-sections
+
+ROULETTE_LDFLAGS := -Wl,--gc-sections
+
+ROULETTE_BASE_BIN := $(ROULETTE_BIN_DIR)/roulette_baseline
+ROULETTE_ATTACK_BIN := $(ROULETTE_BIN_DIR)/roulette_skip_add
+
+.PHONY: roulette roulette-clean
+
+roulette: $(ROULETTE_BASE_BIN) $(ROULETTE_ATTACK_BIN)
+
+$(ROULETTE_BASE_BIN): $(ROULETTE_ALL_SRCS)
+	mkdir -p $(dir $@)
+	$(CC) $(ROULETTE_CPPFLAGS) $(ROULETTE_CFLAGS) \
+		-DROULETTE_BUILD_MODE=0 \
+		$(ROULETTE_ALL_SRCS) \
+		$(ROULETTE_LDFLAGS) $(LDFLAGS) $(LDLIBS) -o $@
+
+$(ROULETTE_ATTACK_BIN): $(ROULETTE_ALL_SRCS)
+	mkdir -p $(dir $@)
+	$(CC) $(ROULETTE_CPPFLAGS) $(ROULETTE_CFLAGS) \
+		-DROULETTE_BUILD_MODE=1 \
+		$(ROULETTE_ALL_SRCS) \
+		$(ROULETTE_LDFLAGS) $(LDFLAGS) $(LDLIBS) -o $@
+
+roulette-clean:
+	rm -rf $(ROULETTE_BIN_DIR)

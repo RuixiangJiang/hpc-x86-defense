@@ -115,3 +115,7 @@ include $(REPO_ROOT)/scripts/Fault_Attacks_on_CCA-secure_Lattice_KEMs/exp.mk
 # BEGIN HPC-X86 XAGAWA ROUND3 KEM FAULT
 include $(REPO_ROOT)/scripts/Fault-Injection_Attacks_against_NISTs_PQC_Round_3_KEM_Candidates/exp.mk
 # END HPC-X86 XAGAWA ROUND3 KEM FAULT
+
+# BEGIN HPC-X86 DELVAUX ROULETTE
+include $(REPO_ROOT)/scripts/Delvaux_Roulette/exp.mk
+# END HPC-X86 DELVAUX ROULETTE

@@ -3,6 +3,9 @@
 #include "params.h"
 #include "poly.h"
 #include "polyvec.h"
+#ifdef PQCLEAN_KYBER768_ROULETTE_X86
+#include "roulette_masked_invntt_x86.h"
+#endif
 #include "randombytes.h"
 #include "symmetric.h"
 #include <stddef.h>
@@ -286,7 +289,11 @@ void PQCLEAN_KYBER768_CLEAN_indcpa_enc(uint8_t c[KYBER_INDCPA_BYTES],
     PQCLEAN_KYBER768_CLEAN_polyvec_basemul_acc_montgomery(&v, &pkpv, &sp);
 
     PQCLEAN_KYBER768_CLEAN_polyvec_invntt_tomont(&b);
+#ifdef PQCLEAN_KYBER768_ROULETTE_X86
+    PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply(&v);
+#else
     PQCLEAN_KYBER768_CLEAN_poly_invntt_tomont(&v);
+#endif
 
     PQCLEAN_KYBER768_CLEAN_polyvec_add(&b, &b, &ep);
     PQCLEAN_KYBER768_CLEAN_poly_add(&v, &v, &epp);
