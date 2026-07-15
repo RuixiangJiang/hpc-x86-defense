@@ -140,3 +140,7 @@ include $(REPO_ROOT)/scripts/A_Single_Trace_Fault_Injection_Attack_on_Hedged_CRY
 # BEGIN HPC-X86 KUNDU CARRY YOUR FAULT
 include $(REPO_ROOT)/scripts/Carry_Your_Fault/exp.mk
 # END HPC-X86 KUNDU CARRY YOUR FAULT
+
+# BEGIN HPC-X86 MIND THE FAULTY KECCAK
+include $(REPO_ROOT)/scripts/Mind_the_Faulty_KECCAK/exp.mk
+# END HPC-X86 MIND THE FAULTY KECCAK
