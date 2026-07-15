@@ -128,3 +128,7 @@ include $(REPO_ROOT)/scripts/Islam_Signature_Correction_Attack/exp.mk
 include $(REPO_ROOT)/scripts/Fiddling_the_Twiddle_Constants/exp.mk
 # END HPC-X86 RAVI FIDDLING TWIDDLE
 
+# BEGIN HPC-X86 KRAHMER CORRECTION FAULT
+include $(REPO_ROOT)/scripts/Correction_Fault_Attacks_on_Randomized_Dilithium/exp.mk
+# END HPC-X86 KRAHMER CORRECTION FAULT
+

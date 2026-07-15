@@ -6,6 +6,11 @@
 #include "randombytes.h"
 #include "sign.h"
 #include "symmetric.h"
+/* BEGIN HPC-X86 KRAHMER INCLUDE */
+#ifdef PQCLEAN_DILITHIUM2_KRAHMER_X86
+#include "krahmer_correction_fault_x86.h"
+#endif
+/* END HPC-X86 KRAHMER INCLUDE */
 /* BEGIN HPC-X86 FIDDLING TWIDDLE INCLUDE */
 #ifdef PQCLEAN_DILITHIUM2_FIDDLE_TWIDDLE_X86
 #include "fiddling_twiddle_x86.h"
@@ -120,7 +125,15 @@ int PQCLEAN_DILITHIUM2_CLEAN_crypto_sign_signature(uint8_t *sig,
     shake256_inc_squeeze(mu, CRHBYTES, &state);
     shake256_inc_ctx_release(&state);
 
+    /* BEGIN HPC-X86 KRAHMER RANDOMIZED SIGNING */
+#ifdef PQCLEAN_DILITHIUM2_KRAHMER_X86
+    if (randombytes(rhoprime, CRHBYTES) != 0) {
+        return -1;
+    }
+#else
     shake256(rhoprime, CRHBYTES, key, SEEDBYTES + CRHBYTES);
+#endif
+    /* END HPC-X86 KRAHMER RANDOMIZED SIGNING */
 
     /* Expand matrix and transform vectors */
     PQCLEAN_DILITHIUM2_CLEAN_polyvec_matrix_expand(mat, rho);
@@ -145,7 +158,13 @@ rej:
     PQCLEAN_DILITHIUM2_CLEAN_polyvecl_ntt(&z);
 #endif
     /* END HPC-X86 FIDDLING TWIDDLE Y NTT HOOK */
+    /* BEGIN HPC-X86 KRAHMER A CONSUMER HOOK */
+#if defined(PQCLEAN_DILITHIUM2_KRAHMER_X86) && KRAHMER_VARIANT == 2
+    PQCLEAN_DILITHIUM2_CLEAN_krahmer_matrix_apply(&w1, mat, &z);
+#else
     PQCLEAN_DILITHIUM2_CLEAN_polyvec_matrix_pointwise_montgomery(&w1, mat, &z);
+#endif
+    /* END HPC-X86 KRAHMER A CONSUMER HOOK */
     PQCLEAN_DILITHIUM2_CLEAN_polyveck_reduce(&w1);
     PQCLEAN_DILITHIUM2_CLEAN_polyveck_invntt_tomont(&w1);
 
@@ -166,13 +185,17 @@ rej:
     /* Compute z, reject if it reveals secret */
     PQCLEAN_DILITHIUM2_CLEAN_polyvecl_pointwise_poly_montgomery(&z, &cp, &s1);
     PQCLEAN_DILITHIUM2_CLEAN_polyvecl_invntt_tomont(&z);
-#ifdef PQCLEAN_DILITHIUM2_RAVI_X86
+/* BEGIN HPC-X86 KRAHMER CORRECTION HOOK */
+#if defined(PQCLEAN_DILITHIUM2_KRAHMER_X86) && KRAHMER_VARIANT == 1
+    PQCLEAN_DILITHIUM2_CLEAN_krahmer_correction_apply(&z, &y);
+#elif defined(PQCLEAN_DILITHIUM2_RAVI_X86)
     /* BEGIN HPC-X86 RAVI Z HOOK */
     PQCLEAN_DILITHIUM2_CLEAN_ravi_z_generation_apply(&z, &y);
     /* END HPC-X86 RAVI Z HOOK */
 #else
     PQCLEAN_DILITHIUM2_CLEAN_polyvecl_add(&z, &z, &y);
 #endif
+/* END HPC-X86 KRAHMER CORRECTION HOOK */
     PQCLEAN_DILITHIUM2_CLEAN_polyvecl_reduce(&z);
     if (PQCLEAN_DILITHIUM2_CLEAN_polyvecl_chknorm(&z, GAMMA1 - BETA)) {
         goto rej;
