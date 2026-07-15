@@ -1,0 +1,79 @@
+#ifndef WHEN_RANDOMNESS_ISNT_RANDOM_X86_H
+#define WHEN_RANDOMNESS_ISNT_RANDOM_X86_H
+
+#include <stdint.h>
+
+#define WRIR_HPC_EVENT_COUNT 2u
+#define WRIR_N 256u
+#define WRIR_SEEDBYTES 32u
+#define WRIR_CRHBYTES 64u
+
+#define WRIR_COUNTER_SET_STRUCTURAL_INSTRUCTIONS 1
+#define WRIR_COUNTER_SET_STRUCTURAL_BRANCHES 2
+#define WRIR_COUNTER_SET_STRUCTURAL_BRANCH_MISSES 3
+#define WRIR_COUNTER_SET_STRUCTURAL_LOADS 4
+#define WRIR_COUNTER_SET_STRUCTURAL_STORES 5
+#define WRIR_COUNTER_SET_CACHE_L1D 6
+#define WRIR_COUNTER_SET_CACHE_L1I 7
+#define WRIR_COUNTER_SET_CACHE_LLC 8
+#define WRIR_COUNTER_SET_CACHE_DTLB 9
+#define WRIR_COUNTER_SET_CACHE_REFERENCES 10
+#define WRIR_COUNTER_SET_CACHE_MISSES 11
+#define WRIR_COUNTER_SET_CACHE_L1D_REPLACEMENTS 12
+#define WRIR_COUNTER_SET_CACHE_L2_REQUEST_MISSES 13
+#define WRIR_COUNTER_SET_LOAD_L1_HIT 14
+#define WRIR_COUNTER_SET_LOAD_L2_HIT 15
+#define WRIR_COUNTER_SET_LOAD_L3_HIT 16
+#define WRIR_COUNTER_SET_LOAD_L1_MISS 17
+#define WRIR_COUNTER_SET_LOAD_L2_MISS 18
+#define WRIR_COUNTER_SET_LOAD_L3_MISS 19
+#define WRIR_COUNTER_SET_LONG_LATENCY_LOADS 20
+#define WRIR_COUNTER_SET_STALLS_FRONTEND 21
+#define WRIR_COUNTER_SET_STALLS_BACKEND 22
+#define WRIR_COUNTER_SET_STALLS_L1D_MISS 23
+#define WRIR_COUNTER_SET_STALLS_MEM_ANY 24
+#define WRIR_COUNTER_SET_RECOVERY_MACHINE_CLEARS 25
+#define WRIR_COUNTER_SET_RECOVERY_MEMORY_ORDERING 26
+#define WRIR_COUNTER_SET_RECOVERY_CYCLES 27
+#define WRIR_COUNTER_SET_RECOVERY_CYCLES_ANY 28
+#define WRIR_COUNTER_SET_UOPS_RETIRED 29
+#define WRIR_COUNTER_SET_UOPS_ISSUED 30
+#define WRIR_COUNTER_SET_UOPS_EXECUTED 31
+#define WRIR_COUNTER_SET_FRONTEND_UOPS_UNDELIVERED 32
+#define WRIR_COUNTER_SET_FRONTEND_MITE_UOPS 33
+#define WRIR_COUNTER_SET_FRONTEND_DSB_UOPS 34
+#define WRIR_COUNTER_SET_FRONTEND_MS_UOPS 35
+#define WRIR_COUNTER_SET_BRANCH_CONDITIONAL 36
+#define WRIR_COUNTER_SET_BRANCH_CONDITIONAL_TAKEN 37
+#define WRIR_COUNTER_SET_BRANCH_CONDITIONAL_NOT_TAKEN 38
+#define WRIR_COUNTER_SET_BRANCH_MISPRED_CONDITIONAL 39
+#define WRIR_COUNTER_SET_RESOURCE_STALLS_SCOREBOARD 40
+#define WRIR_COUNTER_SET_RESOURCE_STALLS_STORE_BUFFER 41
+#define WRIR_COUNTER_SET_EXECUTION_BOUND_LOADS 42
+#define WRIR_COUNTER_SET_COUNT 42u
+
+typedef struct {
+    uint64_t sequence;
+    uint64_t time_enabled;
+    uint64_t time_running;
+    uint64_t values[WRIR_HPC_EVENT_COUNT];
+    uint32_t requested_mask;
+    uint32_t available_mask;
+    uint32_t open_error_mask;
+    uint32_t valid_mask;
+    int32_t error_code;
+} wrir_hpc_snapshot;
+
+typedef struct {
+    int32_t coeffs[WRIR_N];
+} wrir_poly;
+
+int wrir_select_counter_set(unsigned int counter_set);
+int wrir_hpc_init(void);
+void wrir_hpc_close(void);
+const char *wrir_event_name(unsigned int index);
+void wrir_get_hpc_snapshot(wrir_hpc_snapshot *out);
+void wrir_sampler_target(wrir_poly *out, const uint8_t seed[WRIR_CRHBYTES], uint16_t nonce);
+void wrir_measure_target(wrir_poly *out, const uint8_t seed[WRIR_CRHBYTES], uint16_t nonce);
+void wrir_reference_sampler(wrir_poly *out, const uint8_t seed[WRIR_CRHBYTES], uint16_t nonce);
+#endif

@@ -144,3 +144,7 @@ include $(REPO_ROOT)/scripts/Carry_Your_Fault/exp.mk
 # BEGIN HPC-X86 MIND THE FAULTY KECCAK
 include $(REPO_ROOT)/scripts/Mind_the_Faulty_KECCAK/exp.mk
 # END HPC-X86 MIND THE FAULTY KECCAK
+
+# BEGIN HPC-X86 WHEN RANDOMNESS ISNT RANDOM
+include $(REPO_ROOT)/scripts/When_Randomness_Isnt_Random/exp.mk
+# END HPC-X86 WHEN RANDOMNESS ISNT RANDOM
