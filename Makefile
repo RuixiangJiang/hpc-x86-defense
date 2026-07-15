@@ -132,3 +132,7 @@ include $(REPO_ROOT)/scripts/Fiddling_the_Twiddle_Constants/exp.mk
 include $(REPO_ROOT)/scripts/Correction_Fault_Attacks_on_Randomized_Dilithium/exp.mk
 # END HPC-X86 KRAHMER CORRECTION FAULT
 
+# BEGIN HPC-X86 JENDRAL HEDGED FAULT
+include $(REPO_ROOT)/scripts/A_Single_Trace_Fault_Injection_Attack_on_Hedged_CRYSTALS_Dilithium/exp.mk
+# END HPC-X86 JENDRAL HEDGED FAULT
+

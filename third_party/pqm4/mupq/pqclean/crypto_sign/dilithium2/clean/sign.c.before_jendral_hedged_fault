@@ -6,11 +6,6 @@
 #include "randombytes.h"
 #include "sign.h"
 #include "symmetric.h"
-/* BEGIN HPC-X86 JENDRAL HEDGED INCLUDE */
-#ifdef PQCLEAN_DILITHIUM2_JENDRAL_X86
-#include "jendral_hedged_fault_x86.h"
-#endif
-/* END HPC-X86 JENDRAL HEDGED INCLUDE */
 /* BEGIN HPC-X86 KRAHMER INCLUDE */
 #ifdef PQCLEAN_DILITHIUM2_KRAHMER_X86
 #include "krahmer_correction_fault_x86.h"
@@ -130,20 +125,15 @@ int PQCLEAN_DILITHIUM2_CLEAN_crypto_sign_signature(uint8_t *sig,
     shake256_inc_squeeze(mu, CRHBYTES, &state);
     shake256_inc_ctx_release(&state);
 
-    /* BEGIN HPC-X86 JENDRAL HEDGED SEED DERIVATION */
-#ifdef PQCLEAN_DILITHIUM2_JENDRAL_X86
-    if (PQCLEAN_DILITHIUM2_CLEAN_jendral_derive_rhoprime(
-            rhoprime, key, mu) != 0) {
-        return -1;
-    }
-#elif defined(PQCLEAN_DILITHIUM2_KRAHMER_X86)
+    /* BEGIN HPC-X86 KRAHMER RANDOMIZED SIGNING */
+#ifdef PQCLEAN_DILITHIUM2_KRAHMER_X86
     if (randombytes(rhoprime, CRHBYTES) != 0) {
         return -1;
     }
 #else
     shake256(rhoprime, CRHBYTES, key, SEEDBYTES + CRHBYTES);
 #endif
-    /* END HPC-X86 JENDRAL HEDGED SEED DERIVATION */
+    /* END HPC-X86 KRAHMER RANDOMIZED SIGNING */
 
     /* Expand matrix and transform vectors */
     PQCLEAN_DILITHIUM2_CLEAN_polyvec_matrix_expand(mat, rho);
@@ -157,11 +147,6 @@ int PQCLEAN_DILITHIUM2_CLEAN_crypto_sign_signature(uint8_t *sig,
 
 rej:
     /* Sample intermediate vector y */
-    /* BEGIN HPC-X86 JENDRAL NONCE AUDIT */
-#ifdef PQCLEAN_DILITHIUM2_JENDRAL_X86
-    PQCLEAN_DILITHIUM2_CLEAN_jendral_record_nonce(nonce);
-#endif
-    /* END HPC-X86 JENDRAL NONCE AUDIT */
     PQCLEAN_DILITHIUM2_CLEAN_polyvecl_uniform_gamma1(&y, rhoprime, nonce++);
 
     /* Matrix-vector multiplication */
