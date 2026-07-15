@@ -136,3 +136,7 @@ include $(REPO_ROOT)/scripts/Correction_Fault_Attacks_on_Randomized_Dilithium/ex
 include $(REPO_ROOT)/scripts/A_Single_Trace_Fault_Injection_Attack_on_Hedged_CRYSTALS_Dilithium/exp.mk
 # END HPC-X86 JENDRAL HEDGED FAULT
 
+
+# BEGIN HPC-X86 KUNDU CARRY YOUR FAULT
+include $(REPO_ROOT)/scripts/Carry_Your_Fault/exp.mk
+# END HPC-X86 KUNDU CARRY YOUR FAULT
