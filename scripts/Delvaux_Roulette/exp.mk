@@ -1,73 +1,29 @@
-ROULETTE_PQCLEAN_ROOT := $(REPO_ROOT)/third_party/pqm4/mupq/pqclean
-ROULETTE_KYBER_DIR := $(ROULETTE_PQCLEAN_ROOT)/crypto_kem/kyber768/clean
-ROULETTE_COMMON_DIR := $(ROULETTE_PQCLEAN_ROOT)/common
-ROULETTE_TARGET_DIR := $(REPO_ROOT)/targets/delvaux_roulette
-ROULETTE_BIN_DIR := $(BUILD_DIR)/bin/delvaux_roulette
-
-ROULETTE_PMU_TYPE ?= 4
-ROULETTE_LOAD_CONFIG ?= 0x81d0
-ROULETTE_STORE_CONFIG ?= 0x82d0
-
-ROULETTE_KYBER_SRCS := \
-	$(ROULETTE_KYBER_DIR)/cbd.c \
-	$(ROULETTE_KYBER_DIR)/indcpa.c \
-	$(ROULETTE_KYBER_DIR)/kem.c \
-	$(ROULETTE_KYBER_DIR)/ntt.c \
-	$(ROULETTE_KYBER_DIR)/poly.c \
-	$(ROULETTE_KYBER_DIR)/polyvec.c \
-	$(ROULETTE_KYBER_DIR)/reduce.c \
-	$(ROULETTE_KYBER_DIR)/symmetric-shake.c \
-	$(ROULETTE_KYBER_DIR)/verify.c \
-	$(ROULETTE_KYBER_DIR)/roulette_masked_invntt_x86.c
-
-ROULETTE_COMMON_SRCS := \
-	$(ROULETTE_COMMON_DIR)/fips202.c \
-	$(ROULETTE_COMMON_DIR)/randombytes.c
-
-ROULETTE_ALL_SRCS := \
-	$(ROULETTE_TARGET_DIR)/main.c \
-	$(ROULETTE_KYBER_SRCS) \
-	$(ROULETTE_COMMON_SRCS)
-
-ROULETTE_CPPFLAGS := \
-	-D_GNU_SOURCE \
-	-DPQCLEAN_KYBER768_ROULETTE_X86=1 \
-	-DROULETTE_PMU_TYPE=$(ROULETTE_PMU_TYPE) \
-	-DROULETTE_LOAD_CONFIG=$(ROULETTE_LOAD_CONFIG) \
-	-DROULETTE_STORE_CONFIG=$(ROULETTE_STORE_CONFIG) \
-	-I$(ROULETTE_KYBER_DIR) \
-	-I$(ROULETTE_COMMON_DIR)
-
-ROULETTE_CFLAGS := \
-	-O2 -g -std=c11 \
-	-Wall -Wextra -Wpedantic \
-	-fno-omit-frame-pointer \
-	-fno-lto \
-	-ffunction-sections \
-	-fdata-sections
-
-ROULETTE_LDFLAGS := -Wl,--gc-sections
-
-ROULETTE_BASE_BIN := $(ROULETTE_BIN_DIR)/roulette_baseline
-ROULETTE_ATTACK_BIN := $(ROULETTE_BIN_DIR)/roulette_skip_add
-
-.PHONY: roulette roulette-clean
-
-roulette: $(ROULETTE_BASE_BIN) $(ROULETTE_ATTACK_BIN)
-
-$(ROULETTE_BASE_BIN): $(ROULETTE_ALL_SRCS)
+ROU_PQCLEAN_ROOT := $(REPO_ROOT)/third_party/pqm4/mupq/pqclean
+ROU_KYBER_DIR := $(ROU_PQCLEAN_ROOT)/crypto_kem/kyber768/clean
+ROU_COMMON_DIR := $(ROU_PQCLEAN_ROOT)/common
+ROU_TARGET_DIR := $(REPO_ROOT)/targets/delvaux_roulette
+ROU_SCRIPT_DIR := $(REPO_ROOT)/scripts/Delvaux_Roulette
+ROU_BIN_DIR := $(BUILD_DIR)/bin/delvaux_roulette
+ROU_PMU_TYPE ?= 4
+ROU_LOAD_CONFIG ?= 0x81d0
+ROU_STORE_CONFIG ?= 0x82d0
+ROU_KYBER_SRCS := $(ROU_KYBER_DIR)/cbd.c $(ROU_KYBER_DIR)/indcpa.c $(ROU_KYBER_DIR)/kem.c \
+	$(ROU_KYBER_DIR)/ntt.c $(ROU_KYBER_DIR)/poly.c $(ROU_KYBER_DIR)/polyvec.c \
+	$(ROU_KYBER_DIR)/reduce.c $(ROU_KYBER_DIR)/symmetric-shake.c $(ROU_KYBER_DIR)/verify.c \
+	$(ROU_KYBER_DIR)/roulette_masked_invntt_x86.c
+ROU_COMMON_SRCS := $(ROU_COMMON_DIR)/fips202.c $(ROU_COMMON_DIR)/randombytes.c
+ROU_SRCS := $(ROU_TARGET_DIR)/main.c $(ROU_KYBER_SRCS) $(ROU_COMMON_SRCS)
+ROU_CPPFLAGS := -D_GNU_SOURCE -DPQCLEAN_KYBER768_ROULETTE_X86=1 \
+	-DROU_PMU_TYPE=$(ROU_PMU_TYPE) -DROU_LOAD_CONFIG=$(ROU_LOAD_CONFIG) -DROU_STORE_CONFIG=$(ROU_STORE_CONFIG) \
+	-I$(ROU_KYBER_DIR) -I$(ROU_COMMON_DIR) -I$(ROU_TARGET_DIR) -I$(ROU_SCRIPT_DIR)
+ROU_CFLAGS := -O2 -g -std=c11 -Wall -Wextra -Wpedantic -fno-omit-frame-pointer -fno-lto \
+	-fno-stack-protector -fno-tree-vectorize -fno-ipa-icf -ffunction-sections -fdata-sections
+ROU_LDFLAGS := -Wl,--gc-sections
+ROU_BIN := $(ROU_BIN_DIR)/rou_single
+.PHONY: delvaux-roulette delvaux-roulette-clean
+delvaux-roulette: $(ROU_BIN)
+$(ROU_BIN): $(ROU_SRCS) $(ROU_SCRIPT_DIR)/microarch_events_generated.h
 	mkdir -p $(dir $@)
-	$(CC) $(ROULETTE_CPPFLAGS) $(ROULETTE_CFLAGS) \
-		-DROULETTE_BUILD_MODE=0 \
-		$(ROULETTE_ALL_SRCS) \
-		$(ROULETTE_LDFLAGS) $(LDFLAGS) $(LDLIBS) -o $@
-
-$(ROULETTE_ATTACK_BIN): $(ROULETTE_ALL_SRCS)
-	mkdir -p $(dir $@)
-	$(CC) $(ROULETTE_CPPFLAGS) $(ROULETTE_CFLAGS) \
-		-DROULETTE_BUILD_MODE=1 \
-		$(ROULETTE_ALL_SRCS) \
-		$(ROULETTE_LDFLAGS) $(LDFLAGS) $(LDLIBS) -o $@
-
-roulette-clean:
-	rm -rf $(ROULETTE_BIN_DIR)
+	$(CC) $(ROU_CPPFLAGS) $(ROU_CFLAGS) $(ROU_SRCS) $(ROU_LDFLAGS) $(LDFLAGS) $(LDLIBS) -o $@
+delvaux-roulette-clean:
+	rm -rf $(ROU_BIN_DIR)

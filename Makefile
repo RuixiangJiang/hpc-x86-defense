@@ -116,9 +116,6 @@ include $(REPO_ROOT)/scripts/Fault_Attacks_on_CCA-secure_Lattice_KEMs/exp.mk
 include $(REPO_ROOT)/scripts/Fault-Injection_Attacks_against_NISTs_PQC_Round_3_KEM_Candidates/exp.mk
 # END HPC-X86 XAGAWA ROUND3 KEM FAULT
 
-# BEGIN HPC-X86 DELVAUX ROULETTE
-include $(REPO_ROOT)/scripts/Delvaux_Roulette/exp.mk
-# END HPC-X86 DELVAUX ROULETTE
 
 # BEGIN HPC-X86 ISLAM SIGNATURE CORRECTION
 include $(REPO_ROOT)/scripts/Islam_Signature_Correction_Attack/exp.mk
@@ -156,3 +153,7 @@ include $(REPO_ROOT)/scripts/Breaking_the_Shield/exp.mk
 # BEGIN HPC-X86 WANG SECRET IN ONEPIECE
 include $(REPO_ROOT)/scripts/Secret_in_OnePiece/exp.mk
 # END HPC-X86 WANG SECRET IN ONEPIECE
+
+# BEGIN HPC-X86 DELVAUX ROULETTE
+include $(REPO_ROOT)/scripts/Delvaux_Roulette/exp.mk
+# END HPC-X86 DELVAUX ROULETTE
