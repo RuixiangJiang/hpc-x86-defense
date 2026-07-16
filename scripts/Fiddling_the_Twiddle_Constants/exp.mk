@@ -42,31 +42,25 @@ FIDDLE_CFLAGS := \
 	-Wall -Wextra -Wpedantic \
 	-fno-omit-frame-pointer \
 	-fno-lto \
+	-fno-stack-protector \
+	-fno-tree-vectorize \
+	-fno-ipa-icf \
 	-ffunction-sections \
 	-fdata-sections
 
 FIDDLE_LDFLAGS := -Wl,--gc-sections
-
-FIDDLE_BASE_BIN := \
-	$(FIDDLE_BIN_DIR)/fiddling_twiddle_baseline
-FIDDLE_ATTACK_BIN := \
-	$(FIDDLE_BIN_DIR)/fiddling_twiddle_zero
+FIDDLE_SINGLE_BIN := $(FIDDLE_BIN_DIR)/fiddling_twiddle_single
 
 .PHONY: fiddle-twiddle fiddle-twiddle-clean
 
-fiddle-twiddle: $(FIDDLE_BASE_BIN) $(FIDDLE_ATTACK_BIN)
+fiddle-twiddle: $(FIDDLE_SINGLE_BIN)
 
-$(FIDDLE_BASE_BIN): $(FIDDLE_ALL_SRCS)
+$(FIDDLE_SINGLE_BIN): $(FIDDLE_ALL_SRCS)
+	rm -f \
+		$(FIDDLE_BIN_DIR)/fiddling_twiddle_baseline \
+		$(FIDDLE_BIN_DIR)/fiddling_twiddle_zero
 	mkdir -p $(dir $@)
 	$(CC) $(FIDDLE_CPPFLAGS) $(FIDDLE_CFLAGS) \
-		-DFIDDLE_TWIDDLE_BUILD_MODE=0 \
-		$(FIDDLE_ALL_SRCS) \
-		$(FIDDLE_LDFLAGS) $(LDFLAGS) $(LDLIBS) -o $@
-
-$(FIDDLE_ATTACK_BIN): $(FIDDLE_ALL_SRCS)
-	mkdir -p $(dir $@)
-	$(CC) $(FIDDLE_CPPFLAGS) $(FIDDLE_CFLAGS) \
-		-DFIDDLE_TWIDDLE_BUILD_MODE=1 \
 		$(FIDDLE_ALL_SRCS) \
 		$(FIDDLE_LDFLAGS) $(LDFLAGS) $(LDLIBS) -o $@
 

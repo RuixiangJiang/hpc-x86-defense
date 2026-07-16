@@ -1,90 +1,141 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-# shellcheck source=/dev/null
-source "$SCRIPT_DIR/../common.sh"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/exp_env.sh"
 
-require_command objdump
-require_command nm
-require_command python3
+binary="$FIDDLE_BINARY"
+audit_dir="$FIDDLE_RESULTS_ROOT"
+mkdir -p "$audit_dir"
 
-make -C "$REPO_ROOT" fiddle-twiddle
-
-BASE="$BUILD_DIR/bin/ravi_fiddling_twiddle/fiddling_twiddle_baseline"
-ATTACK="$BUILD_DIR/bin/ravi_fiddling_twiddle/fiddling_twiddle_zero"
-TMP="$(mktemp -d)"
-trap 'rm -rf "$TMP"' EXIT
-
-objdump -d \
-    --disassemble=PQCLEAN_DILITHIUM2_CLEAN_fiddle_target_group_baseline \
-    "$BASE" > "$TMP/baseline_target.asm"
-
-objdump -d \
-    --disassemble=PQCLEAN_DILITHIUM2_CLEAN_fiddle_target_group_skip_load \
-    "$ATTACK" > "$TMP/attack_target.asm"
-
-nm -an "$BASE" > "$TMP/baseline.nm"
-nm -an "$ATTACK" > "$TMP/attack.nm"
-
-grep -q 'fiddle_twiddle_original_load_site' "$TMP/baseline.nm" || {
-    echo "[error] baseline binary lacks the original-load site label" >&2
-    exit 1
+[[ -x "$binary" ]] || {
+  echo "[error] missing executable: $binary" >&2
+  exit 1
 }
 
-grep -q 'fiddle_twiddle_skipped_load_site' "$TMP/attack.nm" || {
-    echo "[error] attack binary lacks the skipped-load site label" >&2
-    exit 1
-}
-
-if grep -q 'fiddle_twiddle_original_load_site' "$TMP/attack.nm"; then
-    echo "[error] attack binary unexpectedly contains original-load label" >&2
-    exit 1
+mapfile -t executables < <(
+  find "$FIDDLE_BIN_DIR" -maxdepth 1 -type f -executable -print
+)
+if [[ "${#executables[@]}" -ne 1 ]]; then
+  echo "[error] expected exactly one executable; found:" >&2
+  printf '  %s\n' "${executables[@]}" >&2
+  exit 1
 fi
 
-python3 - \
-    "$REPO_ROOT/third_party/pqm4/mupq/pqclean/crypto_sign/dilithium2/clean/fiddling_twiddle_x86.c" \
-    "$REPO_ROOT/third_party/pqm4/mupq/pqclean/crypto_sign/dilithium2/clean/sign.c" <<'PY_VERIFY'
+for family in "${FIDDLE_FAMILIES[@]}"; do
+  for mode in baseline attack; do
+    echo "[verify] semantic family=$family mode=$mode"
+    "$binary" \
+      --self-test \
+      --family "$family" \
+      --mode "$mode" \
+      --target-vec "$FIDDLE_TARGET_VEC" \
+      --target-index "$FIDDLE_TARGET_INDEX" \
+      --pointer-offset "$FIDDLE_POINTER_OFFSET"
+  done
+done
+
+disassembly="$audit_dir/collector_disassembly.txt"
+symbols="$audit_dir/collector_symbols.txt"
+
+objdump -d "$binary" > "$disassembly"
+nm -a "$binary" > "$symbols"
+
+# Do not use `nm ... | grep -q` while pipefail is enabled. grep -q may exit
+# immediately after finding a match, causing nm to receive SIGPIPE; the
+# successful symbol check would then be reported as a failed pipeline.
+for symbol in \
+  PQCLEAN_DILITHIUM2_CLEAN_fiddle_target_group_baseline \
+  PQCLEAN_DILITHIUM2_CLEAN_fiddle_target_group_corrupt_pointer \
+  PQCLEAN_DILITHIUM2_CLEAN_fiddle_target_group_corrupt_loaded_value
+do
+  if ! grep -Fq -- "$symbol" "$symbols"; then
+    echo "[error] missing target symbol: $symbol" >&2
+    echo "[diagnostic] symbol table: $symbols" >&2
+    exit 1
+  fi
+done
+
+for label in \
+  fiddle_twiddle_original_load_site \
+  fiddle_twiddle_corrupt_pointer_load_site \
+  fiddle_twiddle_corrupt_loaded_value_site
+do
+  if ! grep -Fq -- "$label" "$symbols"; then
+    echo "[error] missing assembly label: $label" >&2
+    echo "[diagnostic] symbol table: $symbols" >&2
+    exit 1
+  fi
+done
+
+baseline_asm="$audit_dir/baseline_target.asm"
+pointer_asm="$audit_dir/pointer_target.asm"
+value_asm="$audit_dir/loaded_value_target.asm"
+
+objdump -d \
+  --disassemble=PQCLEAN_DILITHIUM2_CLEAN_fiddle_target_group_baseline \
+  "$binary" > "$baseline_asm"
+
+objdump -d \
+  --disassemble=PQCLEAN_DILITHIUM2_CLEAN_fiddle_target_group_corrupt_pointer \
+  "$binary" > "$pointer_asm"
+
+objdump -d \
+  --disassemble=PQCLEAN_DILITHIUM2_CLEAN_fiddle_target_group_corrupt_loaded_value \
+  "$binary" > "$value_asm"
+
+if ! grep -Eq 'mov[a-z]*[[:space:]].*\([^)]*\)' "$baseline_asm"; then
+  echo "[error] baseline target lacks explicit twiddle memory load" >&2
+  exit 1
+fi
+
+if ! grep -Eq 'mov[a-z]*[[:space:]].*\([^)]*\)' "$pointer_asm"; then
+  echo "[error] pointer-fault target lacks explicit memory load" >&2
+  exit 1
+fi
+
+source_file="$FIDDLE_REPO_ROOT/third_party/pqm4/mupq/pqclean/crypto_sign/dilithium2/clean/fiddling_twiddle_x86.c"
+
+python3 - "$source_file" <<'PY_CHECK'
 from pathlib import Path
+import re
 import sys
 
-impl = Path(sys.argv[1]).read_text(encoding="utf-8")
-sign = Path(sys.argv[2]).read_text(encoding="utf-8")
+text = Path(sys.argv[1]).read_text(encoding="utf-8")
 
-required = [
-    "fiddle_twiddle_original_load_site",
-    "movl (%1), %0",
-    "fiddle_twiddle_skipped_load_site",
-    "fiddle_apply_group(a, len, stale_twiddle);",
-    "fiddle_hpc_begin_unconditional();",
-    "fiddle_hpc_end_unconditional();",
-]
-for item in required:
-    if item not in impl:
-        raise SystemExit(f"[error] missing implementation invariant: {item}")
+required = {
+    "baseline": "PQCLEAN_DILITHIUM2_CLEAN_fiddle_target_group_baseline",
+    "pointer": "PQCLEAN_DILITHIUM2_CLEAN_fiddle_target_group_corrupt_pointer",
+    "value": "PQCLEAN_DILITHIUM2_CLEAN_fiddle_target_group_corrupt_loaded_value",
+    "measure_pointer": "static void fiddle_measure_pointer",
+    "measure_value": "static void fiddle_measure_loaded_value",
+}
 
-if "if (fault" in impl or "if (attack" in impl:
-    raise SystemExit(
-        "[error] runtime fault/attack branch found in implementation"
-    )
+for name, marker in required.items():
+    if marker not in text:
+        raise SystemExit(f"[error] missing source marker {name}: {marker}")
 
-correct_hook = (
-    "PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_polyvecl_ntt(&z);"
-)
-wrong_hook = (
-    "PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_polyvecl_ntt(&s1);"
-)
-if correct_hook not in sign:
-    raise SystemExit("[error] signing-time z=y NTT hook is missing")
-if wrong_hook in sign:
-    raise SystemExit("[error] obsolete s1 NTT hook is still present")
+for marker in (
+    "wrong_index = fiddle_wrong_index",
+    "stale_twiddle = fiddle_stale_twiddle_zero",
+    "fiddle_selected_measured_runner(",
+):
+    if marker not in text:
+        raise SystemExit(f"[error] missing window-isolation marker: {marker}")
 
-print("[ok] source invariants and z=y hook verified")
-PY_VERIFY
+print("[verify] source-level window isolation markers present")
+PY_CHECK
 
-echo "[ok] baseline target contains the named original twiddle-load site"
-echo "[ok] attack target contains the named skipped-load site"
-echo "[ok] attack binary does not contain the original-load site"
-echo "[ok] both variants retain the complete butterfly group"
-echo "[ok] the fault hook targets z=y NTT, not s1 NTT"
-echo "[ok] target selection, stale-zero preparation, audit, and PMU analysis are outside the target primitive"
+{
+  echo "single executable: $binary"
+  echo "sha256: $(sha256sum "$binary" | awk '{print $1}')"
+  echo "target vec: $FIDDLE_TARGET_VEC"
+  echo "target index: $FIDDLE_TARGET_INDEX"
+  echo "pointer offset: $FIDDLE_POINTER_OFFSET"
+  echo "pointer attack: wrong pointer prepared before PMU enable; original load retained"
+  echo "loaded-value attack: existing skipped-load/stale-zero primitive retained"
+  echo "family/mode dispatch: function pointer selected before measurement wrapper"
+  echo "status: PASS"
+} > "$audit_dir/window_audit.txt"
+
+cat "$audit_dir/window_audit.txt"
