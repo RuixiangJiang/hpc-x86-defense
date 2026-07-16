@@ -152,3 +152,7 @@ include $(REPO_ROOT)/scripts/When_Randomness_Isnt_Random/exp.mk
 # BEGIN HPC-X86 DU BREAKING SHIELD
 include $(REPO_ROOT)/scripts/Breaking_the_Shield/exp.mk
 # END HPC-X86 DU BREAKING SHIELD
+
+# BEGIN HPC-X86 WANG SECRET IN ONEPIECE
+include $(REPO_ROOT)/scripts/Secret_in_OnePiece/exp.mk
+# END HPC-X86 WANG SECRET IN ONEPIECE
