@@ -148,3 +148,7 @@ include $(REPO_ROOT)/scripts/Mind_the_Faulty_KECCAK/exp.mk
 # BEGIN HPC-X86 WHEN RANDOMNESS ISNT RANDOM
 include $(REPO_ROOT)/scripts/When_Randomness_Isnt_Random/exp.mk
 # END HPC-X86 WHEN RANDOMNESS ISNT RANDOM
+
+# BEGIN HPC-X86 DU BREAKING SHIELD
+include $(REPO_ROOT)/scripts/Breaking_the_Shield/exp.mk
+# END HPC-X86 DU BREAKING SHIELD
