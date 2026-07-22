@@ -16,8 +16,8 @@
 #error "RAVI_Z_BUILD_MODE must be defined at compile time"
 #endif
 
-#if RAVI_Z_BUILD_MODE < RAVI_Z_MODE_BASELINE || \
-    RAVI_Z_BUILD_MODE > RAVI_Z_MODE_SKIP_STORE
+#if RAVI_Z_BUILD_MODE < RAVI_Z_MODE_MIN || \
+    RAVI_Z_BUILD_MODE > RAVI_Z_MODE_MAX
 #error "invalid RAVI_Z_BUILD_MODE"
 #endif
 
@@ -178,16 +178,22 @@ int PQCLEAN_DILITHIUM2_CLEAN_ravi_z_build_mode(void)
     return RAVI_Z_BUILD_MODE;
 }
 
+
+
 const char *PQCLEAN_DILITHIUM2_CLEAN_ravi_z_mode_name(void)
 {
-#if RAVI_Z_BUILD_MODE == RAVI_Z_MODE_BASELINE
-    return "baseline";
-#elif RAVI_Z_BUILD_MODE == RAVI_Z_MODE_SKIP_Y
-    return "skip-y";
-#elif RAVI_Z_BUILD_MODE == RAVI_Z_MODE_SKIP_CS1
-    return "skip-cs1";
+#if RAVI_Z_BUILD_MODE == RAVI_Z_MODE_V1_BASELINE
+    return "v1-baseline";
+#elif RAVI_Z_BUILD_MODE == RAVI_Z_MODE_V1_SKIP_STORE
+    return "v1-skip-store";
+#elif RAVI_Z_BUILD_MODE == RAVI_Z_MODE_V2_BASELINE
+    return "v2-baseline";
+#elif RAVI_Z_BUILD_MODE == RAVI_Z_MODE_V2_SKIP_STORE
+    return "v2-skip-store";
+#elif RAVI_Z_BUILD_MODE == RAVI_Z_MODE_V3_BASELINE
+    return "v3-baseline";
 #else
-    return "skip-store";
+    return "v3-skip-add";
 #endif
 }
 
@@ -286,83 +292,78 @@ void ravi_z_one_normal(int32_t *z_coeff, const int32_t *y_coeff)
     *z_coeff = cs1_value + y_value;
 }
 
-/*
- * Baseline target:
- *     z[target] = cs1[target] + y[target]
- */
-static __attribute__((noinline))
-void ravi_z_target_baseline(int32_t *z_coeff, const int32_t *y_coeff)
-{
-    int32_t cs1_value = *z_coeff;
-    int32_t y_value = *y_coeff;
-    *z_coeff = cs1_value + y_value;
-}
+/* Exact assembly primitives implemented in ravi_z_targets_x86_64.S. */
+void ravi_v1_baseline_asm(int32_t *dst, const int32_t *y);
+void ravi_v1_skip_store_asm(int32_t *dst, const int32_t *y);
+void ravi_v2_baseline_asm(int32_t *dst_y, const int32_t *cs1_saved);
+void ravi_v2_skip_store_asm(int32_t *dst_y, const int32_t *cs1_saved);
+void ravi_v3_baseline_asm(int32_t *dst,
+                          const int32_t *cs1_saved,
+                          const int32_t *y_saved);
+void ravi_v3_skip_add_asm(int32_t *dst,
+                          const int32_t *cs1_saved,
+                          const int32_t *y_saved);
+
+typedef struct {
+    int32_t cs1_shadow;
+    int32_t y_shadow;
+} ravi_target_context;
 
 /*
- * Ravi skip-y:
- *     released z[target] contains only cs1[target].
+ * Prepare aliasing outside the monitored interval.
  *
- * The same-value store is kept intentionally. This distinguishes the omitted
- * y contribution from the independent skipped-store fault.
+ * Variant 1: z[target] already contains c*s1 and is the destination.
+ * Variant 2: z[target] is initialized to y; c*s1 is retained separately.
+ * Variant 3: c*s1 and y are retained separately; z[target] is only a dst.
  */
-static __attribute__((noinline))
-void ravi_z_target_skip_y(int32_t *z_coeff, const int32_t *y_coeff)
+static inline __attribute__((always_inline))
+void ravi_z_prepare_target(polyvecl *z,
+                           const polyvecl *y,
+                           unsigned int target_v,
+                           unsigned int target_c,
+                           ravi_target_context *ctx)
 {
-    volatile int32_t *volatile_z = (volatile int32_t *)z_coeff;
-    int32_t cs1_value;
+    ctx->cs1_shadow = z->vec[target_v].coeffs[target_c];
+    ctx->y_shadow = y->vec[target_v].coeffs[target_c];
 
-    (void)y_coeff;
-    cs1_value = *volatile_z;
-    *volatile_z = cs1_value;
-}
-
-/*
- * Ravi skip-cs1:
- *     released z[target] contains only y[target].
- */
-static __attribute__((noinline))
-void ravi_z_target_skip_cs1(int32_t *z_coeff, const int32_t *y_coeff)
-{
-    int32_t y_value = *y_coeff;
-    *z_coeff = y_value;
-}
-
-/*
- * Ravi skip-store:
- *     cs1[target] + y[target] is computed, but the result is not stored.
- */
-static __attribute__((noinline))
-void ravi_z_target_skip_store(int32_t *z_coeff, const int32_t *y_coeff)
-{
-    int32_t cs1_value = *z_coeff;
-    int32_t y_value = *y_coeff;
-    int32_t result = cs1_value + y_value;
-
-    __asm__ volatile("" : : "r"(result) : "memory");
+#if RAVI_Z_BUILD_MODE == RAVI_Z_MODE_V2_BASELINE || \
+    RAVI_Z_BUILD_MODE == RAVI_Z_MODE_V2_SKIP_STORE
+    z->vec[target_v].coeffs[target_c] = ctx->y_shadow;
+#endif
 }
 
 static inline __attribute__((always_inline))
-void ravi_z_target_selected(int32_t *z_coeff, const int32_t *y_coeff)
+void ravi_z_target_selected(int32_t *z_coeff,
+                            const int32_t *y_coeff,
+                            ravi_target_context *ctx)
 {
-#if RAVI_Z_BUILD_MODE == RAVI_Z_MODE_BASELINE
-    ravi_z_target_baseline(z_coeff, y_coeff);
-#elif RAVI_Z_BUILD_MODE == RAVI_Z_MODE_SKIP_Y
-    ravi_z_target_skip_y(z_coeff, y_coeff);
-#elif RAVI_Z_BUILD_MODE == RAVI_Z_MODE_SKIP_CS1
-    ravi_z_target_skip_cs1(z_coeff, y_coeff);
+#if RAVI_Z_BUILD_MODE == RAVI_Z_MODE_V1_BASELINE
+    (void)ctx;
+    ravi_v1_baseline_asm(z_coeff, y_coeff);
+#elif RAVI_Z_BUILD_MODE == RAVI_Z_MODE_V1_SKIP_STORE
+    (void)ctx;
+    ravi_v1_skip_store_asm(z_coeff, y_coeff);
+#elif RAVI_Z_BUILD_MODE == RAVI_Z_MODE_V2_BASELINE
+    (void)y_coeff;
+    ravi_v2_baseline_asm(z_coeff, &ctx->cs1_shadow);
+#elif RAVI_Z_BUILD_MODE == RAVI_Z_MODE_V2_SKIP_STORE
+    (void)y_coeff;
+    ravi_v2_skip_store_asm(z_coeff, &ctx->cs1_shadow);
+#elif RAVI_Z_BUILD_MODE == RAVI_Z_MODE_V3_BASELINE
+    (void)y_coeff;
+    ravi_v3_baseline_asm(z_coeff, &ctx->cs1_shadow, &ctx->y_shadow);
 #else
-    ravi_z_target_skip_store(z_coeff, y_coeff);
+    (void)y_coeff;
+    ravi_v3_skip_add_asm(z_coeff, &ctx->cs1_shadow, &ctx->y_shadow);
 #endif
 }
 
 /*
- * Prefix-target-suffix execution.
- *
- * There is no "if this is the target coefficient" branch inside the normal
- * coefficient loops. Fault selection is resolved at compile time, so no
- * runtime fault-mode branch exists in the measured region.
+ * Prefix-target-suffix execution.  The target aliasing and fault mode have
+ * already been selected before the PMU is enabled.  The measured interval
+ * contains no runtime attack dispatch and no target-index branch.
  */
-#define RAVI_Z_EXECUTE_BODY(z_ptr, y_ptr, target_v, target_c)               \
+#define RAVI_Z_EXECUTE_BODY(z_ptr, y_ptr, target_v, target_c, ctx_ptr)       \
     do {                                                                    \
         unsigned int ravi_v;                                                \
         unsigned int ravi_c;                                                \
@@ -378,7 +379,8 @@ void ravi_z_target_selected(int32_t *z_coeff, const int32_t *y_coeff)
         }                                                                   \
         ravi_z_target_selected(                                             \
             &(z_ptr)->vec[(target_v)].coeffs[(target_c)],                   \
-            &(y_ptr)->vec[(target_v)].coeffs[(target_c)]);                  \
+            &(y_ptr)->vec[(target_v)].coeffs[(target_c)],                   \
+            (ctx_ptr));                                                     \
         for (ravi_c = (target_c) + 1u; ravi_c < (unsigned int)N; ++ravi_c) {\
             ravi_z_one_normal(&(z_ptr)->vec[(target_v)].coeffs[ravi_c],     \
                               &(y_ptr)->vec[(target_v)].coeffs[ravi_c]);     \
@@ -395,14 +397,11 @@ static __attribute__((noinline))
 void ravi_z_apply_measured(polyvecl *z,
                            const polyvecl *y,
                            unsigned int target_v,
-                           unsigned int target_c)
+                           unsigned int target_c,
+                           ravi_target_context *ctx)
 {
-    /*
-     * Counter setup and fault-mode selection have already completed.
-     * The enabled interval contains only prefix-target-suffix z generation.
-     */
     ravi_hpc_begin_unconditional();
-    RAVI_Z_EXECUTE_BODY(z, y, target_v, target_c);
+    RAVI_Z_EXECUTE_BODY(z, y, target_v, target_c, ctx);
     ravi_hpc_end_unconditional();
 }
 
@@ -410,27 +409,26 @@ static __attribute__((noinline))
 void ravi_z_apply_unmeasured(polyvecl *z,
                              const polyvecl *y,
                              unsigned int target_v,
-                             unsigned int target_c)
+                             unsigned int target_c,
+                             ravi_target_context *ctx)
 {
-    RAVI_Z_EXECUTE_BODY(z, y, target_v, target_c);
+    RAVI_Z_EXECUTE_BODY(z, y, target_v, target_c, ctx);
 }
 
 static __attribute__((noinline))
 void ravi_z_apply_audited(polyvecl *z,
                           const polyvecl *y,
                           unsigned int target_v,
-                          unsigned int target_c)
+                          unsigned int target_c,
+                          ravi_target_context *ctx)
 {
-    ravi_audit.cs1_before = z->vec[target_v].coeffs[target_c];
-    ravi_audit.y_value = y->vec[target_v].coeffs[target_c];
+    ravi_audit.cs1_before = ctx->cs1_shadow;
+    ravi_audit.y_value = ctx->y_shadow;
     ravi_audit.target_vec = target_v;
     ravi_audit.target_coeff = target_c;
 
-    /*
-     * Audit runs only while measurement is disabled. These extra accesses are
-     * never included in an HPC sample.
-     */
-    RAVI_Z_EXECUTE_BODY(z, y, target_v, target_c);
+    /* Audit-only accesses remain outside every measured sample. */
+    RAVI_Z_EXECUTE_BODY(z, y, target_v, target_c, ctx);
 
     ravi_audit.z_after = z->vec[target_v].coeffs[target_c];
     ravi_audit.valid = 1;
@@ -441,27 +439,28 @@ void PQCLEAN_DILITHIUM2_CLEAN_ravi_z_generation_apply(polyvecl *z,
 {
     unsigned int target_v = ravi_target_vec;
     unsigned int target_c = ravi_target_coeff;
+    ravi_target_context ctx;
 
     ravi_generation_invocations++;
 
-    /*
-     * All control decisions occur before counters are enabled.
-     */
     if (target_v >= (unsigned int)L || target_c >= (unsigned int)N) {
         PQCLEAN_DILITHIUM2_CLEAN_polyvecl_add(z, z, y);
         ravi_snapshot.error_code = -ERANGE;
         return;
     }
 
+    /* Shadow creation and Variant-2 destination initialization are outside PMU. */
+    ravi_z_prepare_target(z, y, target_v, target_c, &ctx);
+
     if (ravi_audit_enabled) {
-        ravi_z_apply_audited(z, y, target_v, target_c);
+        ravi_z_apply_audited(z, y, target_v, target_c, &ctx);
         return;
     }
 
     if (ravi_measurement_enabled && ravi_hpc_ready) {
-        ravi_z_apply_measured(z, y, target_v, target_c);
+        ravi_z_apply_measured(z, y, target_v, target_c, &ctx);
         return;
     }
 
-    ravi_z_apply_unmeasured(z, y, target_v, target_c);
+    ravi_z_apply_unmeasured(z, y, target_v, target_c, &ctx);
 }

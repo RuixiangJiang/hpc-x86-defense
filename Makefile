@@ -39,7 +39,8 @@ RAVI_DIL_SRCS := \
 	$(RAVI_DIL_DIR)/rounding.c \
 	$(RAVI_DIL_DIR)/sign.c \
 	$(RAVI_DIL_DIR)/symmetric-shake.c \
-	$(RAVI_DIL_DIR)/ravi_z_generation_x86.c
+	$(RAVI_DIL_DIR)/ravi_z_generation_x86.c \
+	$(RAVI_DIL_DIR)/ravi_z_targets_x86_64.S
 
 RAVI_COMMON_SRCS := \
 	$(RAVI_COMMON_DIR)/fips202.c \
@@ -62,42 +63,55 @@ RAVI_CFLAGS := \
 	-fno-omit-frame-pointer \
 	-fno-lto
 
-RAVI_BASE_BIN := $(RAVI_BIN_DIR)/ravi_z_baseline
-RAVI_SKIP_Y_BIN := $(RAVI_BIN_DIR)/ravi_z_skip_y
-RAVI_SKIP_CS1_BIN := $(RAVI_BIN_DIR)/ravi_z_skip_cs1
-RAVI_SKIP_STORE_BIN := $(RAVI_BIN_DIR)/ravi_z_skip_store
+RAVI_V1_BASE_BIN := $(RAVI_BIN_DIR)/ravi_v1_baseline
+RAVI_V1_ATTACK_BIN := $(RAVI_BIN_DIR)/ravi_v1_skip_store
+RAVI_V2_BASE_BIN := $(RAVI_BIN_DIR)/ravi_v2_baseline
+RAVI_V2_ATTACK_BIN := $(RAVI_BIN_DIR)/ravi_v2_skip_store
+RAVI_V3_BASE_BIN := $(RAVI_BIN_DIR)/ravi_v3_baseline
+RAVI_V3_ATTACK_BIN := $(RAVI_BIN_DIR)/ravi_v3_skip_add
 
-.PHONY: ravi ravi-clean
+.PHONY: ravi ravi-clean ravi-verify
 
 ravi: \
-	$(RAVI_BASE_BIN) \
-	$(RAVI_SKIP_Y_BIN) \
-	$(RAVI_SKIP_CS1_BIN) \
-	$(RAVI_SKIP_STORE_BIN)
+	$(RAVI_V1_BASE_BIN) \
+	$(RAVI_V1_ATTACK_BIN) \
+	$(RAVI_V2_BASE_BIN) \
+	$(RAVI_V2_ATTACK_BIN) \
+	$(RAVI_V3_BASE_BIN) \
+	$(RAVI_V3_ATTACK_BIN)
 
-$(RAVI_BASE_BIN): $(RAVI_ALL_SRCS)
+$(RAVI_V1_BASE_BIN): $(RAVI_ALL_SRCS)
 	mkdir -p $(dir $@)
-	$(CC) $(RAVI_CPPFLAGS) $(RAVI_CFLAGS) \
-		-DRAVI_Z_BUILD_MODE=0 \
+	$(CC) $(RAVI_CPPFLAGS) $(RAVI_CFLAGS) -DRAVI_Z_BUILD_MODE=0 \
 		$(RAVI_ALL_SRCS) $(LDFLAGS) $(LDLIBS) -o $@
 
-$(RAVI_SKIP_Y_BIN): $(RAVI_ALL_SRCS)
+$(RAVI_V1_ATTACK_BIN): $(RAVI_ALL_SRCS)
 	mkdir -p $(dir $@)
-	$(CC) $(RAVI_CPPFLAGS) $(RAVI_CFLAGS) \
-		-DRAVI_Z_BUILD_MODE=1 \
+	$(CC) $(RAVI_CPPFLAGS) $(RAVI_CFLAGS) -DRAVI_Z_BUILD_MODE=1 \
 		$(RAVI_ALL_SRCS) $(LDFLAGS) $(LDLIBS) -o $@
 
-$(RAVI_SKIP_CS1_BIN): $(RAVI_ALL_SRCS)
+$(RAVI_V2_BASE_BIN): $(RAVI_ALL_SRCS)
 	mkdir -p $(dir $@)
-	$(CC) $(RAVI_CPPFLAGS) $(RAVI_CFLAGS) \
-		-DRAVI_Z_BUILD_MODE=2 \
+	$(CC) $(RAVI_CPPFLAGS) $(RAVI_CFLAGS) -DRAVI_Z_BUILD_MODE=2 \
 		$(RAVI_ALL_SRCS) $(LDFLAGS) $(LDLIBS) -o $@
 
-$(RAVI_SKIP_STORE_BIN): $(RAVI_ALL_SRCS)
+$(RAVI_V2_ATTACK_BIN): $(RAVI_ALL_SRCS)
 	mkdir -p $(dir $@)
-	$(CC) $(RAVI_CPPFLAGS) $(RAVI_CFLAGS) \
-		-DRAVI_Z_BUILD_MODE=3 \
+	$(CC) $(RAVI_CPPFLAGS) $(RAVI_CFLAGS) -DRAVI_Z_BUILD_MODE=3 \
 		$(RAVI_ALL_SRCS) $(LDFLAGS) $(LDLIBS) -o $@
+
+$(RAVI_V3_BASE_BIN): $(RAVI_ALL_SRCS)
+	mkdir -p $(dir $@)
+	$(CC) $(RAVI_CPPFLAGS) $(RAVI_CFLAGS) -DRAVI_Z_BUILD_MODE=4 \
+		$(RAVI_ALL_SRCS) $(LDFLAGS) $(LDLIBS) -o $@
+
+$(RAVI_V3_ATTACK_BIN): $(RAVI_ALL_SRCS)
+	mkdir -p $(dir $@)
+	$(CC) $(RAVI_CPPFLAGS) $(RAVI_CFLAGS) -DRAVI_Z_BUILD_MODE=5 \
+		$(RAVI_ALL_SRCS) $(LDFLAGS) $(LDLIBS) -o $@
+
+ravi-verify: ravi
+	$(REPO_ROOT)/scripts/Exploiting_Determinism_in_Lattice_based_Signatures/verify_paper_assembly.sh
 
 ravi-clean:
 	rm -rf $(RAVI_BIN_DIR)

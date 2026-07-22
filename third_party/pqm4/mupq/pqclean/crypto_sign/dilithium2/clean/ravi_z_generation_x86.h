@@ -1,13 +1,26 @@
+
 #ifndef PQCLEAN_DILITHIUM2_CLEAN_RAVI_Z_GENERATION_X86_H
 #define PQCLEAN_DILITHIUM2_CLEAN_RAVI_Z_GENERATION_X86_H
 
 #include <stdint.h>
 #include "polyvec.h"
 
-#define RAVI_Z_MODE_BASELINE   0
-#define RAVI_Z_MODE_SKIP_Y     1
-#define RAVI_Z_MODE_SKIP_CS1   2
-#define RAVI_Z_MODE_SKIP_STORE 3
+/*
+ * Paper-exact build modes for Ravi et al., Figure 4:
+ *
+ * Variant 1: destination aliases the c*s1 operand; attack skips STR.W.
+ * Variant 2: destination aliases the y operand;    attack skips STR.W.
+ * Variant 3: destination is separate;              attack skips ADD.
+ */
+#define RAVI_Z_MODE_V1_BASELINE    0
+#define RAVI_Z_MODE_V1_SKIP_STORE  1
+#define RAVI_Z_MODE_V2_BASELINE    2
+#define RAVI_Z_MODE_V2_SKIP_STORE  3
+#define RAVI_Z_MODE_V3_BASELINE    4
+#define RAVI_Z_MODE_V3_SKIP_ADD    5
+
+#define RAVI_Z_MODE_MIN RAVI_Z_MODE_V1_BASELINE
+#define RAVI_Z_MODE_MAX RAVI_Z_MODE_V3_SKIP_ADD
 
 #define RAVI_Z_HPC_EVENT_COUNT 6
 
