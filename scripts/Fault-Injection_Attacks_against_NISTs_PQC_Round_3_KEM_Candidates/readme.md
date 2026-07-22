@@ -862,3 +862,34 @@ The attack produced a deterministic structural signature of:
 ```
 
 relative to the frozen baseline detector.
+
+---
+
+<!-- BEGIN XAGAWA OS PAIR DETECTOR -->
+
+## OS-level call-pair detector
+
+A separate Linux `uprobe`/`uretprobe` experiment checks whether every
+decapsulation contains exactly one complete `cmov()` invocation:
+
+```text
+decapsulation entry
+    -> cmov entry
+    -> cmov return
+    -> decapsulation return
+```
+
+It is installed in `run_os_pair_detector.sh` and documented in
+`os_pair_detector.md`. Run it independently from the PMU experiment because
+software probes change timing and retired-event counts.
+
+```bash
+HPC_CPU=0 \
+XAGAWA_OS_PAIR_SAMPLES=500 \
+scripts/Fault-Injection_Attacks_against_NISTs_PQC_Round_3_KEM_Candidates/run_os_pair_detector.sh
+```
+
+The normal binary should produce one entry/return pair per decapsulation. The
+skip-`cmov` binary should produce zero, causing one alarm per attack sample.
+
+<!-- END XAGAWA OS PAIR DETECTOR -->

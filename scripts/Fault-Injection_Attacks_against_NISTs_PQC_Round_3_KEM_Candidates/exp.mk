@@ -71,3 +71,39 @@ $(XAGAWA_ATTACK_BIN): $(XAGAWA_ALL_SRCS)
 
 xagawa-round3-kem-clean:
 	rm -rf $(XAGAWA_BIN_DIR)
+
+# BEGIN XAGAWA OS CALL-PAIR DETECTOR
+#
+# These binaries are separate from the PMU result binaries.  The linker is
+# forced to retain the cmov symbol in the skip binary so that a uprobe can be
+# attached even though the call edge itself is intentionally absent.
+XAGAWA_OS_PAIR_BASE_BIN := \
+	$(XAGAWA_BIN_DIR)/xagawa_cmov_baseline_os_pair
+XAGAWA_OS_PAIR_ATTACK_BIN := \
+	$(XAGAWA_BIN_DIR)/xagawa_cmov_skip_os_pair
+
+XAGAWA_OS_PAIR_KEEP_SYMBOL := \
+	-Wl,--undefined=PQCLEAN_KYBER512_CLEAN_cmov
+
+.PHONY: xagawa-round3-kem-os-pair
+
+xagawa-round3-kem-os-pair: \
+	$(XAGAWA_OS_PAIR_BASE_BIN) \
+	$(XAGAWA_OS_PAIR_ATTACK_BIN)
+
+$(XAGAWA_OS_PAIR_BASE_BIN): $(XAGAWA_ALL_SRCS)
+	mkdir -p $(dir $@)
+	$(CC) $(XAGAWA_CPPFLAGS) $(XAGAWA_CFLAGS) \
+		-DXAGAWA_FAILURE_BUILD_MODE=0 \
+		$(XAGAWA_ALL_SRCS) \
+		$(XAGAWA_LDFLAGS) $(XAGAWA_OS_PAIR_KEEP_SYMBOL) \
+		$(LDFLAGS) $(LDLIBS) -o $@
+
+$(XAGAWA_OS_PAIR_ATTACK_BIN): $(XAGAWA_ALL_SRCS)
+	mkdir -p $(dir $@)
+	$(CC) $(XAGAWA_CPPFLAGS) $(XAGAWA_CFLAGS) \
+		-DXAGAWA_FAILURE_BUILD_MODE=1 \
+		$(XAGAWA_ALL_SRCS) \
+		$(XAGAWA_LDFLAGS) $(XAGAWA_OS_PAIR_KEEP_SYMBOL) \
+		$(LDFLAGS) $(LDLIBS) -o $@
+# END XAGAWA OS CALL-PAIR DETECTOR
