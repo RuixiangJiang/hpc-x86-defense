@@ -33,8 +33,11 @@ typedef struct {
     uint64_t config;
 } signcorr_event_desc;
 
-static const signcorr_event_desc signcorr_events[
-    SIGNCORR_HPC_EVENT_COUNT] = {
+#define SIGNCORR_CACHE_CONFIG(cache_, op_, result_) \
+    ((uint64_t)(cache_) | ((uint64_t)(op_) << 8) | \
+     ((uint64_t)(result_) << 16))
+
+static const signcorr_event_desc signcorr_structural_events[6] = {
     {"cycles", PERF_TYPE_HARDWARE, PERF_COUNT_HW_CPU_CYCLES},
     {"instructions", PERF_TYPE_HARDWARE, PERF_COUNT_HW_INSTRUCTIONS},
     {"branches", PERF_TYPE_HARDWARE, PERF_COUNT_HW_BRANCH_INSTRUCTIONS},
@@ -42,6 +45,51 @@ static const signcorr_event_desc signcorr_events[
     {"retired-loads", SIGNCORR_PMU_TYPE, SIGNCORR_LOAD_CONFIG},
     {"retired-stores", SIGNCORR_PMU_TYPE, SIGNCORR_STORE_CONFIG},
 };
+
+static const signcorr_event_desc signcorr_cache_l1d_events[4] = {
+    {"cache-references", PERF_TYPE_HARDWARE,
+     PERF_COUNT_HW_CACHE_REFERENCES},
+    {"cache-misses", PERF_TYPE_HARDWARE,
+     PERF_COUNT_HW_CACHE_MISSES},
+    {"l1d-read-accesses", PERF_TYPE_HW_CACHE,
+     SIGNCORR_CACHE_CONFIG(
+         PERF_COUNT_HW_CACHE_L1D,
+         PERF_COUNT_HW_CACHE_OP_READ,
+         PERF_COUNT_HW_CACHE_RESULT_ACCESS)},
+    {"l1d-read-misses", PERF_TYPE_HW_CACHE,
+     SIGNCORR_CACHE_CONFIG(
+         PERF_COUNT_HW_CACHE_L1D,
+         PERF_COUNT_HW_CACHE_OP_READ,
+         PERF_COUNT_HW_CACHE_RESULT_MISS)},
+};
+
+static const signcorr_event_desc signcorr_cache_llc_dtlb_events[4] = {
+    {"llc-read-accesses", PERF_TYPE_HW_CACHE,
+     SIGNCORR_CACHE_CONFIG(
+         PERF_COUNT_HW_CACHE_LL,
+         PERF_COUNT_HW_CACHE_OP_READ,
+         PERF_COUNT_HW_CACHE_RESULT_ACCESS)},
+    {"llc-read-misses", PERF_TYPE_HW_CACHE,
+     SIGNCORR_CACHE_CONFIG(
+         PERF_COUNT_HW_CACHE_LL,
+         PERF_COUNT_HW_CACHE_OP_READ,
+         PERF_COUNT_HW_CACHE_RESULT_MISS)},
+    {"dtlb-read-accesses", PERF_TYPE_HW_CACHE,
+     SIGNCORR_CACHE_CONFIG(
+         PERF_COUNT_HW_CACHE_DTLB,
+         PERF_COUNT_HW_CACHE_OP_READ,
+         PERF_COUNT_HW_CACHE_RESULT_ACCESS)},
+    {"dtlb-read-misses", PERF_TYPE_HW_CACHE,
+     SIGNCORR_CACHE_CONFIG(
+         PERF_COUNT_HW_CACHE_DTLB,
+         PERF_COUNT_HW_CACHE_OP_READ,
+         PERF_COUNT_HW_CACHE_RESULT_MISS)},
+};
+
+static const signcorr_event_desc *signcorr_events =
+    signcorr_structural_events;
+static unsigned int signcorr_active_event_count = 6u;
+static unsigned int signcorr_counter_set;
 
 static int signcorr_fds[SIGNCORR_HPC_EVENT_COUNT] = {
     -1, -1, -1, -1, -1, -1
@@ -90,6 +138,53 @@ static void signcorr_close_all(void)
     signcorr_hpc_ready = 0;
 }
 
+int PQCLEAN_DILITHIUM2_CLEAN_signcorr_set_counter_set(
+    unsigned int counter_set)
+{
+    if (signcorr_hpc_ready) {
+        return -EBUSY;
+    }
+
+    switch (counter_set) {
+    case 0u:
+        signcorr_events = signcorr_structural_events;
+        signcorr_active_event_count = 6u;
+        break;
+    case 1u:
+        signcorr_events = signcorr_cache_l1d_events;
+        signcorr_active_event_count = 4u;
+        break;
+    case 2u:
+        signcorr_events = signcorr_cache_llc_dtlb_events;
+        signcorr_active_event_count = 4u;
+        break;
+    default:
+        return -EINVAL;
+    }
+
+    signcorr_counter_set = counter_set;
+    return 0;
+}
+
+unsigned int PQCLEAN_DILITHIUM2_CLEAN_signcorr_event_count(void)
+{
+    return signcorr_active_event_count;
+}
+
+const char *PQCLEAN_DILITHIUM2_CLEAN_signcorr_counter_set_name(void)
+{
+    switch (signcorr_counter_set) {
+    case 0u:
+        return "structural";
+    case 1u:
+        return "cache-l1d";
+    case 2u:
+        return "cache-llc-dtlb";
+    default:
+        return "invalid";
+    }
+}
+
 int PQCLEAN_DILITHIUM2_CLEAN_signcorr_hpc_init(void)
 {
     struct perf_event_attr attr;
@@ -99,7 +194,7 @@ int PQCLEAN_DILITHIUM2_CLEAN_signcorr_hpc_init(void)
     signcorr_close_all();
     memset(&signcorr_snapshot, 0, sizeof(signcorr_snapshot));
 
-    for (i = 0; i < SIGNCORR_HPC_EVENT_COUNT; ++i) {
+    for (i = 0; i < signcorr_active_event_count; ++i) {
         memset(&attr, 0, sizeof(attr));
         attr.size = sizeof(attr);
         attr.type = signcorr_events[i].type;
@@ -191,7 +286,7 @@ void PQCLEAN_DILITHIUM2_CLEAN_signcorr_get_audit_snapshot(
 const char *PQCLEAN_DILITHIUM2_CLEAN_signcorr_event_name(
     unsigned int index)
 {
-    if (index >= SIGNCORR_HPC_EVENT_COUNT) {
+    if (index >= signcorr_active_event_count) {
         return "unknown";
     }
     return signcorr_events[index].name;
@@ -282,7 +377,7 @@ static void signcorr_hpc_end_unconditional(void)
     }
 
     for (i = 0; i < data.nr; ++i) {
-        for (j = 0; j < SIGNCORR_HPC_EVENT_COUNT; ++j) {
+        for (j = 0; j < signcorr_active_event_count; ++j) {
             if (data.values[i].id == signcorr_ids[j]) {
                 signcorr_snapshot.values[j] =
                     data.values[i].value;

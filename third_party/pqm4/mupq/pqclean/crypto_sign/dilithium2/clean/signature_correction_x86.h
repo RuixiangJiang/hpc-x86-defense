@@ -5,7 +5,8 @@
 
 #include "polyvec.h"
 
-#define SIGNCORR_HPC_EVENT_COUNT 6
+#define SIGNCORR_HPC_MAX_EVENTS 6
+#define SIGNCORR_HPC_EVENT_COUNT SIGNCORR_HPC_MAX_EVENTS
 
 typedef struct {
     uint64_t sequence;
@@ -36,6 +37,11 @@ typedef struct {
     uint32_t fault_applied;
     uint32_t valid;
 } signcorr_audit_snapshot;
+
+int PQCLEAN_DILITHIUM2_CLEAN_signcorr_set_counter_set(
+    unsigned int counter_set);
+unsigned int PQCLEAN_DILITHIUM2_CLEAN_signcorr_event_count(void);
+const char *PQCLEAN_DILITHIUM2_CLEAN_signcorr_counter_set_name(void);
 
 int PQCLEAN_DILITHIUM2_CLEAN_signcorr_hpc_init(void);
 void PQCLEAN_DILITHIUM2_CLEAN_signcorr_hpc_close(void);

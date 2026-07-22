@@ -47,7 +47,8 @@ for value_name in \
     SIGNCORR_SAMPLES \
     SIGNCORR_WARMUP \
     SIGNCORR_MAX_ATTEMPTS \
-    SIGNCORR_SEARCH_BITS; do
+    SIGNCORR_SEARCH_BITS \
+    SIGNCORR_COUNTER_SET; do
     value="${!value_name}"
     if [[ ! "$value" =~ ^[0-9]+$ ]]; then
         echo "[error] $value_name must be an unsigned integer" >&2
@@ -65,6 +66,10 @@ if (( SIGNCORR_TARGET_COEFF >= 256 )); then
 fi
 if (( SIGNCORR_BIT_INDEX >= 32 )); then
     echo "[error] SIGNCORR_BIT_INDEX must be in [0,32)" >&2
+    exit 1
+fi
+if (( SIGNCORR_COUNTER_SET > 2 )); then
+    echo "[error] SIGNCORR_COUNTER_SET must be 0, 1, or 2" >&2
     exit 1
 fi
 
@@ -111,6 +116,7 @@ ARGS=(
     --message-domain "$MESSAGE_DOMAIN"
     --max-attempts "$SIGNCORR_MAX_ATTEMPTS"
     --search-bits "$SIGNCORR_SEARCH_BITS"
+    --counter-set "$SIGNCORR_COUNTER_SET"
     --key-file "$KEY_FILE"
     --output "$OUTPUT"
 )
@@ -137,6 +143,7 @@ echo "  bit index:      $SIGNCORR_BIT_INDEX"
 echo "  samples:        $SIGNCORR_SAMPLES"
 echo "  warmup:         $SIGNCORR_WARMUP"
 echo "  message domain: $MESSAGE_DOMAIN"
+echo "  counter set:    $SIGNCORR_COUNTER_SET"
 echo "  CPU:            $HPC_CPU"
 echo "  cpu_core CPUs:  ${CORE_CPUS:-unavailable}"
 echo "  cpu_atom CPUs:  ${ATOM_CPUS:-unavailable}"

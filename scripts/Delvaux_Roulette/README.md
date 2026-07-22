@@ -30,147 +30,81 @@ scripts/Delvaux_Roulette/run.sh
 
 ## 1. Implemented fault models
 
-The experiment implements four paper-level fault families.
+The experiment uses two different PMU comparison policies.
 
-| Family | Type | Semantic effect |
+| Family | Software realization | Primary PMU comparison |
 |---|---|---|
-| `skip-local-masked-operation` | C-local | The selected masked update is skipped, so later masked computation consumes a stale or incomplete intermediate |
-| `set-masked-intermediate-constant` | D | The selected masked intermediate is replaced with a configured constant |
-| `replace-masked-intermediate-random` | D | The selected masked intermediate is replaced with a prepared random faulty value |
-| `flip-masked-intermediate-bit` | D | One configured bit of the selected masked intermediate is inverted |
+| `skip-local-masked-operation` | Omit the x86 packed-halfword add corresponding to ARM `uadd16 a, a, b` | Retired instructions |
+| `set-masked-intermediate-constant` | Replace one normal `add` with one `mov` of a prepared constant | Cache/data-memory behavior |
+| `replace-masked-intermediate-random` | Replace one normal `add` with one `mov` of a prepared random value | Cache/data-memory behavior |
+| `flip-masked-intermediate-bit` | Prepare a bit-flipped value outside the PMU window, then execute the same measured consumer as the benign pair | Cache/data-memory behavior |
 
-The attacks do not modify the ciphertext-verification result, bypass implicit
-rejection, overwrite the shared secret, or replace the complete masked INTT
-output.
+The bit-flip implementation no longer adds a software `xor` instruction to the
+measured path.
 
----
+## 2. Roulette target operations
 
-## 2. Roulette target operation
+### 2.1 Skip `uadd16 a, a, b`
 
-The selected final-layer masked operation normally computes:
-
-```text
-normal_intermediate = a_share + b_share
-```
-
-The four target primitives are:
-
-### 2.1 Skip a local masked operation
-
-```text
-normal:
-    used_intermediate = a_share + b_share
-
-fault:
-    used_intermediate = a_share
-```
-
-Representative target structure:
+The paper target is the Cortex-M4 packed-halfword instruction:
 
 ```asm
-normal:
-    add source, destination
-
-fault:
-    # selected add omitted
+uadd16 a, a, b
 ```
 
-No replacement `nop`, software fault branch, random draw, or post-computation
-overwrite is inserted into the fault primitive.
-
-Expected retired-instruction signature:
-
-```text
-instructions = baseline - 1
-```
-
-### 2.2 Set the masked intermediate to a constant
-
-```text
-normal:
-    used_intermediate = a_share + b_share
-
-fault:
-    used_intermediate = configured_constant
-```
-
-Representative target structure:
+The x86-64 experiment uses `paddw` as its packed 16-bit analogue. Baseline and
+attack are identical except for the omitted `paddw`:
 
 ```asm
-normal:
-    add source, destination
+baseline:
+    movd    %edi, %xmm0
+    movd    %esi, %xmm1
+    paddw   %xmm1, %xmm0
+    movd    %xmm0, %eax
+    movswl  %ax, %eax
+    ret
 
-fault:
-    mov configured_constant, destination
+attack:
+    movd    %edi, %xmm0
+    movd    %esi, %xmm1
+    # paddw omitted
+    movd    %xmm0, %eax
+    movswl  %ax, %eax
+    ret
 ```
 
-Default:
+Expected result:
 
 ```text
-ROU_CONSTANT=0x5a5a
+attack retired instructions = baseline retired instructions - 1
 ```
 
-The constant is selected before the PMU window.
-
-### 2.3 Replace the masked intermediate with a random value
+### 2.2 Set to a constant
 
 ```text
-normal:
-    used_intermediate = a_share + b_share
-
-fault:
-    used_intermediate = prepared_random_value
+baseline: one add
+attack:   one mov of the prepared constant
 ```
 
-Representative target structure:
+### 2.3 Replace with a random value
+
+```text
+baseline: one add
+attack:   one mov of the prepared random value
+```
+
+### 2.4 Flip a bit
+
+The normal or bit-flipped intermediate is prepared before the PMU window.
+Benign and attack modes then call the same measured target:
 
 ```asm
-normal:
-    add source, destination
-
-fault:
-    mov prepared_random_value, destination
+movl %edx, %eax
+ret
 ```
 
-Random-value generation, PRNG state updates, range handling, and accidental
-equality checks occur before the PMU window. The measured target receives an
-already prepared faulty value.
-
-### 2.4 Flip one bit of the masked intermediate
-
-```text
-normal:
-    used_intermediate = a_share + b_share
-
-fault:
-    used_intermediate =
-        (a_share + b_share) XOR (1 << configured_bit)
-```
-
-Representative target structure:
-
-```asm
-normal:
-    add source, destination
-
-fault:
-    add source, destination
-    xor flip_mask, destination
-```
-
-Default:
-
-```text
-ROU_FLIP_BIT=5
-```
-
-Expected retired-instruction signature:
-
-```text
-instructions = baseline + 1
-```
-
----
+No synthetic `xor` is retired in the measured region, so the benign and attack
+instruction sequences are identical.
 
 ## 3. Complete Kyber path
 
@@ -428,291 +362,81 @@ traces.
 
 ## 8. Detector design
 
-The results show a clear difference between execution-structure faults and
-data-only faults.
+### 8.1 Instruction skip
 
-### 8.1 Primary structural HPC channel
-
-The primary HPC channel uses:
+`skip-local-masked-operation` is evaluated only with:
 
 ```text
 structural-instructions.instructions
 ```
 
-For session `s`:
+The expected pair-specific delta is exactly `-1`.
+
+### 8.2 Constant, random, and bit-flip data faults
+
+These three families are evaluated with cache and data-memory events only:
 
 ```text
-instruction_delta =
-    instructions(trace)
-    - median(instructions(reference_s))
+retired loads/stores
+L1D, LLC, and DTLB events
+cache references/misses
+L1D replacements and L2 request misses
+load hit/miss and long-latency-load events
+memory-related stalls
+store-buffer stalls
+execution bound on loads
 ```
 
-The structural alarm is:
+Retired instructions, branches, frontend events, and uop events are excluded
+from their primary candidate feature pools.
 
-```text
-abs(instruction_delta) > 0
+A weak or zero TPR is a valid result because a data-only fault is not guaranteed
+to change aggregate cache or memory behavior.
+
+### 8.3 Post-window integrity detector
+
+Redundant intermediate verification remains a separate non-HPC countermeasure.
+
+## 9. Results after this patch
+
+Pre-patch results are archived because the old bit-flip implementation added an
+artificial `xor` instruction and the old skip target used scalar `add`.
+
+Recollect all data:
+
+```bash
+scripts/Delvaux_Roulette/run.sh full
 ```
 
-This detector is predeclared from the target assembly.
+Report the instruction-skip FPR/TPR from retired instructions. Report the
+constant, random, and bit-flip FPR/TPR from the cache/data-memory detector.
+Do not reuse the previous bit-flip instruction-count result.
 
-It detects:
+## 10. Ineffective faults
 
-```text
-skip-local-masked-operation:
-    one retired instruction removed
-
-flip-masked-intermediate-bit:
-    one retired instruction added
-```
-
-The instruction channel is evaluated independently. Cache, frontend, stall, and
-uop features cannot cancel a deterministic instruction anomaly.
-
-### 8.2 Experimental uop-substitution channel
-
-An experimental channel tests whether replacing `add` with a register `mov`
-creates a stable move-elimination fingerprint:
-
-```text
-instructions unchanged
-and
-uops-issued or uops-executed decreases
-```
-
-The channel uses a worst-session confidence-guarded threshold.
-
-Observed thresholds:
-
-```text
-single-trace uop threshold = 1.348982
-batch-10 uop threshold     = 1.348982
-```
-
-The final results do not support this channel as a reliable defense:
-
-```text
-constant replacement:
-    HPC single TPR = 0.1%
-    HPC batch TPR  = 0%
-
-random replacement:
-    HPC single TPR = 0.3%
-    HPC batch TPR  = 0%
-```
-
-The uop channel is therefore diagnostic only. It should not be presented as a
-successful detector.
-
-### 8.3 Post-window intermediate-integrity channel
-
-The second defense tier performs a redundant computation after the PMU window:
-
-```text
-expected_intermediate = a_share + b_share
-observed_intermediate = value used by the masked computation
-
-alarm if:
-    observed_intermediate != expected_intermediate
-```
-
-This channel is not an HPC detector.
-
-It is a software data-integrity countermeasure executed outside the measured
-attack window. It does not change the target primitive or contaminate the HPC
-measurement.
-
-### 8.4 Two-tier decision
-
-The combined defense is:
-
-```text
-two_tier_alarm =
-    structural_HPC_alarm
-    OR
-    intermediate_integrity_alarm
-```
-
-Interpretation:
-
-```text
-execution-structure fault:
-    detected by retired-instruction monitoring
-
-data-only fault with equivalent execution structure:
-    detected by redundant intermediate verification
-```
-
----
-
-## 9. Measured results
-
-### 9.1 HPC validation false-positive rate
-
-The currently implemented HPC detector includes both the structural channel
-and the experimental uop channel.
-
-```text
-single trace:
-    FP  = 33 / 24000
-    FPR = 0.1375%
-
-batch of 10:
-    FP  = 0 / 2400
-    FPR = 0.0000%
-```
-
-The single-trace false positives are primarily the cost of retaining the
-experimental uop-substitution channel. The structural instruction channel is
-the reliable component.
-
-### 9.2 Attack true-positive rates
-
-| Attack | HPC single TPR | HPC batch-10 TPR | Integrity single TPR | Integrity batch-10 TPR | Two-tier single TPR | Two-tier batch-10 TPR |
-|---|---:|---:|---:|---:|---:|---:|
-| Skip local masked operation | 100.0% | 100.0% | 99.9% | 100.0% | 100.0% | 100.0% |
-| Set intermediate to constant | 0.1% | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| Replace intermediate with random value | 0.3% | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| Flip one intermediate bit | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-
-### 9.3 HPC identifiability classification
-
-| Attack | Classification |
-|---|---|
-| Skip local masked operation | Deterministically identifiable through retired-instruction deficit |
-| Flip masked intermediate bit | Deterministically identifiable through retired-instruction surplus |
-| Set masked intermediate to constant | Not reliably identifiable with the current standard HPC set |
-| Replace masked intermediate with random value | Not reliably identifiable with the current standard HPC set |
-
-Although the random-replacement experiment initially tested a conditional
-move-elimination fingerprint, the measured TPR was only 0.3% and did not
-survive batch aggregation. It must therefore be classified as non-identifiable
-with the current counter set.
-
----
-
-## 10. Why the skip integrity TPR is 99.9%
-
-For the skipped addition:
-
-```text
-normal = a_share + b_share
-fault  = a_share
-```
-
-A fault can be injected correctly but have no data effect when:
-
-```text
-b_share = 0
-```
-
-Then:
-
-```text
-a_share + b_share = a_share
-```
-
-The instruction was still skipped, so the structural HPC detector detects it.
-However, a detector based only on comparing intermediate values sees no
-difference.
-
-This explains:
-
-```text
-skip structural HPC TPR = 100%
-skip integrity TPR      = 99.9%
-two-tier TPR            = 100%
-```
-
-Reports should distinguish:
-
-```text
-injection-level detection:
-    was the selected operation faulted?
-
-effect-conditioned detection:
-    did the fault change the intermediate value?
-```
-
-The attack generator should not exclude naturally ineffective samples solely
-to increase the measured TPR.
-
----
+Injection-level and effect-conditioned detection should be reported separately.
+A data fault that accidentally reproduces the normal value remains part of the
+injection-level dataset.
 
 ## 11. Interpretation
 
-The experiment establishes an important HPC detection boundary.
+The instruction skip changes control/data execution structure and is detected
+through its exact retired-instruction deficit.
 
-### Reliably detectable with the current HPCs
+Constant replacement, random replacement, and bit flip are data faults. They do
+not receive an artificial instruction-count signature. Their HPC evaluation
+asks whether changed data produces reproducible cache or memory behavior.
 
-```text
-fault changes the retired execution structure
-```
+## 12. Recommended primary reporting
 
-Examples:
+| Fault | Primary HPC scope | Expected instruction delta |
+|---|---|---:|
+| Skip `uadd16` | Retired instructions | `-1` |
+| Set to constant | Cache/data-memory | none predeclared |
+| Replace with random | Cache/data-memory | none predeclared |
+| Bit flip | Cache/data-memory | `0`; identical sequence |
 
-```text
-skip one instruction
-add one bit-flip instruction
-```
-
-### Not reliably detectable with the current HPCs
-
-```text
-fault changes only the intermediate data value
-while preserving the retired instruction count,
-branch count, load count, and store count
-```
-
-Examples:
-
-```text
-replace add with immediate mov
-replace add with register mov
-```
-
-Standard performance counters do not directly reveal whether a retired
-instruction was an `add` or a semantically different `mov` when both produce
-the same coarse execution counts.
-
-Cache, frontend, uop, and stall events can correlate with a replacement in one
-session but fail to generalize across sessions.
-
----
-
-## 12. Recommended primary result
-
-The recommended HPC-only result is:
-
-| Fault | Single TPR | Batch-10 TPR |
-|---|---:|---:|
-| Skip local masked operation | 100% | 100% |
-| Flip masked intermediate bit | 100% | 100% |
-| Set intermediate to constant | Not identifiable |
-| Replace intermediate with random value | Not identifiable |
-
-The recommended combined-defense result is:
-
-| Fault | Single two-tier TPR | Batch-10 two-tier TPR |
-|---|---:|---:|
-| Skip local masked operation | 100% | 100% |
-| Set intermediate to constant | 100% | 100% |
-| Replace intermediate with random value | 100% | 100% |
-| Flip masked intermediate bit | 100% | 100% |
-
-Recommended wording:
-
-> Retired-instruction monitoring perfectly detected the skipped-operation and
-> bit-flip simulations, whose software realizations respectively removed and
-> added one retired instruction. Constant and random intermediate replacement
-> preserved the measured execution structure and were not reliably
-> identifiable using the available standard HPC events. A two-tier defense
-> combining structural HPC monitoring with post-window redundant intermediate
-> verification detected all four simulated fault models.
-
-The redundant intermediate verification must be reported separately as a
-non-HPC countermeasure.
-
----
+The post-window integrity detector must be reported separately as non-HPC.
 
 ## 13. Output directory
 
@@ -773,27 +497,9 @@ Run:
 scripts/Delvaux_Roulette/run.sh verify
 ```
 
-The verifier checks:
-
-1. only one executable is used;
-2. all four benign modes pass semantic self-tests;
-3. all four attack modes pass semantic self-tests;
-4. every runtime PMU counter set can be selected;
-5. the skip target omits the selected `add`;
-6. the constant target performs the configured replacement;
-7. the random target consumes a prepared random value;
-8. the bit-flip target performs the normal update and one selected `xor`;
-9. no family or attack dispatch occurs inside the PMU window;
-10. no PRNG, semantic oracle, ciphertext comparison, or CSV operation occurs
-    inside the target primitive.
-
-Verification output is stored in:
-
-```text
-results/Delvaux_Roulette/single_executable/window_audit.txt
-```
-
----
+The verifier checks that the UADD16 baseline contains `paddw`, the skip target
+omits it, constant/random use `mov`, and the bit-flip target contains no
+synthetic `xor`, `add`, or `paddw`.
 
 ## 15. Requirements
 
@@ -831,44 +537,69 @@ invalid requested event
 
 ## 16. Limitations
 
-- This is a software fault simulation, not a physical voltage, clock, EM,
-  laser, or Rowhammer experiment.
-- The skip and bit-flip software models change the number of retired
-  instructions. A physical data upset may not create the same structural
-  signature.
-- Constant and random replacement are implemented as explicit replacement
-  instructions. A physical data corruption may occur without retiring a
-  replacement instruction.
-- The experiment targets one selected intermediate in one masked Kyber768 INTT
-  layout.
-- Results depend on CPU model, microcode, kernel, PMU event definitions,
-  frequency policy, SMT state, and system noise.
-- A zero observed batch FPR is not proof that the population FPR is zero.
-- The intermediate-integrity tier is a separate software countermeasure, not
-  evidence that HPCs detect data-only faults.
-- The experiment detects local execution or data-integrity anomalies; it does
-  not itself perform the paper's complete secret-recovery procedure.
-
----
+- `paddw` is an x86-64 analogue of ARM `uadd16`, not the same ISA instruction.
+- The bit-flip value is prepared outside the PMU window to preserve an identical
+  measured instruction sequence.
+- Constant and random replacement remain explicit `mov` substitutions.
+- Cache and memory behavior may not reliably distinguish data-only faults.
+- Results are CPU-, microcode-, kernel-, and PMU-dependent.
+- The post-window integrity check is not an HPC detector.
 
 ## 17. Reproducibility checklist
 
 ```text
-[ ] run.sh is the only public shell workflow entry
-[ ] rou_single is the only executable in the experiment build directory
-[ ] all four benign semantic self-tests pass
-[ ] all four attack semantic self-tests pass
-[ ] skip removes exactly the selected add
-[ ] constant replacement uses the configured constant
-[ ] random replacement value is prepared before the PMU window
-[ ] bit flip applies exactly one configured xor after the normal update
-[ ] no runtime family/attack branch is inside the PMU window
-[ ] all traces remain pinned to the selected logical CPU
-[ ] validation and final attack sessions are not used to fit thresholds
-[ ] HPC-only and non-HPC integrity results are reported separately
-[ ] skip and flip structural results are primary HPC results
-[ ] constant and random replacement are marked HPC-non-identifiable
-[ ] the experimental uop channel is labeled diagnostic only
-[ ] zero observed FPR is not described as an absolute guarantee
-[ ] CPU model, binary digest, manifest, and event-resolution report are archived
+[ ] skip baseline contains one PADdW
+[ ] skip attack omits PADdW without a replacement NOP
+[ ] skip detector uses retired instructions only
+[ ] constant/random attacks retain one MOV replacement
+[ ] bit-flip value is prepared before the PMU window
+[ ] bit-flip benign and attack modes call the same measured target
+[ ] bit-flip target contains no XOR
+[ ] constant/random/flip feature pools contain only cache/data-memory events
+[ ] old pre-patch bit-flip results are not reused
+[ ] held-out validation and attack sessions are recollected
 ```
+
+---
+
+<!-- BEGIN ROULETTE EXPANDED DATA WINDOW -->
+
+## Expanded PMU window and raw counter reporting
+
+The instruction-skip family keeps its local target window. Constant replacement,
+random replacement, and bit flip use an expanded window:
+
+```text
+fault-value preparation                    outside
+PMU enable
+target operation                           inside
+remaining final-layer butterflies          inside
+final masked-INTT scaling                   inside
+share recombination and v->coeffs stores   inside
+PMU disable
+semantic audit and ciphertext comparison   outside
+```
+
+Raw baseline and attack counter summaries are generated automatically:
+
+```text
+results/Delvaux_Roulette/single_executable/
+├── raw_behavior_summary.txt
+├── raw_behavior_summary.csv
+└── raw_behavior_summary.json
+```
+
+The instruction-skip report includes the actual baseline and attack retired
+instruction counts, modes, medians, means, ranges, and histograms. The three
+data-fault reports include unnormalized baseline and attack cache/memory counts,
+means, medians, 5th/95th percentiles, ranges, and per-session summaries.
+
+Run the raw summarizer separately with:
+
+```bash
+scripts/Delvaux_Roulette/run.sh raw
+```
+
+All datasets must be recollected after changing the PMU window.
+
+<!-- END ROULETTE EXPANDED DATA WINDOW -->

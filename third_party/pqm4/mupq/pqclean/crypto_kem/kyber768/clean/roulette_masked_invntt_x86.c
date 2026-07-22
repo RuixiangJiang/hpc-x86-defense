@@ -699,20 +699,6 @@ int32_t rou_target_masked_add_baseline(
 }
 
 ROU_NOINLINE
-int32_t rou_target_skip_local_masked_operation(
-    int32_t a_share, int32_t b_share,
-    int32_t fault_value, uint32_t flip_mask) {
-    (void)fault_value;
-    (void)flip_mask;
-    __asm__ volatile(
-        ""
-        : "+r"(a_share)
-        : "r"(b_share)
-        : "cc");
-    return a_share;
-}
-
-ROU_NOINLINE
 int32_t rou_target_set_masked_intermediate_constant(
     int32_t a_share, int32_t b_share,
     int32_t fault_value, uint32_t flip_mask) {
@@ -740,20 +726,6 @@ int32_t rou_target_replace_masked_intermediate_random(
     return a_share;
 }
 
-ROU_NOINLINE
-int32_t rou_target_flip_masked_intermediate_bit(
-    int32_t a_share, int32_t b_share,
-    int32_t fault_value, uint32_t flip_mask) {
-    (void)fault_value;
-    __asm__ volatile(
-        "addl %1, %0\n\t"
-        "xorl %2, %0"
-        : "+r"(a_share)
-        : "r"(b_share), "r"(flip_mask)
-        : "cc");
-    return a_share;
-}
-
 #define ROU_DEFINE_MEASURE_WRAPPER(name_, target_) \
     ROU_NOINLINE int32_t name_( \
         int32_t a_share, int32_t b_share, \
@@ -769,6 +741,9 @@ int32_t rou_target_flip_masked_intermediate_bit(
         return result; \
     }
 
+ROU_DEFINE_MEASURE_WRAPPER(
+    rou_measure_uadd16_baseline,
+    rou_target_uadd16_baseline)
 ROU_DEFINE_MEASURE_WRAPPER(
     rou_measure_masked_add_baseline,
     rou_target_masked_add_baseline)
@@ -788,8 +763,15 @@ ROU_DEFINE_MEASURE_WRAPPER(
 int PQCLEAN_KYBER768_CLEAN_roulette_set_mode(unsigned int mode) {
     switch (mode) {
     case ROU_MODE_BASELINE:
+    case ROU_MODE_DATA_BASELINE:
+        /* Baseline for constant/random: one scalar ADD. */
         rou_selected_target = rou_target_masked_add_baseline;
         rou_selected_measure = rou_measure_masked_add_baseline;
+        break;
+    case ROU_MODE_SKIP_BASELINE:
+        /* Paper-specific UADD16-equivalent baseline. */
+        rou_selected_target = rou_target_uadd16_baseline;
+        rou_selected_measure = rou_measure_uadd16_baseline;
         break;
     case ROU_MODE_SKIP_LOCAL_OPERATION:
         rou_selected_target = rou_target_skip_local_masked_operation;
@@ -803,7 +785,9 @@ int PQCLEAN_KYBER768_CLEAN_roulette_set_mode(unsigned int mode) {
         rou_selected_target = rou_target_replace_masked_intermediate_random;
         rou_selected_measure = rou_measure_replace_masked_intermediate_random;
         break;
+    case ROU_MODE_FLIP_BASELINE:
     case ROU_MODE_FLIP_BIT:
+        /* Both modes execute the same target; only prepared data differs. */
         rou_selected_target = rou_target_flip_masked_intermediate_bit;
         rou_selected_measure = rou_measure_flip_masked_intermediate_bit;
         break;
@@ -817,6 +801,9 @@ int PQCLEAN_KYBER768_CLEAN_roulette_set_mode(unsigned int mode) {
 const char *PQCLEAN_KYBER768_CLEAN_roulette_mode_name(void) {
     switch (rou_runtime_mode) {
     case ROU_MODE_BASELINE: return "canonical-baseline";
+    case ROU_MODE_DATA_BASELINE: return "data-fault-expanded-baseline";
+    case ROU_MODE_SKIP_BASELINE: return "uadd16-baseline";
+    case ROU_MODE_FLIP_BASELINE: return "bit-flip-data-baseline";
     case ROU_MODE_SKIP_LOCAL_OPERATION: return "skip-local-masked-operation";
     case ROU_MODE_SET_CONSTANT: return "set-masked-intermediate-constant";
     case ROU_MODE_SET_RANDOM: return "replace-masked-intermediate-random";
@@ -888,6 +875,13 @@ void PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply(poly *v) {
     unsigned int k;
     unsigned int mismatch_count = 0u;
     int target_seen = 0;
+    int extended_window_active = 0;
+    const int extended_window_mode =
+        rou_runtime_mode == ROU_MODE_DATA_BASELINE ||
+        rou_runtime_mode == ROU_MODE_SET_CONSTANT ||
+        rou_runtime_mode == ROU_MODE_SET_RANDOM ||
+        rou_runtime_mode == ROU_MODE_FLIP_BASELINE ||
+        rou_runtime_mode == ROU_MODE_FLIP_BIT;
     const int16_t f = 1441;
 
     if (!rou_reencrypt_active) {
@@ -939,11 +933,33 @@ void PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply(poly *v) {
                 if (len == 128u && j == target) {
                     int32_t normal_value = (int32_t)a0 + (int32_t)b0;
                     int32_t random_value = rou_random_fault_value(normal_value);
-                    int32_t fault_value =
-                        rou_runtime_mode == ROU_MODE_SET_CONSTANT ?
-                            rou_selected_constant : random_value;
-                    uint32_t flip_mask = UINT32_C(1) << rou_selected_flip_bit;
+                    uint32_t flip_mask =
+                        UINT32_C(1) << rou_selected_flip_bit;
+                    int32_t fault_value;
                     int32_t used_value;
+
+                    /*
+                     * Data-only values are prepared before the measured target.
+                     * The bit-flip target itself contains no synthetic XOR.
+                     */
+                    switch (rou_runtime_mode) {
+                    case ROU_MODE_SET_CONSTANT:
+                        fault_value = rou_selected_constant;
+                        break;
+                    case ROU_MODE_SET_RANDOM:
+                        fault_value = random_value;
+                        break;
+                    case ROU_MODE_FLIP_BASELINE:
+                        fault_value = normal_value;
+                        break;
+                    case ROU_MODE_FLIP_BIT:
+                        fault_value =
+                            normal_value ^ (int32_t)flip_mask;
+                        break;
+                    default:
+                        fault_value = random_value;
+                        break;
+                    }
 
                     rou_audit.share_a_before = a0;
                     rou_audit.share_b_before = b0;
@@ -951,8 +967,23 @@ void PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply(poly *v) {
                     rou_audit.selected_random = random_value;
 
                     if (rou_measurement_enabled && rou_hpc_ready) {
-                        used_value = rou_selected_measure(
-                            a0, b0, fault_value, flip_mask);
+                        if (extended_window_mode) {
+                            /*
+                             * Start immediately before the faulted/benign target.
+                             * Keep counting through later butterflies, final
+                             * scaling, and share recombination.
+                             */
+                            rou_hpc_begin();
+                            extended_window_active = 1;
+                            used_value = rou_selected_target(
+                                a0, b0, fault_value, flip_mask);
+                        } else {
+                            /*
+                             * Instruction skip keeps the exact local window.
+                             */
+                            used_value = rou_selected_measure(
+                                a0, b0, fault_value, flip_mask);
+                        }
                     } else {
                         used_value = rou_selected_target(
                             a0, b0, fault_value, flip_mask);
@@ -988,6 +1019,15 @@ void PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply(poly *v) {
                 (int16_t)((int32_t)share0[j] + share1[j]));
     }
 
+    /*
+     * End before semantic audit, output tagging, ciphertext comparison, or
+     * reporting. Only normal masked-INTT propagation remains in the window.
+     */
+    if (extended_window_active) {
+        rou_hpc_end();
+        extended_window_active = 0;
+    }
+
     rou_audit.reference_coeff_mod_q = rou_mod_q(reference.coeffs[target]);
     rou_audit.observed_coeff_mod_q = rou_mod_q(v->coeffs[target]);
     rou_audit.target_changed =
@@ -1002,12 +1042,19 @@ void PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply(poly *v) {
         }
     }
     rou_audit.non_target_mismatches = mismatch_count;
-    rou_audit.fault_applied = rou_runtime_mode != ROU_MODE_BASELINE;
+    rou_audit.fault_applied =
+        rou_runtime_mode == ROU_MODE_SKIP_LOCAL_OPERATION ||
+        rou_runtime_mode == ROU_MODE_SET_CONSTANT ||
+        rou_runtime_mode == ROU_MODE_SET_RANDOM ||
+        rou_runtime_mode == ROU_MODE_FLIP_BIT;
 
     {
         int32_t expected_value;
         switch (rou_runtime_mode) {
         case ROU_MODE_BASELINE:
+        case ROU_MODE_SKIP_BASELINE:
+        case ROU_MODE_FLIP_BASELINE:
+        case ROU_MODE_DATA_BASELINE:
             expected_value = rou_audit.normal_intermediate;
             break;
         case ROU_MODE_SKIP_LOCAL_OPERATION:
@@ -1037,7 +1084,10 @@ void PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply(poly *v) {
             target_seen &&
             mismatch_count == 0u &&
             rou_audit.used_intermediate == expected_value &&
-            (rou_runtime_mode != ROU_MODE_BASELINE ||
+            ((rou_runtime_mode != ROU_MODE_BASELINE &&
+              rou_runtime_mode != ROU_MODE_SKIP_BASELINE &&
+              rou_runtime_mode != ROU_MODE_FLIP_BASELINE &&
+              rou_runtime_mode != ROU_MODE_DATA_BASELINE) ||
              rou_audit.reference_coeff_mod_q ==
                  rou_audit.observed_coeff_mod_q);
     }

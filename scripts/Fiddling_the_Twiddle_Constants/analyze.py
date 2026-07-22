@@ -6,543 +6,494 @@ import csv
 import json
 import math
 import statistics
-from collections import Counter, defaultdict
+from collections import Counter
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 
-EVENTS = (
-    "cycles",
-    "instructions",
-    "branches",
-    "branch_misses",
-    "retired_loads",
-    "retired_stores",
-)
+COUNTER_SETS = {
+    "structural": [
+        "cycles",
+        "instructions",
+        "branches",
+        "branch_misses",
+        "retired_loads",
+        "retired_stores",
+    ],
+    "cache-l1d": [
+        "cache_references",
+        "cache_misses",
+        "l1d_read_accesses",
+        "l1d_read_misses",
+    ],
+    "cache-llc-dtlb": [
+        "llc_read_accesses",
+        "llc_read_misses",
+        "dtlb_read_accesses",
+        "dtlb_read_misses",
+    ],
+}
 
-STRUCTURAL_EVENTS = (
-    "instructions",
-    "branches",
-    "retired_loads",
-    "retired_stores",
-)
 
-
-def median(values: Iterable[float]) -> float:
-    items = list(values)
-    return float(statistics.median(items)) if items else math.nan
-
-
-def quantile(values: list[float], q: float) -> float:
+def quantile(values: list[int], q: float) -> float:
     ordered = sorted(values)
     if not ordered:
         return math.nan
     if len(ordered) == 1:
-        return ordered[0]
+        return float(ordered[0])
     position = q * (len(ordered) - 1)
     lo = int(math.floor(position))
     hi = int(math.ceil(position))
     if lo == hi:
-        return ordered[lo]
+        return float(ordered[lo])
     return (
         ordered[lo] * (hi - position)
         + ordered[hi] * (position - lo)
     )
 
 
-def robust_scale(values: Iterable[float]) -> float:
-    items = [float(value) for value in values]
-    if not items:
-        return 1.0
-    center = median(items)
-    mad = median(abs(value - center) for value in items)
-    q1 = quantile(items, 0.25)
-    q3 = quantile(items, 0.75)
-    iqr_scale = (q3 - q1) / 1.349 if q3 >= q1 else 0.0
-    return max(1.0, 1.4826 * mad, iqr_scale)
+def mode_value(values: list[int]) -> int:
+    counts = Counter(values)
+    maximum = max(counts.values())
+    return min(value for value, count in counts.items() if count == maximum)
 
 
-def auc_score(negative: list[float], positive: list[float]) -> float:
-    if not negative or not positive:
-        return math.nan
-    combined = [(value, 0) for value in negative]
-    combined += [(value, 1) for value in positive]
-    combined.sort(key=lambda item: item[0])
+def stats(values: list[int]) -> dict[str, Any]:
+    counts = Counter(values)
+    return {
+        "n": len(values),
+        "mode": mode_value(values),
+        "mean": statistics.fmean(values),
+        "median": statistics.median(values),
+        "stdev": statistics.stdev(values) if len(values) > 1 else 0.0,
+        "minimum": min(values),
+        "p05": quantile(values, 0.05),
+        "p25": quantile(values, 0.25),
+        "p75": quantile(values, 0.75),
+        "p95": quantile(values, 0.95),
+        "maximum": max(values),
+        "histogram": (
+            {str(key): counts[key] for key in sorted(counts)}
+            if len(counts) <= 32
+            else {
+                str(key): count
+                for key, count in counts.most_common(16)
+            }
+        ),
+    }
 
-    rank_sum = 0.0
+
+def auc(baseline: list[int], attack: list[int]) -> float:
+    pairs = [(value, 0) for value in baseline]
+    pairs += [(value, 1) for value in attack]
+    pairs.sort(key=lambda item: item[0])
+
+    rank_sum_attack = 0.0
     index = 0
-    while index < len(combined):
+    while index < len(pairs):
         end = index + 1
-        while (
-            end < len(combined)
-            and combined[end][0] == combined[index][0]
-        ):
+        while end < len(pairs) and pairs[end][0] == pairs[index][0]:
             end += 1
-        average_rank = (index + 1 + end) / 2.0
-        rank_sum += average_rank * sum(
-            label for _, label in combined[index:end]
+        average_rank = ((index + 1) + end) / 2.0
+        rank_sum_attack += average_rank * sum(
+            label for _, label in pairs[index:end]
         )
         index = end
 
-    negatives = len(negative)
-    positives = len(positive)
-    return (
-        rank_sum - positives * (positives + 1) / 2.0
-    ) / (negatives * positives)
+    n_attack = len(attack)
+    n_baseline = len(baseline)
+    u = (
+        rank_sum_attack
+        - n_attack * (n_attack + 1) / 2.0
+    )
+    return u / (n_attack * n_baseline)
 
 
-def make_batches(values: list[float], size: int) -> list[float]:
-    return [
-        median(values[start:start + size])
-        for start in range(0, len(values) - size + 1, size)
-    ]
+def rate(
+    values: list[int],
+    direction: str,
+    threshold: int,
+) -> float:
+    if direction == "high":
+        return sum(value >= threshold for value in values) / len(values)
+    return sum(value <= threshold for value in values) / len(values)
 
 
-def read_csv(
-    path: Path,
-    family: str,
-    expected_attack: bool,
-    minimum_running: float,
-) -> tuple[dict[int, dict[str, Any]], dict[str, Any]]:
-    rows: dict[int, dict[str, Any]] = {}
-    excluded: Counter[str] = Counter()
-    total = 0
+def choose_threshold(
+    baseline: list[int],
+    attack: list[int],
+    target_fpr: float,
+) -> dict[str, Any]:
+    candidates = sorted(set(baseline + attack))
+    best: dict[str, Any] | None = None
 
-    if not path.is_file():
-        return rows, {
-            "path": str(path),
-            "collected": 0,
-            "valid": 0,
-            "excluded": {"missing_file": 1},
+    for direction in ("low", "high"):
+        for threshold in candidates:
+            fpr = rate(baseline, direction, threshold)
+            if fpr > target_fpr:
+                continue
+            tpr = rate(attack, direction, threshold)
+            candidate = {
+                "direction": direction,
+                "threshold": threshold,
+                "development_fpr": fpr,
+                "development_tpr": tpr,
+            }
+            if best is None or (
+                tpr,
+                -fpr,
+            ) > (
+                best["development_tpr"],
+                -best["development_fpr"],
+            ):
+                best = candidate
+
+    if best is None:
+        direction = (
+            "high"
+            if statistics.median(attack) >= statistics.median(baseline)
+            else "low"
+        )
+        threshold = (
+            max(baseline) + 1
+            if direction == "high"
+            else min(baseline) - 1
+        )
+        best = {
+            "direction": direction,
+            "threshold": threshold,
+            "development_fpr": 0.0,
+            "development_tpr": 0.0,
         }
+
+    return best
+
+
+def read_event_values(
+    path: Path,
+    expected_mode: str,
+    events: list[str],
+    minimum_running: float,
+) -> tuple[dict[str, list[int]], dict[str, int]]:
+    values = {event: [] for event in events}
+    excluded: Counter[str] = Counter()
 
     with path.open(newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
-        required = {
-            "sample",
-            "family",
-            "mode",
-            "is_attack",
-            "sign_ret",
-            "verify_ret",
-            "oracle_success",
-            "fault_applied",
-            "semantic_valid",
-            "cpu_stable",
-            "running_percent",
-            "valid_mask",
-            "error_code",
-            *EVENTS,
-        }
-        missing = required - set(reader.fieldnames or [])
+        fields = reader.fieldnames or []
+        missing = [event for event in events if event not in fields]
         if missing:
-            raise SystemExit(
-                f"[error] {path} missing columns: {sorted(missing)}"
-            )
+            raise SystemExit(f"[error] {path} missing events {missing}")
 
-        for raw in reader:
-            total += 1
-            if raw["family"] != family:
-                raise SystemExit(
-                    f"[error] {path}: family={raw['family']}, "
-                    f"expected={family}"
-                )
-            if bool(int(raw["is_attack"])) != expected_attack:
-                raise SystemExit(
-                    f"[error] {path}: attack flag mismatch"
-                )
-            if int(raw["sign_ret"]) != 0:
-                excluded["sign_failure"] += 1
+        required_mask = (1 << len(events)) - 1
+
+        for row in reader:
+            if row["mode"] != expected_mode:
+                excluded["wrong_mode"] += 1
                 continue
-            if int(raw["oracle_success"]) != 1:
-                excluded["oracle_failure"] += 1
-                continue
-            if int(raw["semantic_valid"]) != 1:
+            if int(row["semantic_valid"]) != 1:
                 excluded["semantic_invalid"] += 1
                 continue
-            expected_fault = 1 if expected_attack else 0
-            if int(raw["fault_applied"]) != expected_fault:
-                excluded[
-                    f"fault_applied_expected_{expected_fault}"
-                ] += 1
+            if int(row["oracle_success"]) != 1:
+                excluded["oracle_failure"] += 1
                 continue
-            if int(raw["error_code"]) != 0:
+            if int(row["error_code"]) != 0:
                 excluded["counter_error"] += 1
                 continue
-            if int(raw["cpu_stable"]) != 1:
+            if int(row["cpu_stable"]) != 1:
                 excluded["cpu_migration"] += 1
                 continue
-            if float(raw["running_percent"]) < minimum_running:
+            if float(row["running_percent"]) < minimum_running:
                 excluded["low_running_percent"] += 1
                 continue
-            if int(raw["valid_mask"], 0) != (1 << len(EVENTS)) - 1:
-                excluded["incomplete_valid_mask"] += 1
+            if (
+                int(row["valid_mask"], 0) & required_mask
+            ) != required_mask:
+                excluded["invalid_event_mask"] += 1
                 continue
 
-            sample = int(raw["sample"])
-            row: dict[str, Any] = {
-                "sample": sample,
-                "verify_ret": int(raw["verify_ret"]),
-                "fault_applied": int(raw["fault_applied"]),
-            }
-            for event in EVENTS:
-                row[event] = float(raw[event])
-            rows[sample] = row
+            for event in events:
+                values[event].append(int(row[event]))
 
-    return rows, {
-        "path": str(path),
-        "collected": total,
-        "valid": len(rows),
-        "excluded": dict(excluded),
-    }
+    if not all(values[event] for event in events):
+        raise SystemExit(f"[error] no complete valid rows in {path}")
+    return values, dict(excluded)
 
 
-def summarize_flags(
-    flags_by_session: dict[str, list[bool]],
-) -> dict[str, Any]:
-    by_session: dict[str, Any] = {}
-    positives = 0
-    trials = 0
-
-    for session, flags in sorted(flags_by_session.items()):
-        count = sum(flags)
-        positives += count
-        trials += len(flags)
-        by_session[session] = {
-            "positives": count,
-            "trials": len(flags),
-            "rate": count / len(flags) if flags else math.nan,
-        }
-
-    return {
-        "positives": positives,
-        "trials": trials,
-        "rate": positives / trials if trials else math.nan,
-        "by_session": by_session,
-        "worst_session_rate": max(
-            (item["rate"] for item in by_session.values()),
-            default=math.nan,
-        ),
-    }
+def fmt(value: Any) -> str:
+    if value is None:
+        return "NA"
+    if isinstance(value, float):
+        if value.is_integer():
+            return str(int(value))
+        return f"{value:.3f}"
+    return str(value)
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--results-root", type=Path, required=True)
-    parser.add_argument("--manifest", type=Path, required=True)
-    parser.add_argument("--family", required=True)
     parser.add_argument("--minimum-running", type=float, default=95.0)
     parser.add_argument("--target-fpr", type=float, default=0.01)
-    parser.add_argument("--batch-size", type=int, default=10)
-    parser.add_argument("--report-output", type=Path, required=True)
-    parser.add_argument("--model-output", type=Path, required=True)
+    parser.add_argument("--text-output", type=Path, required=True)
+    parser.add_argument("--csv-output", type=Path, required=True)
+    parser.add_argument("--json-output", type=Path, required=True)
     args = parser.parse_args()
 
-    manifest = json.loads(
-        args.manifest.read_text(encoding="utf-8")
-    )
-    descriptors = manifest["collections"]
+    report: dict[str, Any] = {
+        "family": "redirect-twiddle-pointer-to-zero-array",
+        "window": (
+            "shared PC-relative pointer load through completion "
+            "of one full target-polynomial NTT"
+        ),
+        "counter_sets": {},
+    }
+    flat_rows: list[dict[str, Any]] = []
 
-    raw: dict[str, dict[int, dict[str, Any]]] = {}
-    audit: dict[str, Any] = {}
-    by_stage: dict[
-        str, dict[str, dict[str, str]]
-    ] = defaultdict(lambda: defaultdict(dict))
+    for set_name, events in COUNTER_SETS.items():
+        set_dir = args.results_root / set_name
+        baseline_files = sorted(set_dir.glob("s*_baseline.csv"))
+        attack_files = sorted(set_dir.glob("s*_attack.csv"))
+        if not baseline_files or not attack_files:
+            raise SystemExit(f"[error] missing sessions for {set_name}")
 
-    for descriptor in descriptors:
-        stem = descriptor["stem"]
-        rows, summary = read_csv(
-            args.results_root
-            / args.family
-            / f"{stem}.csv",
-            args.family,
-            bool(descriptor["expected_attack"]),
-            args.minimum_running,
+        sessions = sorted(
+            {
+                path.name.split("_", 1)[0]
+                for path in baseline_files + attack_files
+            }
         )
-        raw[stem] = rows
-        audit[stem] = summary
-        if len(rows) < 10:
+        if len(sessions) < 2:
             raise SystemExit(
-                f"[error] {args.family}/{stem} has only "
-                f"{len(rows)} valid rows"
+                f"[error] {set_name} needs at least two sessions "
+                "for held-out validation"
             )
-        by_stage[descriptor["stage"]][
-            descriptor["session"]
-        ][descriptor["kind"]] = stem
 
-    calibration = [
-        raw[kinds["baseline"]]
-        for _, kinds in sorted(by_stage["calibration"].items())
-    ]
-    global_scale = {
-        event: robust_scale(
-            row[event]
-            for dataset in calibration
-            for row in dataset.values()
-        )
-        for event in EVENTS
-    }
+        values_by_session: dict[str, dict[str, dict[str, list[int]]]] = {}
+        audit_by_session: dict[str, Any] = {}
 
-    def score_collection(
-        stage: str,
-        session: str,
-        kind: str,
-    ) -> tuple[list[float], list[float]]:
-        kinds = by_stage[stage][session]
-        reference = raw[kinds["reference"]]
-        target = raw[kinds[kind]]
-
-        centers = {
-            event: median(
-                row[event] for row in reference.values()
+        for session in sessions:
+            baseline_path = set_dir / f"{session}_baseline.csv"
+            attack_path = set_dir / f"{session}_attack.csv"
+            baseline, baseline_excluded = read_event_values(
+                baseline_path,
+                "baseline",
+                events,
+                args.minimum_running,
             )
-            for event in EVENTS
+            attack, attack_excluded = read_event_values(
+                attack_path,
+                "attack",
+                events,
+                args.minimum_running,
+            )
+            values_by_session[session] = {
+                "baseline": baseline,
+                "attack": attack,
+            }
+            audit_by_session[session] = {
+                "baseline_excluded": baseline_excluded,
+                "attack_excluded": attack_excluded,
+            }
+
+        development_session = sessions[0]
+        validation_sessions = sessions[1:]
+        set_report: dict[str, Any] = {
+            "development_session": development_session,
+            "validation_sessions": validation_sessions,
+            "events": {},
+            "audit": audit_by_session,
         }
-        scales = {
-            event: max(
-                1.0,
-                robust_scale(
-                    row[event] for row in reference.values()
+
+        for event in events:
+            pooled_baseline = [
+                value
+                for session in sessions
+                for value in values_by_session[session]["baseline"][event]
+            ]
+            pooled_attack = [
+                value
+                for session in sessions
+                for value in values_by_session[session]["attack"][event]
+            ]
+            baseline_stats = stats(pooled_baseline)
+            attack_stats = stats(pooled_attack)
+
+            dev_baseline = values_by_session[
+                development_session
+            ]["baseline"][event]
+            dev_attack = values_by_session[
+                development_session
+            ]["attack"][event]
+            threshold = choose_threshold(
+                dev_baseline,
+                dev_attack,
+                args.target_fpr,
+            )
+
+            validation_baseline = [
+                value
+                for session in validation_sessions
+                for value in values_by_session[session]["baseline"][event]
+            ]
+            validation_attack = [
+                value
+                for session in validation_sessions
+                for value in values_by_session[session]["attack"][event]
+            ]
+
+            detector = {
+                **threshold,
+                "validation_fpr": rate(
+                    validation_baseline,
+                    threshold["direction"],
+                    threshold["threshold"],
                 ),
-                0.50 * global_scale[event],
+                "validation_tpr": rate(
+                    validation_attack,
+                    threshold["direction"],
+                    threshold["threshold"],
+                ),
+                "validation_auc_attack_high": auc(
+                    validation_baseline,
+                    validation_attack,
+                ),
+            }
+
+            per_session = {}
+            for session in sessions:
+                b = values_by_session[session]["baseline"][event]
+                a = values_by_session[session]["attack"][event]
+                per_session[session] = {
+                    "baseline": stats(b),
+                    "attack": stats(a),
+                    "median_delta": statistics.median(a)
+                    - statistics.median(b),
+                    "mean_delta": statistics.fmean(a)
+                    - statistics.fmean(b),
+                }
+
+            item = {
+                "baseline": baseline_stats,
+                "attack": attack_stats,
+                "attack_minus_baseline": {
+                    "mode": attack_stats["mode"]
+                    - baseline_stats["mode"],
+                    "median": attack_stats["median"]
+                    - baseline_stats["median"],
+                    "mean": attack_stats["mean"]
+                    - baseline_stats["mean"],
+                },
+                "detector": detector,
+                "per_session": per_session,
+            }
+            set_report["events"][event] = item
+
+            for class_name, event_stats in (
+                ("baseline", baseline_stats),
+                ("attack", attack_stats),
+            ):
+                flat_rows.append({
+                    "counter_set": set_name,
+                    "event": event,
+                    "class": class_name,
+                    **{
+                        key: event_stats[key]
+                        for key in (
+                            "n", "mode", "mean", "median", "stdev",
+                            "minimum", "p05", "p25", "p75", "p95",
+                            "maximum",
+                        )
+                    },
+                    "threshold_direction": detector["direction"],
+                    "threshold": detector["threshold"],
+                    "validation_fpr": detector["validation_fpr"],
+                    "validation_tpr": detector["validation_tpr"],
+                    "validation_auc_attack_high":
+                        detector["validation_auc_attack_high"],
+                })
+
+        report["counter_sets"][set_name] = set_report
+
+    args.text_output.parent.mkdir(parents=True, exist_ok=True)
+    with args.text_output.open("w", encoding="utf-8") as out:
+        out.write(
+            "=== Ravi Fiddling the Twiddle Constants: "
+            "paper-aligned pointer redirection ===\n"
+        )
+        out.write(
+            "Window: shared PC-relative pointer load through one full "
+            "target-polynomial NTT\n"
+        )
+        out.write(
+            "Condition-1 and Condition-2 are modeled as one attack: "
+            "T is loaded in baseline; T* points to a zero table in attack.\n\n"
+        )
+
+        for set_name, set_report in report["counter_sets"].items():
+            out.write(f"[{set_name}]\n")
+            out.write(
+                f"{'event':25s} {'base mode':>10s} "
+                f"{'attack mode':>12s} {'mode delta':>11s} "
+                f"{'base median [p05,p95]':>27s} "
+                f"{'attack median [p05,p95]':>29s} "
+                f"{'val FPR':>9s} {'val TPR':>9s}\n"
             )
-            for event in EVENTS
-        }
 
-        one_class: list[float] = []
-        structural: list[float] = []
+            for event, item in set_report["events"].items():
+                baseline = item["baseline"]
+                attack = item["attack"]
+                delta = item["attack_minus_baseline"]
+                detector = item["detector"]
+                b_interval = (
+                    f"{fmt(baseline['median'])} "
+                    f"[{fmt(baseline['p05'])},{fmt(baseline['p95'])}]"
+                )
+                a_interval = (
+                    f"{fmt(attack['median'])} "
+                    f"[{fmt(attack['p05'])},{fmt(attack['p95'])}]"
+                )
+                out.write(
+                    f"{event:25s} "
+                    f"{baseline['mode']:10d} "
+                    f"{attack['mode']:12d} "
+                    f"{delta['mode']:+11d} "
+                    f"{b_interval:>27s} "
+                    f"{a_interval:>29s} "
+                    f"{detector['validation_fpr']:9.4f} "
+                    f"{detector['validation_tpr']:9.4f}\n"
+                )
 
-        for sample in sorted(target):
-            row = target[sample]
-            z = {
-                event: (row[event] - centers[event]) / scales[event]
-                for event in EVENTS
-            }
-            one_class.append(max(abs(z[event]) for event in EVENTS))
+            out.write("\n[per-session median deltas]\n")
+            for event, item in set_report["events"].items():
+                deltas = ", ".join(
+                    f"{session}={fmt(session_item['median_delta'])}"
+                    for session, session_item
+                    in item["per_session"].items()
+                )
+                out.write(f"  {event}: {deltas}\n")
+            out.write("\n")
 
-            if args.family == "corrupt-loaded-twiddle-value":
-                structural.append(max(
-                    0.0,
-                    -z["instructions"],
-                    -z["retired_loads"],
-                ))
-            else:
-                # Pointer corruption preserves instruction/load/store counts.
-                # This comparison score intentionally remains zero unless the
-                # coarse structural events change.
-                structural.append(max(
-                    abs(z[event]) for event in STRUCTURAL_EVENTS
-                ))
+    fieldnames = [
+        "counter_set", "event", "class", "n", "mode", "mean",
+        "median", "stdev", "minimum", "p05", "p25", "p75",
+        "p95", "maximum", "threshold_direction", "threshold",
+        "validation_fpr", "validation_tpr",
+        "validation_auc_attack_high",
+    ]
+    with args.csv_output.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(flat_rows)
 
-        return one_class, structural
-
-    threshold_single: dict[str, list[float]] = {}
-    threshold_batch: dict[str, list[float]] = {}
-
-    for session in sorted(by_stage["threshold"]):
-        scores, _ = score_collection(
-            "threshold", session, "baseline"
-        )
-        threshold_single[session] = scores
-        threshold_batch[session] = make_batches(
-            scores, args.batch_size
-        )
-
-    def freeze_threshold(
-        values_by_session: dict[str, list[float]],
-    ) -> dict[str, Any]:
-        candidates = {
-            session: quantile(values, 1.0 - args.target_fpr)
-            for session, values in values_by_session.items()
-        }
-        threshold = max(candidates.values())
-        frozen = {}
-        pooled_fp = 0
-        pooled_n = 0
-        for session, values in sorted(values_by_session.items()):
-            fp = sum(value > threshold for value in values)
-            pooled_fp += fp
-            pooled_n += len(values)
-            frozen[session] = {
-                "false_positives": fp,
-                "trials": len(values),
-                "rate": fp / len(values),
-            }
-        return {
-            "value": threshold,
-            "selection": (
-                "maximum per-session empirical "
-                f"{100*(1-args.target_fpr):.2f}th percentile"
-            ),
-            "per_session_candidates": candidates,
-            "per_session_at_frozen_threshold": frozen,
-            "false_positives": pooled_fp,
-            "trials": pooled_n,
-            "rate": pooled_fp / pooled_n,
-        }
-
-    single_threshold = freeze_threshold(threshold_single)
-    batch_threshold = freeze_threshold(threshold_batch)
-
-    validation_flags: dict[str, list[bool]] = {}
-    validation_scores: list[float] = []
-    validation_batch_flags: dict[str, list[bool]] = {}
-    validation_batch_scores: list[float] = []
-
-    for session in sorted(by_stage["validation"]):
-        scores, _ = score_collection(
-            "validation", session, "baseline"
-        )
-        batches = make_batches(scores, args.batch_size)
-        validation_scores.extend(scores)
-        validation_batch_scores.extend(batches)
-        validation_flags[session] = [
-            score > single_threshold["value"] for score in scores
-        ]
-        validation_batch_flags[session] = [
-            score > batch_threshold["value"] for score in batches
-        ]
-
-    attack_flags: dict[str, list[bool]] = {}
-    attack_scores: list[float] = []
-    attack_batch_flags: dict[str, list[bool]] = {}
-    attack_batch_scores: list[float] = []
-    attack_structural_scores: list[float] = []
-
-    for session in sorted(by_stage["attack"]):
-        scores, structural = score_collection(
-            "attack", session, "attack"
-        )
-        batches = make_batches(scores, args.batch_size)
-        attack_scores.extend(scores)
-        attack_structural_scores.extend(structural)
-        attack_batch_scores.extend(batches)
-        attack_flags[session] = [
-            score > single_threshold["value"] for score in scores
-        ]
-        attack_batch_flags[session] = [
-            score > batch_threshold["value"] for score in batches
-        ]
-
-    validation_result = summarize_flags(validation_flags)
-    validation_batch_result = summarize_flags(
-        validation_batch_flags
-    )
-    attack_result = summarize_flags(attack_flags)
-    attack_batch_result = summarize_flags(
-        attack_batch_flags
-    )
-
-    model = {
-        "name": "baseline-only-session-local-one-class",
-        "events": list(EVENTS),
-        "score": "maximum absolute session-local robust z score",
-        "feature_selection": "none",
-        "attack_labels_used_for_threshold": False,
-        "single_threshold": single_threshold,
-        "batch_threshold": batch_threshold,
-        "batch_size": args.batch_size,
-        "family_specific_structural_comparison": {
-            "corrupt-loaded-twiddle-value": (
-                "instruction/load deficit"
-            ),
-            "corrupt-twiddle-pointer": (
-                "no deterministic coarse structural signature"
-            ),
-        },
-    }
-
-    report = {
-        "family": args.family,
-        "model": model,
-        "collection_audit": audit,
-        "validation": {
-            "single": validation_result,
-            "batch": validation_batch_result,
-        },
-        "attack": {
-            "single": attack_result,
-            "batch": attack_batch_result,
-            "auc_single": auc_score(
-                validation_scores, attack_scores
-            ),
-            "auc_batch": auc_score(
-                validation_batch_scores,
-                attack_batch_scores,
-            ),
-            "semantic_successes": sum(
-                int(row["fault_applied"]) == 1
-                for session in by_stage["attack"].values()
-                for row in raw[session["attack"]].values()
-            ),
-            "semantic_trials": sum(
-                len(raw[session["attack"]])
-                for session in by_stage["attack"].values()
-            ),
-            "structural_score_median": median(
-                attack_structural_scores
-            ),
-        },
-    }
-
-    args.report_output.parent.mkdir(parents=True, exist_ok=True)
-    args.report_output.write_text(
+    args.json_output.write_text(
         json.dumps(report, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
-    args.model_output.write_text(
-        json.dumps(model, indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
-    )
 
-    text_path = args.report_output.with_suffix(".txt")
-    with text_path.open("w", encoding="utf-8") as out:
-        out.write(
-            f"=== Fiddling the Twiddle Constants: {args.family} ===\n"
-        )
-        out.write(
-            "Detector: baseline-only session-local one-class PMU score\n"
-        )
-        out.write(
-            f"Single threshold: {single_threshold['value']:.6f}\n"
-        )
-        out.write(
-            f"Validation: FP={validation_result['positives']}/"
-            f"{validation_result['trials']} "
-            f"FPR={100*validation_result['rate']:.4f}%\n"
-        )
-        out.write(
-            f"Attack: TP={attack_result['positives']}/"
-            f"{attack_result['trials']} "
-            f"TPR={100*attack_result['rate']:.4f}% "
-            f"AUC={report['attack']['auc_single']:.6f}\n"
-        )
-        out.write(
-            f"Batch-{args.batch_size} threshold: "
-            f"{batch_threshold['value']:.6f}\n"
-        )
-        out.write(
-            f"Batch validation: FP="
-            f"{validation_batch_result['positives']}/"
-            f"{validation_batch_result['trials']} "
-            f"FPR={100*validation_batch_result['rate']:.4f}%\n"
-        )
-        out.write(
-            f"Batch attack: TP={attack_batch_result['positives']}/"
-            f"{attack_batch_result['trials']} "
-            f"TPR={100*attack_batch_result['rate']:.4f}% "
-            f"AUC={report['attack']['auc_batch']:.6f}\n"
-        )
-        out.write(
-            f"Semantic success: "
-            f"{report['attack']['semantic_successes']}/"
-            f"{report['attack']['semantic_trials']}\n"
-        )
-        out.write(
-            f"Median family-specific structural score: "
-            f"{report['attack']['structural_score_median']:.6f}\n"
-        )
-
-    print(text_path.read_text(encoding="utf-8"), end="")
+    print(args.text_output.read_text(encoding="utf-8"), end="")
+    print(f"[written] {args.text_output}")
+    print(f"[written] {args.csv_output}")
+    print(f"[written] {args.json_output}")
     return 0
 
 

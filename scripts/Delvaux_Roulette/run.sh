@@ -74,6 +74,7 @@ Usage:
   scripts/Delvaux_Roulette/run.sh collect [all|FAMILY]
   scripts/Delvaux_Roulette/run.sh analyze [all|FAMILY]
   scripts/Delvaux_Roulette/run.sh semantic
+  scripts/Delvaux_Roulette/run.sh raw
   scripts/Delvaux_Roulette/run.sh full [all|FAMILY]
   scripts/Delvaux_Roulette/run.sh clean
 
@@ -551,6 +552,16 @@ summarize_all() {
     tee "$ROU_RESULTS_ROOT/combined_summary.console.txt"
 }
 
+analyze_raw_behavior() {
+  python3 "$SCRIPT_DIR/summarize_raw_behavior.py" \
+    --results-root "$ROU_RESULTS_ROOT" \
+    --manifest "$MANIFEST" \
+    --minimum-running "${ROU_MINIMUM_RUNNING:-95}" \
+    --json-output "$ROU_RESULTS_ROOT/raw_behavior_summary.json" \
+    --csv-output "$ROU_RESULTS_ROOT/raw_behavior_summary.csv" \
+    --text-output "$ROU_RESULTS_ROOT/raw_behavior_summary.txt"
+}
+
 analyze_semantic() {
   local analyzer="$SCRIPT_DIR/analyze_semantic_detector.py"
 
@@ -591,6 +602,7 @@ analyze_scope() {
 
   if [[ "$scope" == "all" ]]; then
     summarize_all
+    analyze_raw_behavior
     if [[ -f "$SCRIPT_DIR/analyze_semantic_detector.py" ]]; then
       analyze_semantic
     fi
@@ -628,6 +640,10 @@ case "$ACTION" in
 
   semantic|analyze-semantic)
     analyze_semantic
+    ;;
+
+  raw|analyze-raw)
+    analyze_raw_behavior
     ;;
 
   full)

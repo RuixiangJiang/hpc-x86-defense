@@ -121,7 +121,24 @@ static family_t parse_family(const char *label) {
 }
 static case_t prepare_case(const char *label, rou_case_mode_t mode) {
     case_t c; memset(&c,0,sizeof(c)); c.family=parse_family(label); c.mode=mode; c.label=label;
-    if (mode==M_BASELINE) { c.runtime_mode=ROU_MODE_BASELINE; return c; }
+    if (mode==M_BASELINE) {
+        switch(c.family) {
+        case F_SKIP:
+            c.runtime_mode=ROU_MODE_SKIP_BASELINE;
+            break;
+        case F_FLIP:
+            c.runtime_mode=ROU_MODE_FLIP_BASELINE;
+            break;
+        case F_CONSTANT:
+        case F_RANDOM:
+            c.runtime_mode=ROU_MODE_DATA_BASELINE;
+            break;
+        default:
+            c.runtime_mode=UINT32_MAX;
+            break;
+        }
+        return c;
+    }
     switch(c.family) {
     case F_SKIP: c.runtime_mode=ROU_MODE_SKIP_LOCAL_OPERATION; break;
     case F_CONSTANT: c.runtime_mode=ROU_MODE_SET_CONSTANT; break;
@@ -132,15 +149,20 @@ static case_t prepare_case(const char *label, rou_case_mode_t mode) {
     return c;
 }
 static const char *target_kind(family_t f) {
-    return f==F_SKIP ? "masked-intt-local-operation" : "masked-intt-data-intermediate";
+    return f==F_SKIP ? "masked-intt-uadd16-operation" : "masked-intt-data-intermediate";
 }
 static int semantic_valid_for_case(const case_t *c, const rou_audit_snapshot *a) {
     int32_t expected;
     if (!a->valid || !a->compare_recorded || a->mode!=c->runtime_mode || a->non_target_mismatches!=0u) return 0;
     switch(c->runtime_mode) {
     case ROU_MODE_BASELINE:
+    case ROU_MODE_SKIP_BASELINE:
+    case ROU_MODE_FLIP_BASELINE:
+    case ROU_MODE_DATA_BASELINE:
         expected=a->normal_intermediate;
-        return a->fault_applied==0u && a->used_intermediate==expected && a->target_changed==0u;
+        return a->fault_applied==0u &&
+               a->used_intermediate==expected &&
+               a->target_changed==0u;
     case ROU_MODE_SKIP_LOCAL_OPERATION:
         expected=a->share_a_before;
         return a->operation_skipped==1u && a->used_intermediate==expected;

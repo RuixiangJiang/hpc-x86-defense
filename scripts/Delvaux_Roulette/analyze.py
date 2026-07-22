@@ -36,6 +36,40 @@ STRUCTURAL_FEATURES = [
     'structural-stores.retired_stores',
 ]
 
+SKIP_FAMILY = "skip-local-masked-operation"
+
+DATA_BEHAVIOR_PASSES = {
+    "structural-loads",
+    "structural-stores",
+    "cache-l1d",
+    "cache-llc",
+    "cache-dtlb",
+    "cache-references",
+    "cache-misses",
+    "cache-l1d-replacements",
+    "cache-l2-request-misses",
+    "load-l1-hit",
+    "load-l2-hit",
+    "load-l3-hit",
+    "load-l1-miss",
+    "load-l2-miss",
+    "load-l3-miss",
+    "long-latency-loads",
+    "stalls-l1d-miss",
+    "stalls-mem-any",
+    "resource-stalls-store-buffer",
+    "execution-bound-loads",
+}
+
+
+def feature_allowed(family: str, pass_name: str, event: str) -> bool:
+    if family == SKIP_FAMILY:
+        return (
+            pass_name == "structural-instructions"
+            and event == "instructions"
+        )
+    return pass_name in DATA_BEHAVIOR_PASSES and event != "cycles"
+
 META_COLUMNS = {
     'sample', 'family', 'mode', 'is_attack', 'input_domain',
     'semantic_valid', 'fault_applied', 'differs_intended',
@@ -552,6 +586,8 @@ def main() -> int:
         selected_events: list[str] = []
         if pass_ok:
             for event in sorted(common_events or set()):
+                if not feature_allowed(family, pass_name, event):
+                    continue
                 if event == 'cycles' and pass_name != 'structural-instructions':
                     continue
                 feature_ok = True

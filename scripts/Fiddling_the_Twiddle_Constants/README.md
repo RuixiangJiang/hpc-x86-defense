@@ -1,463 +1,177 @@
 # Ravi et al. — Fiddling the Twiddle Constants
 
-This directory contains an Intel x86/Linux software fault-simulation and
-hardware performance counter experiment for:
+This directory contains a paper-aligned x86-64/Linux software fault-effect
+simulation of Ravi et al., **“Fiddling the Twiddle Constants — Fault Injection
+Analysis of the Number Theoretic Transform.”**
+
+The experiment models the two conditions from the paper as **one complete
+attack**, rather than as two independent attacks:
 
 ```text
-Ravi et al.,
-“Fiddling the Twiddle Constants:
-Fault Injection Analysis of the Number Theoretic Transform.”
+Condition-1:
+    the twiddle-table pointer load returns T* instead of the correct T
+
+Condition-2:
+    T* points to an array whose twiddle values are all zero
 ```
 
-The experiment targets one twiddle access in the signing-time forward NTT of
-the ephemeral Dilithium2 vector:
+The implementation evaluates whether hardware performance counters (HPCs) can
+distinguish the normal execution from the pointer-redirection attack.
 
-```c
-z = y;
-PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_polyvecl_ntt(&z);
-```
+---
 
-Two independent fault families are implemented:
+## 1. Correction to the previous repository model
+
+The previous repository version incorrectly implemented two separate attacks:
 
 ```text
 corrupt-twiddle-pointer
 corrupt-loaded-twiddle-value
 ```
 
-All benign runs, attack runs, semantic self-tests, and PMU measurements use one
-executable:
+The first redirected one selected twiddle access to another valid zeta entry.
+The second skipped one selected twiddle load and substituted a stale zero.
+
+That split does not match the paper. In the paper, the fault affects the
+twiddle-table pointer loaded near the beginning of the NTT. A successful fault
+changes the pointer from `T` to `T*`, and `T*` must point to an address range
+that returns zeros. The complete NTT then consumes zero twiddles through the
+faulty pointer.
+
+The old two-family implementation and its family-specific analysis have been
+removed. The repository now contains one family:
 
 ```text
-build/bin/ravi_fiddling_twiddle/fiddling_twiddle_single
-```
-
-All workflows are exposed through one public entry point:
-
-```text
-scripts/Fiddling_the_Twiddle_Constants/run.sh
+redirect-twiddle-pointer-to-zero-array
 ```
 
 ---
 
-## 1. Implemented attacks
+## 2. Paper-aligned software fault model
 
-### 1.1 Corrupt the twiddle pointer
-
-Attack family:
-
-```text
-corrupt-twiddle-pointer
-```
-
-Attack type:
-
-```text
-D
-```
-
-Normal behavior:
-
-```text
-correct_pointer = &zetas[target_index]
-zeta = *correct_pointer
-execute the complete target butterfly group
-```
-
-Faulted behavior:
-
-```text
-wrong_pointer = &zetas[wrong_index]
-zeta = *wrong_pointer
-execute the complete target butterfly group
-```
-
-The twiddle load remains present. Only the address used by the load is changed.
-
-Representative target structure:
+The physical paper attack uses EMFI against the ARM instruction:
 
 ```asm
-baseline:
-    movl (correct_twiddle_pointer), zeta
-
-attack:
-    movl (wrong_twiddle_pointer), zeta
+ldr r1, [pc, #4]
 ```
 
-The current default configuration is:
+This instruction loads the twiddle-table pointer from a PC-relative literal.
+The physical fault changes the loaded value from `T` to `T*`.
 
-```text
-target twiddle index = 8
-pointer offset       = 64
-used twiddle index   = 72
-```
-
-For the current Dilithium2 table:
-
-```text
-correct twiddle at index 8 = 1826347
-used twiddle at index 72   = -1257611
-```
-
-The wrong pointer is prepared before PMU enable and points to another valid
-entry in the original `zetas[]` table. The simulation therefore does not rely
-on an invalid pointer, segmentation fault, or out-of-bounds memory access.
-
-The NTT loop continues normally:
-
-```text
-same number of twiddle loads
-same number of butterflies
-same loop bounds
-same branches
-same stores
-```
-
----
-
-### 1.2 Corrupt the loaded twiddle value
-
-Attack family:
-
-```text
-corrupt-loaded-twiddle-value
-```
-
-Attack type:
-
-```text
-D
-```
-
-Normal behavior:
-
-```text
-zeta = *twiddle_pointer
-execute the complete target butterfly group
-```
-
-Faulted behavior:
-
-```text
-the selected twiddle load is skipped
-zeta retains a stale zero value
-execute the complete target butterfly group using zeta = 0
-```
-
-Representative target structure:
+The x86-64 simulation uses one shared RIP-relative pointer load:
 
 ```asm
+movq fiddle_active_twiddle_pointer_literal(%rip), register
+```
+
+Both baseline and attack execute this same instruction at the same address.
+
+```text
 baseline:
-    movl (twiddle_pointer), zeta
+    loaded pointer = T
+    T points to the original Dilithium zeta table
 
 attack:
-    # selected load omitted
-    # stale zero already present in zeta
+    loaded pointer = T*
+    T* points to a page-aligned zero-filled twiddle table
 ```
 
-The stale zero is prepared before PMU enable. The measured fault primitive does
-not execute a replacement load or an explicit `mov $0`.
+The simulation reproduces the **architectural fault effect** of the EMFI
+attack. It does not attempt to reproduce electromagnetic injection physics on
+x86-64.
 
-The attack preserves:
+### Condition-2 preparation
 
-```text
-all butterfly iterations
-all butterfly multiplications
-all butterfly additions and subtractions
-all target-group stores
-the surrounding NTT loop structure
-```
+Before counters are enabled, the simulator:
 
-The only deterministic execution-structure difference is the missing twiddle
-load instruction.
+1. creates a page-aligned array of `N` 32-bit twiddle entries;
+2. fills the array with zeros;
+3. verifies that every entry is zero;
+4. touches the original and zero tables to resolve page mappings;
+5. selects either `T` or `T*` as the value of the shared pointer literal.
+
+No zero filling, pointer selection, mode branch, page fault, reference
+calculation, or semantic audit is included in the PMU window.
 
 ---
 
-## 2. Correct signing-time target
+## 3. Monitored region
 
-The hook is placed after sampling the ephemeral vector `y`:
+The earlier implementation measured only one selected butterfly group. That
+window was too narrow for a fault that redirects the base pointer used by the
+complete NTT.
 
-```c
-z = y;
-
-#ifdef PQCLEAN_DILITHIUM2_FIDDLE_TWIDDLE_X86
-    PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_polyvecl_ntt(&z);
-#else
-    PQCLEAN_DILITHIUM2_CLEAN_polyvecl_ntt(&z);
-#endif
-```
-
-The experiment does not fault:
+The corrected PMU region is:
 
 ```text
-NTT(s1)
-NTT(s2)
-NTT(t0)
-challenge NTT
-key-generation NTTs
-verification NTTs
-```
-
-Targeting the ephemeral `z = NTT(y)` path preserves the intended signing-time
-attack context. Each signing attempt obtains a fresh ephemeral input while the
-same local twiddle fault is applied to the selected NTT group.
-
----
-
-## 3. Default target group
-
-Default configuration:
-
-```text
-FIDDLE_TARGET_VEC=0
-FIDDLE_TARGET_INDEX=8
-FIDDLE_POINTER_OFFSET=64
-```
-
-Twiddle index 8 is the first group in the `len = 16` layer:
-
-```text
-target vector          = 0
-target twiddle index   = 8
-target layer length    = 16
-target group start     = 0
-number of butterflies  = 16
-```
-
-Forward-NTT twiddle-index mapping:
-
-```text
-len = 128: indices   1
-len = 64:  indices   2..3
-len = 32:  indices   4..7
-len = 16:  indices   8..15
-len = 8:   indices  16..31
-len = 4:   indices  32..63
-len = 2:   indices  64..127
-len = 1:   indices 128..255
-```
-
-Changing the target index changes the number of butterflies in the measured
-group and therefore changes the PMU distribution. A detector calibrated for
-one target must not be reused for another target without recalibration.
-
----
-
-## 4. Single-executable design
-
-The experiment uses one binary:
-
-```text
-build/bin/ravi_fiddling_twiddle/fiddling_twiddle_single
-```
-
-This executable supports:
-
-```text
-corrupt-twiddle-pointer / baseline
-corrupt-twiddle-pointer / attack
-corrupt-loaded-twiddle-value / baseline
-corrupt-loaded-twiddle-value / attack
-```
-
-Family and mode selection occur before the target measurement wrapper is
-entered.
-
-The wrapper selected for the current run directly calls one fixed primitive:
-
-```text
-baseline wrapper
-pointer-corruption wrapper
-loaded-value-corruption wrapper
-```
-
-No attack-specific ELF is built.
-
-The executable digest is recorded in:
-
-```text
-results/Fiddling_the_Twiddle_Constants/single_executable/
-└── binary_audit.tsv
-```
-
----
-
-## 5. Unpolluted PMU window
-
-The PMU window contains only:
-
-```text
-record CPU before measurement
-reset and enable PMU group
-direct call to one preselected target primitive
-disable and read PMU group
-record CPU after measurement
-```
-
-### Baseline window
-
-```text
+zero-table creation and pointer selection             outside
 PMU enable
-original twiddle load
-complete target butterfly group
+shared PC-relative load of T or T*                     inside
+all 255 twiddle reads through the loaded pointer       inside
+all butterflies of one complete target-polynomial NTT inside
 PMU disable
+reference NTT and mismatch audit                       outside
+signature verification                                 outside
 ```
 
-### Pointer-corruption window
+Only one configurable polynomial in `polyvecl_ntt(&z)` is faulted and measured.
+The remaining vector rows execute the original Dilithium NTT outside this
+target PMU window.
+
+Default target:
 
 ```text
-PMU enable
-twiddle load from the prepared unintended pointer
-complete target butterfly group
-PMU disable
+target vector row: 0
 ```
-
-### Loaded-value-corruption window
-
-```text
-PMU enable
-selected twiddle-load site omitted
-complete target butterfly group using stale zero
-PMU disable
-```
-
-The following operations remain outside the measured window:
-
-```text
-family selection
-baseline/attack selection
-target-vector comparison
-target-index comparison
-wrong-index calculation
-wrong-pointer construction
-pointer bounds handling
-stale-zero preparation
-correct-twiddle read for auditing
-wrong-twiddle read for auditing
-reference array copies
-full reference NTT
-mismatch counting
-signature verification
-semantic-oracle evaluation
-detector evaluation
-CSV formatting and output
-```
-
-There is no measured software dispatcher of the form:
-
-```c
-if (attack) {
-    ...
-}
-
-if (family == POINTER_FAULT) {
-    ...
-}
-
-if (index == target_index) {
-    ...
-}
-```
-
-The fault model is therefore not detected merely because an artificial
-software condition was inserted into the PMU target window.
 
 ---
 
-## 6. Semantic validation
+## 4. Correctness properties
 
-Each sample records fields including:
+The implementation verifies the following properties for every accepted row.
 
-```text
-family
-mode
-target_twiddle_index
-used_twiddle_index
-correct_twiddle
-used_twiddle
-pointer_corrupted
-twiddle_load_skipped
-loaded_value_corrupted
-target_group_mismatches
-final_ntt_mismatches
-fault_requested
-fault_applied
-semantic_valid
-verify_ret
-oracle_success
-```
-
-### Pointer-corruption baseline
-
-A baseline sample is valid when:
+### Baseline
 
 ```text
-used_twiddle_index == target_twiddle_index
-used_twiddle       == correct_twiddle
-pointer_corrupted  == 0
-twiddle_load_skipped == 0
-target_group_mismatches == 0
-final_ntt_mismatches    == 0
-signature verification succeeds
+loaded pointer == original zeta-table pointer T
+pointer_redirected == 0
+first loaded twiddle == original first twiddle
+target NTT output == reference NTT output
+signature verifies successfully
 ```
 
-### Pointer-corruption attack
-
-An attack sample is valid when:
+### Attack
 
 ```text
-used_twiddle_index != target_twiddle_index
-used_twiddle       != correct_twiddle
-pointer_corrupted  == 1
-twiddle_load_skipped == 0
-target_group_mismatches > 0
-final_ntt_mismatches    > 0
-signature verification fails
+loaded pointer == zero-table pointer T*
+pointer_redirected == 1
+zero table was verified before measurement
+first loaded twiddle == 0
+target NTT output differs from reference NTT output
+faulty signature is rejected by the original verifier
 ```
 
-### Loaded-value-corruption baseline
-
-A baseline sample is valid when:
+Baseline and attack use:
 
 ```text
-used_twiddle == correct_twiddle
-twiddle_load_skipped == 0
-target_group_mismatches == 0
-final_ntt_mismatches    == 0
-signature verification succeeds
+the same ELF
+the same target function
+the same pointer-load instruction
+the same NTT loop
+the same number of twiddle loads
+the same number of butterfly operations
 ```
 
-### Loaded-value-corruption attack
-
-An attack sample is valid when:
-
-```text
-used_twiddle == 0
-twiddle_load_skipped == 1
-loaded_value_corrupted == 1
-target_group_mismatches > 0
-final_ntt_mismatches    > 0
-signature verification fails
-```
-
-Latest semantic evaluation:
-
-```text
-corrupt-twiddle-pointer:
-    semantic success = 1000 / 1000
-
-corrupt-loaded-twiddle-value:
-    semantic success = 1000 / 1000
-```
-
-Semantic success and PMU detection are evaluated separately. A sample is not
-declared a successful fault merely because its counter vector differs from the
-baseline.
+The only intentional difference is the value returned by the shared
+PC-relative pointer load.
 
 ---
 
-## 7. Monitored PMU events
+## 5. PMU counter sets
 
-The current collector records:
+The experiment uses one executable and three runtime-selectable counter sets.
+
+### Structural
 
 ```text
 cycles
@@ -468,33 +182,292 @@ retired_loads
 retired_stores
 ```
 
-The experiment is intended to run on one pinned logical Intel P-core.
+### Cache and L1D
 
-Example:
-
-```bash
-FIDDLE_CPU_CORE=2 \
-scripts/Fiddling_the_Twiddle_Constants/run.sh full
+```text
+cache_references
+cache_misses
+l1d_read_accesses
+l1d_read_misses
 ```
 
-Raw load/store encodings are CPU-specific and must be checked before running on
-another microarchitecture.
+### LLC and DTLB
+
+```text
+llc_read_accesses
+llc_read_misses
+dtlb_read_accesses
+dtlb_read_misses
+```
+
+The cache events use Linux `perf_event_open` generic hardware/cache encodings.
+Their exact microarchitectural mapping is CPU- and kernel-dependent.
 
 ---
 
-## 8. Unified runner
+## 6. Experimental design
 
-All workflows use:
+The reported experiment used the default configuration:
 
 ```text
-scripts/Fiddling_the_Twiddle_Constants/run.sh
+sessions per counter set:       4
+baseline samples per session:   500
+attack samples per session:     500
+warmup signatures:              10
+minimum PMU running percentage: 95%
+target development FPR:         1%
 ```
 
-List fault families:
+Collection order is alternated to reduce session-order and cache-warmth bias:
 
-```bash
-scripts/Fiddling_the_Twiddle_Constants/run.sh list
+```text
+s00: baseline -> attack
+s01: attack   -> baseline
+s02: baseline -> attack
+s03: attack   -> baseline
 ```
+
+For each event:
+
+```text
+development session:
+    s00 selects an exploratory one-event threshold
+
+held-out validation:
+    s01, s02, and s03 evaluate FPR and TPR
+```
+
+The report also includes absolute modes, means, medians, percentiles, ranges,
+AUC values, and per-session median differences.
+
+---
+
+## 7. Results
+
+### 7.1 Structural behavior
+
+Baseline and attack retired exactly the same number of structural operations.
+
+| Event | Baseline mode | Attack mode | Delta |
+|---|---:|---:|---:|
+| instructions | 40,292 | 40,292 | 0 |
+| branches | 3,344 | 3,344 | 0 |
+| retired loads | 10,518 | 10,518 | 0 |
+| retired stores | 9,239 | 9,239 | 0 |
+
+Per-session median differences were zero for all four events:
+
+```text
+instructions:   0, 0, 0, 0
+branches:       0, 0, 0, 0
+retired_loads:  0, 0, 0, 0
+retired_stores: 0, 0, 0, 0
+```
+
+This confirms that the corrected attack does not introduce an instruction
+skip, an additional pointer operation, a different loop count, or a different
+number of memory operations.
+
+#### Cycles
+
+```text
+baseline median: 8168.5
+attack median:   8154
+```
+
+Per-session median differences were:
+
+```text
+s00 = +42
+s01 = -10.5
+s02 = -136.5
+s03 = +33
+```
+
+The direction was not stable across sessions. The held-out detector achieved:
+
+```text
+FPR = 1.80%
+TPR = 2.73%
+```
+
+Cycles therefore did not provide a useful detector.
+
+#### Branch misses
+
+```text
+baseline median: 21
+attack median:   21
+```
+
+Per-session median differences were:
+
+```text
+s00 = +2
+s01 = 0
+s02 = -6
+s03 = +1
+```
+
+The held-out detector achieved:
+
+```text
+FPR = 1.73%
+TPR = 1.87%
+```
+
+Branch misses were also non-informative.
+
+---
+
+### 7.2 L1D behavior
+
+The number of L1D read accesses was structurally identical:
+
+```text
+baseline mode: 10,518
+attack mode:   10,518
+delta:         0
+```
+
+However, the L1D read-miss distribution changed substantially.
+
+| Statistic | Baseline | Attack |
+|---|---:|---:|
+| mode | 1 | 9 |
+| median | 1 | 9 |
+| p05 | 0 | 6 |
+| p95 | 4 | 12 |
+
+The central distributions were nearly separated:
+
+```text
+baseline p05-p95: 0-4 misses
+attack p05-p95:   6-12 misses
+```
+
+Per-session median differences were consistently positive:
+
+```text
+s00 = +7
+s01 = +6
+s02 = +6
+s03 = +10
+```
+
+A threshold selected only on `s00` achieved the following held-out result on
+`s01-s03`:
+
+```text
+validation FPR = 0.80%
+validation TPR = 86.27%
+```
+
+This is the primary victim-side HPC result of the experiment.
+
+### Interpretation
+
+The number of loads is unchanged, but their addresses differ:
+
+```text
+baseline:
+    twiddle loads read the original zeta table T
+
+attack:
+    twiddle loads read the separate zero table T*
+```
+
+The original zeta table is used repeatedly by normal Dilithium NTT operations
+before the monitored `NTT(z)` and is therefore likely to be resident in L1D.
+The zero table occupies different cache lines and is not refreshed by those
+normal NTT operations. Redirecting the complete twiddle stream to `T*`
+therefore produces additional L1D misses.
+
+The detector observes an **address-residency difference**, not a different
+number of memory operations and not a data-dependent branch.
+
+---
+
+### 7.3 Generic cache, LLC, and DTLB behavior
+
+The following events were effectively non-informative:
+
+```text
+cache_references
+cache_misses
+llc_read_accesses
+llc_read_misses
+dtlb_read_misses
+```
+
+Their modal baseline and attack counts were all zero.
+
+The DTLB read-access count was identical:
+
+```text
+baseline mode: 10,518
+attack mode:   10,518
+```
+
+Both the original and zero-table pages were touched before the PMU window, so
+the address redirection did not create a measurable DTLB miss signal.
+
+The absence of LLC misses is compatible with the L1D result. The additional
+attack accesses can miss in L1D while still hitting in a lower-level cache.
+
+---
+
+## 8. Main conclusion
+
+The paper-aligned attack preserves the complete execution structure:
+
+```text
+instructions:   unchanged
+branches:       unchanged
+retired loads:  unchanged
+retired stores: unchanged
+```
+
+Consequently, instruction-count, branch-count, load-count, and store-count
+monitors cannot distinguish the baseline from the attack.
+
+The pointer redirection does change the cache footprint:
+
+```text
+L1D read-miss mode:
+    baseline = 1
+    attack   = 9
+
+held-out detection:
+    FPR = 0.80%
+    TPR = 86.27%
+```
+
+For this implementation and platform, the most useful victim-side monitor is:
+
+```text
+primary HPC:
+    l1d_read_misses
+
+negative-control HPCs:
+    instructions
+    branches
+    retired_loads
+    retired_stores
+    generic cache events
+    LLC events
+    DTLB misses
+```
+
+This result should not be generalized blindly to every processor. Generic cache
+event mappings, cache sizes, replacement policies, prior NTT activity, table
+alignment, and operating-system noise can change the observed distributions.
+The stable four-session direction and held-out evaluation nevertheless show
+that the L1D signal is not explained solely by one collection batch.
+
+---
+
+## 9. Usage
 
 Build and verify:
 
@@ -502,554 +475,108 @@ Build and verify:
 scripts/Fiddling_the_Twiddle_Constants/run.sh verify
 ```
 
-Run short semantic/PMU probes:
+Run a short semantic and PMU smoke test:
 
 ```bash
 scripts/Fiddling_the_Twiddle_Constants/run.sh smoke
 ```
 
-Collect and analyze both attacks:
+Collect all sessions and generate the report:
 
 ```bash
 scripts/Fiddling_the_Twiddle_Constants/run.sh full
 ```
 
-Run one family only:
+Collect without analysis:
 
 ```bash
-scripts/Fiddling_the_Twiddle_Constants/run.sh full \
-  corrupt-twiddle-pointer
+scripts/Fiddling_the_Twiddle_Constants/run.sh collect
 ```
+
+Analyze existing results:
 
 ```bash
-scripts/Fiddling_the_Twiddle_Constants/run.sh full \
-  corrupt-loaded-twiddle-value
+scripts/Fiddling_the_Twiddle_Constants/run.sh analyze
 ```
 
-Reanalyze existing data:
-
-```bash
-scripts/Fiddling_the_Twiddle_Constants/run.sh analyze all
-```
-
-Run only the latest semantics-derived detector:
-
-```bash
-scripts/Fiddling_the_Twiddle_Constants/run.sh semantic
-```
-
-Clean the experiment executable:
+Clean the binary:
 
 ```bash
 scripts/Fiddling_the_Twiddle_Constants/run.sh clean
 ```
 
-Custom target:
+Environment variables:
 
-```bash
-FIDDLE_CPU_CORE=2 \
-FIDDLE_TARGET_VEC=0 \
-FIDDLE_TARGET_INDEX=8 \
-FIDDLE_POINTER_OFFSET=64 \
-scripts/Fiddling_the_Twiddle_Constants/run.sh full
+```text
+FIDDLE_CPU_CORE=0
+FIDDLE_TARGET_VEC=0
+FIDDLE_SESSIONS=4
+FIDDLE_SAMPLES=500
+FIDDLE_WARMUP=10
+FIDDLE_MIN_RUNNING=95.0
+FIDDLE_TARGET_FPR=0.01
 ```
 
 ---
 
-## 9. Collection methodology
-
-The experiment uses independent multi-session datasets.
-
-### Calibration
-
-```text
-4 sessions × 500 benign traces
-```
-
-### Development
-
-```text
-4 sessions ×
-    200 benign reference traces
-    500 benign traces
-    500 attack traces
-```
-
-### Threshold
-
-```text
-4 sessions ×
-    200 benign reference traces
-    5000 benign threshold traces
-```
-
-### Validation
-
-```text
-3 sessions ×
-    200 benign reference traces
-    2000 benign validation traces
-```
-
-### Final attack evaluation
-
-```text
-2 sessions ×
-    200 benign reference traces
-    500 contextual benign traces
-    500 attack traces
-```
-
-Final validation and attack traces are not used to redefine the fault
-semantics.
-
----
-
-## 10. Detector workflow
-
-`run.sh analyze all` and `run.sh full` execute two detector pipelines.
-
-### 10.1 Generic one-class detector
-
-The original generic detector is retained as an ablation.
-
-It computes a session-local robust one-class score across:
-
-```text
-cycles
-instructions
-branches
-branch_misses
-retired_loads
-retired_stores
-```
-
-The score is approximately:
-
-```text
-maximum absolute normalized deviation among all PMU events
-```
-
-This detector produced poor results because noisy events dominated the frozen
-threshold.
-
-Observed ablation results:
-
-| Attack | Single FPR | Single TPR | AUC | Batch-10 FPR | Batch-10 TPR | Batch AUC |
-|---|---:|---:|---:|---:|---:|---:|
-| Corrupt twiddle pointer | 0.5667% | 0.6000% | 0.595634 | 0.0000% | 1.0000% | 0.633692 |
-| Corrupt loaded twiddle value | 4.8000% | 0.3000% | 0.649302 | 15.3333% | 1.0000% | 0.654200 |
-
-These numbers are retained only as an ablation demonstrating that a generic
-maximum-deviation detector can hide a deterministic structural signature behind
-unrelated PMU noise.
-
----
-
-### 10.2 Primary semantics-derived detector
-
-The primary detector is:
-
-```text
-analyze_semantic_detector.py
-```
-
-It uses a detector derived from the target operation rather than selecting a
-generic weighted combination from attack traces.
-
-#### Loaded-value structural channel
-
-The loaded-value simulation omits exactly one twiddle-load instruction.
-
-For a trace in session `s`:
-
-```text
-instruction_deficit =
-    median(reference instructions in session s)
-    - trace instructions
-
-load_deficit =
-    median(reference retired loads in session s)
-    - trace retired loads
-```
-
-The structural score is:
-
-```text
-min(max(0, instruction_deficit),
-    max(0, load_deficit))
-```
-
-Alarm condition:
-
-```text
-instruction deficit > 0
-AND
-retired-load deficit > 0
-```
-
-This joint condition prevents unrelated single-counter fluctuations from being
-treated as the target fault.
-
-#### Pointer-corruption HPC classification
-
-Pointer corruption preserves the measured coarse execution structure:
-
-```text
-same instruction count
-same retired-load count
-same branch count
-same store count
-same butterfly count
-```
-
-The current PMU set does not expose the loaded address or directly identify
-which `zetas[]` entry supplied the value.
-
-It is therefore classified as:
-
-```text
-not-identifiable-by-current-coarse-hpc-set
-```
-
-No artificial HPC detector is claimed for this family.
-
----
-
-## 11. Post-window integrity channel
-
-A separate non-HPC channel checks whether the intended twiddle was consumed:
-
-```text
-used_twiddle_index != target_twiddle_index
-OR
-used_twiddle       != correct_twiddle
-```
-
-This is a post-window semantic-integrity check.
-
-It detects:
-
-```text
-pointer corruption
-loaded-value corruption
-```
-
-The integrity channel is not an HPC result and must not be reported as one.
-
-A deployable countermeasure would require a trusted redundant check such as:
-
-```text
-expected_pointer = &zetas[target_index]
-expected_twiddle = zetas[target_index]
-
-verify that:
-    consumed pointer/value == expected pointer/value
-```
-
-The comparison must remain outside the PMU target window when evaluating HPC
-behavior.
-
----
-
-## 12. Two-tier detector
-
-The combined decision is:
-
-```text
-two_tier_alarm =
-    structural_HPC_alarm
-    OR
-    twiddle_integrity_alarm
-```
-
-Interpretation:
-
-```text
-execution-structure fault:
-    detect with HPC structural monitoring
-
-data/address fault with equivalent coarse execution structure:
-    detect with redundant twiddle-integrity verification
-```
-
----
-
-## 13. Final measured results
-
-### 13.1 Validation false-positive rate
-
-Primary semantics-derived HPC detector:
-
-```text
-single trace:
-    FP  = 0 / 12000
-    FPR = 0.0000%
-
-batch of 10:
-    FP  = 0 / 1200
-    FPR = 0.0000%
-```
-
-Zero observed false positives do not prove that the population FPR is exactly
-zero.
-
----
-
-### 13.2 Corrupt twiddle pointer
-
-```text
-semantic success      = 1000 / 1000
-HPC structural score median = 0
-HPC single TPR        = 0.0000%
-HPC batch-10 TPR      = 0.0000%
-integrity single TPR  = 100.0000%
-integrity batch TPR   = 100.0000%
-two-tier single TPR   = 100.0000%
-two-tier batch TPR    = 100.0000%
-```
-
-Classification:
-
-```text
-not-identifiable-by-current-coarse-hpc-set
-```
-
-This is a valid negative result. The fault simulation succeeds semantically,
-but the current coarse PMUs do not distinguish a load from the correct table
-entry from an otherwise identical load from another valid table entry.
-
----
-
-### 13.3 Corrupt loaded twiddle value
-
-```text
-semantic success      = 1000 / 1000
-HPC structural score median = 1
-HPC single TPR        = 100.0000%
-HPC batch-10 TPR      = 100.0000%
-integrity single TPR  = 100.0000%
-integrity batch TPR   = 100.0000%
-two-tier single TPR   = 100.0000%
-two-tier batch TPR    = 100.0000%
-```
-
-Classification:
-
-```text
-deterministic-instruction-and-load-deficit
-```
-
-The deterministic signature is:
-
-```text
-instructions  = reference - 1
-retired_loads = reference - 1
-```
-
----
-
-## 14. Result summary
-
-### HPC-only result
-
-| Fault model | HPC classification | Single TPR | Batch-10 TPR | Validation FPR |
-|---|---|---:|---:|---:|
-| Corrupt twiddle pointer | Not identifiable with current coarse HPCs | 0% | 0% | 0% observed |
-| Corrupt loaded twiddle value | Deterministic instruction/load deficit | 100% | 100% | 0% observed |
-
-### Post-window integrity result
-
-| Fault model | Single TPR | Batch-10 TPR |
-|---|---:|---:|
-| Corrupt twiddle pointer | 100% | 100% |
-| Corrupt loaded twiddle value | 100% | 100% |
-
-### Combined two-tier result
-
-| Fault model | Single TPR | Batch-10 TPR |
-|---|---:|---:|
-| Corrupt twiddle pointer | 100% | 100% |
-| Corrupt loaded twiddle value | 100% | 100% |
-
----
-
-## 15. Recommended interpretation
-
-Recommended wording:
-
-> The loaded-twiddle-value corruption simulation omitted one twiddle-load
-> instruction and produced a deterministic deficit of one retired instruction
-> and one retired load. A semantics-derived joint structural detector achieved
-> 100% single-trace and batch detection, with no false positives observed in
-> 12,000 benign validation traces. In contrast, corrupting the twiddle pointer
-> preserved the measured instruction, load, branch, and store structure and was
-> not identifiable using the available coarse-grained HPC events, despite
-> 100% semantic fault success. A separate post-window redundant twiddle-integrity
-> check detected both fault families, yielding 100% detection in the combined
-> two-tier defense.
-
-Required qualification:
-
-> The twiddle-integrity check is a non-HPC software countermeasure and is
-> reported separately from the HPC-only results.
-
-The generic one-class detector should be presented only as an ablation, not as
-the primary detector.
-
----
-
-## 16. Output files
-
-Main result directory:
+## 10. Output files
 
 ```text
 results/Fiddling_the_Twiddle_Constants/single_executable/
+├── structural/
+│   ├── s00_baseline.csv
+│   ├── s00_attack.csv
+│   └── ...
+├── cache-l1d/
+│   ├── s00_baseline.csv
+│   ├── s00_attack.csv
+│   └── ...
+├── cache-llc-dtlb/
+│   ├── s00_baseline.csv
+│   ├── s00_attack.csv
+│   └── ...
+├── collection_manifest.json
+├── binary_audit.tsv
+├── raw_behavior_report.txt
+├── raw_behavior_summary.csv
+└── raw_behavior_summary.json
 ```
 
-Verification artifacts:
+`raw_behavior_report.txt` contains the readable baseline/attack comparison.
 
-```text
-binary_audit.tsv
-window_audit.txt
-collector_symbols.txt
-collector_disassembly.txt
-baseline_target.asm
-pointer_target.asm
-loaded_value_target.asm
-collection_manifest.json
-```
+`raw_behavior_summary.csv` contains flat summary rows suitable for plotting or
+statistical processing.
 
-Generic one-class ablation:
-
-```text
-corrupt-twiddle-pointer/
-    detector_model.json
-    fpr_tpr_report.json
-    fpr_tpr_report.txt
-
-corrupt-loaded-twiddle-value/
-    detector_model.json
-    fpr_tpr_report.json
-    fpr_tpr_report.txt
-
-combined_summary.csv
-combined_summary.json
-combined_summary.txt
-```
-
-Primary semantics-derived detector:
-
-```text
-semantic_detector_report.json
-semantic_detector_report.txt
-semantic_detector_summary.csv
-```
+`raw_behavior_summary.json` contains the complete report, including
+per-session distributions, detector thresholds, AUC values, and held-out
+FPR/TPR.
 
 ---
 
-## 17. Verification
+## 11. Scope and limitations
 
-Run:
+This is a software fault-effect simulation.
 
-```bash
-scripts/Fiddling_the_Twiddle_Constants/run.sh verify
-```
-
-The verifier checks:
-
-1. only one executable exists in the experiment build directory;
-2. pointer-family baseline semantic self-test passes;
-3. pointer-family attack semantic self-test passes;
-4. loaded-value-family baseline semantic self-test passes;
-5. loaded-value-family attack semantic self-test passes;
-6. the baseline primitive contains one explicit twiddle memory load;
-7. the pointer-corruption primitive retains one explicit twiddle memory load;
-8. the loaded-value primitive omits the selected twiddle load;
-9. all three target primitives retain the complete butterfly-group
-   computation;
-10. wrong-pointer construction occurs before PMU enable;
-11. stale-zero preparation occurs before PMU enable;
-12. family/mode selection occurs outside the measured target primitive;
-13. the signing hook remains at `z = y; NTT(z)`.
-
-Latest semantic self-test example:
+It demonstrates:
 
 ```text
-corrupt-twiddle-pointer / baseline:
-    correct_index=8
-    used_index=8
-    correct=1826347
-    used=1826347
-
-corrupt-twiddle-pointer / attack:
-    correct_index=8
-    used_index=72
-    correct=1826347
-    used=-1257611
-
-corrupt-loaded-twiddle-value / baseline:
-    correct_index=8
-    used_index=8
-    correct=1826347
-    used=1826347
-
-corrupt-loaded-twiddle-value / attack:
-    correct_index=8
-    used_index=8
-    correct=1826347
-    used=0
+T -> T* pointer corruption
+T* -> zero-filled twiddle array
+unchanged victim control flow
+changed cache footprint
 ```
 
----
-
-## 18. Limitations
-
-- This is a software fault simulation, not a physical voltage, clock, EM,
-  laser, or Rowhammer injection experiment.
-- The loaded-value simulation removes a retired instruction and retired load.
-  A physical register or datapath corruption may alter the loaded value without
-  removing the load instruction.
-- The pointer simulation redirects the load to another valid table entry.
-  Other physical pointer corruptions may produce invalid, misaligned,
-  uncached, or attacker-controlled addresses with different PMU behavior.
-- The current PMU set is coarse and does not expose the exact load address.
-- Pointer-corruption detectability may change if the wrong address causes a
-  cache, TLB, page-fault, or memory-ordering effect.
-- Results are specific to the selected CPU, kernel, microcode, raw event
-  encoding, compiler, target index, and measured butterfly-group size.
-- Zero observed validation FPR is not an absolute FPR guarantee.
-- The integrity channel is a separate software countermeasure, not evidence
-  that HPCs detect pointer corruption.
-- The experiment measures local fault detection. It does not reproduce the
-  complete physical injection setup or full secret-recovery procedure from the
-  paper.
-
----
-
-## 19. Reproducibility checklist
+It does not demonstrate:
 
 ```text
-[ ] run.sh is the only public workflow entry
-[ ] fiddling_twiddle_single is the only experiment executable
-[ ] both pointer baseline/attack semantic tests pass
-[ ] both loaded-value baseline/attack semantic tests pass
-[ ] target remains z = y; NTT(z)
-[ ] pointer attack loads from an unintended valid zetas[] entry
-[ ] pointer attack retains the original twiddle-load instruction
-[ ] loaded-value attack omits the selected twiddle load
-[ ] loaded-value attack consumes stale zero
-[ ] all target butterflies continue to execute
-[ ] no family/mode branch is inside the PMU target window
-[ ] wrong pointer is prepared before PMU enable
-[ ] stale zero is prepared before PMU enable
-[ ] CPU remains pinned during each measured trace
-[ ] semantic success and PMU detection are reported separately
-[ ] generic one-class detector is labeled as an ablation
-[ ] semantics-derived detector is used as the primary result
-[ ] pointer corruption is marked HPC-non-identifiable
-[ ] loaded-value corruption is reported as a joint instruction/load deficit
-[ ] integrity results are labeled non-HPC
-[ ] zero observed FPR is not described as a population guarantee
-[ ] binary digest, manifest, event configuration, and CPU information are archived
+physical EMFI timing
+probe placement
+pulse voltage or width
+Flash-prefetch-buffer fault physics
+probability of obtaining a useful T*
+hardware attack success rate
 ```
+
+The measured FPR and TPR characterize the HPC detector for the software
+fault-effect model on the evaluated x86-64 system. They are not physical EMFI
+success probabilities.

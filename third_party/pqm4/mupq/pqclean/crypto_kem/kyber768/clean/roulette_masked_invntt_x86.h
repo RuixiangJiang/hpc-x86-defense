@@ -10,6 +10,9 @@
 #define ROU_MODE_SET_CONSTANT 2u
 #define ROU_MODE_SET_RANDOM 3u
 #define ROU_MODE_FLIP_BIT 4u
+#define ROU_MODE_SKIP_BASELINE 5u
+#define ROU_MODE_FLIP_BASELINE 6u
+#define ROU_MODE_DATA_BASELINE 7u
 #define ROU_HPC_EVENT_COUNT 2u
 
 #define ROU_COUNTER_SET_STRUCTURAL_INSTRUCTIONS 1
@@ -122,11 +125,13 @@ void PQCLEAN_KYBER768_CLEAN_roulette_record_compare(
     const uint8_t reencrypted_ct[KYBER_CIPHERTEXTBYTES],
     int compare_fail);
 
+int32_t rou_target_uadd16_baseline(int32_t, int32_t, int32_t, uint32_t);
 int32_t rou_target_masked_add_baseline(int32_t, int32_t, int32_t, uint32_t);
 int32_t rou_target_skip_local_masked_operation(int32_t, int32_t, int32_t, uint32_t);
 int32_t rou_target_set_masked_intermediate_constant(int32_t, int32_t, int32_t, uint32_t);
 int32_t rou_target_replace_masked_intermediate_random(int32_t, int32_t, int32_t, uint32_t);
 int32_t rou_target_flip_masked_intermediate_bit(int32_t, int32_t, int32_t, uint32_t);
+int32_t rou_measure_uadd16_baseline(int32_t, int32_t, int32_t, uint32_t);
 int32_t rou_measure_masked_add_baseline(int32_t, int32_t, int32_t, uint32_t);
 int32_t rou_measure_skip_local_masked_operation(int32_t, int32_t, int32_t, uint32_t);
 int32_t rou_measure_set_masked_intermediate_constant(int32_t, int32_t, int32_t, uint32_t);

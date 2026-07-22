@@ -535,40 +535,15 @@ def main() -> int:
                 row["instructions"] - center["instructions"]
             )
 
-            # Exact semantics-derived structural channel:
-            # skip = -1 retired instruction; bit flip = +1.
-            structural = abs(instruction_delta)
-
-            # Data replacement with a register move can be move-eliminated.
-            # This channel is considered only when retired instructions are
-            # unchanged, preventing skip/flip from being diluted or confused
-            # with the uop detector.
-            if structural == 0:
-                issued_deficit = max(
-                    0.0,
-                    min(
-                        args.z_clip,
-                        (
-                            center["uops_issued"]
-                            - row["uops_issued"]
-                        ) / scale["uops_issued"],
-                    ),
-                )
-                executed_deficit = max(
-                    0.0,
-                    min(
-                        args.z_clip,
-                        (
-                            center["uops_executed"]
-                            - row["uops_executed"]
-                        ) / scale["uops_executed"],
-                    ),
-                )
-                uop_substitution = max(
-                    issued_deficit, executed_deficit
-                )
-            else:
-                uop_substitution = 0.0
+            # Only the instruction skip has a deterministic
+            # retired-instruction channel. The three data faults are evaluated
+            # with cache/memory events by the family-specific analyzer.
+            structural = (
+                abs(instruction_delta)
+                if family == "skip-local-masked-operation"
+                else 0.0
+            )
+            uop_substitution = 0.0
 
             # This is a separate non-HPC countermeasure channel. It models
             # redundant recomputation/compare outside the PMU window.
@@ -817,20 +792,13 @@ def main() -> int:
             for name, flags in batch_flags.items()
         }
 
-        if family in (
-            "skip-local-masked-operation",
-            "flip-masked-intermediate-bit",
-        ):
+        if family == "skip-local-masked-operation":
             hpc_identifiability = (
                 "deterministic-retired-instruction-structure"
             )
-        elif family == "replace-masked-intermediate-random":
-            hpc_identifiability = (
-                "conditional-move-elimination-uop-fingerprint"
-            )
         else:
             hpc_identifiability = (
-                "not-identifiable-by-current-standard-hpc-set"
+                "cache-memory-behavior-evaluated-by-family-analyzer"
             )
 
         attack_results[family] = {
@@ -869,7 +837,6 @@ def main() -> int:
                 "threshold": structural_threshold,
                 "detects": [
                     "skip-local-masked-operation",
-                    "flip-masked-intermediate-bit",
                 ],
             },
             "uop_substitution": {

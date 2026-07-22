@@ -17,8 +17,9 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#define FIDDLE_KEY_MAGIC "FTWDL002"
+#define FIDDLE_KEY_MAGIC "FTWDL003"
 #define FIDDLE_KEY_MAGIC_LEN 8u
+#define FIDDLE_FAMILY_NAME "redirect-twiddle-pointer-to-zero-array"
 
 typedef struct {
     char magic[FIDDLE_KEY_MAGIC_LEN];
@@ -42,19 +43,7 @@ static unsigned long parse_ulong(
     return value;
 }
 
-static int parse_family(const char *text)
-{
-    if (strcmp(text, "corrupt-twiddle-pointer") == 0) {
-        return FIDDLE_FAMILY_POINTER;
-    }
-    if (strcmp(text, "corrupt-loaded-twiddle-value") == 0) {
-        return FIDDLE_FAMILY_LOADED_VALUE;
-    }
-    fprintf(stderr, "[error] unknown family: %s\n", text);
-    exit(EXIT_FAILURE);
-}
-
-static int parse_mode(const char *text)
+static unsigned int parse_mode(const char *text)
 {
     if (strcmp(text, "baseline") == 0) {
         return FIDDLE_MODE_BASELINE;
@@ -186,7 +175,7 @@ static void build_message(
     uint64_t sample)
 {
     static const uint8_t prefix[] =
-        "Ravi et al. Fiddling the Twiddle Constants";
+        "Ravi et al. zero-twiddle pointer redirection";
     size_t prefix_len = sizeof(prefix) - 1u;
 
     memset(message, 0, 64);
@@ -211,8 +200,7 @@ static void build_message(
 }
 
 static int semantic_oracle(
-    int family,
-    int mode,
+    unsigned int mode,
     int sign_ret,
     int verify_ret,
     const fiddle_twiddle_audit_snapshot *audit)
@@ -221,33 +209,23 @@ static int semantic_oracle(
         return sign_ret == 0 &&
             verify_ret == 0 &&
             audit->semantic_valid == 1u &&
-            audit->fault_applied == 0u;
-    }
-
-    if (family == FIDDLE_FAMILY_POINTER) {
-        return sign_ret == 0 &&
-            verify_ret != 0 &&
-            audit->semantic_valid == 1u &&
-            audit->fault_applied == 1u &&
-            audit->pointer_corrupted == 1u &&
-            audit->twiddle_load_skipped == 0u;
+            audit->fault_applied == 0u &&
+            audit->pointer_redirected == 0u;
     }
 
     return sign_ret == 0 &&
         verify_ret != 0 &&
         audit->semantic_valid == 1u &&
         audit->fault_applied == 1u &&
-        audit->pointer_corrupted == 0u &&
-        audit->twiddle_load_skipped == 1u &&
-        audit->used_twiddle == 0;
+        audit->pointer_redirected == 1u &&
+        audit->zero_table_verified == 1u &&
+        audit->loaded_first_twiddle == 0 &&
+        audit->target_ntt_mismatches > 0u;
 }
 
 static int run_self_test(
-    int family,
-    int mode,
-    unsigned int target_vec,
-    unsigned int target_index,
-    unsigned int pointer_offset)
+    unsigned int mode,
+    unsigned int target_vec)
 {
     uint8_t *pk = NULL;
     uint8_t *sk = NULL;
@@ -279,11 +257,8 @@ static int run_self_test(
     }
 
     PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_configure(
-        (unsigned int)family,
-        (unsigned int)mode,
-        target_vec,
-        target_index,
-        pointer_offset);
+        mode,
+        target_vec);
     PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_set_measurement_enabled(0);
 
     build_message(message, UINT32_C(0x53454c46), 0);
@@ -308,7 +283,6 @@ static int run_self_test(
         &audit);
 
     ok = semantic_oracle(
-        family,
         mode,
         sign_ret,
         verify_ret,
@@ -316,37 +290,32 @@ static int run_self_test(
 
     if (ok) {
         printf(
-            "semantic self-test passed family=%s mode=%s "
-            "correct_index=%u used_index=%u correct=%" PRId32
-            " used=%" PRId32 "\n",
-            PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_family_name(),
+            "semantic self-test passed mode=%s "
+            "correct_pointer=0x%016" PRIx64 " "
+            "loaded_pointer=0x%016" PRIx64 " "
+            "zero_pointer=0x%016" PRIx64 " "
+            "first_twiddle=%" PRId32 " mismatches=%u\n",
             PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_mode_name(),
-            audit.target_twiddle_index,
-            audit.used_twiddle_index,
-            audit.correct_twiddle,
-            audit.used_twiddle);
+            audit.correct_pointer,
+            audit.loaded_pointer,
+            audit.zero_table_pointer,
+            audit.loaded_first_twiddle,
+            audit.target_ntt_mismatches);
     } else {
         fprintf(
             stderr,
-            "[error] semantic self-test failed family=%s mode=%s "
-            "sign=%d verify=%d semantic=%u fault=%u "
-            "pointer=%u skip_load=%u mismatches=%u/%u "
-            "correct_index=%u used_index=%u correct=%" PRId32
-            " used=%" PRId32 "\n",
-            PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_family_name(),
+            "[error] semantic self-test failed mode=%s "
+            "sign=%d verify=%d semantic=%u fault=%u redirect=%u "
+            "zero=%u first=%" PRId32 " mismatches=%u\n",
             PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_mode_name(),
             sign_ret,
             verify_ret,
             audit.semantic_valid,
             audit.fault_applied,
-            audit.pointer_corrupted,
-            audit.twiddle_load_skipped,
-            audit.target_group_mismatches,
-            audit.final_ntt_mismatches,
-            audit.target_twiddle_index,
-            audit.used_twiddle_index,
-            audit.correct_twiddle,
-            audit.used_twiddle);
+            audit.pointer_redirected,
+            audit.zero_table_verified,
+            audit.loaded_first_twiddle,
+            audit.target_ntt_mismatches);
     }
 
     free(sig);
@@ -360,22 +329,20 @@ static void write_csv_header(FILE *out)
     unsigned int i;
 
     fputs(
-        "sample,family,mode,is_attack,message_domain,"
-        "target_vec,target_twiddle_index,used_twiddle_index,"
-        "pointer_offset,target_len,target_start,"
-        "sign_ret,siglen,verify_ret,oracle_success,"
-        "correct_twiddle,used_twiddle,"
-        "pointer_corrupted,twiddle_load_skipped,"
-        "loaded_value_corrupted,"
-        "target_group_mismatches,final_ntt_mismatches,"
-        "fault_requested,fault_applied,semantic_valid,"
-        "affinity_cpu,cpu_before,cpu_after,cpu_stable,"
-        "sequence,signing_invocations,"
-        "time_enabled,time_running,running_percent,"
-        "valid_mask,error_code",
+        "sample,family,mode,is_attack,counter_set,message_domain,"
+        "target_vec,sign_ret,siglen,verify_ret,oracle_success,"
+        "correct_pointer,loaded_pointer,zero_table_pointer,"
+        "correct_first_twiddle,loaded_first_twiddle,"
+        "twiddles_consumed,zero_table_verified,pointer_redirected,"
+        "target_ntt_mismatches,fault_requested,fault_applied,"
+        "semantic_valid,affinity_cpu,cpu_before,cpu_after,cpu_stable,"
+        "sequence,signing_invocations,time_enabled,time_running,"
+        "running_percent,valid_mask,error_code",
         out);
 
-    for (i = 0; i < FIDDLE_TWIDDLE_HPC_EVENT_COUNT; ++i) {
+    for (i = 0;
+         i < PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_event_count();
+         ++i) {
         fprintf(
             out,
             ",%s",
@@ -396,11 +363,9 @@ int main(int argc, char **argv)
     unsigned long samples = 500;
     unsigned long warmup = 10;
     unsigned long target_vec = 0;
-    unsigned long target_twiddle_index = 8;
-    unsigned long pointer_offset = 64;
     unsigned long message_domain = 0;
-    int family = FIDDLE_FAMILY_LOADED_VALUE;
-    int mode = FIDDLE_MODE_BASELINE;
+    unsigned long counter_set = FIDDLE_COUNTER_SET_STRUCTURAL;
+    unsigned int mode = FIDDLE_MODE_BASELINE;
     int create_key = 0;
     int self_test = 0;
     int affinity_cpu = -1;
@@ -420,21 +385,14 @@ int main(int argc, char **argv)
         } else if (strcmp(argv[i], "--target-vec") == 0 &&
                    i + 1 < (unsigned long)argc) {
             target_vec = parse_ulong(argv[++i], "target vector");
-        } else if (strcmp(argv[i], "--target-index") == 0 &&
-                   i + 1 < (unsigned long)argc) {
-            target_twiddle_index =
-                parse_ulong(argv[++i], "target twiddle index");
-        } else if (strcmp(argv[i], "--pointer-offset") == 0 &&
-                   i + 1 < (unsigned long)argc) {
-            pointer_offset =
-                parse_ulong(argv[++i], "pointer offset");
         } else if (strcmp(argv[i], "--message-domain") == 0 &&
                    i + 1 < (unsigned long)argc) {
             message_domain =
                 parse_ulong(argv[++i], "message domain");
-        } else if (strcmp(argv[i], "--family") == 0 &&
+        } else if (strcmp(argv[i], "--counter-set") == 0 &&
                    i + 1 < (unsigned long)argc) {
-            family = parse_family(argv[++i]);
+            counter_set =
+                parse_ulong(argv[++i], "counter set");
         } else if (strcmp(argv[i], "--mode") == 0 &&
                    i + 1 < (unsigned long)argc) {
             mode = parse_mode(argv[++i]);
@@ -454,43 +412,29 @@ int main(int argc, char **argv)
         } else {
             fprintf(
                 stderr,
-                "usage: %s --family FAMILY --mode baseline|attack "
-                "[--self-test] [--output FILE --key-file FILE] "
-                "[--create-key] [--samples N] [--warmup N] "
-                "[--target-vec V] [--target-index K] "
-                "[--pointer-offset N] [--message-domain D] "
-                "[--cpu N]\n",
+                "usage: %s --mode baseline|attack "
+                "[--counter-set 0|1|2] [--self-test] "
+                "[--output FILE --key-file FILE] [--create-key] "
+                "[--samples N] [--warmup N] [--target-vec V] "
+                "[--message-domain D] [--cpu N]\n",
                 argv[0]);
             goto cleanup;
         }
     }
 
-    if (target_vec >= (unsigned long)L ||
-        target_twiddle_index == 0 ||
-        target_twiddle_index >= (unsigned long)N) {
-        fprintf(
-            stderr,
-            "[error] target must satisfy vec in [0,%d), "
-            "twiddle index in [1,%d)\n",
-            L,
-            N);
+    if (target_vec >= (unsigned long)L || counter_set > 2u) {
+        fprintf(stderr, "[error] invalid target vector/counter set\n");
         goto cleanup;
     }
 
     if (self_test) {
-        return run_self_test(
-            family,
-            mode,
-            (unsigned int)target_vec,
-            (unsigned int)target_twiddle_index,
-            (unsigned int)pointer_offset);
+        return run_self_test(mode, (unsigned int)target_vec);
     }
 
     if (output_path == NULL || key_path == NULL || samples == 0) {
         fprintf(
             stderr,
-            "[error] --output, --key-file, and samples > 0 "
-            "are required\n");
+            "[error] --output, --key-file, and samples > 0 required\n");
         goto cleanup;
     }
 
@@ -516,26 +460,15 @@ int main(int argc, char **argv)
         goto cleanup;
     }
 
-    hpc_ret = PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_hpc_init();
-    if (hpc_ret != 0) {
-        fprintf(
-            stderr,
-            "[error] perf_event_open group failed: %d (%s)\n",
-            hpc_ret,
-            strerror(-hpc_ret));
-        fprintf(
-            stderr,
-            "[hint] check perf_event_paranoid, raw-event access, "
-            "and P-core selection\n");
+    if (PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_set_counter_set(
+            (unsigned int)counter_set) != 0) {
+        fprintf(stderr, "[error] unable to select counter set\n");
         goto cleanup;
     }
 
     PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_configure(
-        (unsigned int)family,
-        (unsigned int)mode,
-        (unsigned int)target_vec,
-        (unsigned int)target_twiddle_index,
-        (unsigned int)pointer_offset);
+        mode,
+        (unsigned int)target_vec);
 
     PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_set_measurement_enabled(0);
     for (i = 0; i < warmup; ++i) {
@@ -551,8 +484,22 @@ int main(int argc, char **argv)
                 sizeof(message),
                 sk) != 0) {
             fprintf(stderr, "[error] warmup signing failed\n");
-            goto cleanup_hpc;
+            goto cleanup;
         }
+    }
+
+    hpc_ret = PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_hpc_init();
+    if (hpc_ret != 0) {
+        fprintf(
+            stderr,
+            "[error] perf_event_open group failed: %d (%s)\n",
+            hpc_ret,
+            strerror(-hpc_ret));
+        fprintf(
+            stderr,
+            "[hint] check perf_event_paranoid, event support, "
+            "and P-core selection\n");
+        goto cleanup;
     }
 
     out = fopen(output_path, "w");
@@ -604,7 +551,6 @@ int main(int argc, char **argv)
                 : -1;
 
         oracle_success = semantic_oracle(
-            family,
             mode,
             sign_ret,
             verify_ret,
@@ -624,39 +570,36 @@ int main(int argc, char **argv)
 
         fprintf(
             out,
-            "%lu,%s,%s,%d,%lu,"
-            "%u,%u,%u,%u,%u,%u,"
-            "%d,%zu,%d,%d,"
+            "%lu,%s,%s,%u,%s,0x%08lx,"
+            "%u,%d,%zu,%d,%d,"
+            "0x%016" PRIx64 ",0x%016" PRIx64 ","
+            "0x%016" PRIx64 ","
             "%" PRId32 ",%" PRId32 ","
-            "%u,%u,%u,"
-            "%u,%u,"
-            "%u,%u,%u,"
+            "%u,%u,%u,%u,%u,%u,%u,"
             "%d,%d,%d,%d,"
             "%" PRIu64 ",%" PRIu64 ","
             "%" PRIu64 ",%" PRIu64 ",%.6f,"
             "0x%08" PRIx32 ",%" PRId32,
             i,
-            PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_family_name(),
+            FIDDLE_FAMILY_NAME,
             PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_mode_name(),
             mode == FIDDLE_MODE_ATTACK,
+            PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_counter_set_name(),
             message_domain,
             audit.target_vec,
-            audit.target_twiddle_index,
-            audit.used_twiddle_index,
-            audit.pointer_offset,
-            audit.target_len,
-            audit.target_start,
             sign_ret,
             siglen,
             verify_ret,
             oracle_success,
-            audit.correct_twiddle,
-            audit.used_twiddle,
-            audit.pointer_corrupted,
-            audit.twiddle_load_skipped,
-            audit.loaded_value_corrupted,
-            audit.target_group_mismatches,
-            audit.final_ntt_mismatches,
+            audit.correct_pointer,
+            audit.loaded_pointer,
+            audit.zero_table_pointer,
+            audit.correct_first_twiddle,
+            audit.loaded_first_twiddle,
+            audit.twiddles_consumed,
+            audit.zero_table_verified,
+            audit.pointer_redirected,
+            audit.target_ntt_mismatches,
             audit.fault_requested,
             audit.fault_applied,
             audit.semantic_valid,
@@ -673,7 +616,8 @@ int main(int argc, char **argv)
             hpc.error_code);
 
         for (event = 0;
-             event < FIDDLE_TWIDDLE_HPC_EVENT_COUNT;
+             event <
+                 PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_event_count();
              ++event) {
             fprintf(out, ",%" PRIu64, hpc.values[event]);
         }
@@ -688,14 +632,13 @@ int main(int argc, char **argv)
     out = NULL;
 
     printf(
-        "[done] family=%s mode=%s samples=%lu "
-        "target=(%lu,%lu) pointer_offset=%lu output=%s\n",
-        PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_family_name(),
+        "[done] family=%s mode=%s counter_set=%s samples=%lu "
+        "target_vec=%lu output=%s\n",
+        FIDDLE_FAMILY_NAME,
         PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_mode_name(),
+        PQCLEAN_DILITHIUM2_CLEAN_fiddle_twiddle_counter_set_name(),
         samples,
         target_vec,
-        target_twiddle_index,
-        pointer_offset,
         output_path);
     ret = EXIT_SUCCESS;
 

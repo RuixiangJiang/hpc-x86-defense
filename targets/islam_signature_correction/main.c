@@ -412,7 +412,9 @@ static void write_csv_header(FILE *out)
         "valid_mask,error_code",
         out);
 
-    for (i = 0; i < SIGNCORR_HPC_EVENT_COUNT; ++i) {
+    for (i = 0;
+         i < PQCLEAN_DILITHIUM2_CLEAN_signcorr_event_count();
+         ++i) {
         fprintf(
             out,
             ",%s",
@@ -443,6 +445,7 @@ int main(int argc, char **argv)
     unsigned long max_attempts = 128;
     unsigned long full_search_first = 0;
     unsigned long search_bits = 3;
+    unsigned long counter_set = 0;
     int create_key = 0;
 
     FILE *out = NULL;
@@ -487,6 +490,10 @@ int main(int argc, char **argv)
                    i + 1 < (unsigned long)argc) {
             search_bits =
                 parse_ulong(argv[++i], "search bits");
+        } else if (strcmp(argv[i], "--counter-set") == 0 &&
+                   i + 1 < (unsigned long)argc) {
+            counter_set =
+                parse_ulong(argv[++i], "counter set");
         } else if (strcmp(argv[i], "--output") == 0 &&
                    i + 1 < (unsigned long)argc) {
             output_path = argv[++i];
@@ -503,7 +510,8 @@ int main(int argc, char **argv)
                 "[--fault-enable 0|1] [--target-vec V] "
                 "[--target-coeff C] [--bit-index B] "
                 "[--message-domain D] [--max-attempts N] "
-                "[--full-search-first] [--search-bits B]\n",
+                "[--full-search-first] [--search-bits B] "
+                "[--counter-set 0|1|2]\n",
                 argv[0]);
             goto cleanup;
         }
@@ -525,7 +533,8 @@ int main(int argc, char **argv)
         target_coeff >= (unsigned long)N ||
         bit_index >= 32u ||
         search_bits == 0u ||
-        search_bits > 31u) {
+        search_bits > 31u ||
+        counter_set > 2u) {
         fprintf(stderr, "[error] invalid fault/search configuration\n");
         goto cleanup;
     }
@@ -569,6 +578,13 @@ int main(int argc, char **argv)
         (unsigned int)target_vec,
         (unsigned int)target_coeff,
         (unsigned int)bit_index);
+
+    if (PQCLEAN_DILITHIUM2_CLEAN_signcorr_set_counter_set(
+            (unsigned int)counter_set) != 0) {
+        fprintf(stderr, "[error] invalid or busy counter set\n");
+        goto cleanup;
+    }
+
     PQCLEAN_DILITHIUM2_CLEAN_signcorr_set_measurement_enabled(0);
 
     for (i = 0; i < warmup; ++i) {
@@ -804,7 +820,8 @@ int main(int argc, char **argv)
             snap.error_code);
 
         for (event_index = 0;
-             event_index < SIGNCORR_HPC_EVENT_COUNT;
+             event_index <
+                 PQCLEAN_DILITHIUM2_CLEAN_signcorr_event_count();
              ++event_index) {
             fprintf(
                 out,

@@ -70,37 +70,28 @@ audit_line="$(
   exit 1
 }
 
+DISASM="$(objdump -dr --no-show-raw-insn "$BIN")"
 FUNCTION="$(
-  objdump -dr --no-show-raw-insn \
-    --disassemble=PQCLEAN_DILITHIUM2_CLEAN_fiddle_ntt_from_pointer_literal \
-    "$BIN"
+  awk '
+    /<PQCLEAN_DILITHIUM2_CLEAN_fiddle_ntt_from_pointer_literal>:/ {
+      found = 1
+    }
+    found { print }
+    found && NF == 0 { exit }
+  ' <<<"$DISASM"
 )"
 
-grep -q \
-  '<PQCLEAN_DILITHIUM2_CLEAN_fiddle_ntt_from_pointer_literal>:' \
-  <<<"$FUNCTION" || {
+[[ -n "$FUNCTION" ]] || {
   echo "[error] pointer-literal NTT function absent from binary" >&2
   exit 1
 }
 
-# Search the complete symbol-specific disassembly. The previous awk
-# extractor stopped at the first blank line after the function prologue.
-grep -Eq \
-  'fiddle_active_twiddle_pointer_literal|fiddle_twiddle_pointer_load_site' \
-  <<<"$FUNCTION" || {
-  echo "[error] disassembly does not reference the active pointer literal" >&2
+grep -q 'fiddle_active_twiddle_pointer_literal' <<<"$FUNCTION" || {
+  echo "[error] disassembly does not reference active pointer literal" >&2
   echo "$FUNCTION" >&2
   exit 1
 }
 
-# Require an actual RIP-relative memory load in the target function.
-grep -Eq \
-  'mov[a-z]*[[:space:]]+.*\(%rip\)' \
-  <<<"$FUNCTION" || {
-  echo "[error] no RIP-relative pointer load found in target function" >&2
-  echo "$FUNCTION" >&2
-  exit 1
-}
 # Baseline and attack semantics use the same binary and same target function.
 "$BIN" --mode baseline --target-vec "$FIDDLE_TARGET_VEC" --self-test
 "$BIN" --mode attack --target-vec "$FIDDLE_TARGET_VEC" --self-test

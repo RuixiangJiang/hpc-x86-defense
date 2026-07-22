@@ -10,7 +10,8 @@ ROU_STORE_CONFIG ?= 0x82d0
 ROU_KYBER_SRCS := $(ROU_KYBER_DIR)/cbd.c $(ROU_KYBER_DIR)/indcpa.c $(ROU_KYBER_DIR)/kem.c \
 	$(ROU_KYBER_DIR)/ntt.c $(ROU_KYBER_DIR)/poly.c $(ROU_KYBER_DIR)/polyvec.c \
 	$(ROU_KYBER_DIR)/reduce.c $(ROU_KYBER_DIR)/symmetric-shake.c $(ROU_KYBER_DIR)/verify.c \
-	$(ROU_KYBER_DIR)/roulette_masked_invntt_x86.c
+	$(ROU_KYBER_DIR)/roulette_masked_invntt_x86.c \
+	$(ROU_KYBER_DIR)/roulette_targets_x86_64.S
 ROU_COMMON_SRCS := $(ROU_COMMON_DIR)/fips202.c $(ROU_COMMON_DIR)/randombytes.c
 ROU_SRCS := $(ROU_TARGET_DIR)/main.c $(ROU_KYBER_SRCS) $(ROU_COMMON_SRCS)
 ROU_CPPFLAGS := -D_GNU_SOURCE -DPQCLEAN_KYBER768_ROULETTE_X86=1 \

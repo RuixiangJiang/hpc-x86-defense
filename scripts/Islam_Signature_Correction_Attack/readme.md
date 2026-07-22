@@ -1252,3 +1252,73 @@ Final interpretation:
 > selected victim-side architectural hardware counters do not provide a
 > reliable detection signal for a single-bit data corruption that already
 > exists before the constant-time NTT begins.
+
+---
+
+<!-- BEGIN SIGNCORR CACHE MEMORY PMU -->
+
+## Cache and memory PMU passes
+
+The original structural pass records:
+
+```text
+cycles
+instructions
+branches
+branch-misses
+retired-loads
+retired-stores
+```
+
+It does not record cache references, cache misses, L1D behavior, LLC behavior,
+or DTLB behavior. Two additional runtime counter sets collect these events
+without changing the victim PMU window:
+
+```text
+counter set 1:
+    cache-references
+    cache-misses
+    l1d-read-accesses
+    l1d-read-misses
+
+counter set 2:
+    llc-read-accesses
+    llc-read-misses
+    dtlb-read-accesses
+    dtlb-read-misses
+```
+
+Each set contains at most four programmable events so it can be scheduled on a
+typical Intel P-core without combining all cache events into one oversized PMU
+group. Baseline and attack use the same executable, key, target coefficient,
+bit position, and message domain within each pass.
+
+Run:
+
+```bash
+scripts/Islam_Signature_Correction_Attack/run_cache_memory.sh full
+```
+
+Analyze existing cache/memory CSV files without recollecting:
+
+```bash
+scripts/Islam_Signature_Correction_Attack/run_cache_memory.sh analyze
+```
+
+Outputs:
+
+```text
+results/Islam_Signature_Correction_Attack/
+├── cache_l1d_baseline.csv
+├── cache_l1d_attack.csv
+├── cache_llc_dtlb_baseline.csv
+├── cache_llc_dtlb_attack.csv
+├── cache_memory_report.txt
+├── cache_memory_summary.csv
+└── cache_memory_summary.json
+```
+
+The report presents unnormalized baseline and attack modes, means, medians,
+5th/95th percentiles, ranges, and attack-minus-baseline differences.
+
+<!-- END SIGNCORR CACHE MEMORY PMU -->

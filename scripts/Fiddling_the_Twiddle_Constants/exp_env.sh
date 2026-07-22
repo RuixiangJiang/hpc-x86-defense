@@ -9,17 +9,17 @@ export FIDDLE_RESULTS_ROOT="${FIDDLE_RESULTS_ROOT:-$FIDDLE_REPO_ROOT/results/Fid
 
 export FIDDLE_WARMUP="${FIDDLE_WARMUP:-10}"
 export FIDDLE_TARGET_VEC="${FIDDLE_TARGET_VEC:-0}"
-export FIDDLE_TARGET_INDEX="${FIDDLE_TARGET_INDEX:-8}"
-export FIDDLE_POINTER_OFFSET="${FIDDLE_POINTER_OFFSET:-64}"
+export FIDDLE_SESSIONS="${FIDDLE_SESSIONS:-4}"
+export FIDDLE_SAMPLES="${FIDDLE_SAMPLES:-500}"
 export FIDDLE_MIN_RUNNING="${FIDDLE_MIN_RUNNING:-95.0}"
-export FIDDLE_BATCH_SIZE="${FIDDLE_BATCH_SIZE:-10}"
 export FIDDLE_TARGET_FPR="${FIDDLE_TARGET_FPR:-0.01}"
 
 if [[ -z "${FIDDLE_CPU_CORE:-}" ]]; then
     export FIDDLE_CPU_CORE="${HPC_CPU:-0}"
 fi
 
-export FIDDLE_FAMILIES=(
-    corrupt-twiddle-pointer
-    corrupt-loaded-twiddle-value
+export FIDDLE_COUNTER_SETS=(
+    structural
+    cache-l1d
+    cache-llc-dtlb
 )
