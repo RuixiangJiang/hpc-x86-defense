@@ -578,3 +578,474 @@ against this attack. It is:
 > post-fault window exposes a reproducible batch-level signal, but that signal
 > is too weak to achieve a high true-positive rate under a low false-positive
 > operating point.
+
+<!-- BEGIN HPC-X86 CARRY YOUR FAULT RAW BEHAVIOR -->
+## Raw baseline-versus-attack PMU behavior
+
+The detector analysis reports feature selection, FPR, TPR, and AUC. The
+experiment now also prints the absolute baseline-versus-attack behavior for
+every available event in every selected PMU pass.
+
+For each window and event, the raw report includes:
+
+```text
+baseline mode
+attack mode
+mode difference
+baseline median and p05-p95
+attack median and p05-p95
+median difference
+paired-delta median and p05-p95
+development/test median differences
+positive/zero/negative temporal-block median directions
+```
+
+The comparison uses only naturally paired samples:
+
+```text
+baseline_attack_development.csv <-> attack_development.csv
+baseline_attack_test.csv        <-> attack_test.csv
+```
+
+It does not train a detector or choose a threshold.
+
+The raw reports are generated automatically by:
+
+```bash
+scripts/Carry_Your_Fault/run.sh
+scripts/Carry_Your_Fault/run.sh analyze
+```
+
+To regenerate only raw behavior reports from existing CSV files:
+
+```bash
+scripts/Carry_Your_Fault/run.sh raw
+```
+
+Outputs:
+
+```text
+results/Carry_Your_Fault/two_window/
+├── exact-a2b/
+│   ├── raw_behavior_report.txt
+│   ├── raw_behavior_console.txt
+│   ├── raw_behavior_summary.csv
+│   └── raw_behavior_summary.json
+└── post-fault/
+    ├── raw_behavior_report.txt
+    ├── raw_behavior_console.txt
+    ├── raw_behavior_summary.csv
+    └── raw_behavior_summary.json
+```
+
+Unavailable model-specific PMU events are listed explicitly instead of being
+silently interpreted as zero.
+<!-- END HPC-X86 CARRY YOUR FAULT RAW BEHAVIOR -->
+
+<!-- BEGIN HPC-X86 CARRY YOUR FAULT TWO-WINDOW RESULTS -->
+## Exact-A2B and post-fault raw PMU results
+
+The two windows observe different stages of the same stuck-at-1 fault:
+
+```text
+fault establishment
+    |
+    v
+arithmetic-to-Boolean conversion
+    |
+    v
+masked comparison and comparison-result reduction
+```
+
+`exact-a2b` measures only the arithmetic-to-Boolean conversion. `post-fault`
+performs A2B before PMU enable and measures only the later masked-comparison
+propagation. Baseline and attack use the same measured instruction stream in
+each window; only the input data differ.
+
+The tables below summarize the paired development and independent-test samples
+from the current raw-behavior run. Fault establishment, semantic checks, and
+CSV generation are outside both PMU windows.
+
+### Exact-A2B window
+
+#### Measured region
+
+```text
+construct paired arithmetic shares                    outside PMU
+force ga1s bit 11 to one in the attack build          outside PMU
+PMU enable
+    cyf_a2b_target(target_share, second_share)
+PMU disable
+post-A2B semantic and propagation checks              outside PMU
+```
+
+This window tests whether the bit-11 data fault is directly observable while
+the affected arithmetic share is converted to Boolean sharing.
+
+#### Structural behavior
+
+| Event | Baseline median | Attack median | Median delta |
+|---|---:|---:|---:|
+| cycles | 197 | 197 | 0 |
+| instructions | 89 | 89 | 0 |
+| branches | 10 | 10 | 0 |
+| branch misses | 1 | 1 | 0 |
+| retired loads | 21 | 21 | 0 |
+| retired stores | 16 | 16 | 0 |
+
+The instruction, branch, load, and store counts were exact invariants. All 20
+temporal blocks had zero median difference for these structural events. The
+cycle distributions overlapped strongly:
+
+```text
+baseline cycles: 197 [163,224]
+attack cycles:   197 [162,225]
+paired delta:      0 [-37,41.05]
+```
+
+Development and test cycle shifts had opposite signs:
+
+```text
+development median delta: -5
+test median delta:        +2
+```
+
+Therefore, cycles did not provide a stable attack feature.
+
+#### Cache and memory behavior
+
+| Event | Baseline median | Attack median | Median delta |
+|---|---:|---:|---:|
+| L1D read misses | 0 | 0 | 0 |
+| L1I read misses | 15 | 14 | -1 |
+| LLC read misses | 0 | 0 | 0 |
+| DTLB read misses | 0 | 0 | 0 |
+| cache references | 0 | 0 | 0 |
+| cache misses | 0 | 0 | 0 |
+| L1D replacements | 1 | 1 | 0 |
+| L2 request misses | 0 | 0 | 0 |
+
+The apparent L1I shift was small and temporally inconsistent:
+
+```text
+paired L1I delta: median -1, p05 -19, p95 +10
+block directions: 7 positive, 3 zero, 10 negative
+```
+
+L1D replacements also had no useful separation:
+
+```text
+baseline: 1 [0,4]
+attack:   1 [0,4]
+paired delta median: 0
+block directions: 1 positive, 16 zero, 3 negative
+```
+
+The evaluated host did not expose usable model-specific load-hit,
+load-miss-latency, or long-latency-load events in this pass. These unavailable
+events were reported explicitly rather than interpreted as zero.
+
+#### Stall and recovery behavior
+
+The largest raw median differences appeared in cycles and
+`stalls_mem_any`, but the distributions and temporal directions were not
+stable:
+
+```text
+stalls pass:
+    cycles:
+        baseline median 196 [162,221]
+        attack median   183 [161,218]
+        median delta    -13
+        block directions 7 positive / 3 zero / 10 negative
+
+    stalls_mem_any:
+        baseline median 136 [102,155]
+        attack median   116 [100,152]
+        median delta    -20
+        paired delta median -10 [-42,35]
+        block directions 8 positive / 1 zero / 11 negative
+```
+
+Recovery-related events remained unchanged:
+
+```text
+machine clears:           0 vs 0
+memory-ordering clears:   0 vs 0
+recovery cycles median:  10 vs 10
+```
+
+#### Exact-A2B conclusion
+
+The exact-A2B window produced no stable baseline-versus-attack PMU feature.
+
+The fault changed the A2B input value while preserving:
+
+```text
+89 retired instructions
+10 branches
+21 retired loads
+16 retired stores
+the same measured function and control flow
+```
+
+The cache, stall, and cycle shifts either remained zero, had strongly
+overlapping distributions, or changed direction across development, test, and
+temporal blocks. This result supports treating `exact-a2b` as a negative-control
+window for direct single-execution detection.
+
+#### Exact-A2B batch-analysis status
+
+For batch size 100, the current run produced:
+
+```text
+status: PAIR_ORDER_GENERALIZATION_FAILURE
+FPR:    8/100 = 8%
+TPR:    1/10  = 10%
+AUC:    0.645
+```
+
+The AB and BA order strata disagreed in effect direction:
+
+```text
+AB: effect +0.01, AUC 0.82
+BA: effect -0.01, AUC 0.50
+```
+
+Batch sizes 500, 1000, and 5000 did not contain the required minimum number of
+non-overlapping batches. These results are diagnostic and are not reportable
+detector operating points.
+
+---
+
+### Post-fault window
+
+#### Measured region
+
+```text
+construct paired arithmetic shares                    outside PMU
+force ga1s bit 11 to one in the attack build          outside PMU
+cyf_a2b_target(...)                                   outside PMU
+prepare masked prefixes and secand masks              outside PMU
+PMU enable
+    extract the propagated Boolean-share bit
+    construct masked comparison words
+    execute first-order secand operations
+    unmask the comparison result
+    reduce it to the comparison-failure bit
+PMU disable
+semantic oracle                                       outside PMU
+```
+
+This window tests whether the same stuck-at-1 fault becomes more observable
+after A2B, while it propagates through masked comparison.
+
+#### Structural behavior
+
+| Event | Baseline median | Attack median | Median delta |
+|---|---:|---:|---:|
+| cycles | 202 | 186 | -16 |
+| instructions | 170 | 170 | 0 |
+| branches | 10 | 10 | 0 |
+| branch misses | 1 | 1 | 0 |
+| retired loads | 39 | 39 | 0 |
+| retired stores | 34 | 34 | 0 |
+
+The structural instruction and memory-operation counts remained exact
+invariants across all temporal blocks:
+
+```text
+instructions:   170 vs 170
+branches:        10 vs 10
+retired loads:   39 vs 39
+retired stores:  34 vs 34
+```
+
+The pooled structural cycle medians differed, but the paired distribution did
+not support a stable direction:
+
+```text
+baseline cycles: 202 [169,222]
+attack cycles:   186 [168,216]
+paired delta:     -2 [-38,33]
+block directions: 7 positive / 2 zero / 11 negative
+```
+
+#### Cache and memory behavior
+
+| Event | Baseline median | Attack median | Median delta |
+|---|---:|---:|---:|
+| L1D read misses | 0 | 0 | 0 |
+| L1I read misses | 23 | 22 | -1 |
+| LLC read misses | 0 | 0 | 0 |
+| DTLB read misses | 0 | 0 | 0 |
+| cache references | 0 | 0 | 0 |
+| cache misses | 0 | 0 | 0 |
+| L1D replacements | 0 | 0 | 0 |
+| L2 request misses | 0 | 0 | 0 |
+
+L1D misses were almost always zero:
+
+```text
+baseline: 0 [0,0]
+attack:   0 [0,1]
+block directions: 1 positive / 19 zero / 0 negative
+```
+
+L1I misses showed a small negative median shift, but the temporal directions
+were mixed:
+
+```text
+paired delta median: -1
+paired p05-p95:      -7 to +6
+block directions:    7 positive / 1 zero / 12 negative
+```
+
+The direct cache-reference and cache-miss counters were zero in this particular
+raw run. The evaluated host again did not expose the model-specific load-hit
+and load-miss-latency events.
+
+#### Stall behavior
+
+The post-fault window showed its clearest raw differences in the stalls pass:
+
+| Event | Baseline median | Attack median | Median delta |
+|---|---:|---:|---:|
+| cycles | 180 | 202 | +22 |
+| `stalls_l1d_miss` | 0 | 0 | 0 |
+| `stalls_mem_any` | 103 | 122 | +19 |
+
+Development and test medians agreed on the direction:
+
+```text
+cycles:
+    development delta +24
+    test delta         +9.5
+
+stalls_mem_any:
+    development delta +18.5
+    test delta         +19
+```
+
+The temporal-block result was stronger than in `exact-a2b`, but still not
+universal:
+
+```text
+cycles block directions:
+    13 positive / 1 zero / 6 negative
+
+stalls_mem_any block directions:
+    15 positive / 0 zero / 5 negative
+```
+
+The paired distributions still overlapped substantially:
+
+```text
+cycles paired delta:
+    median +10
+    p05-p95 -29 to +42
+
+stalls_mem_any paired delta:
+    median +9
+    p05-p95 -25.05 to +36
+```
+
+Thus, the post-fault stall shift is a weak statistical effect rather than a
+deterministic per-execution detector.
+
+#### Recovery behavior
+
+```text
+machine clears:          0 vs 0
+memory-ordering clears:  0 vs 0
+recovery cycles median: 10 vs 10
+```
+
+The recovery pass showed a +22 pooled cycle median difference, but development
+and test disagreed in direction:
+
+```text
+development cycle delta: -22
+test cycle delta:        +25
+```
+
+Therefore, the recovery-pass cycle shift was not stable.
+
+#### Post-fault conclusion
+
+`post-fault` was more observable than `exact-a2b`, especially in the
+memory-stall pass:
+
+```text
+stalls_mem_any median:
+    baseline 103
+    attack   122
+    delta    +19
+```
+
+However, the paired p05-p95 ranges crossed zero, 5 of 20 temporal blocks had
+the opposite direction, and the batch order-generalization guard failed.
+Consequently, the current run does not establish a reliable single-trace or
+batch detector.
+
+The appropriate interpretation is:
+
+> Carry propagation beyond A2B can create a small PMU shift in later masked
+> comparison, but benign variance, temporal drift, and collection-order effects
+> remain comparable to or larger than the signal.
+
+#### Post-fault batch-analysis status
+
+For batch size 100, the current run produced:
+
+```text
+status: PAIR_ORDER_GENERALIZATION_FAILURE
+FPR:    16/100 = 16%
+TPR:     9/10  = 90%
+AUC:     0.925
+```
+
+Although both order strata had positive effects, the required order guard
+still failed:
+
+```text
+AB: effect +0.03, AUC 0.86
+BA: effect +0.04, AUC 1.00
+```
+
+The high TPR must not be reported as a detector result because the FPR was
+16%, the order-generalization criterion failed, and only ten attack batches
+were available. Batch sizes 500, 1000, and 5000 were not evaluated because
+each dataset contained fewer than five non-overlapping batches.
+
+---
+
+### Two-window comparison
+
+| Property | Exact-A2B | Post-fault |
+|---|---|---|
+| PMU region | A2B conversion | masked comparison after A2B |
+| Instructions | 89 vs 89 | 170 vs 170 |
+| Retired loads | 21 vs 21 | 39 vs 39 |
+| Retired stores | 16 vs 16 | 34 vs 34 |
+| Direct cache separation | none | none |
+| Most visible raw effect | inconsistent cycle/memory-stall shifts | positive memory-stall shift |
+| Stable single-trace feature | no | no |
+| Current batch result | order-generalization failure | order-generalization failure |
+
+The two-window result reinforces the main conclusion of this experiment:
+additional cache and memory-related counters did not turn the stuck-at-1 data
+fault into a reliable PMU detector. The immediate A2B window was effectively
+indistinguishable, while the downstream window exposed only a weak,
+non-deterministic shift.
+
+These current raw and small-batch diagnostics do not replace the repository’s
+larger independently replicated result. The final reportable replicated
+operating point remains the separately calibrated 500-execution batch result:
+
+```text
+FPR: 1.0%
+TPR: 18.6%
+median test AUC: 0.81215
+```
+<!-- END HPC-X86 CARRY YOUR FAULT TWO-WINDOW RESULTS -->

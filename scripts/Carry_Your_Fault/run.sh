@@ -17,6 +17,7 @@ usage:
   ./run.sh exact           # exact A2B negative-control window only
   ./run.sh post            # post-fault propagation window only
   ./run.sh analyze         # re-run all analyses on existing CSV files
+  ./run.sh raw             # print raw baseline/attack PMU behavior only
   ./run.sh batch           # re-run cache-reference batch analysis only
   ./run.sh replicate-smoke # small end-to-end test of replicate path
   ./run.sh replicate-batch # reset and collect independent cache-detail runs
@@ -239,6 +240,14 @@ collect_pass() {
     rmdir "$block_root"
 }
 
+
+analyze_raw_window() {
+    local root="$1"
+    local window="$2"
+    local window_root="$root/$window"
+    python3 "$SCRIPT_DIR/analyze_raw_behavior.py"         --root "$window_root"         --window "$window"         --passes "${SELECTED_PASSES[@]}"         --minimum-running "$CYF_MIN_RUNNING"         --text-output "$window_root/raw_behavior_report.txt"         --csv-output "$window_root/raw_behavior_summary.csv"         --json-output "$window_root/raw_behavior_summary.json" |         tee "$window_root/raw_behavior_console.txt"
+}
+
 analyze_single_window() {
     local root="$1"
     local window="$2"
@@ -351,6 +360,7 @@ analyze_windows() {
     local windows=("$@")
     local window
     for window in "${windows[@]}"; do
+        analyze_raw_window "$root" "$window"
         analyze_single_window "$root" "$window"
         analyze_batch_window "$root" "$window"
     done
@@ -603,6 +613,12 @@ case "$ACTION" in
     analyze)
         select_configuration
         analyze_windows "$CYF_RESULTS_DIR" "${SELECTED_WINDOWS[@]}"
+        ;;
+    raw)
+        select_configuration
+        for window in "${SELECTED_WINDOWS[@]}"; do
+            analyze_raw_window "$CYF_RESULTS_DIR" "$window"
+        done
         ;;
     batch)
         select_configuration
