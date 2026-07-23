@@ -1,387 +1,743 @@
 # Valsaraj et al., “When Randomness Isn’t Random”
 
-This directory implements a controlled x86-64 software simulation of three
-data-oriented seed faults described by Valsaraj et al. and evaluates whether
-hardware performance counters (HPCs) can detect them.
+This experiment implements three instruction-level architectural fault models
+derived from Valsaraj et al., *“When Randomness Isn’t Random.”*
 
-The experiment is deliberately built around exactly one ELF executable:
-
-```text
-build/bin/when_randomness_isnt_random/wrir_single
-```
-
-Baseline executions, all three attacks, and all 42 PMU counter sets invoke
-this same file. This removes attack-specific compilation, code placement, and
-binary-identity effects from the detector evaluation.
-
-## Simulated fault semantics
-
-The experiment evaluates the following data-oriented faults.
-
-| Family | Intended computation | Faulty computation |
-|---|---|---|
-| `skip-seed-pointer-offset` | sampler receives `material + 32` | sampler receives base pointer `material` |
-| `wrong-domain-index` | sampler receives intended nonce 4 | sampler receives wrong nonce 0 |
-| `redirect-seed-pointer` | sampler receives a per-sample seed | sampler receives a fixed redirected buffer |
-
-In every case, SHAKE256 and ETA=2 rejection sampling execute normally. The
-fault changes only the seed pointer or nonce supplied to the sampler; it does
-not skip SHAKE, skip sampling, insert an attack branch into the measured
-function, or alter the sampler implementation.
-
-The exact runtime arguments are:
-
-| Family | Mode | Used seed | Used nonce |
-|---|---|---|---:|
-| `skip-seed-pointer-offset` | baseline | `material + 32` | 0 |
-| `skip-seed-pointer-offset` | attack | `material` | 0 |
-| `wrong-domain-index` | baseline | `material + 32` | 4 |
-| `wrong-domain-index` | attack | `material + 32` | 0 |
-| `redirect-seed-pointer` | baseline | per-sample `material + 32` | 0 |
-| `redirect-seed-pointer` | attack | fixed redirect buffer | 0 |
-
-The default redirect buffer is derived from `WRIR_REDIRECT_BYTE=0xa5` and is
-identical across attacked samples.
-
-## Single-executable control
-
-The executable accepts the semantic family, baseline/attack mode, and PMU
-counter set at runtime. All mode dispatch and argument preparation finish
-before the PMU window begins.
-
-The 42 PMU passes are also selected at runtime with:
+The three regions are evaluated separately:
 
 ```text
---counter-set 1..42
+Region 1: noiseseed pointer initialization
+    skip one ADD instruction
+
+Region 2: coins memcpy
+    disturb one LDR-equivalent pointer load
+
+Region 3: sigma initialization
+    disturb one LDR-equivalent pointer load
 ```
 
-Each pass requests exactly `cycles + one target event`, avoiding PMU
-multiplexing. Runtime counter selection therefore does not produce a different
-binary for each event.
+The experiment runs on x86-64 and therefore cannot execute the original ARM
+instructions literally. It instead reproduces their architectural effects with
+small assembly targets whose static structure is verified after compilation.
 
-`verify_window.sh` enforces the control by checking that:
+---
 
-- exactly one executable exists in the experiment build directory;
-- all three baseline and three attack semantic self-tests pass;
-- all 42 runtime counter-set selectors are accepted;
-- `wrir_sampler_target` contains no mode dispatch or PMU-control code;
-- `wrir_measure_target` calls the sampler exactly once;
-- seed/nonce preparation, semantic oracles, tags, and CSV output remain outside
-  the measurement window.
+## 1. Fault models
 
-The executable path and SHA-256 digest are recorded in `binary_audit.tsv`.
+### 1.1 Region 1 — noiseseed initialization
 
-## PMU measurement boundary
+The intended pointer is initialized at an offset from the seed-material base.
 
-For each trace, the program performs the following steps:
+Baseline:
+
+```asm
+movq %rdi, %rax
+addq $32, %rax
+movq %rax, (%rsi)
+ret
+```
+
+Attack:
+
+```asm
+movq %rdi, %rax
+movq %rax, (%rsi)
+ret
+```
+
+The skipped instruction is exactly:
+
+```asm
+addq $32, %rax
+```
+
+Its semantic effect is:
 
 ```text
-outside window: build seed material and redirect buffer
-outside window: select family and baseline/attack mode
-outside window: freeze used_seed and used_nonce
+baseline:
+    noiseseed = seed_material + 32
 
-inside window:  enable/reset counters
-inside window:  SHAKE256(seed || nonce)
-inside window:  ETA=2 rejection sampling
-inside window:  disable/read counters
-
-outside window: compute trusted reference result
-outside window: validate fault semantics and write CSV
+attack:
+    noiseseed = seed_material
 ```
 
-Consequently, the measured region contains no `if (attack)` branch. Baseline
-and attacked executions enter the same sampler with different already-prepared
-arguments.
+The measured target differs by exactly one retired instruction.
 
-## Detector design
+---
 
-The default experiment uses process-separated calibration, development,
-threshold, validation, and final attack sessions. Each non-calibration session
-starts with an independent benign reference collection.
+### 1.2 Region 2 — coins memcpy
 
-For feature `j` in session `s`, a trace is normalized using only that
-session's benign reference executions:
+The caller places two pointers in a synthetic stack frame:
+
+```c
+frame.correct = legitimate_coins_pointer;
+frame.fault   = predictable_data_pointer;
+```
+
+Baseline LDR analogue:
+
+```asm
+movq 0(%rdi), %rax
+```
+
+Attack LDR analogue:
+
+```asm
+movq 8(%rdi), %rax
+```
+
+The fault changes only the effective address used by the pointer-load
+instruction. Both variants still execute one pointer load and the same 32-byte
+copy:
+
+```asm
+movdqu  0(%rax), %xmm0
+movdqu 16(%rax), %xmm1
+movdqu %xmm0,  0(%rsi)
+movdqu %xmm1, 16(%rsi)
+ret
+```
+
+The wrong pointer refers to deterministic bytes:
 
 ```text
-z_s,j(x) = (x_j - median(R_s,j)) /
-           max(1, robustScale(R_s,j), lambda * globalScale_j)
+fault_page[i] = 0xa5 XOR (13 * i)
 ```
 
-The default scale regularization is `lambda=0.50`.
-
-The primary sparse directional detector freezes at most eight non-redundant
-features using development-only oriented AUC, median effect, and cross-session
-direction consistency. Its primary batch detector is restricted to the
-predeclared mean or median directional score. Validation and final attack
-labels are not used for feature, direction, weight, batch-metric, or threshold
-selection.
-
-The primary threshold is calibrated independently in every threshold session.
-The final worst-session threshold is the most conservative session candidate:
+Therefore:
 
 ```text
-tau = max_s tau_s
+baseline:
+    load the correct coins pointer from the intended stack slot
+
+attack:
+    disturb the LDR effective address
+    load the adjacent wrong pointer
+    copy predictable bytes
 ```
 
-The default target FPR is 1% with a one-sided 95% confidence guard.
+The static instruction count is identical in baseline and attack.
 
-A structural-only detector using the available subset of instructions,
-branches, loads, and stores is reported as a comparison. It is not the primary
-defense.
+---
 
-### Operation-level unified detector
+### 1.3 Region 3 — sigma initialization
 
-The three families represent three sampler contexts within one protected
-operation. A family-specific model is applied only to its corresponding
-context. Its score is standardized using benign threshold sessions, and the
-operation score is:
+Region 3 uses the same pointer-load disturbance:
+
+```asm
+baseline:
+    movq 0(%rdi), %rax
+
+attack:
+    movq 8(%rdi), %rax
+```
+
+Both variants then execute the same 64-byte copy.
+
+The disturbed pointer refers to a page filled with a constant byte:
 
 ```text
-U = max(u_skip, u_domain, u_redirect)
+0x5c 0x5c 0x5c ... 0x5c
 ```
 
-The unified threshold is calibrated directly on complete benign operation
-tuples. It therefore provides one total false-positive budget for the whole
-operation. This unified detector, rather than three independently budgeted
-family detectors, is the recommended headline defense result.
+Therefore:
 
-## Installation and execution
+```text
+baseline:
+    load the legitimate sigma pointer
 
-Install from the repository root:
+attack:
+    disturb the LDR effective address
+    load a constant-filled sigma pointer
+```
+
+The instruction, load, and store counts remain unchanged.
+
+---
+
+## 2. Scope of the simulation
+
+These are software-level architectural fault-effect simulations.
+
+They reproduce:
+
+```text
+Region 1:
+    omission of one ADD instruction
+
+Regions 2 and 3:
+    one LDR-equivalent instruction remains present
+    but loads a pointer from the wrong stack slot
+```
+
+They do not reproduce:
+
+```text
+laser or EM pulse timing
+physical target location
+pulse energy
+fault-success probability
+neighboring-instruction corruption
+the exact ARM pipeline behavior
+```
+
+---
+
+## 3. PMU windows
+
+### Region 1
+
+```text
+prepare seed material                          outside PMU
+PMU enable
+    mov base -> register
+    baseline-only ADD 32
+    store noiseseed pointer
+PMU disable
+semantic audit and CSV output                  outside PMU
+```
+
+The PMU window contains only the pointer-initialization target.
+
+### Regions 2 and 3
+
+```text
+prepare correct and wrong source buffers       outside PMU
+prepare synthetic stack frame                  outside PMU
+prepare cache profile                          outside PMU
+PMU enable
+    load pointer from stack slot
+    copy 32 or 64 bytes from selected address
+PMU disable
+semantic audit and CSV output                  outside PMU
+```
+
+There is no runtime attack selector inside the PMU window.
+
+---
+
+## 4. Cache profiles
+
+Regions 2 and 3 are evaluated under two cache-residency profiles.
+
+### 4.1 `matched-hot`
+
+```text
+correct source: resident
+wrong source:   resident
+```
+
+This profile tests whether changing only the selected pointer address and loaded
+data value changes PMU behavior when both source lines have comparable cache
+residency.
+
+### 4.2 `redirect-cold`
+
+```text
+correct source: resident
+wrong source:   flushed before PMU enable
+```
+
+This profile models redirection to an address outside the normal hot working
+set.
+
+The cache preparation is performed before PMU enable. Baseline and attack use
+the same preparation procedure; only the LDR-selected pointer differs.
+
+---
+
+## 5. PMU events
+
+### Region 1
+
+```text
+cycles
+instructions
+```
+
+### Regions 2 and 3
+
+```text
+cycles
+instructions
+retired_loads
+retired_stores
+l1d_read_misses
+llc_read_misses
+dtlb_read_misses
+cache_references
+cache_misses
+```
+
+Each pass measures `cycles` plus one target event without multiplexing.
+
+---
+
+## 6. Collection design
+
+Default configuration:
+
+```text
+sessions:                 4
+baseline samples/session: 500
+attack samples/session:   500
+total baseline samples:   2,000
+total attack samples:     2,000
+warmup executions:        20
+minimum PMU running:      95%
+```
+
+Session order alternates:
+
+```text
+s00: baseline -> attack
+s01: attack   -> baseline
+s02: baseline -> attack
+s03: attack   -> baseline
+```
+
+This reduces fixed-order bias and makes per-session direction consistency
+visible.
+
+---
+
+# 7. Experimental results
+
+## 7.1 Region 1 — skipped ADD
+
+### Retired instructions
+
+| Statistic | Baseline | Attack | Delta |
+|---|---:|---:|---:|
+| mode | 39 | 38 | **-1** |
+| median | 39 | 38 | **-1** |
+| p05 | 39 | 38 | |
+| p95 | 39 | 38 | |
+
+Per-session median differences:
+
+```text
+s00: -1
+s01: -1
+s02: -1
+s03: -1
+```
+
+The result is exact and session-independent:
+
+```text
+attack retired instructions
+    =
+baseline retired instructions - 1
+```
+
+### Cycles
+
+```text
+baseline median: 139 [136,148]
+attack median:   128 [126,137]
+median delta:    -11
+```
+
+Per-session cycle deltas:
+
+```text
+s00: -13
+s01: -12
+s02: -11.5
+s03: -10
+```
+
+### Retired-instruction detector
+
+The frozen baseline instruction mode is:
+
+```text
+39
+```
+
+Results:
+
+```text
+false positives: 1 / 2,000
+FPR:             0.0500%
+
+true positives:  2,000 / 2,000
+measured TPR:    100.0000%
+```
+
+A measured TPR of 100% means that no false negative occurred in this
+2,000-sample dataset. It does not establish a population TPR of exactly 100%.
+
+### Region 1 conclusion
+
+The skipped-ADD fault is directly visible in retired instructions. The target
+omits exactly one instruction and the PMU reports an exact one-instruction
+difference in all sessions.
+
+---
+
+## 7.2 Region 2 — disturbed coins-pointer LDR
+
+### 7.2.1 `matched-hot`
+
+Both the legitimate and redirected source lines are resident.
+
+#### Structural behavior
+
+| Event | Baseline | Attack | Delta |
+|---|---:|---:|---:|
+| instructions | 41 | 41 | 0 |
+| retired loads | 11 | 11 | 0 |
+| retired stores | 10 | 10 | 0 |
+
+All structural per-session median differences were zero.
+
+#### Cache behavior
+
+| Event | Baseline median | Attack median | Delta |
+|---|---:|---:|---:|
+| L1D read misses | 0 | 0 | 0 |
+| LLC read misses | 0 | 0 | 0 |
+| DTLB read misses | 0 | 0 | 0 |
+| cache references | 0 | 0 | 0 |
+| cache misses | 0 | 0 | 0 |
+
+L1D distributions:
+
+```text
+baseline: 0 [0,1]
+attack:   0 [0,1]
+```
+
+Cycle medians across the separate passes differed by only approximately
+`-1` to `+5` cycles and changed direction across sessions.
+
+#### Matched-hot conclusion
+
+When both possible source lines have comparable cache residency, disturbing the
+pointer load is not directly visible in the evaluated structural or cache
+events.
+
+The PMU observes the same:
+
+```text
+instruction count
+load count
+store count
+cache-miss distribution
+```
+
+The fact that the redirected source contains predictable data does not itself
+create a cache signature.
+
+---
+
+### 7.2.2 `redirect-cold`
+
+The legitimate source remains resident while the redirected source line is
+flushed before PMU enable.
+
+#### Structural behavior
+
+| Event | Baseline | Attack | Delta |
+|---|---:|---:|---:|
+| instructions | 41 | 41 | 0 |
+| retired loads | 11 | 11 | 0 |
+| retired stores | 10 | 10 | 0 |
+
+The LDR disturbance preserves the dynamic instruction and memory-operation
+counts.
+
+#### L1D behavior
+
+| Statistic | Baseline | Attack | Delta |
+|---|---:|---:|---:|
+| mode | 0 | 1 | **+1** |
+| median | 0 | 1 | **+1** |
+| p05 | 0 | 0 | |
+| p95 | 1 | 2 | |
+
+Per-session L1D-miss median differences:
+
+```text
+s00: +1
+s01: +1
+s02: +1
+s03:  0
+```
+
+Cycles in the L1D-miss pass:
+
+```text
+baseline median: 144 [140,155]
+attack median:   150 [140,166]
+median delta:     +6
+```
+
+#### Other cache events
+
+| Event | Baseline median | Attack median | Delta |
+|---|---:|---:|---:|
+| LLC read misses | 0 | 0 | 0 |
+| DTLB read misses | 0 | 0 | 0 |
+| cache references | 0 | 0 | 0 |
+| cache misses | 0 | 0 | 0 |
+
+#### Redirect-cold conclusion
+
+The attack usually produces one additional L1D read miss because the wrong
+coins pointer selects a flushed 64-byte cache line.
+
+This signal is caused by different address residency, not by the predictable
+byte pattern itself.
+
+---
+
+## 7.3 Region 3 — disturbed sigma-pointer LDR
+
+### 7.3.1 `matched-hot`
+
+Both source lines are resident.
+
+#### Structural behavior
+
+| Event | Baseline | Attack | Delta |
+|---|---:|---:|---:|
+| instructions | 45 | 45 | 0 |
+| retired loads | 13 | 13 | 0 |
+| retired stores | 12 | 12 | 0 |
+
+All structural counts are exact invariants.
+
+#### Cache behavior
+
+| Event | Baseline median | Attack median | Delta |
+|---|---:|---:|---:|
+| L1D read misses | 0 | 0 | 0 |
+| LLC read misses | 0 | 0 | 0 |
+| DTLB read misses | 0 | 0 | 0 |
+| cache references | 0 | 0 | 0 |
+| cache misses | 0 | 0 | 0 |
+
+L1D distributions:
+
+```text
+baseline: 0 [0,1]
+attack:   0 [0,1]
+```
+
+The separate cycle passes showed small changes between approximately `-4` and
+`+6` cycles, with inconsistent directions.
+
+#### Matched-hot conclusion
+
+A constant-filled sigma value is not directly distinguishable when the correct
+and redirected addresses have comparable cache state.
+
+---
+
+### 7.3.2 `redirect-cold`
+
+The legitimate source remains resident while the wrong constant-filled source
+line is flushed.
+
+#### Structural behavior
+
+| Event | Baseline | Attack | Delta |
+|---|---:|---:|---:|
+| instructions | 45 | 45 | 0 |
+| retired loads | 13 | 13 | 0 |
+| retired stores | 12 | 12 | 0 |
+
+#### L1D behavior
+
+| Statistic | Baseline | Attack | Delta |
+|---|---:|---:|---:|
+| mode | 0 | 1 | **+1** |
+| median | 0 | 1 | **+1** |
+| p05 | 0 | 0 | |
+| p95 | 1 | 2 | |
+
+Per-session L1D-miss median differences:
+
+```text
+s00: +1
+s01: +1
+s02: +1
+s03: -1
+```
+
+Cycles in the L1D-miss pass:
+
+```text
+baseline median: 133 [129,145]
+attack median:   139 [129,152]
+median delta:     +6
+```
+
+The first three sessions support the expected additional miss, while the fourth
+session reverses direction. The L1D signal is therefore visible in the pooled
+statistics but not perfectly session-stable.
+
+#### Other cache events
+
+| Event | Baseline median | Attack median | Delta |
+|---|---:|---:|---:|
+| LLC read misses | 0 | 0 | 0 |
+| DTLB read misses | 0 | 0 | 0 |
+| cache references | 0 | 0 | 0 |
+| cache misses | 0 | 0 | 0 |
+
+#### Redirect-cold conclusion
+
+The redirected sigma pointer produces approximately one additional L1D miss
+when it selects a flushed source line. The effect is weaker than a deterministic
+instruction-count signature because one session showed the opposite median
+direction.
+
+---
+
+# 8. Cross-region comparison
+
+| Region | Fault effect | Instructions | Loads | Stores | Main observed signal |
+|---|---|---:|---:|---:|---|
+| 1 | skip `addq $32,%rax` | 39 -> 38 | not monitored | not monitored | exact `-1` retired instruction |
+| 2, matched-hot | disturbed coins-pointer LDR | 41 -> 41 | 11 -> 11 | 10 -> 10 | no stable cache difference |
+| 2, redirect-cold | disturbed coins-pointer LDR | 41 -> 41 | 11 -> 11 | 10 -> 10 | L1D misses `0 -> 1` |
+| 3, matched-hot | disturbed sigma-pointer LDR | 45 -> 45 | 13 -> 13 | 12 -> 12 | no stable cache difference |
+| 3, redirect-cold | disturbed sigma-pointer LDR | 45 -> 45 | 13 -> 13 | 12 -> 12 | L1D misses `0 -> 1` |
+
+---
+
+# 9. Interpretation
+
+The three experiments separate two fundamentally different fault classes.
+
+## Instruction skip
+
+Region 1 changes the dynamic instruction stream:
+
+```text
+one ADD instruction is absent
+```
+
+Retired instructions therefore provide a direct and deterministic signal.
+
+## Pointer-load disturbance
+
+Regions 2 and 3 preserve:
+
+```text
+the number of instructions
+the number of loads
+the number of stores
+the copy length
+the control flow
+```
+
+Only the loaded pointer value changes.
+
+When both possible addresses are hot, the evaluated PMU events cannot
+distinguish the legitimate and redirected loads. When the wrong source line is
+cold, the redirection usually creates one additional L1D miss.
+
+The central result is:
+
+> Detectability of the disturbed-LDR faults depends on the cache residency of
+> the incorrect address, not on whether the loaded bytes are predictable or
+> constant.
+
+The current results do not support the stronger claim that all incorrect
+pointer loads can be detected using cache counters.
+
+---
+
+# 10. Event-mapping caveats
+
+The generic events:
+
+```text
+cache_references
+cache_misses
+```
+
+returned zero throughout this run. These zeros should be treated as
+non-informative on the evaluated CPU/event mapping, not as proof that no cache
+activity occurred.
+
+Similarly:
+
+```text
+LLC read misses = 0
+DTLB read misses = 0
+```
+
+does not contradict the observed L1D misses.
+
+`clflush` removes a cache line but does not invalidate the corresponding TLB
+translation. The reloaded line may also be satisfied without producing a
+counted LLC miss under the host’s event mapping.
+
+The event with the clearest behavior in this experiment is:
+
+```text
+l1d_read_misses
+```
+
+---
+
+# 11. Commands
+
+Run from the repository root.
+
+Build and verify:
 
 ```bash
-bash /path/to/install_when_randomness_isnt_random_single_executable.sh .
+scripts/When_Randomness_Isnt_Random/run.sh verify
 ```
 
-Run the build, semantic checks, disassembly checks, and short PMU probe:
+Smoke test:
 
 ```bash
 scripts/When_Randomness_Isnt_Random/run.sh smoke
 ```
 
-Run the full worst-session evaluation:
+Full collection and analysis:
 
 ```bash
 scripts/When_Randomness_Isnt_Random/run.sh full
 ```
 
-To select a CPU manually:
+Reanalyze existing CSV files:
 
 ```bash
-WRIR_CPU_CORE=2 \
-  scripts/When_Randomness_Isnt_Random/run.sh full
+scripts/When_Randomness_Isnt_Random/run.sh analyze
 ```
 
-The default full sample plan is:
+---
+
+# 12. Output files
 
 ```text
-calibration:  4 sessions × 500 benign traces
-development: 4 sessions × (200 reference + 500 benign + 500 attack)
-threshold:   4 sessions × (200 reference + 5000 benign)
-validation:  3 sessions × (200 reference + 2000 benign)
-attack test: 2 sessions × (200 reference + 500 contextual benign + 500 attack)
+results/When_Randomness_Isnt_Random/instruction_faithful/
+├── region1/
+│   └── region-only/
+│       └── instructions/
+├── region2/
+│   ├── matched-hot/
+│   └── redirect-cold/
+├── region3/
+│   ├── matched-hot/
+│   └── redirect-cold/
+├── raw_behavior_report.txt
+├── raw_behavior_summary.csv
+└── raw_behavior_summary.json
 ```
 
-Batches contain 10 traces and never cross a session boundary.
+`raw_behavior_report.txt` contains the readable comparison.
 
-## Observed full-run results
+`raw_behavior_summary.csv` contains one flat row per region, profile, and event.
 
-The following results were obtained with `baseline=single`, the worst-session
-threshold policy, a nominal 1% target FPR, and batch size 10. All three fault
-semantics succeeded for `1000/1000` final attack traces.
-
-### Family-specific primary detectors
-
-These detectors are useful diagnostics, but each has its own FPR budget and
-should not be presented as the overall system result.
-
-| Attack | Single FPR | Single worst-session FPR | Single TPR | Single AUC | Batch FPR | Batch worst-session FPR | Batch TPR | Batch AUC |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `skip-seed-pointer-offset` | 0.4167% | 0.7000% | 1.0000% | 0.647331 | 0.0000% | 0.0000% | 5.0000% | 0.847317 |
-| `wrong-domain-index` | 0.5000% | 0.7500% | 1.8000% | 0.622406 | 0.0000% | 0.0000% | 9.0000% | 0.815150 |
-| `redirect-seed-pointer` | 0.7667% | 1.2500% | 75.1000% | 0.992179 | 0.1667% | 0.5000% | 100.0000% | 1.000000 |
-
-### Directly calibrated operation-level unified detector
-
-The unified detector used one shared FPR budget:
-
-| Granularity | Pooled validation FPR | Worst-session validation FPR |
-|---|---:|---:|
-| single trace | 0.7667% | 1.2500% |
-| batch of 10 | 0.1667% | 0.5000% |
-
-Its attack results were:
-
-| Attack | Unified single TPR | Unified single AUC | Unified batch TPR | Unified batch AUC |
-|---|---:|---:|---:|---:|
-| `skip-seed-pointer-offset` | 0.2000% | 0.589171 | 1.0000% | 0.730417 |
-| `wrong-domain-index` | 0.2000% | 0.552631 | 0.0000% | 0.702300 |
-| `redirect-seed-pointer` | 75.1000% | 0.990095 | 100.0000% | 1.000000 |
-
-### Structural-only batch comparison
-
-| Attack | Batch FPR | Batch TPR | Batch AUC |
-|---|---:|---:|---:|
-| `skip-seed-pointer-offset` | 0.3333% | 0.0000% | 0.495833 |
-| `wrong-domain-index` | 0.0000% | 0.0000% | 0.467583 |
-| `redirect-seed-pointer` | 0.3333% | 100.0000% | 0.998333 |
-
-## Interpretation
-
-### Skip the seed-pointer offset
-
-Skipping the offset changes which seed bytes are consumed, but the selected
-bytes still vary across samples and remain pseudorandom-looking. SHAKE and the
-sampler execute through the normal code path. The unified batch detector
-therefore achieves only 1% TPR, which is indistinguishable from a practically
-ineffective detector at the configured false-positive scale.
-
-### Use the wrong domain index
-
-Changing nonce 4 to nonce 0 changes the derived randomness without changing
-the SHAKE/sampler implementation. The resulting seed stream remains
-pseudorandom-looking. The unified batch detector produces 0% TPR. This is
-strong evidence that HPCs cannot validate the semantic correctness of a
-domain identifier when the underlying computation is unchanged.
-
-### Redirect the seed pointer
-
-The implemented redirect attack points every attacked trace to the same fixed
-buffer. Reusing this input produces a stable data-dependent rejection-sampling
-profile, including repeated loop, instruction, branch, and stall behavior.
-The batch detector identifies this repetition with 100% TPR at 0.1667% pooled
-FPR and 0.5% worst-session FPR.
-
-The detector is therefore recognizing repeated randomness and its resulting
-microarchitectural profile. It is not directly recognizing that a pointer was
-semantically unauthorized.
-
-## Security conclusion
-
-The single-executable experiment supports the following conclusion:
-
-> Performance counters do not reliably detect seed-pointer offset or domain-
-> index faults when the faulty input remains pseudorandom-looking and SHAKE
-> and sampling execute normally. They can reliably detect the tested fixed-
-> seed redirection because repeated seed reuse creates a stable batch-level
-> execution profile.
-
-The recommended headline numbers are the operation-level batch results:
-
-```text
-skip-seed-pointer-offset: 1% TPR
-wrong-domain-index:       0% TPR
-redirect-seed-pointer:  100% TPR
-pooled batch FPR:       0.1667%
-worst-session batch FPR: 0.5000%
-```
-
-The earlier high TPRs obtained with independently compiled or separately
-contextualized binaries should not be interpreted as detection of the seed
-semantics. The single-executable result removes that binary-identity factor
-and is the appropriate primary result.
-
-## Scope and limitations
-
-- The redirect result applies specifically to redirection to the fixed,
-  repeated buffer implemented here. It must not be generalized to every
-  attacker-controlled pointer.
-- If an attacker redirects the pointer to a different pseudorandom-looking
-  seed on every invocation, the resulting HPC profile may resemble the two
-  undetectable attacks.
-- A moderate AUC does not imply a deployable detector. The skip and domain
-  batch AUCs exceed 0.5, but their frozen-threshold TPRs remain too low.
-- Confidence guards constrain the threshold data; they do not guarantee that
-  a future validation session cannot exceed the nominal FPR. The redirect
-  single-trace detector reached 1.25% worst-session validation FPR, whereas
-  its batch detector remained at 0.5%.
-- PMU event availability is CPU dependent. Unsupported raw events are removed
-  by the coverage checks.
-- The reported values are one controlled full run on one host. Reboots,
-  microcode changes, kernel changes, frequency policy, background load, and
-  CPU selection can affect the exact rates.
-
-## Threshold-only ablation
-
-The old independent-versus-canonical binary comparison is intentionally
-removed. With binary identity fixed, `run_ablation.sh` performs only the
-remaining controlled threshold comparison:
-
-| Cell | Executable | Raw traces | Threshold policy |
-|---|---|---|---|
-| P | `wrir_single` | shared | pooled confidence guard |
-| W | `wrir_single` | shared | worst-session confidence guard |
-
-P and W analyze identical raw traces. The summarizer verifies that their
-selected features and batch metric are identical, so only threshold selection
-changes.
-
-Run a reduced end-to-end check:
-
-```bash
-scripts/When_Randomness_Isnt_Random/run_ablation.sh quick
-```
-
-Run the full threshold ablation:
-
-```bash
-scripts/When_Randomness_Isnt_Random/run_ablation.sh full
-```
-
-Its results are written to:
-
-```text
-results/When_Randomness_Isnt_Random/single_executable_threshold_ablation/
-```
-
-## Output files
-
-The main evaluation writes to:
-
-```text
-results/When_Randomness_Isnt_Random/single_executable/
-```
-
-Important files include:
-
-```text
-binary_audit.tsv
-collection_manifest.json
-microarch_events.json
-cpu_affinity.json
-combined_summary.txt
-combined_summary.csv
-combined_summary.json
-combined_union_detector.json
-<attack>/detector_model.json
-<attack>/fpr_tpr_report.txt
-<attack>/fpr_tpr_report.json
-<attack>/validation_decisions.json
-```
-
-The threshold ablation additionally produces:
-
-```text
-ablation_summary.md
-ablation_summary.csv
-ablation_summary.json
-ablation_effects.csv
-binary_audit.tsv
-```
-
-Do not mix CSVs or detector models from the older `directional_extended`,
-`session_calibrated`, `session_calibrated_operation`, or `ablation_2x2`
-result roots with this version.
-
-## Repository scope
-
-The installer replaces only:
-
-```text
-scripts/When_Randomness_Isnt_Random/
-targets/when_randomness_isnt_random/
-```
-
-It maintains one marked include block in the repository `Makefile`. It does
-not create a root README, root run wrapper, backup directory, or unrelated
-helper file.
+`raw_behavior_summary.json` contains complete descriptive statistics and
+per-session results.

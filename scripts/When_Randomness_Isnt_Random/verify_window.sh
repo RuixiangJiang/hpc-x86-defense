@@ -1,78 +1,76 @@
 #!/usr/bin/env bash
 set -euo pipefail
-source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/exp_env.sh"
-tmp="$(mktemp -d)"
-trap 'rm -rf "$tmp"' EXIT
 
-normalize_symbol() {
-  local binary="$1"
-  local symbol="$2"
-  objdump -d -C --no-show-raw-insn --disassemble="$symbol" "$binary" \
-    | awk -v sym="<$symbol>:" '
-        index($0,sym) {inside=1; next}
-        inside && /^[[:space:]]*[0-9a-f]+ <.*>:/ {exit}
-        inside && /:/ {print}
-      ' \
-    | sed -E \
-        -e 's/^[[:space:]]*[0-9a-f]+:[[:space:]]*//' \
-        -e 's/[0-9a-f]+ <([^>]+)>/ADDR <\1>/g' \
-        -e 's/0x[0-9a-f]+/HEX/g' \
-        -e 's/[[:space:]]+/ /g'
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd -- "$SCRIPT_DIR/../.." && pwd)"
+BUILD_DIR="${BUILD_DIR:-$REPO_ROOT/build}"
+BIN_DIR="$BUILD_DIR/bin/when_randomness_isnt_random"
+
+fail() {
+    echo "[error] $*" >&2
+    exit 1
 }
 
-binary="${WRIR_BIN_DIR}/wrir_single"
-[[ -x "$binary" ]] || { echo "[error] missing $binary" >&2; exit 1; }
+make -C "$REPO_ROOT" when-randomness-isnt-random
 
-mapfile -t executables < <(find "$WRIR_BIN_DIR" -maxdepth 1 -type f -executable -print | sort)
-if [[ "${#executables[@]}" -ne 1 || "${executables[0]}" != "$binary" ]]; then
-  echo "[error] expected exactly one executable in $WRIR_BIN_DIR" >&2
-  printf '  %s\n' "${executables[@]}" >&2
-  exit 1
-fi
-
-# The same ELF must implement all six baseline/attack semantic cases.
-for family in "${WRIR_FAMILIES[@]}"; do
-  for mode in baseline attack; do
-    output="$($binary --self-test --counter-set 1 \
-      --family-label "$family" --mode "$mode")"
-    grep -q 'semantic self-test passed' <<<"$output"
-  done
+for region in 1 2 3; do
+    base="$BIN_DIR/wrir_r${region}_baseline_instructions"
+    attack="$BIN_DIR/wrir_r${region}_attack_instructions"
+    [[ -x "$base" ]] || fail "missing $base"
+    [[ -x "$attack" ]] || fail "missing $attack"
+    "$base" --self-test --cache-profile matched-hot
+    "$attack" --self-test --cache-profile matched-hot
 done
 
-# Exercise runtime selection of every PMU descriptor without opening counters.
-for index in "${!WRIR_PASSES[@]}"; do
-  output="$($binary --self-test --counter-set "$((index + 1))" \
-    --family-label skip-seed-pointer-offset --mode baseline)"
-  grep -q 'semantic self-test passed' <<<"$output"
-done
-
-target="$tmp/single.target"
-normalize_symbol "$binary" wrir_sampler_target > "$target"
-[[ -s "$target" ]] || { echo "[error] empty target disassembly" >&2; exit 1; }
-if grep -Eq 'prepare_arguments|strcmp|reference_sampler|memcmp|fprintf|sched_getcpu|tag_bytes|tag_poly|wrir_hpc_begin|wrir_hpc_end|wrir_select_counter_set' "$target"; then
-  echo "[error] setup, mode dispatch, oracle, output, or PMU control leaked into sampler target" >&2
-  exit 1
-fi
-
-wrapper="$tmp/single.wrapper"
-normalize_symbol "$binary" wrir_measure_target > "$wrapper"
-[[ "$(grep -c '<wrir_sampler_target>' "$wrapper" || true)" -eq 1 ]] || {
-  echo "[error] measurement wrapper must call sampler exactly once" >&2
-  exit 1
+disassemble() {
+    objdump -d --no-show-raw-insn \
+        --disassemble=wrir_target "$1"
 }
-if grep -Eq 'prepare_arguments|strcmp|reference_sampler|memcmp|fprintf|sched_getcpu|tag_bytes|tag_poly|wrir_select_counter_set' "$wrapper"; then
-  echo "[error] mode/argument setup, event selection, oracle, or output leaked into measurement wrapper" >&2
-  exit 1
+
+instruction_count() {
+    awk '/^[[:space:]]*[0-9a-f]+:/ {count++} END {print count+0}'
+}
+
+r1_base="$(disassemble "$BIN_DIR/wrir_r1_baseline_instructions")"
+r1_attack="$(disassemble "$BIN_DIR/wrir_r1_attack_instructions")"
+
+grep -Eq '\badd[q]?[[:space:]]+\$0x20,%rax\b' <<<"$r1_base" || {
+    echo "$r1_base" >&2
+    fail "Region 1 baseline ADD not found"
+}
+if grep -Eq '\badd[q]?[[:space:]]+\$0x20,%rax\b' <<<"$r1_attack"; then
+    echo "$r1_attack" >&2
+    fail "Region 1 attack still contains ADD"
 fi
 
-cat <<EOF2
-Window verification passed:
-  exactly one executable exists: $binary
-  the same ELF implements three baseline and three attack semantic cases
-  the same ELF selects all ${#WRIR_PASSES[@]} PMU counter sets at runtime
-  attack 1 skips the seed-pointer offset before PMU enable
-  attack 2 supplies the wrong domain index before PMU enable
-  attack 3 redirects the seed pointer before PMU enable
-  SHAKE256(seed || domain) and ETA=2 rejection sampling execute normally
-  mode dispatch, seed/nonce setup, semantic oracle, and CSV output stay outside the PMU window
-EOF2
+r1_base_count="$(instruction_count <<<"$r1_base")"
+r1_attack_count="$(instruction_count <<<"$r1_attack")"
+[[ $((r1_base_count - r1_attack_count)) -eq 1 ]] ||
+    fail "Region 1 must differ statically by exactly one instruction"
+
+for region in 2 3; do
+    base="$(disassemble "$BIN_DIR/wrir_r${region}_baseline_instructions")"
+    attack="$(disassemble "$BIN_DIR/wrir_r${region}_attack_instructions")"
+
+    grep -Eq '\bmov[[:space:]]+\(%rdi\),%rax\b' <<<"$base" || {
+        echo "$base" >&2
+        fail "Region $region baseline pointer LDR analogue not found"
+    }
+    grep -Eq '\bmov[[:space:]]+0x8\(%rdi\),%rax\b' <<<"$attack" || {
+        echo "$attack" >&2
+        fail "Region $region attack disturbed pointer LDR analogue not found"
+    }
+
+    base_count="$(instruction_count <<<"$base")"
+    attack_count="$(instruction_count <<<"$attack")"
+    [[ "$base_count" -eq "$attack_count" ]] ||
+        fail "Region $region instruction counts differ statically"
+done
+
+echo "[pass] Region 1 attack omits exactly ADD $0x20,%rax."
+echo "[pass] Region 1 noiseseed pointer changes from base+32 to base."
+echo "[pass] Region 2 keeps one pointer-load instruction but changes its stack-slot address."
+echo "[pass] Region 2 loads a predictable coins pointer from the wrong slot."
+echo "[pass] Region 3 keeps one pointer-load instruction but changes its stack-slot address."
+echo "[pass] Region 3 loads a constant sigma pointer from the wrong slot."
+echo "[pass] Regions 2 and 3 preserve static instruction count."
