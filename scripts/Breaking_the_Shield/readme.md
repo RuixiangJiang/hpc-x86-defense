@@ -1,790 +1,613 @@
-# Du et al., “Breaking the Shield”
+# Du et al., “Breaking the Shield” — two instruction-skip experiments
 
-This directory implements a controlled x86-64 software simulation of four fault
-semantics described in Du et al., **“Breaking the Shield”**, and evaluates
-whether hardware performance counters (HPCs) can detect the resulting execution
-changes.
-
-The experiment follows the single-executable, multi-session methodology used by:
+This experiment retains only the following two attacks from Du et al.,
+*“Breaking the Shield”*:
 
 ```text
-scripts/When_Randomness_Isnt_Random/
+Region 1: SHAKE256 absorb-loop abort
+    skip the conditional loop-back branch
+
+Region 2: polyz_unpack coefficient corruption
+    skip the load instruction so the target register remains zero
 ```
 
-Baseline executions, all four attacks, and all PMU counter passes use the same
-ELF executable:
-
-```text
-build/bin/breaking_the_shield/bts_single
-```
-
-This removes attack-specific executable identity as a detector feature and keeps
-fault selection, input construction, semantic validation, and reporting outside
-the measured region.
+The original attacks target ARM Thumb instructions. This repository measures
+x86-64 PMU events, so it uses instruction-level x86 analogues while preserving
+the architectural fault effects.
 
 ---
 
-## 1. Scope
+# 1. Region 1 — SHAKE256 absorb-loop abort
 
-The experiment evaluates two transient control-flow faults in SHAKE256 and two
-local computation faults in Dilithium2/ML-DSA-44 `polyz_unpack`.
+## 1.1 Target instruction
 
-| Family | Type | Intended computation | Simulated faulty computation |
-|---|---|---|---|
-| `abort-shake256-absorb-loop` | T | Absorb all eight complete SHAKE256-rate input blocks, then absorb the final partial block and padding | Terminate the complete-block absorb loop after block 3; blocks 4–7 are not absorbed |
-| `skip-one-shake256-absorb-block` | T | Absorb complete blocks 0–7 in order | Omit complete block 3 only; blocks 0–2 and 4–7 execute normally |
-| `polyz-unpack-zero-load` | C-local | Load packed byte `a[39]` while reconstructing coefficient 17 | Skip that load and continue the dependent shift/OR with a zero destination value |
-| `polyz-unpack-stale-load` | C-local | Load the same packed byte `a[39]` | Skip that load and continue the dependent shift/OR with stale byte `0x5a` retained in the destination register |
+The original attack skips the ARM Thumb loop-back branch:
 
-The target block, coefficient, byte, and stale value are fixed before
-collection. The experiment does not search for a favorable fault location
-during evaluation.
+```asm
+bne.n absorb_loop
+```
+
+The x86-64 analogue used by this experiment is:
+
+```asm
+jnz .Lbts_absorb_loop_body
+```
+
+The measured target contains:
+
+```asm
+movl $5, %r14d
+
+.Lbts_absorb_loop_body:
+    call bts_absorb_full_block_entry
+    addq $136, %r13
+    decl %r14d
+    jnz .Lbts_absorb_loop_body
+```
+
+The skipped instruction is exactly:
+
+```asm
+jnz .Lbts_absorb_loop_body
+```
+
+## 1.2 Baseline behavior
+
+```text
+blocks 0, 1, and 2 execute as a fixed prefix
+
+the loop body begins at block 3
+
+the loop-back JNZ executes normally
+
+blocks 3, 4, 5, 6, and 7 execute
+
+total absorbed full blocks = 8
+```
+
+## 1.3 Attack behavior
+
+```text
+blocks 0, 1, and 2 execute as a fixed prefix
+
+the loop body executes once for block 3
+
+the loop-back JNZ is skipped
+
+execution falls through to the unchanged post-loop tail handling
+
+total absorbed full blocks = 4
+```
+
+The attack is not implemented by compiling a shorter C loop bound. The
+baseline and attack targets differ statically by exactly the omitted branch
+instruction.
+
+The local fault is one skipped branch, but its global dynamic effect is the
+removal of four complete SHAKE256 absorb/Keccak block executions.
 
 ---
 
-## 2. Exact fault semantics
+# 2. Region 2 — polyz_unpack skipped load
 
-### 2.1 Abort the SHAKE256 absorb loop
+## 2.1 Target instruction
 
-The canonical target processes eight full 136-byte SHAKE256-rate blocks:
+The original attack skips an ARM wide load:
+
+```asm
+ldr.w r5, [...]
+```
+
+The x86-64 target uses `%r12d` as the architectural analogue of ARM register
+`r5`.
+
+Before PMU enable, the measurement wrapper executes:
+
+```asm
+xorl %r12d, %r12d
+```
+
+Therefore the target register enters the measured window with:
 
 ```text
-block 0 → block 1 → block 2 → block 3 → block 4 → block 5 → block 6 → block 7
+r12d = 0
 ```
 
-The attacked target terminates the loop after block 3:
+The baseline target contains:
+
+```asm
+movl 2(%rax), %r12d
+shrl $2, %r12d
+andl $0x3ffff, %r12d
+movl $131072, %eax
+subl %r12d, %eax
+movl %eax, 0(%rdx)
+```
+
+The skipped instruction is exactly:
+
+```asm
+movl 2(%rax), %r12d
+```
+
+This is the x86-64 32-bit-load analogue of the paper’s `ldr.w`.
+
+## 2.2 Baseline behavior
 
 ```text
-block 0 → block 1 → block 2 → block 3 → stop full-block loop
+r12d = load32(packed_group + 2)
+
+t1 = (r12d >> 2) & 0x3ffff
+
+coefficient = GAMMA1 - t1
 ```
 
-The final partial input, SHAKE domain separator, padding, final permutation, and
-output extraction still execute. The attack therefore changes only the number
-of complete blocks absorbed.
-
-Constants:
+## 2.3 Attack behavior
 
 ```text
-BTS_SHAKE256_RATE             = 136 bytes
-BTS_SHAKE_FULL_BLOCKS         = 8
-BTS_SHAKE_ABORT_AFTER_BLOCKS  = 4
-BTS_SHAKE_TAIL_BYTES          = 37
+the load into r12d is skipped
+
+r12d retains its preloaded value 0
+
+the dependent shift, mask, subtract, and store instructions still execute
+
+t1 = 0
+
+faulty coefficient = GAMMA1 = 131072
 ```
 
-### 2.2 Skip one SHAKE256 absorb block
-
-The attacked target omits block 3 while preserving both the preceding and
-following blocks:
-
-```text
-block 0 → block 1 → block 2 → [block 3 skipped] → block 4 → ... → block 7
-```
-
-The loop does not terminate early. Exactly one complete absorb block and its
-corresponding Keccak permutation are absent.
-
-Constant:
-
-```text
-BTS_SHAKE_SKIP_BLOCK = 3
-```
-
-### 2.3 Skip a `polyz_unpack` load and use zero
-
-For Dilithium2/ML-DSA-44, four coefficients are unpacked from each nine-byte
-group. Coefficient 17 is coefficient 1 of packed group 4:
-
-```c
-t1  = a[38] >> 2;
-t1 |= (uint32_t)a[39] << 6;   /* selected load */
-t1 |= (uint32_t)a[40] << 14;
-t1 &= 0x3ffff;
-r[17] = GAMMA1 - t1;
-```
-
-The fault skips only the selected `a[39]` load. The following shift and OR
-remain in the executed instruction sequence. Before the PMU window, the
-destination register is initialized to zero:
-
-```text
-zero-load fault:
-    r12d = 0x00 before PMU enable
-    selected movzbl a[39], r12d is omitted
-    shl r12d and OR r12d still execute
-```
-
-### 2.4 Skip the same load and retain a stale value
-
-This attack uses the same skipped-load target as the zero-load attack. The only
-difference is the register value prepared before the PMU window:
-
-```text
-stale-load fault:
-    r12d = 0x5a before PMU enable
-    selected movzbl a[39], r12d is omitted
-    shl r12d and OR r12d still execute
-```
-
-The build reserves `r12` with `-ffixed-r12`, preventing the compiler from using
-the destination register for unrelated values.
-
-Constants:
-
-```text
-BTS_POLYZ_TARGET_COEFF       = 17
-BTS_POLYZ_TARGET_GROUP       = 4
-BTS_POLYZ_TARGET_INPUT_BYTE  = 39
-BTS_POLYZ_STALE_BYTE         = 0x5a
-BTS_GAMMA1                   = 2^17
-```
-
-The input generator ensures `a[39]` is neither `0x00` nor `0x5a`, so both fault
-modes change the intended coefficient and can be validated by the semantic
-oracle.
+The attack does not replace the loaded value with zero using a C assignment.
+It omits exactly the load instruction and relies on the target register’s
+pre-existing zero value.
 
 ---
 
-## 3. Reused-randomness test construction
+# 3. Simulation scope
 
-For the two SHAKE attacks, the nonfaulted input portion is fixed within a
-session, while per-sample entropy is placed only in the block region removed by
-the corresponding fault.
-
-For the abort attack:
+The implementation reproduces the architectural fault effects:
 
 ```text
-fixed:    blocks 0–3 and final tail
-varying:  blocks 4–7
+Region 1:
+    omit one loop-back branch
+    abort the absorb loop
+
+Region 2:
+    omit one 32-bit load
+    preserve a zero register value
 ```
 
-For the single-block skip attack:
+It does not reproduce:
 
 ```text
-fixed:    blocks 0–2, blocks 4–7, and final tail
-varying:  block 3
+EMFI or laser pulse timing
+physical probe position
+pulse energy
+fault-success probability
+neighboring-instruction corruption
+the exact ARM pipeline
 ```
-
-Therefore:
-
-- canonical executions absorb the per-sample entropy and produce varying
-  outputs;
-- attacked executions omit that entropy and produce reused outputs within the
-  session.
-
-This construction exercises the predictable/reused-randomness consequence of
-the fault without changing the SHAKE attack semantics.
 
 ---
 
-## 4. Single-executable control
+# 4. PMU windows
 
-The executable accepts the family, baseline/attack mode, input domain, CPU, and
-PMU counter-set selector at runtime.
-
-All four baseline modes, all four attack modes, and all 42 PMU passes execute:
+## Region 1
 
 ```text
-build/bin/breaking_the_shield/bts_single
+prepare deterministic SHAKE256 input           outside PMU
+prepare semantic reference output              outside PMU
+PMU enable
+    fixed prefix: blocks 0..2
+    absorb-loop body
+    target loop-back branch
+    post-loop tail handling
+PMU disable
+semantic comparison and CSV output             outside PMU
 ```
 
-The executable digest is recorded in:
+## Region 2
 
 ```text
-results/Breaking_the_Shield/single_executable/binary_audit.tsv
+prepare packed polyz group                     outside PMU
+initialize r12d = 0                            outside PMU
+prepare semantic reference coefficient         outside PMU
+PMU enable
+    target 32-bit load
+    shift
+    mask
+    subtraction
+    coefficient store
+PMU disable
+semantic comparison and CSV output             outside PMU
 ```
 
-The experiment uses one PMU group per pass:
-
-```text
-cycles + one target event
-```
-
-This avoids PMU multiplexing and prevents a different binary from being built
-for each event.
+There is no runtime fault selector inside either PMU window.
 
 ---
 
-## 5. Measurement boundary
+# 5. Monitored events
 
-For every trace:
+## Region 1
 
 ```text
-outside window:
-    generate the input
-    select family and baseline/attack mode
-    select the target and measurement wrapper
-    initialize the skipped-load destination register
-    prepare output storage
-
-inside window:
-    reset and enable the PMU group
-    call exactly one preselected target
-    disable and read the PMU group
-
-outside window:
-    execute the trusted semantic oracle
-    compare measured and intended outputs
-    count changed output units
-    compute output tags
-    check CPU stability
-    write the CSV row
+cycles
+retired instructions
 ```
 
-The target functions contain no:
+The loop-abort attack removes four complete absorb/Keccak block executions, so
+retired instructions are expected to decrease substantially.
 
-- runtime `if (attack)` branch;
-- family-name comparison;
-- semantic oracle;
-- output comparison;
-- tag computation;
-- scheduler query;
-- CSV formatting;
-- PMU counter-set selection.
+## Region 2
 
-The measurement wrapper calls its selected target exactly once.
+```text
+cycles
+retired loads
+```
+
+The skipped `ldr.w` analogue removes exactly one retired load while preserving
+all dependent arithmetic and store instructions.
 
 ---
 
-## 6. Window verification
+# 6. Collection design
 
-Run:
+Default collection:
+
+```text
+sessions:                 4
+baseline samples/session: 500
+attack samples/session:   500
+total baseline samples:   2,000
+total attack samples:     2,000
+warmup executions:        20
+minimum PMU running:      95%
+```
+
+Collection order alternates:
+
+```text
+s00: baseline -> attack
+s01: attack   -> baseline
+s02: baseline -> attack
+s03: attack   -> baseline
+```
+
+This reduces fixed-order bias and exposes per-session consistency.
+
+---
+
+# 7. Experimental results
+
+## 7.1 Region 1 — skipped loop-back branch
+
+### Retired instructions
+
+| Statistic | Baseline | Attack | Delta |
+|---|---:|---:|---:|
+| mode | 269,230 | 149,829 | **-119,401** |
+| median | 269,230 | 149,829 | **-119,401** |
+| p05 | 269,230 | 149,829 | |
+| p95 | 269,230 | 149,829 | |
+
+Per-session median instruction differences:
+
+```text
+s00: -119,401
+s01: -119,401
+s02: -119,401
+s03: -119,401
+```
+
+The retired-instruction effect is exact across all four sessions.
+
+Although the injected fault omits only one local branch instruction, the
+branch skip prevents four complete absorb/Keccak blocks from executing.
+Therefore the dynamic instruction reduction is:
+
+```text
+119,401 retired instructions
+```
+
+rather than one instruction.
+
+### Cycles
+
+```text
+baseline median: 48,518.5 [46,383, 51,239]
+attack median:   27,236.5 [26,172.9, 27,982]
+median delta:   -21,282
+```
+
+Per-session cycle median differences:
+
+```text
+s00: -21,561
+s01: -21,412
+s02: -21,157
+s03: -19,790
+```
+
+All sessions show a large cycle reduction, consistent with the disappearance
+of four full absorb/Keccak block executions.
+
+### Retired-instruction detector
+
+The detector freezes the baseline retired-instruction mode:
+
+```text
+269,230
+```
+
+A sample is classified as faulty when its retired-instruction count differs
+from this value.
+
+Results:
+
+```text
+false positives: 17 / 2,000
+FPR:              0.8500%
+
+true positives:  2,000 / 2,000
+measured TPR:    100.0000%
+```
+
+A measured TPR of 100% means that no false negative occurred in the 2,000
+attack samples. It does not establish a population TPR of exactly 100%.
+
+### Region 1 conclusion
+
+The skipped loop-back branch creates a very large global control-flow effect:
+
+```text
+skip one branch
+    ->
+abort the absorb loop after block 3
+    ->
+omit four full absorb/Keccak block executions
+    ->
+retired instructions decrease by 119,401
+    ->
+cycles decrease by approximately 21,282
+```
+
+Retired instructions detect this attack reliably in the current dataset,
+although the exact-mode detector produced a 0.85% false-positive rate.
+
+---
+
+## 7.2 Region 2 — skipped load with zero register
+
+### Retired loads
+
+| Statistic | Baseline | Attack | Delta |
+|---|---:|---:|---:|
+| mode | 11 | 10 | **-1** |
+| median | 11 | 10 | **-1** |
+| p05 | 11 | 10 | |
+| p95 | 11 | 10 | |
+
+Per-session median retired-load differences:
+
+```text
+s00: -1
+s01: -1
+s02: -1
+s03: -1
+```
+
+The effect is exact and session-independent:
+
+```text
+attack retired loads
+    =
+baseline retired loads - 1
+```
+
+This matches the fault model precisely because the attack removes exactly one
+load instruction while keeping the rest of the target unchanged.
+
+### Cycles
+
+```text
+baseline median: 142 [138,152]
+attack median:   128 [126,137]
+median delta:    -14
+```
+
+Per-session cycle median differences:
+
+```text
+s00: -15
+s01: -14
+s02: -15
+s03: -15
+```
+
+The cycle reduction is larger than one cycle because the missing load also
+removes its load latency and changes the dependency timing of the following
+instructions.
+
+### Retired-load detector
+
+The detector freezes the baseline retired-load mode:
+
+```text
+11
+```
+
+A sample is classified as faulty when its retired-load count differs from this
+value.
+
+Results:
+
+```text
+false positives: 0 / 2,000
+FPR:              0.0000%
+
+true positives:  2,000 / 2,000
+measured TPR:    100.0000%
+```
+
+No baseline or attack overlap occurred in the 4,000 collected samples.
+
+### Region 2 conclusion
+
+The skipped load produces the expected exact structural signature:
+
+```text
+skip one 32-bit load
+    ->
+r12d remains zero
+    ->
+all dependent arithmetic still executes
+    ->
+retired loads decrease by exactly one
+    ->
+faulty coefficient becomes 131072
+```
+
+Retired loads perfectly separated baseline and attack in this dataset.
+
+---
+
+# 8. Cross-region comparison
+
+| Property | Region 1 | Region 2 |
+|---|---|---|
+| Original ARM target | `bne.n` | `ldr.w r5, [...]` |
+| x86 analogue | `jnz .Lbts_absorb_loop_body` | `movl 2(%rax), %r12d` |
+| Fault effect | abort absorb loop | leave target register at zero |
+| Monitored counter | retired instructions | retired loads |
+| Baseline mode | 269,230 instructions | 11 loads |
+| Attack mode | 149,829 instructions | 10 loads |
+| Counter delta | **-119,401** | **-1** |
+| Cycle median delta | **-21,282** | **-14** |
+| FPR | 0.8500% | 0.0000% |
+| Measured TPR | 100.0000% | 100.0000% |
+
+---
+
+# 9. Interpretation
+
+The two attacks illustrate different relationships between a local instruction
+fault and its global HPC signature.
+
+## Region 1
+
+```text
+local fault:
+    one branch is skipped
+
+global effect:
+    four complete absorb/Keccak block executions disappear
+
+HPC consequence:
+    a very large retired-instruction difference
+```
+
+The counter does not merely observe the skipped branch. It observes all dynamic
+instructions removed by the changed control flow.
+
+## Region 2
+
+```text
+local fault:
+    one load is skipped
+
+global effect:
+    the destination register remains zero
+    arithmetic and control flow remain intact
+
+HPC consequence:
+    exactly one fewer retired load
+```
+
+Here the counter directly matches the skipped instruction class.
+
+The results support:
+
+> Control-flow instruction skips can create very large retired-instruction
+> signatures when they remove substantial downstream execution, while a local
+> data-flow load skip can be detected by counting the corresponding retired
+> load event.
+
+---
+
+# 10. Verification requirements
+
+The repository verifier requires:
+
+```text
+Region 1:
+    baseline contains exactly one target JNZ
+    attack omits that JNZ
+    the target pair differs statically by one branch instruction
+    baseline absorbs eight full blocks
+    attack absorbs four full blocks
+
+Region 2:
+    baseline contains movl 2(%rax),%r12d
+    attack omits that load
+    r12d is initialized to zero before PMU enable
+    shift, mask, subtract, and store instructions remain present
+    the target pair differs statically by one load instruction
+```
+
+Each binary must also pass 1,000 deterministic semantic test cases.
+
+---
+
+# 11. Commands
+
+Run from the repository root.
+
+Build and verify:
 
 ```bash
 scripts/Breaking_the_Shield/run.sh verify
 ```
 
-The verifier checks that:
-
-1. exactly one executable exists in the experiment build directory;
-2. the same ELF passes all four baseline and four attack semantic tests;
-3. all 42 PMU counter sets are selected at runtime;
-4. setup, mode dispatch, semantic oracles, and output code do not appear in the
-   target functions;
-5. each measurement wrapper calls one fixed target exactly once;
-6. the canonical `polyz_unpack` helper contains the selected `a[39]` load;
-7. the skipped-load helper does not contain that load;
-8. the dependent shift and OR remain in both helpers;
-9. the canonical and skipped-load helpers differ by exactly one machine
-   instruction;
-10. zero-load and stale-load use the same skipped-load implementation.
-
-Verification artifacts:
-
-```text
-results/Breaking_the_Shield/single_executable/window_audit.txt
-results/Breaking_the_Shield/single_executable/collector_disassembly.txt
-```
-
-A failed verification stops the experiment before collection.
-
----
-
-## 7. Detector methodology
-
-The analysis is inherited from `When_Randomness_Isnt_Random`.
-
-### 7.1 Data separation
-
-The default full run uses process-separated sessions:
-
-```text
-calibration:
-    4 sessions × 500 benign traces
-
-development:
-    4 sessions ×
-        200 benign reference traces
-        500 benign traces
-        500 attack traces
-
-threshold:
-    4 sessions ×
-        200 benign reference traces
-        5000 benign threshold traces
-
-validation:
-    3 sessions ×
-        200 benign reference traces
-        2000 benign validation traces
-
-final attack test:
-    2 sessions ×
-        200 benign reference traces
-        500 contextual benign traces
-        500 attack traces
-```
-
-Development labels select features and directions. Threshold sessions freeze the
-decision threshold. Validation and final attack labels are not used for feature
-selection or threshold fitting.
-
-### 7.2 Session-local normalization
-
-For feature `j` in session `s`, traces are normalized only with that session's
-benign reference set:
-
-```text
-z_s,j(x) =
-    (x_j - median(reference_s,j))
-    /
-    max(1, robust_scale(reference_s,j), lambda × global_scale_j)
-```
-
-Default regularization:
-
-```text
-lambda = 0.50
-```
-
-### 7.3 Primary sparse directional detector
-
-The primary family-specific detector selects at most eight nonredundant features
-using development-only:
-
-- oriented AUC;
-- median effect magnitude;
-- direction consistency across development sessions;
-- correlation filtering.
-
-The threshold is selected independently in each threshold session with a
-one-sided 95% confidence guard. The frozen threshold is the most conservative
-candidate:
-
-```text
-tau = max(tau_session)
-```
-
-Default nominal target:
-
-```text
-target FPR = 1%
-```
-
-### 7.4 Batch detector
-
-The primary batch detector aggregates ten traces without crossing a session
-boundary. Its selected aggregation is restricted to the predeclared mean or
-median directional score.
-
-### 7.5 Structural-only comparison
-
-A separate detector is restricted to the available subset of:
-
-```text
-instructions
-branches
-retired loads
-retired stores
-```
-
-For instruction-skip experiments, this detector is an important semantic
-control because it tests whether the omitted execution structure itself is
-visible without relying on unstable cache, frontend, or raw-uop events.
-
----
-
-## 8. PMU passes
-
-The experiment attempts 42 runtime-selected counter sets:
-
-```text
-structural-instructions
-structural-branches
-structural-branch-misses
-structural-loads
-structural-stores
-cache-l1d
-cache-l1i
-cache-llc
-cache-dtlb
-cache-references
-cache-misses
-cache-l1d-replacements
-cache-l2-request-misses
-load-l1-hit
-load-l2-hit
-load-l3-hit
-load-l1-miss
-load-l2-miss
-load-l3-miss
-long-latency-loads
-stalls-frontend
-stalls-backend
-stalls-l1d-miss
-stalls-mem-any
-recovery-machine-clears
-recovery-memory-ordering
-recovery-cycles
-recovery-cycles-any
-uops-retired
-uops-issued
-uops-executed
-frontend-uops-undelivered
-frontend-mite-uops
-frontend-dsb-uops
-frontend-ms-uops
-branch-conditional
-branch-conditional-taken
-branch-conditional-not-taken
-branch-mispred-conditional
-resource-stalls-scoreboard
-resource-stalls-store-buffer
-execution-bound-loads
-```
-
-Unsupported raw events are excluded by the resolver and coverage checks.
-
----
-
-## 9. Requirements
-
-Recommended environment:
-
-- Linux x86-64;
-- Python 3;
-- GNU Make;
-- GCC or a compatible compiler supporting `-ffixed-r12`;
-- GNU `objdump`;
-- access to `perf_event_open`;
-- an isolated or otherwise low-noise CPU core.
-
-Check PMU permissions if initialization fails:
-
-```bash
-cat /proc/sys/kernel/perf_event_paranoid
-```
-
-The smoke probe rejects collections with counter errors, CPU migration,
-incomplete counter groups, or insufficient `time_running / time_enabled`.
-
----
-
-## 10. Build and run
-
-From the repository root:
-
-```bash
-make breaking-the-shield -j8
-```
-
-Build, semantic checks, disassembly checks, and short PMU probe:
+Smoke test:
 
 ```bash
 scripts/Breaking_the_Shield/run.sh smoke
 ```
 
-Complete collection and analysis:
+Full collection and analysis:
 
 ```bash
 scripts/Breaking_the_Shield/run.sh full
 ```
 
-Use a specific CPU:
+Reanalyze existing CSV files:
 
 ```bash
-BTS_CPU_CORE=2 \
-scripts/Breaking_the_Shield/run.sh full
-```
-
-Other supported actions:
-
-```bash
-scripts/Breaking_the_Shield/run.sh verify
-scripts/Breaking_the_Shield/run.sh collect
 scripts/Breaking_the_Shield/run.sh analyze
-scripts/Breaking_the_Shield/run.sh collect-session LABEL
 ```
 
 ---
 
-## 11. Useful configuration variables
-
-| Variable | Default | Meaning |
-|---|---:|---|
-| `BTS_CPU_CORE` | automatic | CPU used for affinity |
-| `BTS_WARMUP` | `20` | warm-up executions before collection |
-| `BTS_TARGET_FPR` | `0.01` | nominal detector false-positive target |
-| `BTS_THRESHOLD_CONFIDENCE` | `0.95` | one-sided threshold confidence |
-| `BTS_BATCH_SIZE` | `10` | traces per batch |
-| `BTS_MAXIMUM_FEATURES` | `8` | maximum sparse-detector features |
-| `BTS_MINIMUM_RUNNING` | `95` | minimum PMU running percentage |
-| `BTS_BOOTSTRAP_ITERATIONS` | `1000` | AUC bootstrap iterations |
-| `BTS_RESULTS_ROOT` | repository default | result output directory |
-
-The session and sample counts can also be overridden with the corresponding
-`BTS_*_SESSIONS` and `BTS_*_SAMPLES*` environment variables used in `run.sh`.
-
----
-
-## 12. Output files
-
-Main result root:
+# 12. Output files
 
 ```text
-results/Breaking_the_Shield/single_executable/
+results/Breaking_the_Shield/instruction_faithful_two_attacks/
+├── region1/
+│   ├── s00_baseline.csv
+│   ├── s00_attack.csv
+│   └── ...
+├── region2/
+│   ├── s00_baseline.csv
+│   ├── s00_attack.csv
+│   └── ...
+├── structural_counter_report.txt
+├── structural_counter_summary.csv
+└── structural_counter_summary.json
 ```
 
-Important files:
+`structural_counter_report.txt` is the main human-readable report.
 
-```text
-binary_audit.tsv
-collection_manifest.json
-microarch_events.json
-cpu_affinity.json
-window_audit.txt
-collector_disassembly.txt
-combined_summary.console.txt
-combined_summary.txt
-combined_summary.csv
-combined_summary.json
-combined_union_detector.json
+`structural_counter_summary.csv` contains the flat baseline-versus-attack
+summary.
 
-<family>/detector_model.json
-<family>/fpr_tpr_report.txt
-<family>/fpr_tpr_report.json
-<family>/validation_decisions.json
-<family>/threshold_normalized.csv
-<family>/validation_normalized.csv
-<family>/attack_baseline_normalized.csv
-<family>/attack_normalized.csv
-```
-
-Raw per-pass traces are stored under:
-
-```text
-<family>/<pmu-pass>/<stage>_<session>_<kind>.csv
-```
-
-Do not combine raw traces or detector models from a previous implementation
-whose `polyz_unpack` fault helpers removed more than the selected load.
-
----
-
-## 13. Observed full-run results
-
-The following results were obtained with:
-
-```text
-baseline policy:   single
-threshold policy:  worst-session
-target FPR:        1%
-batch size:        10
-semantic success:  1000/1000 for every attack
-```
-
-### 13.1 Family-specific primary sparse detector
-
-| Attack | Single FPR | Worst-session single FPR | Single TPR | Single AUC | Batch FPR | Worst-session batch FPR | Batch TPR | Batch AUC |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `abort-shake256-absorb-loop` | 0.0000% | 0.0000% | 100.0000% | 1.000000 | 0.0000% | 0.0000% | 100.0000% | 1.000000 |
-| `skip-one-shake256-absorb-block` | 0.0000% | 0.0000% | 100.0000% | 1.000000 | 0.0000% | 0.0000% | 100.0000% | 1.000000 |
-| `polyz-unpack-zero-load` | 0.1333% | 0.1500% | 96.7000% | 0.993685 | 0.1667% | 0.5000% | 100.0000% | 1.000000 |
-| `polyz-unpack-stale-load` | 1.0333% | 2.4500% | 98.5000% | 0.990703 | 0.3333% | 0.5000% | 100.0000% | 1.000000 |
-
-The stale-load single-trace detector exceeded the nominal 1% FPR on unseen
-validation data and reached 2.45% in its worst validation session. Its selected
-model was dominated by a large `uops-issued` shift that did not appear for the
-zero-load attack, even though both attacks use the same skipped-load target.
-That raw-uop feature should therefore be treated as session-sensitive rather
-than as a general semantic consequence of the stale value.
-
-### 13.2 Structural-only detector
-
-| Attack | Single FPR | Single TPR | Batch FPR | Batch TPR |
-|---|---:|---:|---:|---:|
-| `abort-shake256-absorb-loop` | 0.0000% | 100.0000% | 0.0000% | 100.0000% |
-| `skip-one-shake256-absorb-block` | 0.0000% | 100.0000% | 0.0000% | 100.0000% |
-| `polyz-unpack-zero-load` | 0.0000% | 100.0000% | 0.0000% | 100.0000% |
-| `polyz-unpack-stale-load` | 0.0000% | 100.0000% | 0.0000% | 100.0000% |
-
-For both `polyz_unpack` attacks, the final structural median shifts were:
-
-```text
-instructions   = -1
-retired loads  = -1
-branches       =  0
-stores         =  0
-```
-
-This matches the intended single-load-skip model and is the most direct evidence
-that the monitored execution structure changed as expected.
-
-### 13.3 Current operation-level unified detector
-
-The current summarizer also calibrates one maximum-score detector across the
-four family-specific models:
-
-| Granularity | Pooled validation FPR | Worst-session validation FPR |
-|---|---:|---:|
-| Single trace | 1.0333% | 2.4500% |
-| Batch of 10 | 0.3333% | 0.5000% |
-
-Attack TPRs:
-
-| Attack | Unified single TPR | Unified single AUC | Unified batch TPR | Unified batch AUC |
-|---|---:|---:|---:|---:|
-| `abort-shake256-absorb-loop` | 100.0000% | 1.000000 | 100.0000% | 1.000000 |
-| `skip-one-shake256-absorb-block` | 100.0000% | 1.000000 | 100.0000% | 1.000000 |
-| `polyz-unpack-zero-load` | 0.7000% | 0.870938 | 0.0000% | 0.927983 |
-| `polyz-unpack-stale-load` | 98.5000% | 0.993834 | 100.0000% | 1.000000 |
-
-These unified values are retained for reproducibility but are **not recommended
-as the headline defense result**. Zero and stale are alternative fault values at
-the same `polyz_unpack` location, not independent runtime contexts. Likewise,
-abort and skip are alternative faults in the same SHAKE absorb region.
-
-A deployment-oriented design should instead train two attack-agnostic
-region-level detectors:
-
-```text
-SHAKE absorb region:
-    baseline + abort-loop + skip-one-block
-
-polyz_unpack region:
-    baseline + zero-load + stale-load
-```
-
-Only those two actual protected regions should then share an operation-level
-false-positive budget.
-
----
-
-## 14. Interpretation
-
-### Abort the SHAKE256 absorb loop
-
-The attacked execution omits four full absorb blocks and four Keccak
-permutations. The resulting structural differences are extremely large:
-
-```text
-instructions:          approximately -119755
-retired loads:         approximately -22332
-branches:              approximately -10480
-stores:                approximately -9600
-conditional branches:  approximately -9256
-```
-
-Both single-trace and batch detectors identify the fault with 100% TPR and 0%
-observed validation FPR.
-
-### Skip one SHAKE256 absorb block
-
-This attack omits exactly one full absorb block and one Keccak permutation. Its
-structural shifts are approximately one quarter of the abort-loop shifts, which
-is consistent with the simulated execution difference:
-
-```text
-instructions:          approximately -30141
-retired loads:         approximately -5583
-branches:              approximately -2688
-stores:                approximately -2400
-conditional branches:  approximately -2314
-```
-
-It is also detected with 100% TPR and 0% observed validation FPR.
-
-### Skip a `polyz_unpack` load
-
-The zero and stale attacks use the same faulty machine-code path. Both omit one
-retired instruction and one retired load while preserving branches and stores.
-
-The structural-only detector therefore detects both fault values reliably. This
-supports the narrower conclusion that HPCs can detect the missing execution of
-the selected load under the tested software simulation.
-
-It does **not** show that HPCs can determine whether the incorrect coefficient
-contains zero, a stale value, or another attacker-controlled value. The
-coefficient value is a semantic property; the stable HPC signal is the omitted
-load instruction.
-
----
-
-## 15. Security conclusion
-
-The experiment supports the following conclusions:
-
-1. Large SHAKE256 control-flow truncations are strongly visible to structural
-   performance counters because they remove complete Keccak processing blocks.
-2. A software-simulated single skipped load in `polyz_unpack` is visible through
-   a deterministic reduction of one retired instruction and one retired load.
-3. HPCs detect the execution-structure change, not the cryptographic semantic
-   meaning of the resulting SHAKE state or coefficient.
-4. Raw microarchitectural events can improve apparent TPR but may introduce
-   session-sensitive false positives; structural events should remain the
-   primary evidence for these instruction-skip faults.
-5. Alternative fault values at one instruction location should share one
-   region-level detector rather than being treated as independent protected
-   contexts.
-
-Recommended headline result for this run:
-
-```text
-Structural-only family-specific detector:
-
-abort SHAKE256 absorb loop:
-    single TPR/FPR = 100% / 0%
-    batch  TPR/FPR = 100% / 0%
-
-skip one SHAKE256 absorb block:
-    single TPR/FPR = 100% / 0%
-    batch  TPR/FPR = 100% / 0%
-
-polyz_unpack zero-load:
-    single TPR/FPR = 100% / 0%
-    batch  TPR/FPR = 100% / 0%
-
-polyz_unpack stale-load:
-    single TPR/FPR = 100% / 0%
-    batch  TPR/FPR = 100% / 0%
-```
-
----
-
-## 16. Limitations
-
-- The experiment is a software-level simulation of instruction omission. It
-  does not reproduce the analog timing, spatial selectivity, transient
-  corruption, or recovery behavior of a physical voltage, clock, EM, laser, or
-  Rowhammer fault.
-- Separate target functions encode the canonical and faulty instruction
-  sequences inside one ELF. The experiment removes executable identity but
-  cannot model every microarchitectural effect of faulting an already-fetched
-  instruction in place.
-- The SHAKE input construction deliberately places entropy in the omitted block
-  region to produce reused attacked outputs. Results should not be generalized
-  to every possible SHAKE input distribution.
-- The `polyz_unpack` experiment fixes coefficient 17 and byte `a[39]`; other
-  coefficients or load positions may have different instruction encodings or
-  microarchitectural behavior.
-- The stale byte is fixed at `0x5a`. The structural load-skip result should
-  generalize to other stale values, but data-dependent raw PMU effects should
-  not be assumed to generalize.
-- Observed FPR and TPR values come from one controlled host run. CPU model,
-  microcode, kernel version, PMU event definitions, frequency policy,
-  interrupts, SMT activity, and background load can change the exact rates.
-- A measured 0% FPR is not proof of a zero population false-positive
-  probability; consult the confidence intervals in each JSON report.
-- The current four-family unified detector is diagnostic only. A final defense
-  evaluation should use two region-level, attack-agnostic models.
-
----
-
-## 17. Reproducibility checklist
-
-Before reporting a run, verify that:
-
-```text
-[ ] run.sh verify passes
-[ ] binary_audit.tsv records exactly one executable
-[ ] all four attacks report semantic success for every final trace
-[ ] both polyz faults show instructions = -1
-[ ] both polyz faults show retired_loads = -1
-[ ] both polyz faults show branches = 0
-[ ] both polyz faults show stores = 0
-[ ] zero and stale use the same skipped-load helper
-[ ] validation FPR is reported separately from threshold-session FP
-[ ] worst-session FPR is included
-[ ] structural-only and full sparse detectors are not conflated
-[ ] current four-family unified numbers are labeled diagnostic
-[ ] CPU, binary digest, event resolution, and collection manifest are archived
-```
+`structural_counter_summary.json` contains complete descriptive statistics,
+per-session differences, and detector results.

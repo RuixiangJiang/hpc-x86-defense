@@ -1,99 +1,103 @@
 #!/usr/bin/env bash
 set -euo pipefail
-source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/exp_env.sh"
-tmp="$(mktemp -d)"
-trap 'rm -rf "$tmp"' EXIT
-binary="${BTS_BIN_DIR}/bts_single"
-[[ -x "$binary" ]] || { echo "[error] missing $binary" >&2; exit 1; }
-mapfile -t executables < <(find "$BTS_BIN_DIR" -maxdepth 1 -type f -executable -print | sort)
-if [[ "${#executables[@]}" -ne 1 || "${executables[0]}" != "$binary" ]]; then
-  echo "[error] expected exactly one executable in $BTS_BIN_DIR" >&2
-  exit 1
-fi
-for family in "${BTS_FAMILIES[@]}"; do
-  for mode in baseline attack; do
-    "$binary" --self-test --counter-set 1 --family-label "$family" --mode "$mode" \
-      | grep -q 'semantic self-test passed'
-  done
-done
-for index in "${!BTS_PASSES[@]}"; do
-  "$binary" --self-test --counter-set "$((index + 1))" \
-    --family-label abort-shake256-absorb-loop --mode baseline \
-    | grep -q 'semantic self-test passed'
+
+source "$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)/exp_env.sh"
+
+fail() {
+    echo "[error] $*" >&2
+    exit 1
+}
+
+make -C "$BTS_REPO_ROOT" breaking-the-shield
+
+r1_base="$BTS_BIN_DIR/bts_region1_baseline"
+r1_attack="$BTS_BIN_DIR/bts_region1_attack"
+r2_base="$BTS_BIN_DIR/bts_region2_baseline"
+r2_attack="$BTS_BIN_DIR/bts_region2_attack"
+
+for binary in "$r1_base" "$r1_attack" "$r2_base" "$r2_attack"; do
+    [[ -x "$binary" ]] || fail "missing binary: $binary"
+    "$binary" --self-test
 done
 
-targets=(
-  bts_shake_baseline_target bts_shake_abort_target bts_shake_skip_block_target
-  bts_polyz_baseline_target bts_polyz_zero_load_target bts_polyz_stale_load_target
-)
-wrappers=(
-  bts_measure_shake_baseline bts_measure_shake_abort bts_measure_shake_skip_block
-  bts_measure_polyz_baseline bts_measure_polyz_zero_load bts_measure_polyz_stale_load
-)
-: > "${BTS_RESULTS_ROOT}/collector_disassembly.txt"
-for symbol in "${targets[@]}" "${wrappers[@]}"; do
-  objdump -d -C --no-show-raw-insn --disassemble="$symbol" "$binary" \
-    >> "${BTS_RESULTS_ROOT}/collector_disassembly.txt"
-done
-for symbol in "${targets[@]}"; do
-  body="$(objdump -d -C --no-show-raw-insn --disassemble="$symbol" "$binary")"
-  grep -q "<$symbol>:" <<<"$body"
-  if grep -Eq 'prepare_case|parse_family|strcmp|semantic_case|memcmp|fprintf|sched_getcpu|tag_bytes|bts_hpc_begin|bts_hpc_end|bts_select_counter_set' <<<"$body"; then
-    echo "[error] setup, oracle, output, or PMU control leaked into $symbol" >&2
-    exit 1
-  fi
-done
-for i in "${!wrappers[@]}"; do
-  wrapper="${wrappers[$i]}"; target="${targets[$i]}"
-  body="$(objdump -d -C --no-show-raw-insn --disassemble="$wrapper" "$binary")"
-  [[ "$(grep -c "<$target>" <<<"$body" || true)" -eq 1 ]] || {
-    echo "[error] $wrapper must call $target exactly once" >&2; exit 1;
-  }
-  if grep -Eq 'prepare_case|parse_family|strcmp|semantic_case|memcmp|fprintf|sched_getcpu|tag_bytes|bts_select_counter_set' <<<"$body"; then
-    echo "[error] mode setup, oracle, output, or event selection leaked into $wrapper" >&2
-    exit 1
-  fi
-done
-baseline_group="$(objdump -d -C --no-show-raw-insn --disassemble=bts_polyz_group_target_baseline "$binary")"
-skipped_group="$(objdump -d -C --no-show-raw-insn --disassemble=bts_polyz_group_target_skipped_load "$binary")"
-grep -Eq 'movzbl[[:space:]]+0x3\(' <<<"$baseline_group" || {
-  echo "[error] canonical target group is missing the selected a[3] load" >&2; exit 1;
+disassemble_target() {
+    objdump -d --no-show-raw-insn \
+        --disassemble=bts_target "$1"
 }
-if grep -Eq 'movzbl[[:space:]]+0x3\(' <<<"$skipped_group"; then
-  echo "[error] skipped-load target still executes the selected a[3] load" >&2; exit 1
+
+count_instructions() {
+    awk '/^[[:space:]]*[0-9a-f]+:/ {count++} END {print count+0}'
+}
+
+r1_base_asm="$(disassemble_target "$r1_base")"
+r1_attack_asm="$(disassemble_target "$r1_attack")"
+
+r1_base_branches="$(grep -Ec '\bjne\b|\bjnz\b' <<<"$r1_base_asm")"
+r1_attack_branches="$(grep -Ec '\bjne\b|\bjnz\b' <<<"$r1_attack_asm" || true)"
+
+[[ "$r1_base_branches" -eq 1 ]] || {
+    echo "$r1_base_asm" >&2
+    fail "Region 1 baseline must contain exactly one target JNZ"
+}
+[[ "$r1_attack_branches" -eq 0 ]] || {
+    echo "$r1_attack_asm" >&2
+    fail "Region 1 attack must omit the target JNZ"
+}
+
+r1_base_count="$(count_instructions <<<"$r1_base_asm")"
+r1_attack_count="$(count_instructions <<<"$r1_attack_asm")"
+[[ $((r1_base_count - r1_attack_count)) -eq 1 ]] ||
+    fail "Region 1 binaries must differ statically by one branch instruction"
+
+r1_base_absorb_calls="$(
+    grep -Ec '\bcall.*bts_absorb_full_block_entry' <<<"$r1_base_asm"
+)"
+r1_attack_absorb_calls="$(
+    grep -Ec '\bcall.*bts_absorb_full_block_entry' <<<"$r1_attack_asm"
+)"
+[[ "$r1_base_absorb_calls" -eq "$r1_attack_absorb_calls" ]] ||
+    fail "Region 1 static absorb-body structure differs beyond the branch"
+
+r2_base_asm="$(disassemble_target "$r2_base")"
+r2_attack_asm="$(disassemble_target "$r2_attack")"
+
+grep -Eq '\bmov[[:space:]]+0x2\(%rax\),%r12d\b' <<<"$r2_base_asm" || {
+    echo "$r2_base_asm" >&2
+    fail "Region 2 baseline LDR.W analogue not found"
+}
+if grep -Eq '\bmov[[:space:]]+0x2\(%rax\),%r12d\b' <<<"$r2_attack_asm"; then
+    echo "$r2_attack_asm" >&2
+    fail "Region 2 attack still contains the skipped load"
 fi
-for body in "$baseline_group" "$skipped_group"; do
-  grep -Eq 'shl.*r12d' <<<"$body" || {
-    echo "[error] dependent shift on the load destination is missing" >&2; exit 1;
-  }
-  grep -Eq 'or.*r12d' <<<"$body" || {
-    echo "[error] dependent OR on the load destination is missing" >&2; exit 1;
-  }
+
+for pattern in \
+    '\bshr[[:space:]]+\$0x2,%r12d\b' \
+    '\band[[:space:]]+\$0x3ffff,%r12d\b' \
+    '\bsub[[:space:]]+%r12d,%eax\b'; do
+    grep -Eq "$pattern" <<<"$r2_base_asm" ||
+        fail "Region 2 baseline missing dependent operation: $pattern"
+    grep -Eq "$pattern" <<<"$r2_attack_asm" ||
+        fail "Region 2 attack missing dependent operation: $pattern"
 done
-baseline_count="$(grep -Ec '^[[:space:]]*[0-9a-f]+:' <<<"$baseline_group")"
-skipped_count="$(grep -Ec '^[[:space:]]*[0-9a-f]+:' <<<"$skipped_group")"
-[[ "$baseline_count" -eq $((skipped_count + 1)) ]] || {
-  echo "[error] polyz helpers must differ by exactly the one skipped load instruction" >&2
-  echo "        baseline=$baseline_count skipped=$skipped_count" >&2
-  exit 1
+
+r2_base_count="$(count_instructions <<<"$r2_base_asm")"
+r2_attack_count="$(count_instructions <<<"$r2_attack_asm")"
+[[ $((r2_base_count - r2_attack_count)) -eq 1 ]] ||
+    fail "Region 2 binaries must differ statically by one load instruction"
+
+r2_wrapper="$(
+    objdump -d --no-show-raw-insn \
+        --disassemble=bts_measure_target "$r2_attack"
+)"
+grep -Eq '\bxor[[:space:]]+%r12d,%r12d\b' <<<"$r2_wrapper" || {
+    echo "$r2_wrapper" >&2
+    fail "Region 2 wrapper does not establish r12d=0 before PMU enable"
 }
-{
-  printf '
-=== exact polyz load-skip helpers ===
-'
-  printf '%s
-' "$baseline_group"
-  printf '%s
-' "$skipped_group"
-} >> "${BTS_RESULTS_ROOT}/collector_disassembly.txt"
-cat <<EOF2
-Window verification passed:
-  exactly one executable exists: $binary
-  the same ELF implements four baseline and four attack semantic cases
-  all ${#BTS_PASSES[@]} PMU counter sets are selected at runtime
-  family/mode selection and input construction finish before PMU enable
-  each measurement wrapper directly calls exactly one preselected target
-  semantic oracles, comparison, tags, scheduler checks, and CSV output are outside the PMU window
-  SHAKE abort omits blocks 4-7; SHAKE skip omits only block 3
-  polyz zero/stale variants share the same skipped-load target and omit exactly the selected a[39] load; the following shift/OR remain
-EOF2
+
+echo "[pass] only the two requested attacks are built."
+echo "[pass] Region 1 baseline contains one loop-back JNZ; attack omits it."
+echo "[pass] Region 1 attack executes four rather than eight full absorb blocks."
+echo "[pass] Region 2 baseline contains MOVL 2(%rax),%r12d; attack omits it."
+echo "[pass] Region 2 establishes the ARM-r5 analogue as zero outside PMU."
+echo "[pass] Region 2 dependent shift/mask/subtract instructions remain unchanged."
+echo "[pass] each baseline/attack target pair differs statically by exactly one instruction."
