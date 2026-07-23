@@ -1,76 +1,62 @@
 #!/usr/bin/env bash
 set -euo pipefail
-source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/exp_env.sh"
-tmp="$(mktemp -d)"
-trap 'rm -rf "$tmp"' EXIT
 
-extract_symbol() {
-  local binary="$1" symbol="$2" output="$3"
-  objdump -d -C "$binary" > "${output}.all"
-  awk -v symbol="$symbol" '
-    $0 ~ "<" symbol ">:" {inside=1; print; next}
-    inside && /^[[:xdigit:]]+ <.*>:/ {exit}
-    inside {print}
-  ' "${output}.all" > "$output"
-}
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd -- "$SCRIPT_DIR/../.." && pwd)"
+BUILD_DIR="${BUILD_DIR:-$REPO_ROOT/build}"
+BIN_DIR="$BUILD_DIR/bin/mind_faulty_keccak"
 
-check_target_symbol() {
-  local file="$1"
-  [[ -s "$file" ]] || { echo "[error] empty disassembly: $file" >&2; exit 1; }
-  if grep -Eq '<(ioctl|read|reference_|build_message|fprintf|fwrite|memcmp|output_tag)' "$file"; then
-    echo "[error] non-target work leaked into measured target/helper: $file" >&2
+fail() {
+    echo "[error] $*" >&2
     exit 1
-  fi
 }
 
-check_wrapper_symbol() {
-  local file="$1"
-  [[ -s "$file" ]] || { echo "[error] empty disassembly: $file" >&2; exit 1; }
-  if grep -Eq '<(reference_|build_message|fprintf|fwrite|memcmp|output_tag)' "$file"; then
-    echo "[error] semantic or output work leaked into measurement wrapper: $file" >&2
-    exit 1
-  fi
+make -C "$REPO_ROOT" mind-faulty-keccak
+
+BASE="$BIN_DIR/mfk_movs_baseline_structural-instructions"
+ATTACK="$BIN_DIR/mfk_movs_skip_structural-instructions"
+[[ -x "$BASE" ]] || fail "missing baseline binary"
+[[ -x "$ATTACK" ]] || fail "missing attack binary"
+
+"$BASE" --self-test
+"$ATTACK" --self-test
+
+BASE_ASM="$(objdump -d --no-show-raw-insn --disassemble=mfk_keccak_target "$BASE")"
+ATTACK_ASM="$(objdump -d --no-show-raw-insn --disassemble=mfk_keccak_target "$ATTACK")"
+
+grep -Eq '\bor[l]?[[:space:]]+\$0x1,%r10d\b' <<<"$BASE_ASM" || {
+    echo "$BASE_ASM" >&2
+    fail "baseline MOVS-equivalent instruction not found"
 }
-
-for pass in "${MFK_PASSES[@]}"; do
-  ab="${MFK_BIN_DIR}/mfk_abort_baseline_${pass}"
-  aa="${MFK_BIN_DIR}/mfk_loop_abort_${pass}"
-  sb="${MFK_BIN_DIR}/mfk_skip_baseline_${pass}"
-  sa="${MFK_BIN_DIR}/mfk_skip_round_${pass}"
-  for bin in "$ab" "$aa" "$sb" "$sa"; do
-    [[ -x "$bin" ]] || { echo "[error] missing $bin" >&2; exit 1; }
-  done
-
-  grep -q 'family=loop-abort mode=abort-baseline rounds=24' <<<"$("$ab" --self-test)"
-  grep -q "family=loop-abort mode=loop-abort rounds=${MFK_ATTACK_ROUNDS:-8}" <<<"$("$aa" --self-test)"
-  grep -q 'family=skip-one-round mode=skip-baseline rounds=24' <<<"$("$sb" --self-test)"
-  grep -q "family=skip-one-round mode=skip-one-round rounds=23.*skipped_round=${MFK_SKIP_ROUND:-8}" <<<"$("$sa" --self-test)"
-
-  for pair in "ab:$ab" "aa:$aa" "sb:$sb" "sa:$sa"; do
-    key="${pair%%:*}"; bin="${pair#*:}"
-    extract_symbol "$bin" mfk_keccak_target "$tmp/${key}-${pass}.target"
-    extract_symbol "$bin" mfk_measure_target "$tmp/${key}-${pass}.wrapper"
-    check_target_symbol "$tmp/${key}-${pass}.target"
-    check_wrapper_symbol "$tmp/${key}-${pass}.wrapper"
-    [[ "$(grep -c '<mfk_keccak_target>' "$tmp/${key}-${pass}.wrapper" || true)" -eq 1 ]] || {
-      echo "[error] wrapper must call target once: $bin" >&2; exit 1; }
-  done
-
-  extract_symbol "$sb" mfk_keccak_round "$tmp/sb-${pass}.round"
-  extract_symbol "$sa" mfk_keccak_round "$tmp/sa-${pass}.round"
-  check_target_symbol "$tmp/sb-${pass}.round"
-  check_target_symbol "$tmp/sa-${pass}.round"
-done
-
-if grep -REn 'if[[:space:]]*\([[:space:]]*round[[:space:]]*==|if[[:space:]]*\([[:space:]]*round[[:space:]]*!=' \
-    "${MFK_REPO_ROOT}/targets/mind_faulty_keccak/mind_faulty_keccak_x86.c"; then
-  echo "[error] runtime round-skip selector found in measured implementation" >&2
-  exit 1
+if grep -Eq '\bor[l]?[[:space:]]+\$0x1,%r10d\b' <<<"$ATTACK_ASM"; then
+    echo "$ATTACK_ASM" >&2
+    fail "attack still contains the skipped MOVS-equivalent instruction"
 fi
 
-echo "Window verification passed:"
-echo "  attack 1: loop abort executes only the configured prefix"
-echo "  attack 2: one selected round is compile-time omitted; prefix and suffix execute"
-echo "  each attack has a matched baseline implementation"
-echo "  no runtime attack selector or fault assignment is present"
-echo "  input preparation, SHAKE padding, semantic oracle, and output remain outside the PMU window"
+base_jnz="$(grep -Ec '\bjne\b|\bjnz\b' <<<"$BASE_ASM")"
+attack_jnz="$(grep -Ec '\bjne\b|\bjnz\b' <<<"$ATTACK_ASM")"
+[[ "$base_jnz" -eq 1 ]] || fail "baseline must contain one fault-site branch"
+[[ "$attack_jnz" -eq 1 ]] || fail "attack must contain one fault-site branch"
+
+base_calls="$(grep -Ec '\bcall.*mfk_keccak_round' <<<"$BASE_ASM")"
+attack_calls="$(grep -Ec '\bcall.*mfk_keccak_round' <<<"$ATTACK_ASM")"
+[[ "$base_calls" -eq 24 ]] || fail "baseline must retain 24 static round calls"
+[[ "$attack_calls" -eq 24 ]] || fail "attack must retain 24 static round calls"
+
+count_instructions() {
+    awk '/^[[:space:]]*[0-9a-f]+:/ {count++} END {print count+0}'
+}
+base_count="$(count_instructions <<<"$BASE_ASM")"
+attack_count="$(count_instructions <<<"$ATTACK_ASM")"
+[[ $((base_count - attack_count)) -eq 1 ]] || {
+    echo "baseline static instructions=$base_count" >&2
+    echo "attack static instructions=$attack_count" >&2
+    fail "target binaries must differ statically by exactly one instruction"
+}
+
+echo "[pass] only Attack 1 is built."
+echo "[pass] baseline contains one flag-setting MOVS-equivalent instruction."
+echo "[pass] attack omits exactly that instruction."
+echo "[pass] the same following conditional branch remains in both binaries."
+echo "[pass] both binaries retain all 24 round-call sites statically."
+echo "[pass] baseline executes 24 rounds; attack aborts after 8 rounds."

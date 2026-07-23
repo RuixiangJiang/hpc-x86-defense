@@ -1,343 +1,497 @@
-# Wang et al., “Mind the Faulty KECCAK”: Two-Attack PMU Experiment
+# Wang et al., “Mind the Faulty KECCAK” — skipped-MOVS loop-abort experiment
 
-This experiment implements and evaluates two distinct Keccak control-flow fault models described in Wang et al., **“Mind the Faulty KECCAK.”** Both attacks are executed through separate compile-time binaries, measured with Linux performance monitoring counters on x86, and evaluated using independent calibration, benign-validation, and attack-test datasets.
+This directory contains only **Attack 1** from Wang et al., *“Mind the Faulty
+KECCAK”*: aborting the Keccak round loop by skipping the flag-setting
+instruction immediately before the conditional branch that continues the loop.
 
-The experiment reports the two attacks **side by side**. Their FPR and TPR values are not pooled because each attack uses its own matched baseline implementation and independently calibrated detector.
-
-## Implemented attacks
-
-### Attack 1: Abort the Keccak round loop
-
-The normal implementation executes all 24 rounds of Keccak-f[1600]:
-
-```text
-round 0, 1, 2, ..., 23
-```
-
-The faulted implementation terminates the round loop after a configured prefix. With the default setting `MFK_ATTACK_ROUNDS=8`, it executes:
+The original physical experiment targets an ARM Thumb `MOVS` instruction with
+EMFI. This repository runs on x86-64 and therefore cannot execute a literal ARM
+`MOVS`. Instead, it uses a one-instruction x86 architectural analogue that
+preserves the two properties relevant to the attack:
 
 ```text
-round 0, 1, 2, ..., 7
+1. write the loop-control value;
+2. update the condition flags consumed by the following branch.
 ```
 
-and then returns through the normal function epilogue.
+---
 
-The attack binary does not contain a runtime fault selector. The shortened loop bound is fixed at compile time.
+## 1. Exact skipped instruction
 
-### Attack 2: Skip one selected Keccak round
+The fault site in `mfk_keccak_target` is:
 
-The second attack omits one selected round while the prefix and suffix continue normally. With the default zero-based setting `MFK_SKIP_ROUND=8`, the matched baseline executes:
+```asm
+xorl %r10d, %r10d
+orl  $1, %r10d
+jnz  .Lmfk_suffix
+```
+
+The skipped instruction is:
+
+```asm
+orl $1, %r10d
+```
+
+This instruction is the x86 MOVS-equivalent used by the experiment.
+
+It has two effects:
 
 ```text
-prefix: round 0, 1, ..., 7
-selected round: round 8
-suffix: round 9, 10, ..., 23
+r10d: 0 -> 1
+ZF:   1 -> 0
 ```
 
-The faulted implementation executes:
+The immediately following conditional branch is:
+
+```asm
+jnz .Lmfk_suffix
+```
+
+### Baseline
 
 ```text
-prefix: round 0, 1, ..., 7
-selected round: omitted
-suffix: round 9, 10, ..., 23
+xorl %r10d,%r10d
+    r10d = 0
+    ZF = 1
+
+orl $1,%r10d
+    r10d = 1
+    ZF = 0
+
+jnz .Lmfk_suffix
+    branch is taken
+    rounds 8 through 23 execute
+    total Keccak rounds = 24
 ```
 
-The omitted round is selected at compile time. The measured target does not execute a runtime condition such as:
-
-```c
-if (round == skipped_round)
-```
-
-The implemented second attack is **skip one selected Keccak round**, not the omission of an entire multi-block SHAKE invocation.
-
-## Matched baselines
-
-The two attacks use separate matched baselines.
-
-| Experiment | Matched baseline | Faulted target |
-|---|---|---|
-| Loop abort | Original 24-round loop | Same loop compiled to execute only the configured prefix |
-| Skip one round | Prefix, selected-round call, and suffix structure | Same prefix and suffix structure with the selected-round call omitted |
-
-This separation prevents implementation-structure differences between the two experiments from being interpreted as fault effects.
-
-Each detector is calibrated only from the matched baseline belonging to the same attack family.
-
-## Clean PMU measurement window
-
-For every sample, the PMU measurement surrounds only the Keccak target:
+### Attack
 
 ```text
-construct deterministic input                       outside PMU window
-prepare the padded SHAKE256 Keccak state            outside PMU window
-enable and reset PMU group                          window boundary
-    mfk_keccak_target(state)                        measured window
-disable and read PMU group                          window boundary
-compute independent semantic oracle                 outside PMU window
-compare measured and expected states                outside PMU window
-write CSV                                            outside PMU window
+xorl %r10d,%r10d
+    r10d = 0
+    ZF = 1
+
+orl $1,%r10d
+    skipped
+
+jnz .Lmfk_suffix
+    reads the stale ZF = 1
+    branch is not taken
+    the function returns through the normal epilogue
+    total Keccak rounds = 8
 ```
 
-The measured window does not contain:
+The branch itself is **not removed**. The same `jnz` instruction is present and
+executed in both binaries. Only the preceding flag-setting instruction is
+omitted in the attack binary.
 
-- runtime attack selection;
-- software fault assignment;
-- input generation;
-- SHAKE padding;
-- semantic-oracle execution;
-- output comparison;
-- CSV formatting or file output.
+Both binaries statically retain all 24 Keccak-round call sites. The attack
+executes only rounds 0 through 7 because the unchanged branch is not taken.
 
-The window-verification script checks all generated binaries and confirms that:
+---
 
-- the loop-abort baseline executes 24 rounds;
-- the loop-abort attack executes only the configured prefix;
-- the skip-round baseline executes all 24 intended rounds;
-- the skip-round attack omits exactly the configured round while preserving the prefix and suffix;
-- no runtime attack selector or fault assignment is present;
-- input preparation, semantic validation, and output remain outside the PMU window.
+## 2. Relation to the physical attack
 
-## Semantic validation
-
-Every measured sample is checked against an independent reference implementation after the PMU window closes.
-
-A loop-abort baseline sample is valid only when:
+The paper uses EMFI to skip an ARM Thumb `MOVS`. This repository reproduces the
+architectural fault effect on x86-64:
 
 ```text
-measured state == reference state after 24 rounds
+skip one flag-setting instruction
+    ->
+the following conditional branch sees stale flags
+    ->
+the branch is not taken
+    ->
+the Keccak loop aborts
 ```
 
-A loop-abort attack sample is valid only when:
+The implementation does not model:
 
 ```text
-measured state == reference state after the configured prefix
-measured state != reference state after 24 rounds
+EM pulse position
+pulse width
+trigger delay
+physical fault-success probability
+neighboring-instruction corruption
+the exact ARM pipeline behavior
 ```
 
-A skip-round baseline sample is valid only when:
+It is therefore a software-level architectural simulation of the published
+instruction-skip effect, not a physical EMFI reproduction.
+
+---
+
+## 3. PMU measurement window
+
+For every sample:
 
 ```text
-measured state == reference state after all 24 rounds
+construct deterministic SHAKE256 state          outside PMU
+compute reference states                        outside PMU
+enable and reset PMU group                      window boundary
+    mfk_keccak_target(state)                    measured window
+        rounds 0..7
+        MOVS-equivalent fault site
+        conditional JNZ
+        rounds 8..23 in baseline only
+disable and read PMU group                      window boundary
+semantic comparison and CSV output              outside PMU
 ```
 
-A skip-round attack sample is valid only when:
+The PMU window contains no runtime attack selector and no software fault
+assignment.
+
+Baseline and attack are separate compile-time binaries:
 
 ```text
-measured state == reference state with exactly one selected round omitted
-measured state != reference state after all 24 rounds
+baseline:
+    contains orl $1,%r10d
+
+attack:
+    omits exactly orl $1,%r10d
 ```
 
-The reported experiment obtained semantic success for all attack samples:
+---
+
+## 4. Static and semantic verification
+
+`verify_window.sh` checks that:
 
 ```text
-loop-abort:     500/500
-skip-one-round: 500/500
+baseline contains the MOVS-equivalent OR instruction
+attack omits that one instruction
+the following conditional JNZ remains in both binaries
+both binaries retain all 24 round-call sites statically
+the target functions differ statically by exactly one instruction
+baseline output equals 24 Keccak rounds
+attack output equals the first 8 Keccak rounds
 ```
 
-## PMU collection
+The semantic self-test evaluates 1,000 deterministic inputs for each binary.
 
-The experiment uses 28 non-multiplexed PMU passes. Each pass opens:
+---
+
+## 5. PMU events
+
+Five non-multiplexed counter passes are collected. Each pass measures `cycles`
+plus one target event:
 
 ```text
-cycles + one target counter
+structural-instructions:
+    cycles
+    retired instructions
+
+structural-branches:
+    cycles
+    retired branches
+
+structural-branch-misses:
+    cycles
+    branch misses
+
+structural-loads:
+    cycles
+    retired loads
+
+structural-stores:
+    cycles
+    retired stores
 ```
 
-The process is pinned to one compatible P-core. Every CSV row records the configured CPU and the CPU observed immediately before and after the measured target. Samples are rejected when the process migrates, executes on the wrong CPU, has an incomplete PMU group, or has insufficient counter running time.
-
-The default validity requirement is:
+Default collection:
 
 ```text
-running_percent >= 95
+sessions:                 4
+samples per mode/session: 500
+total baseline samples:   2,000
+total attack samples:     2,000
+warmup executions:        20
+collection order:         alternating AB / BA
+minimum PMU running:      95%
 ```
 
-Before the full collection begins, the runner performs a short PMU probe for both attack families. The full experiment proceeds only when the probe passes.
+---
 
-## Detector
+## 6. Raw baseline-versus-attack results
 
-The default detector uses the retired-instruction count from the non-multiplexed pass:
+### 6.1 Retired instructions
+
+| Statistic | Baseline | Attack | Delta |
+|---|---:|---:|---:|
+| mode | 25,073 | 8,384 | -16,689 |
+| median | 25,073 | 8,384 | -16,689 |
+| p05 | 25,073 | 8,384 | |
+| p95 | 25,073 | 8,384 | |
+
+Per-session median deltas:
 
 ```text
-structural-instructions.instructions
+s00: -16,689
+s01: -16,689
+s02: -16,689
+s03: -16,689
 ```
 
-For each attack family, the detector is calibrated independently:
-
-1. collect the matched baseline calibration dataset;
-2. compute the modal retired-instruction count;
-3. require the baseline modal rate to meet the configured stability threshold;
-4. freeze the modal value before validation and attack testing;
-5. classify a sample as anomalous when its retired-instruction count differs from the frozen baseline value.
-
-The default minimum calibration modal rate is:
+The instruction difference is exact and session-independent. Although the
+fault injection omits only one local instruction, the changed branch outcome
+prevents the remaining 16 Keccak rounds from executing. The measured
+instruction difference therefore includes:
 
 ```text
-MFK_MINIMUM_MODAL_RATE=0.98
+1 skipped MOVS-equivalent instruction
++
+all instructions belonging to rounds 8 through 23
 ```
 
-The detector therefore does not select or tune a threshold using the validation or attack-test datasets.
+### 6.2 Cycles in the instruction pass
 
-## Experimental results
+| Statistic | Baseline | Attack | Delta |
+|---|---:|---:|---:|
+| median | 4,787 | 1,791 | -2,996 |
+| p05 | 4,697.95 | 1,766 | |
+| p95 | 5,178 | 1,974.05 | |
 
-Default fault parameters:
+Per-session cycle median deltas:
 
 ```text
-loop-abort: execute the first 8 of 24 rounds
-skip-one-round: omit zero-based round index 8
+s00: -2,984.5
+s01: -3,026
+s02: -2,953
+s03: -3,019
 ```
 
-Default dataset sizes per attack family:
+The large and consistent reduction is caused by the complete removal of rounds
+8 through 23 from the dynamic execution path.
+
+### 6.3 Retired branches
+
+| Statistic | Baseline | Attack | Delta |
+|---|---:|---:|---:|
+| mode | 1,858 | 626 | -1,232 |
+| median | 1,858 | 626 | -1,232 |
+| p05 | 1,858 | 626 | |
+| p95 | 1,858 | 626 | |
+
+Per-session median delta:
 
 ```text
-calibration baseline: 500 samples
-benign validation:   5000 samples
-attack test:          500 samples
+s00: -1,232
+s01: -1,232
+s02: -1,232
+s03: -1,232
 ```
 
-### Side-by-side detection results
+The conditional fault-site branch still retires in both executions. The
+difference comes from branch instructions that would have executed inside
+Keccak rounds 8 through 23.
 
-| Attack | Matched baseline detector | FP / benign | FPR | One-sided 95% FPR upper bound | TP / attack | Measured TPR | One-sided 95% TPR lower bound | Semantic success | Instruction delta |
-|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Abort Keccak loop, 24 rounds to an 8-round prefix | Retired-instruction mode = 28,787 | 5 / 5,000 | **0.10%** | 0.2101% | 500 / 500 | **100%** | 99.4026% | 500 / 500 | -19,152 |
-| Skip one Keccak round, omit round index 8 | Retired-instruction mode = 25,149 | 3 / 5,000 | **0.06%** | 0.1550% | 500 / 500 | **100%** | 99.4026% | 500 / 500 | -1,043 |
+### 6.4 Branch misses
 
-The two rows represent two independently calibrated detectors. They must be reported separately:
+| Statistic | Baseline | Attack | Delta |
+|---|---:|---:|---:|
+| mode | 1 | 1 | 0 |
+| median | 1 | 1 | 0 |
+| p05 | 1 | 1 | |
+| p95 | 2 | 1 | |
+
+Per-session median deltas:
 
 ```text
-loop-abort:     FPR = 0.10%, TPR = 100%
-skip-one-round: FPR = 0.06%, TPR = 100%
+s00: -1
+s01:  0
+s02:  0
+s03:  0
 ```
 
-Do not combine the two rows into a single overall FPR or TPR because they use different matched baseline implementations and independently frozen detector values.
+Branch misses do not provide a stable attack signal. The dominant effect is the
+reduction in total retired branches, not a consistent change in branch
+misprediction behavior.
 
-### Result interpretation
+### 6.5 Retired loads
 
-For the loop-abort attack, executing only 8 of the intended 24 rounds reduced the modal retired-instruction count by 19,152. The resulting separation was large enough to detect all 500 attack samples, with 5 false alarms among 5,000 benign validation samples.
+| Statistic | Baseline | Attack | Delta |
+|---|---:|---:|---:|
+| mode | 5,457 | 1,825 | -3,632 |
+| median | 5,457 | 1,825 | -3,632 |
+| p05 | 5,457 | 1,825 | |
+| p95 | 5,457 | 1,825 | |
 
-For the skip-one-round attack, omitting only round 8 reduced the modal retired-instruction count by 1,043. Although this reduction was much smaller than the loop-abort effect, it remained well separated from the stable matched baseline and all 500 attack samples were detected. The corresponding benign validation set produced 3 false alarms among 5,000 samples.
+Per-session median delta:
 
-A measured TPR of 100% means that no false negative occurred in the 500-sample attack-test dataset. It does not establish that the population TPR is exactly 100%. The one-sided 95% lower confidence bound is therefore also reported as 99.4026%.
+```text
+s00: -3,632
+s01: -3,632
+s02: -3,632
+s03: -3,632
+```
 
-## Repository-root execution
+### 6.6 Retired stores
 
-All commands are intended to be run from the root of `hpc-x86-defense`. There is no need to change into the experiment script directory.
+| Statistic | Baseline | Attack | Delta |
+|---|---:|---:|---:|
+| mode | 2,385 | 801 | -1,584 |
+| median | 2,385 | 801 | -1,584 |
+| p05 | 2,385 | 801 | |
+| p95 | 2,385 | 801 | |
 
-### Smoke test
+Per-session median delta:
+
+```text
+s00: -1,584
+s01: -1,584
+s02: -1,584
+s03: -1,584
+```
+
+The load and store reductions are exact because the attack does not execute the
+memory operations belonging to the final 16 Keccak rounds.
+
+---
+
+## 7. Result summary
+
+| Event | Baseline median | Attack median | Median delta |
+|---|---:|---:|---:|
+| instructions | 25,073 | 8,384 | **-16,689** |
+| branches | 1,858 | 626 | **-1,232** |
+| branch misses | 1 | 1 | 0 |
+| retired loads | 5,457 | 1,825 | **-3,632** |
+| retired stores | 2,385 | 801 | **-1,584** |
+| cycles, instruction pass | 4,787 | 1,791 | **-2,996** |
+
+The skip of one local flag-setting instruction causes a large global
+control-flow effect:
+
+```text
+one instruction is skipped locally
+    ->
+the following branch is not taken
+    ->
+16 complete Keccak rounds are omitted dynamically
+    ->
+instructions, branches, loads, stores, and cycles all decrease sharply
+```
+
+This is why the PMU signal is much larger than a one-instruction difference.
+
+---
+
+## 8. Retired-instruction detector
+
+The detector freezes the baseline retired-instruction mode:
+
+```text
+baseline mode = 25,073
+```
+
+A sample is classified as faulty when its retired-instruction count differs
+from this frozen value.
+
+Results:
+
+```text
+false positives: 2 / 2,000
+FPR:             0.1000%
+
+true positives:  2,000 / 2,000
+measured TPR:    100.0000%
+```
+
+A measured TPR of 100% means that no false negative occurred in this
+2,000-sample attack dataset. It does not prove a population TPR of exactly
+100%.
+
+The instruction detector is effective because the attack distribution is
+separated from the baseline by exactly 16,689 retired instructions.
+
+---
+
+## 9. Interpretation
+
+The most useful PMU events for this attack are:
+
+```text
+retired instructions
+retired branches
+retired loads
+retired stores
+cycles
+```
+
+They all observe the disappearance of the final 16 Keccak rounds.
+
+`branch_misses` is not useful because the attack does not primarily create a
+stable misprediction pattern. It changes whether the suffix is executed at
+all.
+
+This experiment demonstrates an important distinction:
+
+```text
+local physical fault:
+    one MOVS instruction is skipped
+
+logical program effect:
+    the loop-continuation branch is not taken
+
+global dynamic effect:
+    16 Keccak rounds disappear
+```
+
+Consequently, a local one-instruction fault can produce a very large and highly
+detectable HPC signature.
+
+---
+
+## 10. Commands
+
+Run from the repository root.
+
+Build and verify:
 
 ```bash
-./run_mind_faulty_keccak.sh smoke
+scripts/Mind_the_Faulty_KECCAK/run.sh verify
 ```
 
-This command:
-
-- resolves available PMU events;
-- builds the experiment binaries;
-- runs semantic self-tests;
-- performs the static measurement-window audit;
-- performs short PMU probes for both attack families.
-
-### Full experiment
+Smoke test:
 
 ```bash
-./run_mind_faulty_keccak.sh full
+scripts/Mind_the_Faulty_KECCAK/run.sh smoke
 ```
 
-The full runner performs:
-
-1. PMU-event resolution;
-2. compilation of all matched-baseline and attack binaries;
-3. semantic and disassembly-based window verification;
-4. P-core PMU probes for both attack families;
-5. calibration, validation, and attack collection for loop abort;
-6. calibration, validation, and attack collection for skip one round;
-7. independent FPR/TPR analysis for each attack;
-8. generation of a combined side-by-side summary.
-
-### Other actions
+Full collection and analysis:
 
 ```bash
-./run_mind_faulty_keccak.sh probe
-./run_mind_faulty_keccak.sh collect
-./run_mind_faulty_keccak.sh analyze
-./run_mind_faulty_keccak.sh verify
+scripts/Mind_the_Faulty_KECCAK/run.sh full
 ```
 
-### Explicit configuration
+Reanalyze existing CSV files:
 
 ```bash
-MFK_CPU_CORE=2 \
-MFK_ATTACK_ROUNDS=8 \
-MFK_SKIP_ROUND=8 \
-MFK_CALIBRATION_SAMPLES=500 \
-MFK_VALIDATION_SAMPLES=5000 \
-MFK_ATTACK_SAMPLES=500 \
-./run_mind_faulty_keccak.sh full
+scripts/Mind_the_Faulty_KECCAK/run.sh analyze
 ```
 
-`MFK_SKIP_ROUND` uses a zero-based round index in the range 0 to 23.
+---
 
-The stopping point or skipped round must be selected before inspecting test-set performance. Do not test multiple positions and report only the easiest one to detect without clearly describing that selection process.
-
-## Generated binaries
-
-For each PMU pass, the build creates four binaries:
+## 11. Output files
 
 ```text
-mfk_abort_baseline_<pass>
-mfk_loop_abort_<pass>
-mfk_skip_baseline_<pass>
-mfk_skip_round_<pass>
+results/Mind_the_Faulty_KECCAK/movs_skip_loop_abort/
+├── structural-instructions/
+│   ├── s00_baseline.csv
+│   ├── s00_attack.csv
+│   └── ...
+├── structural-branches/
+├── structural-branch-misses/
+├── structural-loads/
+├── structural-stores/
+├── raw_behavior_report.txt
+├── raw_behavior_summary.csv
+└── raw_behavior_summary.json
 ```
 
-With 28 non-multiplexed PMU passes, the complete build contains 112 experiment binaries.
+`raw_behavior_report.txt` contains the readable baseline-versus-attack report.
 
-## Result files
+`raw_behavior_summary.csv` contains flat event summaries.
 
-```text
-results/Mind_the_Faulty_KECCAK/two_attacks/
-├── cpu_affinity.json
-├── microarch_events.json
-├── loop-abort/
-│   ├── <PMU pass directories>/
-│   ├── detector_model.json
-│   ├── fpr_tpr_report.json
-│   └── fpr_tpr_report.txt
-├── skip-one-round/
-│   ├── <PMU pass directories>/
-│   ├── detector_model.json
-│   ├── fpr_tpr_report.json
-│   └── fpr_tpr_report.txt
-├── combined_summary.txt
-├── combined_summary.json
-├── combined_summary.csv
-└── combined_summary.console.txt
-```
-
-The main side-by-side report is:
-
-```bash
-cat results/Mind_the_Faulty_KECCAK/two_attacks/combined_summary.txt
-```
-
-Machine-readable results are available in:
-
-```text
-combined_summary.json
-combined_summary.csv
-```
-
-## Recommended reporting text
-
-> We evaluated two Keccak control-flow fault models using separate matched baselines and independently calibrated retired-instruction detectors. For the round-loop abort fault, in which execution terminated after the first 8 of 24 rounds, the detector produced 5 false positives among 5,000 benign validation executions and detected all 500 attack executions, corresponding to an FPR of 0.10% and a measured TPR of 100%. For the selected-round omission fault, in which round 8 was skipped while the prefix and suffix executed normally, the detector produced 3 false positives among 5,000 benign validation executions and detected all 500 attack executions, corresponding to an FPR of 0.06% and a measured TPR of 100%. The one-sided 95% lower confidence bound on the TPR was 99.40% for both attacks. Because the attacks used separate matched baselines and independently frozen detector values, their FPR and TPR values are reported side by side rather than pooled.
-
-## Scope and limitations
-
-The current results establish detection performance under the evaluated environment and configuration:
-
-- one x86 experiment machine;
-- one fixed compatible P-core;
-- independent calibration, validation, and attack input domains;
-- loop abort after round 7;
-- omission of round index 8;
-- 500 attack samples per attack family.
-
-The reported values should not be presented as cross-machine or cross-day guarantees without additional independent replication. The results also apply to these control-flow faults and should not be generalized to Keccak faults that modify only data values while preserving the same instruction stream.
+`raw_behavior_summary.json` contains the complete descriptive statistics and
+per-session results.
