@@ -175,13 +175,36 @@ rej:
     /* END HPC-X86 FIDDLING TWIDDLE Y NTT HOOK */
     /* BEGIN HPC-X86 KRAHMER A CONSUMER HOOK */
 #if defined(PQCLEAN_DILITHIUM2_KRAHMER_X86) && KRAHMER_VARIANT == 2
-    PQCLEAN_DILITHIUM2_CLEAN_krahmer_matrix_apply(&w1, mat, &z);
-#else
-    PQCLEAN_DILITHIUM2_CLEAN_polyvec_matrix_pointwise_montgomery(&w1, mat, &z);
-#endif
-    /* END HPC-X86 KRAHMER A CONSUMER HOOK */
+    /*
+     * Fault preparation is outside the PMU interval. Baseline leaves A
+     * unchanged; attack changes exactly one expanded A coefficient to zero.
+     */
+    PQCLEAN_DILITHIUM2_CLEAN_krahmer_matrix_prepare(mat);
+    PQCLEAN_DILITHIUM2_CLEAN_krahmer_matrix_region_begin();
+
+    /*
+     * Measured region: the unchanged consumer of A, including immediate
+     * propagation through reduction and inverse NTT.
+     */
+    PQCLEAN_DILITHIUM2_CLEAN_polyvec_matrix_pointwise_montgomery(
+        &w1, mat, &z);
     PQCLEAN_DILITHIUM2_CLEAN_polyveck_reduce(&w1);
     PQCLEAN_DILITHIUM2_CLEAN_polyveck_invntt_tomont(&w1);
+
+    /*
+     * Stop counters before entering any build-specific restoration or audit
+     * code. This keeps the measured instruction stream identical.
+     */
+    PQCLEAN_DILITHIUM2_CLEAN_krahmer_matrix_region_stop();
+    PQCLEAN_DILITHIUM2_CLEAN_krahmer_matrix_audit(
+        &w1, mat, &z);
+#else
+    PQCLEAN_DILITHIUM2_CLEAN_polyvec_matrix_pointwise_montgomery(
+        &w1, mat, &z);
+    PQCLEAN_DILITHIUM2_CLEAN_polyveck_reduce(&w1);
+    PQCLEAN_DILITHIUM2_CLEAN_polyveck_invntt_tomont(&w1);
+#endif
+    /* END HPC-X86 KRAHMER A CONSUMER HOOK */
 
     /* Decompose w and call the random oracle */
     PQCLEAN_DILITHIUM2_CLEAN_polyveck_caddq(&w1);

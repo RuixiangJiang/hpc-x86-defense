@@ -4,109 +4,206 @@ set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=/dev/null
 source "$SCRIPT_DIR/../common.sh"
+# shellcheck source=/dev/null
+source "$SCRIPT_DIR/exp_env.sh"
 
-require_command objdump
-require_command nm
-require_command python3
+SRC="$REPO_ROOT/third_party/pqm4/mupq/pqclean/crypto_sign/dilithium2/clean/krahmer_correction_fault_x86.c"
+SIGN="$REPO_ROOT/third_party/pqm4/mupq/pqclean/crypto_sign/dilithium2/clean/sign.c"
+BIN_DIR="$BUILD_DIR/bin/krahmer_correction_fault"
 
-EVENT_HEADER="$REPO_ROOT/third_party/pqm4/mupq/pqclean/crypto_sign/dilithium2/clean/krahmer_microarch_events_generated.h"
-python3 "$SCRIPT_DIR/resolve_microarch_events.py" \
-    --output "$EVENT_HEADER" \
-    --quiet
+fail() {
+    echo "[error] $*" >&2
+    exit 1
+}
 
-make -C "$REPO_ROOT" krahmer-correction-fault
+require_contains() {
+    local file="$1"
+    local needle="$2"
+    local label="$3"
 
-CORR_BASE="$BUILD_DIR/bin/krahmer_correction_fault/correction_baseline"
-CORR_ATTACK="$BUILD_DIR/bin/krahmer_correction_fault/correction_skip"
-A_BASE="$BUILD_DIR/bin/krahmer_correction_fault/a_baseline"
-A_ATTACK="$BUILD_DIR/bin/krahmer_correction_fault/a_fault"
-CORR_BASE_CACHE="$BUILD_DIR/bin/krahmer_correction_fault/correction_baseline_cache"
-CORR_ATTACK_CACHE="$BUILD_DIR/bin/krahmer_correction_fault/correction_skip_cache"
-A_BASE_CACHE="$BUILD_DIR/bin/krahmer_correction_fault/a_baseline_cache"
-A_ATTACK_CACHE="$BUILD_DIR/bin/krahmer_correction_fault/a_fault_cache"
-TMP="$(mktemp -d)"
-trap 'rm -rf "$TMP"' EXIT
+    grep -Fq "$needle" "$file" || fail "$label not found: $needle"
+}
 
-for pair in \
-    "$CORR_BASE:corr_base" \
-    "$CORR_ATTACK:corr_attack" \
-    "$A_BASE:a_base" \
-    "$A_ATTACK:a_attack" \
-    "$CORR_BASE_CACHE:corr_base_cache" \
-    "$CORR_ATTACK_CACHE:corr_attack_cache" \
-    "$A_BASE_CACHE:a_base_cache" \
-    "$A_ATTACK_CACHE:a_attack_cache"; do
-    binary="${pair%%:*}"
-    name="${pair##*:}"
-    nm -an "$binary" > "$TMP/$name.nm"
+for binary in \
+    correction_baseline \
+    correction_skip_add \
+    a_baseline_structural \
+    a_load_zero_structural \
+    a_baseline_cache_l1d \
+    a_load_zero_cache_l1d \
+    a_baseline_cache_llc_dtlb \
+    a_load_zero_cache_llc_dtlb; do
+    [[ -x "$BIN_DIR/$binary" ]] || \
+        fail "missing binary: $BIN_DIR/$binary"
 done
 
-grep -q 'krahmer_correction_add_site' "$TMP/corr_base.nm"
-grep -q 'krahmer_correction_skipped_add_site' "$TMP/corr_attack.nm"
-grep -q 'PQCLEAN_DILITHIUM2_CLEAN_krahmer_matrix_consume' "$TMP/a_base.nm"
-grep -q 'PQCLEAN_DILITHIUM2_CLEAN_krahmer_matrix_consume' "$TMP/a_attack.nm"
-grep -q 'krahmer_correction_add_site' "$TMP/corr_base_cache.nm"
-grep -q 'krahmer_correction_skipped_add_site' "$TMP/corr_attack_cache.nm"
-grep -q 'PQCLEAN_DILITHIUM2_CLEAN_krahmer_matrix_consume' "$TMP/a_base_cache.nm"
-grep -q 'PQCLEAN_DILITHIUM2_CLEAN_krahmer_matrix_consume' "$TMP/a_attack_cache.nm"
+BASE_ASM="$(
+    objdump -dr --no-show-raw-insn \
+        --disassemble=PQCLEAN_DILITHIUM2_CLEAN_krahmer_correction_target_baseline \
+        "$BIN_DIR/correction_baseline"
+)"
+SKIP_ASM="$(
+    objdump -dr --no-show-raw-insn \
+        --disassemble=PQCLEAN_DILITHIUM2_CLEAN_krahmer_correction_target_skip \
+        "$BIN_DIR/correction_skip_add"
+)"
 
-python3 - \
-    "$REPO_ROOT/third_party/pqm4/mupq/pqclean/crypto_sign/dilithium2/clean/krahmer_correction_fault_x86.c" \
-    "$REPO_ROOT/third_party/pqm4/mupq/pqclean/crypto_sign/dilithium2/clean/sign.c" <<'PY_VERIFY'
-from pathlib import Path
-import sys
+grep -Eq '\badd[lq]?\b' <<<"$BASE_ASM" || {
+    echo "$BASE_ASM" >&2
+    fail "baseline correction primitive has no ADD"
+}
 
-impl = Path(sys.argv[1]).read_text(encoding="utf-8")
-sign = Path(sys.argv[2]).read_text(encoding="utf-8")
+if grep -Eq '\badd[lq]?\b' <<<"$SKIP_ASM"; then
+    echo "$SKIP_ASM" >&2
+    fail "attack correction primitive still contains ADD"
+fi
 
-required_impl = [
-    "krahmer_correction_add_site",
-    "krahmer_correction_skipped_add_site",
-    "*destination = base_value + correction_value;",
-    "*destination = base_value;",
-    "mat[row].vec[col].coeffs[coeff] = faulty;",
-    "PQCLEAN_DILITHIUM2_CLEAN_krahmer_matrix_consume",
-    "mat[row].vec[col].coeffs[coeff] = original;",
-]
-for item in required_impl:
-    if item not in impl:
-        raise SystemExit(f"[error] missing invariant: {item}")
+for pattern in 'mov.*\(%rsi\)' 'mov.*\(%rdx\)' 'mov.*\(%rdi\)'; do
+    grep -Eq "$pattern" <<<"$BASE_ASM" || \
+        fail "baseline primitive missing load/store pattern: $pattern"
+    grep -Eq "$pattern" <<<"$SKIP_ASM" || \
+        fail "skip primitive missing load/store pattern: $pattern"
+done
 
-required_sign = [
-    "BEGIN HPC-X86 KRAHMER RANDOMIZED SIGNING",
-    "randombytes(rhoprime, CRHBYTES)",
-    "BEGIN HPC-X86 KRAHMER A CONSUMER HOOK",
-    "PQCLEAN_DILITHIUM2_CLEAN_krahmer_matrix_apply",
-    "BEGIN HPC-X86 KRAHMER CORRECTION HOOK",
-    "PQCLEAN_DILITHIUM2_CLEAN_krahmer_correction_apply",
-]
-for item in required_sign:
-    if item not in sign:
-        raise SystemExit(f"[error] missing sign.c hook: {item}")
+require_contains "$SRC" \
+    'volatile int32_t *target =' \
+    "equalized target-address preparation"
+require_contains "$SRC" \
+    '*target = 0;' \
+    "attack known-zero value preparation"
+require_contains "$SRC" \
+    '*target = krahmer_saved_a_value;' \
+    "baseline same-address preparation"
+require_contains "$SRC" \
+    'krahmer_matrix_region_stop(void)' \
+    "dedicated PMU stop function"
+require_contains "$SRC" \
+    'krahmer_matrix_audit(' \
+    "post-window matrix audit"
 
-# Check source order for A-fault window:
-fault = impl.index("mat[row].vec[col].coeffs[coeff] = faulty;")
-begin = impl.index("krahmer_hpc_begin_unconditional();", fault)
-consume = impl.index(
-    "PQCLEAN_DILITHIUM2_CLEAN_krahmer_matrix_consume(",
-    begin,
-)
-end = impl.index("krahmer_hpc_end_unconditional();", consume)
-restore = impl.index(
-    "mat[row].vec[col].coeffs[coeff] = original;",
-    end,
-)
-if not (fault < begin < consume < end < restore):
-    raise SystemExit("[error] A-fault preparation/restoration pollutes window")
+require_contains "$SIGN" \
+    'krahmer_matrix_prepare(mat);' \
+    "matrix preparation call"
+require_contains "$SIGN" \
+    'krahmer_matrix_region_begin();' \
+    "matrix PMU begin call"
+require_contains "$SIGN" \
+    'PQCLEAN_DILITHIUM2_CLEAN_polyveck_reduce(&w1);' \
+    "matrix reduction in measured region"
+require_contains "$SIGN" \
+    'PQCLEAN_DILITHIUM2_CLEAN_polyveck_invntt_tomont(&w1);' \
+    "inverse NTT in measured region"
+require_contains "$SIGN" \
+    'krahmer_matrix_region_stop();' \
+    "dedicated PMU stop call"
+require_contains "$SIGN" \
+    'krahmer_matrix_audit(' \
+    "post-window audit call"
 
-print("[ok] correction and A-fault source invariants verified")
-PY_VERIFY
+line_of_first() {
+    local pattern="$1"
+    local file="$2"
+    grep -nF "$pattern" "$file" |
+        head -n1 |
+        cut -d: -f1
+}
 
-echo "[ok] skipping-correction uses compile-time-separated target primitives"
-echo "[ok] correction target selection and semantic audit are outside the PMU window"
-echo "[ok] A corruption occurs before counter enable"
-echo "[ok] original matrix consumer alone is measured"
-echo "[ok] A restoration and reference comparison occur after counter disable"
-echo "[ok] randomized-signing seed generation is outside both target windows"
+prepare_line="$(line_of_first 'krahmer_matrix_prepare(mat);' "$SIGN")"
+begin_line="$(line_of_first 'krahmer_matrix_region_begin();' "$SIGN")"
+stop_line="$(line_of_first 'krahmer_matrix_region_stop();' "$SIGN")"
+audit_line="$(line_of_first 'krahmer_matrix_audit(' "$SIGN")"
 
-echo "[ok] structural and cache-counter binaries use the same victim target primitives"
+pointwise_line="$(
+    awk -v begin="$begin_line" -v end="$stop_line" '
+        NR > begin && NR < end &&
+        /PQCLEAN_DILITHIUM2_CLEAN_polyvec_matrix_pointwise_montgomery/ {
+            print NR
+            exit
+        }
+    ' "$SIGN"
+)"
+reduce_line="$(
+    awk -v begin="$begin_line" -v end="$stop_line" '
+        NR > begin && NR < end &&
+        /PQCLEAN_DILITHIUM2_CLEAN_polyveck_reduce\(&w1\);/ {
+            print NR
+            exit
+        }
+    ' "$SIGN"
+)"
+invntt_line="$(
+    awk -v begin="$begin_line" -v end="$stop_line" '
+        NR > begin && NR < end &&
+        /PQCLEAN_DILITHIUM2_CLEAN_polyveck_invntt_tomont\(&w1\);/ {
+            print NR
+            exit
+        }
+    ' "$SIGN"
+)"
+
+for value_name in \
+    prepare_line begin_line pointwise_line reduce_line \
+    invntt_line stop_line audit_line; do
+    value="${!value_name:-}"
+    [[ -n "$value" ]] || fail "unable to resolve $value_name in sign.c"
+done
+
+if ! (( prepare_line < begin_line &&
+        begin_line < pointwise_line &&
+        pointwise_line < reduce_line &&
+        reduce_line < invntt_line &&
+        invntt_line < stop_line &&
+        stop_line < audit_line )); then
+    echo "  prepare:    $prepare_line" >&2
+    echo "  begin:      $begin_line" >&2
+    echo "  pointwise:  $pointwise_line" >&2
+    echo "  reduce:     $reduce_line" >&2
+    echo "  invntt:     $invntt_line" >&2
+    echo "  PMU stop:   $stop_line" >&2
+    echo "  audit:      $audit_line" >&2
+    fail "A-fault source-region order is invalid"
+fi
+
+instruction_count() {
+    local binary="$1"
+    local symbol="$2"
+
+    objdump -d --no-show-raw-insn \
+        --disassemble="$symbol" \
+        "$binary" |
+    awk '
+        /^[[:space:]]*[0-9a-f]+:/ {
+            count++
+        }
+        END {
+            print count + 0
+        }
+    '
+}
+
+A_BASE="$BIN_DIR/a_baseline_structural"
+A_ATTACK="$BIN_DIR/a_load_zero_structural"
+
+for symbol in \
+    PQCLEAN_DILITHIUM2_CLEAN_polyvec_matrix_pointwise_montgomery \
+    PQCLEAN_DILITHIUM2_CLEAN_polyveck_reduce \
+    PQCLEAN_DILITHIUM2_CLEAN_polyveck_invntt_tomont \
+    PQCLEAN_DILITHIUM2_CLEAN_krahmer_matrix_region_stop; do
+    base_count="$(instruction_count "$A_BASE" "$symbol")"
+    attack_count="$(instruction_count "$A_ATTACK" "$symbol")"
+
+    [[ "$base_count" -gt 0 ]] || \
+        fail "unable to disassemble baseline symbol: $symbol"
+    [[ "$attack_count" -gt 0 ]] || \
+        fail "unable to disassemble attack symbol: $symbol"
+    [[ "$base_count" -eq "$attack_count" ]] || \
+        fail "measured symbol instruction-count mismatch for $symbol: baseline=$base_count attack=$attack_count"
+done
+
+echo "[pass] attack 1 baseline contains one ADD and attack omits it."
+echo "[pass] attack 1 keeps the same two loads and one store."
+echo "[pass] attack 2 baseline and attack touch the same target address before the window."
+echo "[pass] attack 2 changes only the prepared coefficient value to zero."
+echo "[pass] attack 2 window is pointwise A*z -> reduce -> inverse NTT."
+echo "[pass] PMU stop precedes all restoration, reference, and audit work."
+echo "[pass] measured attack-2 functions have equal static instruction counts."

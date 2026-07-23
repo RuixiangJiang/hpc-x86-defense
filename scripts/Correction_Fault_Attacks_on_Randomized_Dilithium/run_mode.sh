@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [[ $# -lt 5 || $# -gt 6 ]]; then
-    echo "usage: $0 VARIANT MODE MESSAGE_DOMAIN OUTPUT.csv CREATE_KEY_FLAG [structural|cache|cache-detail|load-hits|load-misses-latency|stalls|recovery]" >&2
+if [[ $# -ne 6 ]]; then
+    echo "usage: $0 VARIANT MODE COUNTER_SET DOMAIN OUTPUT.csv create|reuse" >&2
     exit 2
 fi
 
 VARIANT="$1"
 MODE="$2"
-MESSAGE_DOMAIN="$3"
-OUTPUT="$4"
-CREATE_KEY_FLAG="$5"
-COUNTER_SET="${6:-structural}"
+COUNTER_SET="$3"
+DOMAIN="$4"
+OUTPUT="$5"
+KEY_FLAG="$6"
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=/dev/null
@@ -24,193 +24,66 @@ case "$COUNTER_SET:$VARIANT:$MODE" in
         BIN="$BUILD_DIR/bin/krahmer_correction_fault/correction_baseline"
         ;;
     structural:correction:attack)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/correction_skip"
+        BIN="$BUILD_DIR/bin/krahmer_correction_fault/correction_skip_add"
         ;;
     structural:a-fault:baseline)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/a_baseline"
+        BIN="$BUILD_DIR/bin/krahmer_correction_fault/a_baseline_structural"
         ;;
     structural:a-fault:attack)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/a_fault"
+        BIN="$BUILD_DIR/bin/krahmer_correction_fault/a_load_zero_structural"
         ;;
-    cache:correction:baseline)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/correction_baseline_cache"
+    cache-l1d:a-fault:baseline)
+        BIN="$BUILD_DIR/bin/krahmer_correction_fault/a_baseline_cache_l1d"
         ;;
-    cache:correction:attack)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/correction_skip_cache"
+    cache-l1d:a-fault:attack)
+        BIN="$BUILD_DIR/bin/krahmer_correction_fault/a_load_zero_cache_l1d"
         ;;
-    cache:a-fault:baseline)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/a_baseline_cache"
+    cache-llc-dtlb:a-fault:baseline)
+        BIN="$BUILD_DIR/bin/krahmer_correction_fault/a_baseline_cache_llc_dtlb"
         ;;
-    cache:a-fault:attack)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/a_fault_cache"
-        ;;
-    cache-detail:correction:baseline)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/correction_baseline_cache_detail"
-        ;;
-    cache-detail:correction:attack)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/correction_skip_cache_detail"
-        ;;
-    cache-detail:a-fault:baseline)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/a_baseline_cache_detail"
-        ;;
-    cache-detail:a-fault:attack)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/a_fault_cache_detail"
-        ;;
-    load-hits:correction:baseline)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/correction_baseline_load_hits"
-        ;;
-    load-hits:correction:attack)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/correction_skip_load_hits"
-        ;;
-    load-hits:a-fault:baseline)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/a_baseline_load_hits"
-        ;;
-    load-hits:a-fault:attack)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/a_fault_load_hits"
-        ;;
-    load-misses-latency:correction:baseline)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/correction_baseline_load_misses_latency"
-        ;;
-    load-misses-latency:correction:attack)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/correction_skip_load_misses_latency"
-        ;;
-    load-misses-latency:a-fault:baseline)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/a_baseline_load_misses_latency"
-        ;;
-    load-misses-latency:a-fault:attack)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/a_fault_load_misses_latency"
-        ;;
-    stalls:correction:baseline)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/correction_baseline_stalls"
-        ;;
-    stalls:correction:attack)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/correction_skip_stalls"
-        ;;
-    stalls:a-fault:baseline)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/a_baseline_stalls"
-        ;;
-    stalls:a-fault:attack)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/a_fault_stalls"
-        ;;
-    recovery:correction:baseline)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/correction_baseline_recovery"
-        ;;
-    recovery:correction:attack)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/correction_skip_recovery"
-        ;;
-    recovery:a-fault:baseline)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/a_baseline_recovery"
-        ;;
-    recovery:a-fault:attack)
-        BIN="$BUILD_DIR/bin/krahmer_correction_fault/a_fault_recovery"
+    cache-llc-dtlb:a-fault:attack)
+        BIN="$BUILD_DIR/bin/krahmer_correction_fault/a_load_zero_cache_llc_dtlb"
         ;;
     *)
-        echo "[error] invalid counter-set/variant/mode: $COUNTER_SET/$VARIANT/$MODE" >&2
+        echo "[error] invalid variant/mode/counter set: $VARIANT/$MODE/$COUNTER_SET" >&2
         exit 2
         ;;
 esac
 
-if [[ "$CREATE_KEY_FLAG" != "create" &&
-      "$CREATE_KEY_FLAG" != "reuse" ]]; then
-    echo "[error] CREATE_KEY_FLAG must be create or reuse" >&2
+[[ "$KEY_FLAG" == "create" || "$KEY_FLAG" == "reuse" ]] || {
+    echo "[error] key flag must be create or reuse" >&2
     exit 2
-fi
-
-if [[ ! "$HPC_CPU" =~ ^[0-9]+$ ]]; then
-    echo "[error] HPC_CPU must be one logical CPU number" >&2
-    exit 1
-fi
-
-for value_name in \
-    KRAHMER_SAMPLES KRAHMER_WARMUP \
-    KRAHMER_TARGET_VEC KRAHMER_TARGET_COEFF \
-    KRAHMER_TARGET_ROW KRAHMER_TARGET_COL \
-    KRAHMER_TARGET_A_COEFF KRAHMER_A_XOR_MASK; do
-    value="${!value_name}"
-    if [[ ! "$value" =~ ^(0[xX][0-9a-fA-F]+|[0-9]+)$ ]]; then
-        echo "[error] $value_name must be an unsigned integer" >&2
-        exit 1
-    fi
-done
-
-CORE_CPUS="$(cat /sys/bus/event_source/devices/cpu_core/cpus 2>/dev/null || true)"
-ATOM_CPUS="$(cat /sys/bus/event_source/devices/cpu_atom/cpus 2>/dev/null || true)"
-
-if [[ -n "$CORE_CPUS" ]]; then
-python3 - "$HPC_CPU" "$CORE_CPUS" <<'PY_CPUSET'
-import sys
-
-cpu = int(sys.argv[1])
-spec = sys.argv[2]
-allowed = set()
-
-for part in spec.split(","):
-    part = part.strip()
-    if not part:
-        continue
-    if "-" in part:
-        lo, hi = part.split("-", 1)
-        allowed.update(range(int(lo), int(hi) + 1))
-    else:
-        allowed.add(int(part))
-
-if cpu not in allowed:
-    raise SystemExit(
-        f"[error] CPU {cpu} is not in the cpu_core/P-core set: {spec}"
-    )
-PY_CPUSET
-fi
-
-if [[ "${KRAHMER_SKIP_PREPARE:-0}" != "1" ]]; then
-    EVENT_HEADER="$REPO_ROOT/third_party/pqm4/mupq/pqclean/crypto_sign/dilithium2/clean/krahmer_microarch_events_generated.h"
-    python3 "$SCRIPT_DIR/resolve_microarch_events.py" \
-        --output "$EVENT_HEADER" \
-        --quiet
-    make -C "$REPO_ROOT" krahmer-correction-fault
-fi
-mkdir -p "$EXP_RESULTS_DIR"
+}
 
 KEY_FILE="$EXP_RESULTS_DIR/dilithium2.key"
-LOG_FILE="${OUTPUT%.csv}.log"
+mkdir -p "$(dirname "$OUTPUT")" "$EXP_RESULTS_DIR"
 
 ARGS=(
-    --samples "$KRAHMER_SAMPLES"
+    --samples "${KRAHMER_CURRENT_SAMPLES:?KRAHMER_CURRENT_SAMPLES missing}"
     --warmup "$KRAHMER_WARMUP"
-    --message-domain "$MESSAGE_DOMAIN"
+    --message-domain "$DOMAIN"
     --target-vec "$KRAHMER_TARGET_VEC"
     --target-coeff "$KRAHMER_TARGET_COEFF"
     --target-row "$KRAHMER_TARGET_ROW"
     --target-col "$KRAHMER_TARGET_COL"
     --target-a-coeff "$KRAHMER_TARGET_A_COEFF"
-    --a-xor-mask "$KRAHMER_A_XOR_MASK"
     --key-file "$KEY_FILE"
     --output "$OUTPUT"
 )
 
-if [[ "$CREATE_KEY_FLAG" == "create" ]]; then
+if [[ "$KEY_FLAG" == "create" ]]; then
     ARGS+=(--create-key)
 elif [[ ! -f "$KEY_FILE" ]]; then
-    echo "[error] key file does not exist: $KEY_FILE" >&2
-    echo "[hint] run a calibration baseline first" >&2
+    echo "[error] missing key file: $KEY_FILE" >&2
     exit 1
 fi
 
-echo "[configuration]"
-echo "  paper:          Krahmer et al., Correction Fault Attacks on Randomized Dilithium"
-echo "  implementation: randomized Dilithium2 clean"
-echo "  variant:        $VARIANT"
-echo "  mode:           $MODE"
-echo "  counter set:    $COUNTER_SET"
-echo "  samples:        $KRAHMER_SAMPLES"
-echo "  warmup:         $KRAHMER_WARMUP"
-echo "  message domain: $MESSAGE_DOMAIN"
-echo "  correction:     ($KRAHMER_TARGET_VEC,$KRAHMER_TARGET_COEFF)"
-echo "  A target:       ($KRAHMER_TARGET_ROW,$KRAHMER_TARGET_COL,$KRAHMER_TARGET_A_COEFF)"
-echo "  A XOR mask:     $KRAHMER_A_XOR_MASK"
-echo "  CPU:            $HPC_CPU"
-echo "  cpu_core CPUs:  ${CORE_CPUS:-unavailable}"
-echo "  cpu_atom CPUs:  ${ATOM_CPUS:-unavailable}"
-echo
+echo "[collection]"
+echo "  variant:     $VARIANT"
+echo "  mode:        $MODE"
+echo "  counter set: $COUNTER_SET"
+echo "  samples:     $KRAHMER_CURRENT_SAMPLES"
+echo "  domain:      $DOMAIN"
+echo "  output:      $OUTPUT"
 
-taskset -c "$HPC_CPU" \
-    "$BIN" "${ARGS[@]}" 2>&1 | tee "$LOG_FILE"
+taskset -c "$HPC_CPU" "$BIN" "${ARGS[@]}"

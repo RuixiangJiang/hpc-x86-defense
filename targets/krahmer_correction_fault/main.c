@@ -24,7 +24,7 @@
 #define KRAHMER_ATTACK_BUILD 0
 #endif
 
-#define KEY_MAGIC "KRAHCF01"
+#define KEY_MAGIC "KRAHCF02"
 #define KEY_MAGIC_LEN 8u
 
 typedef struct {
@@ -168,7 +168,7 @@ static void build_fixed_message(
     uint32_t domain)
 {
     static const uint8_t prefix[] =
-        "Krahmer correction fault on randomized Dilithium";
+        "Krahmer correction faults on randomized Dilithium";
     size_t prefix_len = sizeof(prefix) - 1u;
 
     memset(message, 0, 64);
@@ -183,31 +183,19 @@ static void build_fixed_message(
     message[59] = (uint8_t)(domain >> 24);
 }
 
-static uint64_t signature_tag(const uint8_t *sig, size_t len)
-{
-    uint64_t hash = UINT64_C(1469598103934665603);
-    size_t i;
-
-    for (i = 0; i < len; ++i) {
-        hash ^= sig[i];
-        hash *= UINT64_C(1099511628211);
-    }
-    return hash;
-}
-
 static const char *mode_name(void)
 {
 #if KRAHMER_VARIANT == KRAHMER_VARIANT_CORRECTION
 #if KRAHMER_ATTACK_BUILD == 0
     return "correction-baseline";
 #else
-    return "skip-correction";
+    return "skip-add";
 #endif
 #else
 #if KRAHMER_ATTACK_BUILD == 0
     return "a-baseline";
 #else
-    return "a-fault";
+    return "a-load-zero";
 #endif
 #endif
 }
@@ -217,22 +205,22 @@ static void write_csv_header(FILE *out)
     unsigned int i;
 
     fputs(
-        "sample,mode,message_domain,attempts,"
-        "sign_ret,siglen,verify_ret,oracle_success,signature_tag,"
+        "sample,mode,counter_set,message_domain,attempts,"
+        "sign_ret,siglen,verify_ret,oracle_success,"
         "variant,attack_build,"
         "target_vec,target_coeff,target_row,target_col,target_a_coeff,"
-        "a_xor_mask,"
         "correction_base,correction_term,"
         "correction_expected,correction_used,"
         "a_original,a_faulty,matrix_output_mismatches,"
         "fault_requested,fault_applied,semantic_valid,"
         "sequence,target_invocations,"
         "time_enabled,time_running,running_percent,"
-        "requested_mask,available_mask,open_error_mask,"
         "valid_mask,error_code",
         out);
 
-    for (i = 0; i < KRAHMER_HPC_EVENT_COUNT; ++i) {
+    for (i = 0;
+         i < PQCLEAN_DILITHIUM2_CLEAN_krahmer_event_count();
+         ++i) {
         fprintf(
             out,
             ",%s",
@@ -258,7 +246,6 @@ int main(int argc, char **argv)
     unsigned long target_row = 0;
     unsigned long target_col = 0;
     unsigned long target_a_coeff = 17;
-    unsigned long a_xor_mask = 1;
     int create_key = 0;
 
     FILE *out = NULL;
@@ -295,10 +282,6 @@ int main(int argc, char **argv)
                    i + 1 < (unsigned long)argc) {
             target_a_coeff =
                 parse_ulong(argv[++i], "target A coefficient");
-        } else if (strcmp(argv[i], "--a-xor-mask") == 0 &&
-                   i + 1 < (unsigned long)argc) {
-            a_xor_mask =
-                parse_ulong(argv[++i], "A XOR mask");
         } else if (strcmp(argv[i], "--output") == 0 &&
                    i + 1 < (unsigned long)argc) {
             output_path = argv[++i];
@@ -315,7 +298,7 @@ int main(int argc, char **argv)
                 "[--message-domain D] "
                 "[--target-vec V] [--target-coeff C] "
                 "[--target-row R] [--target-col C] "
-                "[--target-a-coeff C] [--a-xor-mask M]\n",
+                "[--target-a-coeff C]\n",
                 argv[0]);
             goto cleanup;
         }
@@ -324,8 +307,7 @@ int main(int argc, char **argv)
     if (output_path == NULL || key_path == NULL || samples == 0) {
         fprintf(
             stderr,
-            "[error] --output, --key-file, and samples > 0 "
-            "are required\n");
+            "[error] --output, --key-file, and samples > 0 required\n");
         goto cleanup;
     }
 
@@ -333,9 +315,7 @@ int main(int argc, char **argv)
         target_coeff >= (unsigned long)N ||
         target_row >= (unsigned long)K ||
         target_col >= (unsigned long)L ||
-        target_a_coeff >= (unsigned long)N ||
-        a_xor_mask == 0 ||
-        a_xor_mask > UINT32_MAX) {
+        target_a_coeff >= (unsigned long)N) {
         fprintf(stderr, "[error] target configuration out of range\n");
         goto cleanup;
     }
@@ -371,8 +351,8 @@ int main(int argc, char **argv)
             strerror(-hpc_ret));
         fprintf(
             stderr,
-            "[hint] check perf_event_paranoid, raw-event access, "
-            "and P-core selection\n");
+            "[hint] check perf_event_paranoid, event support, "
+            "raw load/store event codes, and P-core selection\n");
         goto cleanup;
     }
 
@@ -381,8 +361,7 @@ int main(int argc, char **argv)
         (unsigned int)target_coeff,
         (unsigned int)target_row,
         (unsigned int)target_col,
-        (unsigned int)target_a_coeff,
-        (uint32_t)a_xor_mask);
+        (unsigned int)target_a_coeff);
 
     build_fixed_message(message, (uint32_t)message_domain);
 
@@ -418,7 +397,6 @@ int main(int argc, char **argv)
         int sign_ret;
         int verify_ret;
         int oracle_success;
-        uint64_t tag;
         uint64_t attempts;
         double running_percent = 0.0;
         krahmer_hpc_snapshot hpc;
@@ -451,8 +429,6 @@ int main(int argc, char **argv)
                       pk)
                 : -1;
 
-        tag = sign_ret == 0 ? signature_tag(sig, siglen) : 0;
-
 #if KRAHMER_ATTACK_BUILD == 0
         oracle_success =
             sign_ret == 0 &&
@@ -474,28 +450,26 @@ int main(int argc, char **argv)
 
         fprintf(
             out,
-            "%lu,%s,%lu,%" PRIu64 ","
-            "%d,%zu,%d,%d,0x%016" PRIx64 ","
+            "%lu,%s,%s,0x%08lx,%" PRIu64 ","
+            "%d,%zu,%d,%d,"
             "%u,%u,"
             "%u,%u,%u,%u,%u,"
-            "0x%08" PRIx32 ","
             "%" PRId32 ",%" PRId32 ","
             "%" PRId32 ",%" PRId32 ","
             "%" PRId32 ",%" PRId32 ",%u,"
             "%u,%u,%u,"
             "%" PRIu64 ",%" PRIu64 ","
             "%" PRIu64 ",%" PRIu64 ",%.6f,"
-            "0x%08" PRIx32 ",0x%08" PRIx32 ","
-            "0x%08" PRIx32 ",0x%08" PRIx32 ",%" PRId32,
+            "0x%08" PRIx32 ",%" PRId32,
             i,
             mode_name(),
+            PQCLEAN_DILITHIUM2_CLEAN_krahmer_counter_set_name(),
             message_domain,
             attempts,
             sign_ret,
             siglen,
             verify_ret,
             oracle_success,
-            tag,
             audit.variant,
             audit.attack_build,
             audit.target_vec,
@@ -503,7 +477,6 @@ int main(int argc, char **argv)
             audit.target_row,
             audit.target_col,
             audit.target_a_coeff,
-            audit.a_xor_mask,
             audit.correction_base,
             audit.correction_term,
             audit.correction_expected,
@@ -519,13 +492,12 @@ int main(int argc, char **argv)
             hpc.time_enabled,
             hpc.time_running,
             running_percent,
-            hpc.requested_mask,
-            hpc.available_mask,
-            hpc.open_error_mask,
             hpc.valid_mask,
             hpc.error_code);
 
-        for (event = 0; event < KRAHMER_HPC_EVENT_COUNT; ++event) {
+        for (event = 0;
+             event < PQCLEAN_DILITHIUM2_CLEAN_krahmer_event_count();
+             ++event) {
             fprintf(out, ",%" PRIu64, hpc.values[event]);
         }
         fputc('\n', out);
@@ -539,8 +511,9 @@ int main(int argc, char **argv)
     out = NULL;
 
     printf(
-        "[done] mode=%s samples=%lu output=%s\n",
+        "[done] mode=%s counter_set=%s samples=%lu output=%s\n",
         mode_name(),
+        PQCLEAN_DILITHIUM2_CLEAN_krahmer_counter_set_name(),
         samples,
         output_path);
     ret = EXIT_SUCCESS;

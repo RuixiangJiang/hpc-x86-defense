@@ -7,286 +7,152 @@ source "$SCRIPT_DIR/../common.sh"
 # shellcheck source=/dev/null
 source "$SCRIPT_DIR/exp_env.sh"
 
-ACTION="${1:-experiment}"
-ALL_PASSES=(
-    structural cache cache-detail load-hits
-    load-misses-latency stalls recovery
-)
+ACTION="${1:-full}"
 
 usage() {
     cat <<'EOF'
 usage:
-  ./run.sh
-  ./run.sh experiment
-  ./run.sh smoke
-  ./run.sh verify
   ./run.sh build
+  ./run.sh verify
+  ./run.sh smoke
+  ./run.sh collect
+  ./run.sh analyze
+  ./run.sh full
+  ./run.sh clean
 
-Five independent logical datasets are collected:
-  baseline profile
-  baseline threshold
-  baseline validation
-  attack development
-  attack test
+Attack 1:
+  skip exactly one ADD instruction
+  output raw baseline/attack retired-instruction counts
 
-The five streams are collected in a fixed interleaved block schedule.
-
-Defaults:
-  KRAHMER_PROFILE_SAMPLES=2000
-  KRAHMER_THRESHOLD_SAMPLES=5000
-  KRAHMER_VALIDATION_SAMPLES=10000
-  KRAHMER_ATTACK_DEVELOPMENT_SAMPLES=1000
-  KRAHMER_ATTACK_TEST_SAMPLES=1000
-  KRAHMER_BLOCK_SAMPLES=500
-  KRAHMER_CORRECTION_TARGET_FPR=0.001
-  KRAHMER_A_TARGET_FPR=0.10
-  KRAHMER_ROC_FPRS=0.01,0.02,0.05,0.10,0.20
+Attack 2:
+  set one loaded A coefficient to zero before the PMU window
+  keep the measured instruction stream unchanged
+  monitor structural, L1D, LLC, and DTLB behavior
 EOF
 }
 
-selected_passes() {
-    if [[ -n "${KRAHMER_UNIFIED_PASSES:-}" ]]; then
-        read -r -a SELECTED_PASSES <<< "$KRAHMER_UNIFIED_PASSES"
-    else
-        SELECTED_PASSES=("${ALL_PASSES[@]}")
-    fi
-    local pass
-    for pass in "${SELECTED_PASSES[@]}"; do
-        case "$pass" in
-            structural|cache|cache-detail|load-hits|load-misses-latency|stalls|recovery) ;;
-            *) echo "[error] unknown pass: $pass" >&2; exit 2 ;;
-        esac
-    done
-    if [[ " ${SELECTED_PASSES[*]} " != *" structural "* ]]; then
-        echo "[error] structural pass is required" >&2
-        exit 2
-    fi
+build_all() {
+    make -C "$REPO_ROOT" krahmer-correction-fault-clean
+    make -C "$REPO_ROOT" krahmer-correction-fault \
+        -j"${KRAHMER_JOBS:-8}"
 }
 
-resolve_and_build() {
-    local root="$1"
-    local event_header
-    event_header="$REPO_ROOT/third_party/pqm4/mupq/pqclean/crypto_sign/dilithium2/clean/krahmer_microarch_events_generated.h"
-    mkdir -p "$root"
-    python3 "$SCRIPT_DIR/resolve_microarch_events.py" \
-        --output "$event_header" \
-        --report-output "$root/event_resolution.json" | \
-        tee "$root/event_resolution.txt"
-    make -C "$REPO_ROOT" krahmer-correction-fault
-}
-
-append_csv_with_offset() {
-    local source_csv="$1"
-    local destination_csv="$2"
-    local offset="$3"
-    python3 - "$source_csv" "$destination_csv" "$offset" <<'PY_APPEND'
-import csv
-import sys
-from pathlib import Path
-
-source = Path(sys.argv[1])
-destination = Path(sys.argv[2])
-offset = int(sys.argv[3])
-with source.open(newline="", encoding="utf-8") as handle:
-    reader = csv.DictReader(handle)
-    rows = list(reader)
-    fields = reader.fieldnames
-if not fields or "sample" not in fields:
-    raise SystemExit(f"[error] invalid temporary CSV: {source}")
-destination.parent.mkdir(parents=True, exist_ok=True)
-write_header = not destination.exists()
-with destination.open("a", newline="", encoding="utf-8") as handle:
-    writer = csv.DictWriter(handle, fieldnames=fields)
-    if write_header:
-        writer.writeheader()
-    for row in rows:
-        row["sample"] = str(int(row["sample"]) + offset)
-        writer.writerow(row)
-PY_APPEND
-}
-
-run_block() {
-    local pass_name="$1"
-    local variant="$2"
-    local mode="$3"
+run_one() {
+    local variant="$1"
+    local mode="$2"
+    local counter_set="$3"
     local domain="$4"
-    local destination="$5"
-    local offset="$6"
-    local count="$7"
-    local key_flag="$8"
-    local tmp_dir tmp_csv
-    tmp_dir="$(mktemp -d)"
-    tmp_csv="$tmp_dir/block.csv"
-    KRAHMER_SAMPLES="$count" \
-    KRAHMER_SKIP_PREPARE=1 \
-    "$SCRIPT_DIR/run_mode.sh" \
-        "$variant" "$mode" "$domain" \
-        "$tmp_csv" "$key_flag" "$pass_name"
-    append_csv_with_offset "$tmp_csv" "$destination" "$offset"
-    if [[ -f "${tmp_csv%.csv}.log" ]]; then
-        cat "${tmp_csv%.csv}.log" >> "${destination%.csv}.log"
-    fi
-    rm -rf "$tmp_dir"
+    local output="$5"
+    local samples="$6"
+    local key_flag="$7"
+
+    KRAHMER_CURRENT_SAMPLES="$samples" \
+        "$SCRIPT_DIR/run_mode.sh" \
+        "$variant" "$mode" "$counter_set" \
+        "$domain" "$output" "$key_flag"
 }
 
-collect_stream_block() {
-    local pass_name="$1"
-    local variant="$2"
-    local mode="$3"
-    local destination="$4"
-    local offset="$5"
-    local total="$6"
-    local block_index="$7"
-    local kind_index="$8"
-    local domain_base="$9"
-    if (( offset >= total )); then
-        return
-    fi
-    local remaining=$((total - offset))
-    local count="${KRAHMER_BLOCK_SAMPLES:-500}"
-    if (( count > remaining )); then count="$remaining"; fi
-    local domain=$((domain_base + block_index * 10 + kind_index))
-    local key_flag="reuse"
-    if [[ "$KEY_STATE" == "create" ]]; then
-        key_flag="create"
-        KEY_STATE="reuse"
-    fi
-    run_block "$pass_name" "$variant" "$mode" "$domain" \
-        "$destination" "$offset" "$count" "$key_flag"
-}
-
-collect_pass() {
-    local root="$1"
-    local pass_name="$2"
-    local pass_root="$root/$pass_name"
-    mkdir -p "$pass_root"
-    rm -f "$pass_root"/*.csv "$pass_root"/*.log
-
-    local profile_total="${KRAHMER_PROFILE_SAMPLES:-2000}"
-    local threshold_total="${KRAHMER_THRESHOLD_SAMPLES:-5000}"
-    local validation_total="${KRAHMER_VALIDATION_SAMPLES:-10000}"
-    local dev_total="${KRAHMER_ATTACK_DEVELOPMENT_SAMPLES:-1000}"
-    local test_total="${KRAHMER_ATTACK_TEST_SAMPLES:-1000}"
-    local block="${KRAHMER_BLOCK_SAMPLES:-500}"
-    local maximum="$profile_total"
-    for value in "$threshold_total" "$validation_total" "$dev_total" "$test_total"; do
-        if (( value > maximum )); then maximum="$value"; fi
-    done
-    local blocks=$(((maximum + block - 1) / block))
-    local block_index offset
-
-    for ((block_index=0; block_index<blocks; block_index++)); do
-        offset=$((block_index * block))
-        echo "[$pass_name block $((block_index + 1))/$blocks]"
-
-        collect_stream_block "$pass_name" correction baseline \
-            "$pass_root/correction_baseline_profile.csv" \
-            "$offset" "$profile_total" "$block_index" 1 31000
-        collect_stream_block "$pass_name" correction baseline \
-            "$pass_root/correction_baseline_threshold.csv" \
-            "$offset" "$threshold_total" "$block_index" 2 32000
-        collect_stream_block "$pass_name" correction baseline \
-            "$pass_root/correction_baseline_validation.csv" \
-            "$offset" "$validation_total" "$block_index" 3 33000
-        collect_stream_block "$pass_name" correction attack \
-            "$pass_root/correction_attack_development.csv" \
-            "$offset" "$dev_total" "$block_index" 4 34000
-        collect_stream_block "$pass_name" correction attack \
-            "$pass_root/correction_attack_test.csv" \
-            "$offset" "$test_total" "$block_index" 5 35000
-
-        collect_stream_block "$pass_name" a-fault baseline \
-            "$pass_root/a_baseline_profile.csv" \
-            "$offset" "$profile_total" "$block_index" 1 41000
-        collect_stream_block "$pass_name" a-fault baseline \
-            "$pass_root/a_baseline_threshold.csv" \
-            "$offset" "$threshold_total" "$block_index" 2 42000
-        collect_stream_block "$pass_name" a-fault baseline \
-            "$pass_root/a_baseline_validation.csv" \
-            "$offset" "$validation_total" "$block_index" 3 43000
-        collect_stream_block "$pass_name" a-fault attack \
-            "$pass_root/a_attack_development.csv" \
-            "$offset" "$dev_total" "$block_index" 4 44000
-        collect_stream_block "$pass_name" a-fault attack \
-            "$pass_root/a_attack_test.csv" \
-            "$offset" "$test_total" "$block_index" 5 45000
-    done
-}
-
-analyze_variant() {
-    local root="$1"
-    local variant="$2"
-    local prefix="$3"
-    local target_fpr="$4"
-    python3 "$SCRIPT_DIR/analyze.py" \
-        --root "$root" \
-        --passes "${SELECTED_PASSES[@]}" \
-        --variant "$variant" \
-        --minimum-running "$KRAHMER_MIN_RUNNING" \
-        --target-fpr "$target_fpr" \
-        --roc-fprs "${KRAHMER_ROC_FPRS:-0.01,0.02,0.05,0.10,0.20}" \
-        --minimum-scale "${KRAHMER_MINIMUM_SCALE:-1.0}" \
-        --invariant-min-modal-rate "${KRAHMER_INVARIANT_MIN_MODAL_RATE:-0.995}" \
-        --invariant-max-threshold-rate "${KRAHMER_INVARIANT_MAX_THRESHOLD_RATE:-0.001}" \
-        --invariant-budget-fraction "${KRAHMER_INVARIANT_BUDGET_FRACTION:-0.5}" \
-        --minimum-effect "${KRAHMER_MINIMUM_EFFECT:-0.10}" \
-        --minimum-direction-consistency "${KRAHMER_MINIMUM_DIRECTION_CONSISTENCY:-0.75}" \
-        --maximum-baseline-tail "${KRAHMER_MAXIMUM_BASELINE_TAIL:-20.0}" \
-        --maximum-abs-weight "${KRAHMER_MAXIMUM_ABS_WEIGHT:-3.0}" \
-        --development-batches "${KRAHMER_DEVELOPMENT_BATCHES:-8}" \
-        --model-output "$root/${prefix}_directional_detector_model.json" \
-        --report-output "$root/${prefix}_directional_fpr_tpr_report.json" \
-        --roc-output "$root/${prefix}_directional_roc.csv" | \
-        tee "$root/${prefix}_directional_fpr_tpr_report.txt"
-}
-
-run_experiment() {
-    selected_passes
-    local root="${KRAHMER_UNIFIED_RESULTS_DIR:-$EXP_RESULTS_DIR/unified_directional_standard}"
-    rm -rf "$root"
+collect_correction() {
+    local root="$EXP_RESULTS_DIR/correction"
     mkdir -p "$root"
-    resolve_and_build "$root"
-    "$SCRIPT_DIR/verify_window.sh"
-    KEY_STATE="create"
-    local pass
-    for pass in "${SELECTED_PASSES[@]}"; do
-        echo "============================================================"
-        echo "Collecting interleaved streams: $pass"
-        echo "============================================================"
-        collect_pass "$root" "$pass"
-    done
-    echo "============================================================"
-    echo "Directional unified analysis: correction fault"
-    echo "============================================================"
-    analyze_variant "$root" correction correction \
-        "${KRAHMER_CORRECTION_TARGET_FPR:-0.001}"
-    echo "============================================================"
-    echo "Directional unified analysis: A-fault"
-    echo "============================================================"
-    analyze_variant "$root" a-fault a \
-        "${KRAHMER_A_TARGET_FPR:-0.10}"
-    echo "[done] results: $root"
+
+    run_one correction baseline structural 0x434f5231 \
+        "$root/baseline.csv" "$KRAHMER_CORRECTION_SAMPLES" "$1"
+    run_one correction attack structural 0x434f5231 \
+        "$root/attack.csv" "$KRAHMER_CORRECTION_SAMPLES" reuse
 }
 
-run_smoke() {
-    KRAHMER_PROFILE_SAMPLES=10 \
-    KRAHMER_THRESHOLD_SAMPLES=20 \
-    KRAHMER_VALIDATION_SAMPLES=20 \
-    KRAHMER_ATTACK_DEVELOPMENT_SAMPLES=10 \
-    KRAHMER_ATTACK_TEST_SAMPLES=10 \
-    KRAHMER_BLOCK_SAMPLES=5 \
-    KRAHMER_UNIFIED_RESULTS_DIR="$EXP_RESULTS_DIR/unified_directional_smoke" \
-    run_experiment
+collect_a_fault() {
+    local set_name
+    local index
+    local session
+    local domain
+    local root
+
+    for set_name in structural cache-l1d cache-llc-dtlb; do
+        root="$EXP_RESULTS_DIR/a-fault/$set_name"
+        mkdir -p "$root"
+
+        for ((index = 0; index < KRAHMER_A_SESSIONS; ++index)); do
+            printf -v session 's%02d' "$index"
+            domain=$((0x41000000 + index))
+
+            if (( index % 2 == 0 )); then
+                run_one a-fault baseline "$set_name" "$domain" \
+                    "$root/${session}_baseline.csv" \
+                    "$KRAHMER_A_SAMPLES" reuse
+                run_one a-fault attack "$set_name" "$domain" \
+                    "$root/${session}_attack.csv" \
+                    "$KRAHMER_A_SAMPLES" reuse
+            else
+                run_one a-fault attack "$set_name" "$domain" \
+                    "$root/${session}_attack.csv" \
+                    "$KRAHMER_A_SAMPLES" reuse
+                run_one a-fault baseline "$set_name" "$domain" \
+                    "$root/${session}_baseline.csv" \
+                    "$KRAHMER_A_SAMPLES" reuse
+            fi
+        done
+    done
+}
+
+collect_all() {
+    rm -rf "$EXP_RESULTS_DIR"
+    mkdir -p "$EXP_RESULTS_DIR"
+    build_all
+    "$SCRIPT_DIR/verify_window.sh"
+    collect_correction create
+    collect_a_fault
+}
+
+analyze_all() {
+    python3 "$SCRIPT_DIR/analyze.py" \
+        --results-root "$EXP_RESULTS_DIR" \
+        --minimum-running "$KRAHMER_MIN_RUNNING" \
+        --text-output "$EXP_RESULTS_DIR/raw_behavior_report.txt" \
+        --csv-output "$EXP_RESULTS_DIR/raw_behavior_summary.csv" \
+        --json-output "$EXP_RESULTS_DIR/raw_behavior_summary.json"
+}
+
+smoke() {
+    KRAHMER_CORRECTION_SAMPLES=20 \
+    KRAHMER_A_SESSIONS=2 \
+    KRAHMER_A_SAMPLES=20 \
+    EXP_RESULTS_DIR="$EXP_RESULTS_DIR/smoke" \
+        "$SCRIPT_DIR/run.sh" full
 }
 
 case "$ACTION" in
-    experiment|all) run_experiment ;;
-    smoke) run_smoke ;;
-    verify) "$SCRIPT_DIR/verify_window.sh" ;;
     build)
-        selected_passes
-        resolve_and_build "${KRAHMER_UNIFIED_RESULTS_DIR:-$EXP_RESULTS_DIR/unified_directional_standard}"
+        build_all
         ;;
-    help|-h|--help) usage ;;
-    *) echo "[error] unknown action: $ACTION" >&2; usage >&2; exit 2 ;;
+    verify)
+        build_all
+        "$SCRIPT_DIR/verify_window.sh"
+        ;;
+    smoke)
+        smoke
+        ;;
+    collect)
+        collect_all
+        ;;
+    analyze)
+        analyze_all
+        ;;
+    full)
+        collect_all
+        analyze_all
+        ;;
+    clean)
+        make -C "$REPO_ROOT" krahmer-correction-fault-clean
+        rm -rf "$EXP_RESULTS_DIR"
+        ;;
+    help|-h|--help)
+        usage
+        ;;
+    *)
+        echo "[error] unknown action: $ACTION" >&2
+        usage >&2
+        exit 2
+        ;;
 esac
