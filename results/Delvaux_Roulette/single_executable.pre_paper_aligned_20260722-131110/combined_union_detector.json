@@ -1,0 +1,815 @@
+{
+  "batch": {
+    "attack_tpr": {
+      "flip-masked-intermediate-bit": {
+        "alignment": {
+          "s00": {
+            "available_samples": {
+              "flip-masked-intermediate-bit": 500,
+              "replace-masked-intermediate-random": 500,
+              "set-masked-intermediate-constant": 500,
+              "skip-local-masked-operation": 500
+            },
+            "batches": 50,
+            "paired_samples": 500,
+            "used_samples": 500
+          },
+          "s01": {
+            "available_samples": {
+              "flip-masked-intermediate-bit": 500,
+              "replace-masked-intermediate-random": 500,
+              "set-masked-intermediate-constant": 500,
+              "skip-local-masked-operation": 500
+            },
+            "batches": 50,
+            "paired_samples": 500,
+            "used_samples": 500
+          }
+        },
+        "auc": 0.9753833333333334,
+        "by_session": {
+          "s00": {
+            "positives": 46,
+            "rate": 0.92,
+            "trials": 50
+          },
+          "s01": {
+            "positives": 23,
+            "rate": 0.46,
+            "trials": 50
+          }
+        },
+        "ci95": [
+          0.5896854458397853,
+          0.7787112078693286
+        ],
+        "one_sided_95_lower": 0.6053283459758232,
+        "one_sided_95_upper": 0.7659908498496448,
+        "positives": 69,
+        "rate": 0.69,
+        "trials": 100,
+        "worst_session_rate": 0.92
+      },
+      "replace-masked-intermediate-random": {
+        "alignment": {
+          "s00": {
+            "available_samples": {
+              "flip-masked-intermediate-bit": 500,
+              "replace-masked-intermediate-random": 500,
+              "set-masked-intermediate-constant": 500,
+              "skip-local-masked-operation": 500
+            },
+            "batches": 50,
+            "paired_samples": 500,
+            "used_samples": 500
+          },
+          "s01": {
+            "available_samples": {
+              "flip-masked-intermediate-bit": 500,
+              "replace-masked-intermediate-random": 500,
+              "set-masked-intermediate-constant": 500,
+              "skip-local-masked-operation": 500
+            },
+            "batches": 50,
+            "paired_samples": 500,
+            "used_samples": 500
+          }
+        },
+        "auc": 0.45615,
+        "by_session": {
+          "s00": {
+            "positives": 0,
+            "rate": 0.0,
+            "trials": 50
+          },
+          "s01": {
+            "positives": 1,
+            "rate": 0.02,
+            "trials": 50
+          }
+        },
+        "ci95": [
+          0.00025314603297742027,
+          0.05445938539208048
+        ],
+        "one_sided_95_lower": 0.000512801416262292,
+        "one_sided_95_upper": 0.046559811453538755,
+        "positives": 1,
+        "rate": 0.01,
+        "trials": 100,
+        "worst_session_rate": 0.02
+      },
+      "set-masked-intermediate-constant": {
+        "alignment": {
+          "s00": {
+            "available_samples": {
+              "flip-masked-intermediate-bit": 500,
+              "replace-masked-intermediate-random": 500,
+              "set-masked-intermediate-constant": 500,
+              "skip-local-masked-operation": 500
+            },
+            "batches": 50,
+            "paired_samples": 500,
+            "used_samples": 500
+          },
+          "s01": {
+            "available_samples": {
+              "flip-masked-intermediate-bit": 500,
+              "replace-masked-intermediate-random": 500,
+              "set-masked-intermediate-constant": 500,
+              "skip-local-masked-operation": 500
+            },
+            "batches": 50,
+            "paired_samples": 500,
+            "used_samples": 500
+          }
+        },
+        "auc": 0.6970333333333333,
+        "by_session": {
+          "s00": {
+            "positives": 0,
+            "rate": 0.0,
+            "trials": 50
+          },
+          "s01": {
+            "positives": 1,
+            "rate": 0.02,
+            "trials": 50
+          }
+        },
+        "ci95": [
+          0.00025314603297742027,
+          0.05445938539208048
+        ],
+        "one_sided_95_lower": 0.000512801416262292,
+        "one_sided_95_upper": 0.046559811453538755,
+        "positives": 1,
+        "rate": 0.01,
+        "trials": 100,
+        "worst_session_rate": 0.02
+      },
+      "skip-local-masked-operation": {
+        "alignment": {
+          "s00": {
+            "available_samples": {
+              "flip-masked-intermediate-bit": 500,
+              "replace-masked-intermediate-random": 500,
+              "set-masked-intermediate-constant": 500,
+              "skip-local-masked-operation": 500
+            },
+            "batches": 50,
+            "paired_samples": 500,
+            "used_samples": 500
+          },
+          "s01": {
+            "available_samples": {
+              "flip-masked-intermediate-bit": 500,
+              "replace-masked-intermediate-random": 500,
+              "set-masked-intermediate-constant": 500,
+              "skip-local-masked-operation": 500
+            },
+            "batches": 50,
+            "paired_samples": 500,
+            "used_samples": 500
+          }
+        },
+        "auc": 0.9998,
+        "by_session": {
+          "s00": {
+            "positives": 50,
+            "rate": 1.0,
+            "trials": 50
+          },
+          "s01": {
+            "positives": 50,
+            "rate": 1.0,
+            "trials": 50
+          }
+        },
+        "ci95": [
+          0.9637833073548128,
+          1.0
+        ],
+        "one_sided_95_lower": 0.9704869503929543,
+        "one_sided_95_upper": 1.0,
+        "positives": 100,
+        "rate": 1.0,
+        "trials": 100,
+        "worst_session_rate": 1.0
+      }
+    },
+    "batch_size": 10,
+    "fpr": {
+      "by_session": {
+        "s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "s02": {
+          "positives": 4,
+          "rate": 0.02,
+          "trials": 200
+        }
+      },
+      "ci95": [
+        0.0018193416341399644,
+        0.016980706739317064
+      ],
+      "one_sided_95_lower": 0.002280305804732081,
+      "one_sided_95_upper": 0.01519043951414311,
+      "positives": 4,
+      "rate": 0.006666666666666667,
+      "trials": 600,
+      "worst_session_rate": 0.02
+    },
+    "score_models": {
+      "flip-masked-intermediate-bit": {
+        "center": 0.09128970580885667,
+        "mad": 0.14467159546052494,
+        "q1": -0.05550085959536359,
+        "q3": 0.23380655825466728,
+        "scale": 0.21449010742977426
+      },
+      "replace-masked-intermediate-random": {
+        "center": -0.18011604318047836,
+        "mad": 0.26997725754634627,
+        "q1": -0.460372117790076,
+        "q3": 0.07431472906394854,
+        "scale": 0.40026828203821296
+      },
+      "set-masked-intermediate-constant": {
+        "center": -0.20059585801763463,
+        "mad": 0.3206572651217653,
+        "q1": -0.5277159291008342,
+        "q3": 0.11440780200114989,
+        "scale": 0.4759998006686316
+      },
+      "skip-local-masked-operation": {
+        "center": -0.035896737329935056,
+        "mad": 0.047862152513725394,
+        "q1": -0.2168167105154023,
+        "q3": 0.0,
+        "scale": 0.1607240255859172
+      }
+    },
+    "threshold": {
+      "confidence": 0.95,
+      "confidence_target_met": true,
+      "false_positives": 1,
+      "one_sided_95_upper": 0.0023697133676560643,
+      "per_session_at_frozen_threshold": {
+        "s00": {
+          "false_positives": 1,
+          "one_sided_95_upper": 0.009452282208075008,
+          "rate": 0.002,
+          "trials": 500
+        },
+        "s01": {
+          "false_positives": 0,
+          "one_sided_95_upper": 0.005973551516349559,
+          "rate": 0.0,
+          "trials": 500
+        },
+        "s02": {
+          "false_positives": 0,
+          "one_sided_95_upper": 0.005973551516349559,
+          "rate": 0.0,
+          "trials": 500
+        },
+        "s03": {
+          "false_positives": 0,
+          "one_sided_95_upper": 0.005973551516349559,
+          "rate": 0.0,
+          "trials": 500
+        }
+      },
+      "per_session_candidates": {
+        "s00": {
+          "allowed_false_positives": 1,
+          "confidence_guarded_upper": 0.009452282208075004,
+          "confidence_target_met": true,
+          "false_positives": 1,
+          "rate": 0.002,
+          "trials": 500,
+          "value": 3.5548020473229966
+        },
+        "s01": {
+          "allowed_false_positives": 1,
+          "confidence_guarded_upper": 0.009452282208075004,
+          "confidence_target_met": true,
+          "false_positives": 1,
+          "rate": 0.002,
+          "trials": 500,
+          "value": 2.066927682868513
+        },
+        "s02": {
+          "allowed_false_positives": 1,
+          "confidence_guarded_upper": 0.009452282208075004,
+          "confidence_target_met": true,
+          "false_positives": 1,
+          "rate": 0.002,
+          "trials": 500,
+          "value": 3.10098090615014
+        },
+        "s03": {
+          "allowed_false_positives": 1,
+          "confidence_guarded_upper": 0.009452282208075004,
+          "confidence_target_met": true,
+          "false_positives": 1,
+          "rate": 0.002,
+          "trials": 500,
+          "value": 2.6322364938801988
+        }
+      },
+      "rate": 0.0005,
+      "selection": "maximum of per-session confidence-guarded thresholds",
+      "target_fpr": 0.01,
+      "trials": 2000,
+      "value": 3.5548020473229966,
+      "worst_session_rate": 0.002
+    },
+    "threshold_alignment": {
+      "s00": {
+        "available_samples": {
+          "flip-masked-intermediate-bit": 5000,
+          "replace-masked-intermediate-random": 5000,
+          "set-masked-intermediate-constant": 5000,
+          "skip-local-masked-operation": 5000
+        },
+        "batches": 500,
+        "paired_samples": 5000,
+        "used_samples": 5000
+      },
+      "s01": {
+        "available_samples": {
+          "flip-masked-intermediate-bit": 5000,
+          "replace-masked-intermediate-random": 5000,
+          "set-masked-intermediate-constant": 5000,
+          "skip-local-masked-operation": 5000
+        },
+        "batches": 500,
+        "paired_samples": 5000,
+        "used_samples": 5000
+      },
+      "s02": {
+        "available_samples": {
+          "flip-masked-intermediate-bit": 5000,
+          "replace-masked-intermediate-random": 5000,
+          "set-masked-intermediate-constant": 5000,
+          "skip-local-masked-operation": 5000
+        },
+        "batches": 500,
+        "paired_samples": 5000,
+        "used_samples": 5000
+      },
+      "s03": {
+        "available_samples": {
+          "flip-masked-intermediate-bit": 5000,
+          "replace-masked-intermediate-random": 5000,
+          "set-masked-intermediate-constant": 5000,
+          "skip-local-masked-operation": 5000
+        },
+        "batches": 500,
+        "paired_samples": 5000,
+        "used_samples": 5000
+      }
+    },
+    "validation_alignment": {
+      "s00": {
+        "available_samples": {
+          "flip-masked-intermediate-bit": 2000,
+          "replace-masked-intermediate-random": 2000,
+          "set-masked-intermediate-constant": 2000,
+          "skip-local-masked-operation": 2000
+        },
+        "batches": 200,
+        "paired_samples": 2000,
+        "used_samples": 2000
+      },
+      "s01": {
+        "available_samples": {
+          "flip-masked-intermediate-bit": 2000,
+          "replace-masked-intermediate-random": 2000,
+          "set-masked-intermediate-constant": 2000,
+          "skip-local-masked-operation": 2000
+        },
+        "batches": 200,
+        "paired_samples": 2000,
+        "used_samples": 2000
+      },
+      "s02": {
+        "available_samples": {
+          "flip-masked-intermediate-bit": 2000,
+          "replace-masked-intermediate-random": 2000,
+          "set-masked-intermediate-constant": 2000,
+          "skip-local-masked-operation": 2000
+        },
+        "batches": 200,
+        "paired_samples": 2000,
+        "used_samples": 2000
+      }
+    }
+  },
+  "definition": {
+    "batch_score": "maximum of the three context-specific baseline-standardized frozen primary batch scores",
+    "calibration_data": "aligned context-specific benign threshold traces only",
+    "model_application": "each detector is applied only to its matching invocation context",
+    "multiple_detector_control": "one directly calibrated operation-level threshold; no marginal-FPR addition",
+    "scope": "one complete operation containing three context-specific monitored invocations",
+    "single_score": "maximum of the three context-specific baseline-standardized primary scores",
+    "threshold_rule": "worst-session confidence-guarded operation-level threshold"
+  },
+  "executable": "rou_single",
+  "single_trace": {
+    "attack_tpr": {
+      "flip-masked-intermediate-bit": {
+        "alignment": {
+          "s00": {
+            "available_samples": {
+              "flip-masked-intermediate-bit": 500,
+              "replace-masked-intermediate-random": 500,
+              "set-masked-intermediate-constant": 500,
+              "skip-local-masked-operation": 500
+            },
+            "paired_samples": 500
+          },
+          "s01": {
+            "available_samples": {
+              "flip-masked-intermediate-bit": 500,
+              "replace-masked-intermediate-random": 500,
+              "set-masked-intermediate-constant": 500,
+              "skip-local-masked-operation": 500
+            },
+            "paired_samples": 500
+          }
+        },
+        "auc": 0.8335766666666666,
+        "by_session": {
+          "s00": {
+            "positives": 1,
+            "rate": 0.002,
+            "trials": 500
+          },
+          "s01": {
+            "positives": 2,
+            "rate": 0.004,
+            "trials": 500
+          }
+        },
+        "ci95": [
+          0.0006190999316483582,
+          0.008742023238477711
+        ],
+        "one_sided_95_lower": 0.0008181753982205214,
+        "one_sided_95_upper": 0.0077352447184787995,
+        "positives": 3,
+        "rate": 0.003,
+        "trials": 1000,
+        "worst_session_rate": 0.004
+      },
+      "replace-masked-intermediate-random": {
+        "alignment": {
+          "s00": {
+            "available_samples": {
+              "flip-masked-intermediate-bit": 500,
+              "replace-masked-intermediate-random": 500,
+              "set-masked-intermediate-constant": 500,
+              "skip-local-masked-operation": 500
+            },
+            "paired_samples": 500
+          },
+          "s01": {
+            "available_samples": {
+              "flip-masked-intermediate-bit": 500,
+              "replace-masked-intermediate-random": 500,
+              "set-masked-intermediate-constant": 500,
+              "skip-local-masked-operation": 500
+            },
+            "paired_samples": 500
+          }
+        },
+        "auc": 0.44621266666666665,
+        "by_session": {
+          "s00": {
+            "positives": 0,
+            "rate": 0.0,
+            "trials": 500
+          },
+          "s01": {
+            "positives": 2,
+            "rate": 0.004,
+            "trials": 500
+          }
+        },
+        "ci95": [
+          0.0002423011168773175,
+          0.0072058389114560435
+        ],
+        "one_sided_95_lower": 0.00035547613347768157,
+        "one_sided_95_upper": 0.006282284546721974,
+        "positives": 2,
+        "rate": 0.002,
+        "trials": 1000,
+        "worst_session_rate": 0.004
+      },
+      "set-masked-intermediate-constant": {
+        "alignment": {
+          "s00": {
+            "available_samples": {
+              "flip-masked-intermediate-bit": 500,
+              "replace-masked-intermediate-random": 500,
+              "set-masked-intermediate-constant": 500,
+              "skip-local-masked-operation": 500
+            },
+            "paired_samples": 500
+          },
+          "s01": {
+            "available_samples": {
+              "flip-masked-intermediate-bit": 500,
+              "replace-masked-intermediate-random": 500,
+              "set-masked-intermediate-constant": 500,
+              "skip-local-masked-operation": 500
+            },
+            "paired_samples": 500
+          }
+        },
+        "auc": 0.5766210833333333,
+        "by_session": {
+          "s00": {
+            "positives": 0,
+            "rate": 0.0,
+            "trials": 500
+          },
+          "s01": {
+            "positives": 2,
+            "rate": 0.004,
+            "trials": 500
+          }
+        },
+        "ci95": [
+          0.0002423011168773175,
+          0.0072058389114560435
+        ],
+        "one_sided_95_lower": 0.00035547613347768157,
+        "one_sided_95_upper": 0.006282284546721974,
+        "positives": 2,
+        "rate": 0.002,
+        "trials": 1000,
+        "worst_session_rate": 0.004
+      },
+      "skip-local-masked-operation": {
+        "alignment": {
+          "s00": {
+            "available_samples": {
+              "flip-masked-intermediate-bit": 500,
+              "replace-masked-intermediate-random": 500,
+              "set-masked-intermediate-constant": 500,
+              "skip-local-masked-operation": 500
+            },
+            "paired_samples": 500
+          },
+          "s01": {
+            "available_samples": {
+              "flip-masked-intermediate-bit": 500,
+              "replace-masked-intermediate-random": 500,
+              "set-masked-intermediate-constant": 500,
+              "skip-local-masked-operation": 500
+            },
+            "paired_samples": 500
+          }
+        },
+        "auc": 0.858504,
+        "by_session": {
+          "s00": {
+            "positives": 9,
+            "rate": 0.018,
+            "trials": 500
+          },
+          "s01": {
+            "positives": 4,
+            "rate": 0.008,
+            "trials": 500
+          }
+        },
+        "ci95": [
+          0.006939617502839611,
+          0.02212780363677881
+        ],
+        "one_sided_95_lower": 0.007706232723998802,
+        "one_sided_95_upper": 0.020589286529908643,
+        "positives": 13,
+        "rate": 0.013,
+        "trials": 1000,
+        "worst_session_rate": 0.018
+      }
+    },
+    "fpr": {
+      "by_session": {
+        "s00": {
+          "positives": 8,
+          "rate": 0.004,
+          "trials": 2000
+        },
+        "s01": {
+          "positives": 18,
+          "rate": 0.009,
+          "trials": 2000
+        },
+        "s02": {
+          "positives": 1,
+          "rate": 0.0005,
+          "trials": 2000
+        }
+      },
+      "ci95": [
+        0.0029675597955251655,
+        0.006540559187120206
+      ],
+      "one_sided_95_lower": 0.003178191892805878,
+      "one_sided_95_upper": 0.006200398608894844,
+      "positives": 27,
+      "rate": 0.0045,
+      "trials": 6000,
+      "worst_session_rate": 0.009
+    },
+    "score_models": {
+      "flip-masked-intermediate-bit": {
+        "center": 0.09731089103835622,
+        "mad": 0.23466245865960933,
+        "q1": -0.10884018186395325,
+        "q3": 0.3627389684894262,
+        "scale": 0.34957683495432135
+      },
+      "replace-masked-intermediate-random": {
+        "center": -0.06482806777200639,
+        "mad": 0.5214350758396491,
+        "q1": -0.6866854414677646,
+        "q3": 0.3917958977651696,
+        "scale": 0.7994672640718563
+      },
+      "set-masked-intermediate-constant": {
+        "center": -0.19316891984038895,
+        "mad": 0.45039584396228705,
+        "q1": -0.7402738722875452,
+        "q3": 0.2000796922217083,
+        "scale": 0.6970745474494096
+      },
+      "skip-local-masked-operation": {
+        "center": -0.043076084795922065,
+        "mad": 0.07897233034729308,
+        "q1": -0.42575818923570125,
+        "q3": 0.0,
+        "scale": 0.3156102218203864
+      }
+    },
+    "threshold": {
+      "confidence": 0.95,
+      "confidence_target_met": true,
+      "false_positives": 65,
+      "one_sided_95_upper": 0.003993848943937065,
+      "per_session_at_frozen_threshold": {
+        "s00": {
+          "false_positives": 6,
+          "one_sided_95_upper": 0.002367095542363468,
+          "rate": 0.0012,
+          "trials": 5000
+        },
+        "s01": {
+          "false_positives": 6,
+          "one_sided_95_upper": 0.002367095542363468,
+          "rate": 0.0012,
+          "trials": 5000
+        },
+        "s02": {
+          "false_positives": 36,
+          "one_sided_95_upper": 0.009497163356000957,
+          "rate": 0.0072,
+          "trials": 5000
+        },
+        "s03": {
+          "false_positives": 17,
+          "one_sided_95_upper": 0.005095510597634377,
+          "rate": 0.0034,
+          "trials": 5000
+        }
+      },
+      "per_session_candidates": {
+        "s00": {
+          "allowed_false_positives": 38,
+          "confidence_guarded_upper": 0.002367095542363468,
+          "confidence_target_met": true,
+          "false_positives": 6,
+          "rate": 0.0012,
+          "trials": 5000,
+          "value": 8.432652477161898
+        },
+        "s01": {
+          "allowed_false_positives": 38,
+          "confidence_guarded_upper": 0.00972371981120675,
+          "confidence_target_met": true,
+          "false_positives": 37,
+          "rate": 0.0074,
+          "trials": 5000,
+          "value": 7.977702227161899
+        },
+        "s02": {
+          "allowed_false_positives": 38,
+          "confidence_guarded_upper": 0.009497163356000954,
+          "confidence_target_met": true,
+          "false_positives": 36,
+          "rate": 0.0072,
+          "trials": 5000,
+          "value": 8.470564478600814
+        },
+        "s03": {
+          "allowed_false_positives": 38,
+          "confidence_guarded_upper": 0.009497163356000954,
+          "confidence_target_met": true,
+          "false_positives": 36,
+          "rate": 0.0072,
+          "trials": 5000,
+          "value": 8.356828474284072
+        }
+      },
+      "rate": 0.00325,
+      "selection": "maximum of per-session confidence-guarded thresholds",
+      "target_fpr": 0.01,
+      "trials": 20000,
+      "value": 8.470564478600814,
+      "worst_session_rate": 0.0072
+    },
+    "threshold_alignment": {
+      "s00": {
+        "available_samples": {
+          "flip-masked-intermediate-bit": 5000,
+          "replace-masked-intermediate-random": 5000,
+          "set-masked-intermediate-constant": 5000,
+          "skip-local-masked-operation": 5000
+        },
+        "paired_samples": 5000
+      },
+      "s01": {
+        "available_samples": {
+          "flip-masked-intermediate-bit": 5000,
+          "replace-masked-intermediate-random": 5000,
+          "set-masked-intermediate-constant": 5000,
+          "skip-local-masked-operation": 5000
+        },
+        "paired_samples": 5000
+      },
+      "s02": {
+        "available_samples": {
+          "flip-masked-intermediate-bit": 5000,
+          "replace-masked-intermediate-random": 5000,
+          "set-masked-intermediate-constant": 5000,
+          "skip-local-masked-operation": 5000
+        },
+        "paired_samples": 5000
+      },
+      "s03": {
+        "available_samples": {
+          "flip-masked-intermediate-bit": 5000,
+          "replace-masked-intermediate-random": 5000,
+          "set-masked-intermediate-constant": 5000,
+          "skip-local-masked-operation": 5000
+        },
+        "paired_samples": 5000
+      }
+    },
+    "validation_alignment": {
+      "s00": {
+        "available_samples": {
+          "flip-masked-intermediate-bit": 2000,
+          "replace-masked-intermediate-random": 2000,
+          "set-masked-intermediate-constant": 2000,
+          "skip-local-masked-operation": 2000
+        },
+        "paired_samples": 2000
+      },
+      "s01": {
+        "available_samples": {
+          "flip-masked-intermediate-bit": 2000,
+          "replace-masked-intermediate-random": 2000,
+          "set-masked-intermediate-constant": 2000,
+          "skip-local-masked-operation": 2000
+        },
+        "paired_samples": 2000
+      },
+      "s02": {
+        "available_samples": {
+          "flip-masked-intermediate-bit": 2000,
+          "replace-masked-intermediate-random": 2000,
+          "set-masked-intermediate-constant": 2000,
+          "skip-local-masked-operation": 2000
+        },
+        "paired_samples": 2000
+      }
+    }
+  }
+}

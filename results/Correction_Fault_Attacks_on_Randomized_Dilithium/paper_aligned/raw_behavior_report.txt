@@ -1,0 +1,54 @@
+=== Krahmer correction faults: paper-aligned raw behavior ===
+
+[Attack 1: skip one local ADD]
+PMU window: two loads, baseline-only ADD, one store
+  baseline retired instructions: n=1000 mode=47 median=47 mean=47.000 range=[47,47]
+  attack retired instructions:   n=1000 mode=46 median=46 mean=46.000 range=[46,46]
+  attack-baseline: mode_delta=-1 median_delta=-1 mean_delta=-1.000
+  baseline histogram: {'47': 1000}
+  attack histogram:   {'46': 1000}
+
+[Attack 2: one loaded A coefficient becomes zero]
+PMU window: A*z pointwise multiplication, reduction, and inverse NTT
+Fault preparation and reference/audit work are outside the window.
+
+[structural]
+event                         baseline median [p05,p95]       attack median [p05,p95]  median delta
+cycles                          50807 [50165,51935.100]   50791 [50136.950,51813.100]           -16
+instructions                     271415 [271415,271415]        271415 [271415,271415]             0
+branches                            36007 [36007,36007]           36007 [36007,36007]             0
+branch_misses                             123 [115,126]                 123 [115,126]             0
+retired_loads                       45266 [45266,45266]           45266 [45266,45266]             0
+retired_stores                      36098 [36098,36098]           36098 [36098,36098]             0
+[per-session median deltas]
+  cycles: s00=-124.500, s01=-148.500, s02=29, s03=195.500
+  instructions: s00=0, s01=0, s02=0, s03=0
+  branches: s00=0, s01=0, s02=0, s03=0
+  branch_misses: s00=0, s01=0, s02=-1, s03=0
+  retired_loads: s00=0, s01=0, s02=0, s03=0
+  retired_stores: s00=0, s01=0, s02=0, s03=0
+
+[cache-l1d]
+event                         baseline median [p05,p95]       attack median [p05,p95]  median delta
+cache_references                                0 [0,0]                       0 [0,0]             0
+cache_misses                                    0 [0,0]                       0 [0,0]             0
+l1d_read_accesses                   45266 [45266,45266]           45266 [45266,45266]             0
+l1d_read_misses                              48 [36,59]                    48 [35,57]             0
+[per-session median deltas]
+  cache_references: s00=0, s01=0, s02=0, s03=0
+  cache_misses: s00=0, s01=0, s02=0, s03=0
+  l1d_read_accesses: s00=0, s01=0, s02=0, s03=0
+  l1d_read_misses: s00=1, s01=-2.500, s02=-2, s03=2
+
+[cache-llc-dtlb]
+event                         baseline median [p05,p95]       attack median [p05,p95]  median delta
+llc_read_accesses                               0 [0,0]                       0 [0,0]             0
+llc_read_misses                                 0 [0,0]                       0 [0,0]             0
+dtlb_read_accesses                  45266 [45266,45266]           45266 [45266,45266]             0
+dtlb_read_misses                                0 [0,0]                       0 [0,0]             0
+[per-session median deltas]
+  llc_read_accesses: s00=0, s01=0, s02=0, s03=0
+  llc_read_misses: s00=0, s01=0, s02=0, s03=0
+  dtlb_read_accesses: s00=0, s01=0, s02=0, s03=0
+  dtlb_read_misses: s00=0, s01=0, s02=0, s03=0
+

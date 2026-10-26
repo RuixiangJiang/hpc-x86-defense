@@ -1,0 +1,5 @@
+attack,hpc_identifiability,single_hpc_fpr,single_hpc_tpr,batch_hpc_fpr,batch_hpc_tpr,single_hybrid_fpr,single_hybrid_tpr,batch_hybrid_fpr,batch_hybrid_tpr,single_two_tier_fpr,single_two_tier_tpr,batch_two_tier_fpr,batch_two_tier_tpr
+skip-local-masked-operation,deterministic-retired-instruction-structure,0.0,1.0,0.0,1.0,0.0,0.999,0.0,1.0,0.0,1.0,0.0,1.0
+set-masked-intermediate-constant,cache-memory-behavior-evaluated-by-family-analyzer,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0
+replace-masked-intermediate-random,cache-memory-behavior-evaluated-by-family-analyzer,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0
+flip-masked-intermediate-bit,cache-memory-behavior-evaluated-by-family-analyzer,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0

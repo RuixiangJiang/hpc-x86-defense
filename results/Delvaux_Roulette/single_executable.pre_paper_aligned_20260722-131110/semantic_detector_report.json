@@ -1,0 +1,4911 @@
+{
+  "attacks": {
+    "flip-masked-intermediate-bit": {
+      "batch": {
+        "batch_size": 10,
+        "hpc": {
+          "by_session": {
+            "flip-masked-intermediate-bit:s00": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            },
+            "flip-masked-intermediate-bit:s01": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.9637833073548128,
+            1.0
+          ],
+          "positives": 100,
+          "rate": 1.0,
+          "trials": 100,
+          "worst_session_rate": 1.0
+        },
+        "hybrid": {
+          "by_session": {
+            "flip-masked-intermediate-bit:s00": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            },
+            "flip-masked-intermediate-bit:s01": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.9637833073548128,
+            1.0
+          ],
+          "positives": 100,
+          "rate": 1.0,
+          "trials": 100,
+          "worst_session_rate": 1.0
+        },
+        "structural": {
+          "by_session": {
+            "flip-masked-intermediate-bit:s00": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            },
+            "flip-masked-intermediate-bit:s01": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.9637833073548128,
+            1.0
+          ],
+          "positives": 100,
+          "rate": 1.0,
+          "trials": 100,
+          "worst_session_rate": 1.0
+        },
+        "two_tier": {
+          "by_session": {
+            "flip-masked-intermediate-bit:s00": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            },
+            "flip-masked-intermediate-bit:s01": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.9637833073548128,
+            1.0
+          ],
+          "positives": 100,
+          "rate": 1.0,
+          "trials": 100,
+          "worst_session_rate": 1.0
+        },
+        "uop": {
+          "by_session": {
+            "flip-masked-intermediate-bit:s00": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 50
+            },
+            "flip-masked-intermediate-bit:s01": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.0,
+            0.03621669264517642
+          ],
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 100,
+          "worst_session_rate": 0.0
+        }
+      },
+      "diagnostic_auc": {
+        "hpc_batch": 0.9445833333333333,
+        "hpc_single": 0.9315208333333334
+      },
+      "hpc_identifiability": "deterministic-retired-instruction-structure",
+      "single_trace": {
+        "hpc": {
+          "by_session": {
+            "flip-masked-intermediate-bit:s00": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            },
+            "flip-masked-intermediate-bit:s01": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.9963179161031168,
+            1.0
+          ],
+          "positives": 1000,
+          "rate": 1.0,
+          "trials": 1000,
+          "worst_session_rate": 1.0
+        },
+        "hybrid": {
+          "by_session": {
+            "flip-masked-intermediate-bit:s00": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            },
+            "flip-masked-intermediate-bit:s01": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.9963179161031168,
+            1.0
+          ],
+          "positives": 1000,
+          "rate": 1.0,
+          "trials": 1000,
+          "worst_session_rate": 1.0
+        },
+        "structural": {
+          "by_session": {
+            "flip-masked-intermediate-bit:s00": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            },
+            "flip-masked-intermediate-bit:s01": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.9963179161031168,
+            1.0
+          ],
+          "positives": 1000,
+          "rate": 1.0,
+          "trials": 1000,
+          "worst_session_rate": 1.0
+        },
+        "two_tier": {
+          "by_session": {
+            "flip-masked-intermediate-bit:s00": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            },
+            "flip-masked-intermediate-bit:s01": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.9963179161031168,
+            1.0
+          ],
+          "positives": 1000,
+          "rate": 1.0,
+          "trials": 1000,
+          "worst_session_rate": 1.0
+        },
+        "uop": {
+          "by_session": {
+            "flip-masked-intermediate-bit:s00": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "flip-masked-intermediate-bit:s01": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.0,
+            0.003682083896865672
+          ],
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 1000,
+          "worst_session_rate": 0.0
+        }
+      }
+    },
+    "replace-masked-intermediate-random": {
+      "batch": {
+        "batch_size": 10,
+        "hpc": {
+          "by_session": {
+            "replace-masked-intermediate-random:s00": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            },
+            "replace-masked-intermediate-random:s01": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.39832112950328546,
+            0.6016788704966987
+          ],
+          "positives": 50,
+          "rate": 0.5,
+          "trials": 100,
+          "worst_session_rate": 1.0
+        },
+        "hybrid": {
+          "by_session": {
+            "replace-masked-intermediate-random:s00": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            },
+            "replace-masked-intermediate-random:s01": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.9637833073548128,
+            1.0
+          ],
+          "positives": 100,
+          "rate": 1.0,
+          "trials": 100,
+          "worst_session_rate": 1.0
+        },
+        "structural": {
+          "by_session": {
+            "replace-masked-intermediate-random:s00": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 50
+            },
+            "replace-masked-intermediate-random:s01": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.0,
+            0.03621669264517642
+          ],
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 100,
+          "worst_session_rate": 0.0
+        },
+        "two_tier": {
+          "by_session": {
+            "replace-masked-intermediate-random:s00": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            },
+            "replace-masked-intermediate-random:s01": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.9637833073548128,
+            1.0
+          ],
+          "positives": 100,
+          "rate": 1.0,
+          "trials": 100,
+          "worst_session_rate": 1.0
+        },
+        "uop": {
+          "by_session": {
+            "replace-masked-intermediate-random:s00": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            },
+            "replace-masked-intermediate-random:s01": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.39832112950328546,
+            0.6016788704966987
+          ],
+          "positives": 50,
+          "rate": 0.5,
+          "trials": 100,
+          "worst_session_rate": 1.0
+        }
+      },
+      "diagnostic_auc": {
+        "hpc_batch": 0.7706541666666666,
+        "hpc_single": 0.7731517708333333
+      },
+      "hpc_identifiability": "conditional-move-elimination-uop-fingerprint",
+      "single_trace": {
+        "hpc": {
+          "by_session": {
+            "replace-masked-intermediate-random:s00": {
+              "positives": 496,
+              "rate": 0.992,
+              "trials": 500
+            },
+            "replace-masked-intermediate-random:s01": {
+              "positives": 2,
+              "rate": 0.004,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.4665553231857744,
+            0.5294564826459942
+          ],
+          "positives": 498,
+          "rate": 0.498,
+          "trials": 1000,
+          "worst_session_rate": 0.992
+        },
+        "hybrid": {
+          "by_session": {
+            "replace-masked-intermediate-random:s00": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            },
+            "replace-masked-intermediate-random:s01": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.9963179161031168,
+            1.0
+          ],
+          "positives": 1000,
+          "rate": 1.0,
+          "trials": 1000,
+          "worst_session_rate": 1.0
+        },
+        "structural": {
+          "by_session": {
+            "replace-masked-intermediate-random:s00": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "replace-masked-intermediate-random:s01": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.0,
+            0.003682083896865672
+          ],
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 1000,
+          "worst_session_rate": 0.0
+        },
+        "two_tier": {
+          "by_session": {
+            "replace-masked-intermediate-random:s00": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            },
+            "replace-masked-intermediate-random:s01": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.9963179161031168,
+            1.0
+          ],
+          "positives": 1000,
+          "rate": 1.0,
+          "trials": 1000,
+          "worst_session_rate": 1.0
+        },
+        "uop": {
+          "by_session": {
+            "replace-masked-intermediate-random:s00": {
+              "positives": 496,
+              "rate": 0.992,
+              "trials": 500
+            },
+            "replace-masked-intermediate-random:s01": {
+              "positives": 2,
+              "rate": 0.004,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.4665553231857744,
+            0.5294564826459942
+          ],
+          "positives": 498,
+          "rate": 0.498,
+          "trials": 1000,
+          "worst_session_rate": 0.992
+        }
+      }
+    },
+    "set-masked-intermediate-constant": {
+      "batch": {
+        "batch_size": 10,
+        "hpc": {
+          "by_session": {
+            "set-masked-intermediate-constant:s00": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 50
+            },
+            "set-masked-intermediate-constant:s01": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.0,
+            0.03621669264517642
+          ],
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 100,
+          "worst_session_rate": 0.0
+        },
+        "hybrid": {
+          "by_session": {
+            "set-masked-intermediate-constant:s00": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            },
+            "set-masked-intermediate-constant:s01": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.9637833073548128,
+            1.0
+          ],
+          "positives": 100,
+          "rate": 1.0,
+          "trials": 100,
+          "worst_session_rate": 1.0
+        },
+        "structural": {
+          "by_session": {
+            "set-masked-intermediate-constant:s00": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 50
+            },
+            "set-masked-intermediate-constant:s01": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.0,
+            0.03621669264517642
+          ],
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 100,
+          "worst_session_rate": 0.0
+        },
+        "two_tier": {
+          "by_session": {
+            "set-masked-intermediate-constant:s00": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            },
+            "set-masked-intermediate-constant:s01": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.9637833073548128,
+            1.0
+          ],
+          "positives": 100,
+          "rate": 1.0,
+          "trials": 100,
+          "worst_session_rate": 1.0
+        },
+        "uop": {
+          "by_session": {
+            "set-masked-intermediate-constant:s00": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 50
+            },
+            "set-masked-intermediate-constant:s01": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.0,
+            0.03621669264517642
+          ],
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 100,
+          "worst_session_rate": 0.0
+        }
+      },
+      "diagnostic_auc": {
+        "hpc_batch": 0.8742625,
+        "hpc_single": 0.7341113125
+      },
+      "hpc_identifiability": "not-identifiable-by-current-standard-hpc-set",
+      "single_trace": {
+        "hpc": {
+          "by_session": {
+            "set-masked-intermediate-constant:s00": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "set-masked-intermediate-constant:s01": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.0,
+            0.003682083896865672
+          ],
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 1000,
+          "worst_session_rate": 0.0
+        },
+        "hybrid": {
+          "by_session": {
+            "set-masked-intermediate-constant:s00": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            },
+            "set-masked-intermediate-constant:s01": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.9963179161031168,
+            1.0
+          ],
+          "positives": 1000,
+          "rate": 1.0,
+          "trials": 1000,
+          "worst_session_rate": 1.0
+        },
+        "structural": {
+          "by_session": {
+            "set-masked-intermediate-constant:s00": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "set-masked-intermediate-constant:s01": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.0,
+            0.003682083896865672
+          ],
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 1000,
+          "worst_session_rate": 0.0
+        },
+        "two_tier": {
+          "by_session": {
+            "set-masked-intermediate-constant:s00": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            },
+            "set-masked-intermediate-constant:s01": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.9963179161031168,
+            1.0
+          ],
+          "positives": 1000,
+          "rate": 1.0,
+          "trials": 1000,
+          "worst_session_rate": 1.0
+        },
+        "uop": {
+          "by_session": {
+            "set-masked-intermediate-constant:s00": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "set-masked-intermediate-constant:s01": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.0,
+            0.003682083896865672
+          ],
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 1000,
+          "worst_session_rate": 0.0
+        }
+      }
+    },
+    "skip-local-masked-operation": {
+      "batch": {
+        "batch_size": 10,
+        "hpc": {
+          "by_session": {
+            "skip-local-masked-operation:s00": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            },
+            "skip-local-masked-operation:s01": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.9637833073548128,
+            1.0
+          ],
+          "positives": 100,
+          "rate": 1.0,
+          "trials": 100,
+          "worst_session_rate": 1.0
+        },
+        "hybrid": {
+          "by_session": {
+            "skip-local-masked-operation:s00": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            },
+            "skip-local-masked-operation:s01": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.9637833073548128,
+            1.0
+          ],
+          "positives": 100,
+          "rate": 1.0,
+          "trials": 100,
+          "worst_session_rate": 1.0
+        },
+        "structural": {
+          "by_session": {
+            "skip-local-masked-operation:s00": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            },
+            "skip-local-masked-operation:s01": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.9637833073548128,
+            1.0
+          ],
+          "positives": 100,
+          "rate": 1.0,
+          "trials": 100,
+          "worst_session_rate": 1.0
+        },
+        "two_tier": {
+          "by_session": {
+            "skip-local-masked-operation:s00": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            },
+            "skip-local-masked-operation:s01": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.9637833073548128,
+            1.0
+          ],
+          "positives": 100,
+          "rate": 1.0,
+          "trials": 100,
+          "worst_session_rate": 1.0
+        },
+        "uop": {
+          "by_session": {
+            "skip-local-masked-operation:s00": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 50
+            },
+            "skip-local-masked-operation:s01": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.0,
+            0.03621669264517642
+          ],
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 100,
+          "worst_session_rate": 0.0
+        }
+      },
+      "diagnostic_auc": {
+        "hpc_batch": 0.9445833333333333,
+        "hpc_single": 0.9315208333333334
+      },
+      "hpc_identifiability": "deterministic-retired-instruction-structure",
+      "single_trace": {
+        "hpc": {
+          "by_session": {
+            "skip-local-masked-operation:s00": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            },
+            "skip-local-masked-operation:s01": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.9963179161031168,
+            1.0
+          ],
+          "positives": 1000,
+          "rate": 1.0,
+          "trials": 1000,
+          "worst_session_rate": 1.0
+        },
+        "hybrid": {
+          "by_session": {
+            "skip-local-masked-operation:s00": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            },
+            "skip-local-masked-operation:s01": {
+              "positives": 499,
+              "rate": 0.998,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.9944410757201552,
+            0.9999746825125087
+          ],
+          "positives": 999,
+          "rate": 0.999,
+          "trials": 1000,
+          "worst_session_rate": 1.0
+        },
+        "structural": {
+          "by_session": {
+            "skip-local-masked-operation:s00": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            },
+            "skip-local-masked-operation:s01": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.9963179161031168,
+            1.0
+          ],
+          "positives": 1000,
+          "rate": 1.0,
+          "trials": 1000,
+          "worst_session_rate": 1.0
+        },
+        "two_tier": {
+          "by_session": {
+            "skip-local-masked-operation:s00": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            },
+            "skip-local-masked-operation:s01": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.9963179161031168,
+            1.0
+          ],
+          "positives": 1000,
+          "rate": 1.0,
+          "trials": 1000,
+          "worst_session_rate": 1.0
+        },
+        "uop": {
+          "by_session": {
+            "skip-local-masked-operation:s00": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "skip-local-masked-operation:s01": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.0,
+            0.003682083896865672
+          ],
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 1000,
+          "worst_session_rate": 0.0
+        }
+      }
+    }
+  },
+  "collection_audit": {
+    "flip-masked-intermediate-bit": {
+      "attack_s00_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/attack_s00_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/attack_s00_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/attack_s00_attack.csv",
+          "valid": 500
+        }
+      },
+      "attack_s00_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/attack_s00_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/attack_s00_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/attack_s00_baseline.csv",
+          "valid": 500
+        }
+      },
+      "attack_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/attack_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/attack_s00_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/attack_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "attack_s01_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/attack_s01_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/attack_s01_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/attack_s01_attack.csv",
+          "valid": 500
+        }
+      },
+      "attack_s01_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/attack_s01_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/attack_s01_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/attack_s01_baseline.csv",
+          "valid": 500
+        }
+      },
+      "attack_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/attack_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/attack_s01_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/attack_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "calibration_s00_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/calibration_s00_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/calibration_s00_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/calibration_s00_baseline.csv",
+          "valid": 500
+        }
+      },
+      "calibration_s01_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/calibration_s01_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/calibration_s01_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/calibration_s01_baseline.csv",
+          "valid": 500
+        }
+      },
+      "calibration_s02_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/calibration_s02_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/calibration_s02_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/calibration_s02_baseline.csv",
+          "valid": 500
+        }
+      },
+      "calibration_s03_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/calibration_s03_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/calibration_s03_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/calibration_s03_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s00_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/development_s00_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/development_s00_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/development_s00_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s00_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/development_s00_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/development_s00_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/development_s00_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/development_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/development_s00_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/development_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "development_s01_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/development_s01_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/development_s01_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/development_s01_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s01_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/development_s01_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/development_s01_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/development_s01_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/development_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/development_s01_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/development_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "development_s02_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/development_s02_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/development_s02_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/development_s02_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s02_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/development_s02_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/development_s02_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/development_s02_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s02_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/development_s02_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/development_s02_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/development_s02_reference.csv",
+          "valid": 200
+        }
+      },
+      "development_s03_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/development_s03_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/development_s03_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/development_s03_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s03_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/development_s03_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/development_s03_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/development_s03_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s03_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/development_s03_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/development_s03_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/development_s03_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s00_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/threshold_s00_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "uops_executed": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/threshold_s00_baseline.csv",
+          "valid": 5000
+        },
+        "uops_issued": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/threshold_s00_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/threshold_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/threshold_s00_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/threshold_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s01_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/threshold_s01_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "uops_executed": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/threshold_s01_baseline.csv",
+          "valid": 5000
+        },
+        "uops_issued": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/threshold_s01_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/threshold_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/threshold_s01_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/threshold_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s02_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/threshold_s02_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "uops_executed": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/threshold_s02_baseline.csv",
+          "valid": 5000
+        },
+        "uops_issued": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/threshold_s02_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s02_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/threshold_s02_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/threshold_s02_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/threshold_s02_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s03_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/threshold_s03_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "uops_executed": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/threshold_s03_baseline.csv",
+          "valid": 5000
+        },
+        "uops_issued": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/threshold_s03_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s03_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/threshold_s03_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/threshold_s03_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/threshold_s03_reference.csv",
+          "valid": 200
+        }
+      },
+      "validation_s00_baseline": {
+        "instructions": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/validation_s00_baseline.csv",
+          "valid": 2000
+        },
+        "merged": 2000,
+        "uops_executed": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/validation_s00_baseline.csv",
+          "valid": 2000
+        },
+        "uops_issued": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/validation_s00_baseline.csv",
+          "valid": 2000
+        }
+      },
+      "validation_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/validation_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/validation_s00_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/validation_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "validation_s01_baseline": {
+        "instructions": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/validation_s01_baseline.csv",
+          "valid": 2000
+        },
+        "merged": 2000,
+        "uops_executed": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/validation_s01_baseline.csv",
+          "valid": 2000
+        },
+        "uops_issued": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/validation_s01_baseline.csv",
+          "valid": 2000
+        }
+      },
+      "validation_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/validation_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/validation_s01_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/validation_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "validation_s02_baseline": {
+        "instructions": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/validation_s02_baseline.csv",
+          "valid": 2000
+        },
+        "merged": 2000,
+        "uops_executed": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/validation_s02_baseline.csv",
+          "valid": 2000
+        },
+        "uops_issued": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/validation_s02_baseline.csv",
+          "valid": 2000
+        }
+      },
+      "validation_s02_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/structural-instructions/validation_s02_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-executed/validation_s02_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/flip-masked-intermediate-bit/uops-issued/validation_s02_reference.csv",
+          "valid": 200
+        }
+      }
+    },
+    "replace-masked-intermediate-random": {
+      "attack_s00_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/attack_s00_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/attack_s00_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/attack_s00_attack.csv",
+          "valid": 500
+        }
+      },
+      "attack_s00_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/attack_s00_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/attack_s00_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/attack_s00_baseline.csv",
+          "valid": 500
+        }
+      },
+      "attack_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/attack_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/attack_s00_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/attack_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "attack_s01_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/attack_s01_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/attack_s01_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/attack_s01_attack.csv",
+          "valid": 500
+        }
+      },
+      "attack_s01_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/attack_s01_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/attack_s01_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/attack_s01_baseline.csv",
+          "valid": 500
+        }
+      },
+      "attack_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/attack_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/attack_s01_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/attack_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "calibration_s00_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/calibration_s00_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/calibration_s00_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/calibration_s00_baseline.csv",
+          "valid": 500
+        }
+      },
+      "calibration_s01_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/calibration_s01_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/calibration_s01_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/calibration_s01_baseline.csv",
+          "valid": 500
+        }
+      },
+      "calibration_s02_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/calibration_s02_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/calibration_s02_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/calibration_s02_baseline.csv",
+          "valid": 500
+        }
+      },
+      "calibration_s03_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/calibration_s03_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/calibration_s03_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/calibration_s03_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s00_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/development_s00_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/development_s00_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/development_s00_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s00_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/development_s00_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/development_s00_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/development_s00_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/development_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/development_s00_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/development_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "development_s01_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/development_s01_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/development_s01_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/development_s01_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s01_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/development_s01_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/development_s01_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/development_s01_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/development_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/development_s01_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/development_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "development_s02_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/development_s02_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/development_s02_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/development_s02_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s02_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/development_s02_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/development_s02_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/development_s02_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s02_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/development_s02_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/development_s02_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/development_s02_reference.csv",
+          "valid": 200
+        }
+      },
+      "development_s03_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/development_s03_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/development_s03_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/development_s03_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s03_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/development_s03_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/development_s03_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/development_s03_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s03_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/development_s03_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/development_s03_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/development_s03_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s00_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/threshold_s00_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "uops_executed": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/threshold_s00_baseline.csv",
+          "valid": 5000
+        },
+        "uops_issued": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/threshold_s00_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/threshold_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/threshold_s00_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/threshold_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s01_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/threshold_s01_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "uops_executed": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/threshold_s01_baseline.csv",
+          "valid": 5000
+        },
+        "uops_issued": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/threshold_s01_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/threshold_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/threshold_s01_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/threshold_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s02_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/threshold_s02_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "uops_executed": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/threshold_s02_baseline.csv",
+          "valid": 5000
+        },
+        "uops_issued": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/threshold_s02_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s02_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/threshold_s02_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/threshold_s02_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/threshold_s02_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s03_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/threshold_s03_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "uops_executed": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/threshold_s03_baseline.csv",
+          "valid": 5000
+        },
+        "uops_issued": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/threshold_s03_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s03_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/threshold_s03_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/threshold_s03_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/threshold_s03_reference.csv",
+          "valid": 200
+        }
+      },
+      "validation_s00_baseline": {
+        "instructions": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/validation_s00_baseline.csv",
+          "valid": 2000
+        },
+        "merged": 2000,
+        "uops_executed": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/validation_s00_baseline.csv",
+          "valid": 2000
+        },
+        "uops_issued": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/validation_s00_baseline.csv",
+          "valid": 2000
+        }
+      },
+      "validation_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/validation_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/validation_s00_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/validation_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "validation_s01_baseline": {
+        "instructions": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/validation_s01_baseline.csv",
+          "valid": 2000
+        },
+        "merged": 2000,
+        "uops_executed": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/validation_s01_baseline.csv",
+          "valid": 2000
+        },
+        "uops_issued": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/validation_s01_baseline.csv",
+          "valid": 2000
+        }
+      },
+      "validation_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/validation_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/validation_s01_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/validation_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "validation_s02_baseline": {
+        "instructions": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/validation_s02_baseline.csv",
+          "valid": 2000
+        },
+        "merged": 2000,
+        "uops_executed": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/validation_s02_baseline.csv",
+          "valid": 2000
+        },
+        "uops_issued": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/validation_s02_baseline.csv",
+          "valid": 2000
+        }
+      },
+      "validation_s02_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/structural-instructions/validation_s02_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-executed/validation_s02_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/replace-masked-intermediate-random/uops-issued/validation_s02_reference.csv",
+          "valid": 200
+        }
+      }
+    },
+    "set-masked-intermediate-constant": {
+      "attack_s00_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/attack_s00_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/attack_s00_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/attack_s00_attack.csv",
+          "valid": 500
+        }
+      },
+      "attack_s00_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/attack_s00_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/attack_s00_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/attack_s00_baseline.csv",
+          "valid": 500
+        }
+      },
+      "attack_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/attack_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/attack_s00_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/attack_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "attack_s01_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/attack_s01_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/attack_s01_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/attack_s01_attack.csv",
+          "valid": 500
+        }
+      },
+      "attack_s01_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/attack_s01_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/attack_s01_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/attack_s01_baseline.csv",
+          "valid": 500
+        }
+      },
+      "attack_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/attack_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/attack_s01_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/attack_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "calibration_s00_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/calibration_s00_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/calibration_s00_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/calibration_s00_baseline.csv",
+          "valid": 500
+        }
+      },
+      "calibration_s01_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/calibration_s01_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/calibration_s01_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/calibration_s01_baseline.csv",
+          "valid": 500
+        }
+      },
+      "calibration_s02_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/calibration_s02_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/calibration_s02_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/calibration_s02_baseline.csv",
+          "valid": 500
+        }
+      },
+      "calibration_s03_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/calibration_s03_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/calibration_s03_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/calibration_s03_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s00_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/development_s00_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/development_s00_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/development_s00_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s00_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/development_s00_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/development_s00_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/development_s00_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/development_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/development_s00_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/development_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "development_s01_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/development_s01_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/development_s01_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/development_s01_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s01_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/development_s01_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/development_s01_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/development_s01_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/development_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/development_s01_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/development_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "development_s02_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/development_s02_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/development_s02_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/development_s02_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s02_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/development_s02_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/development_s02_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/development_s02_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s02_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/development_s02_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/development_s02_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/development_s02_reference.csv",
+          "valid": 200
+        }
+      },
+      "development_s03_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/development_s03_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/development_s03_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/development_s03_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s03_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/development_s03_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/development_s03_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/development_s03_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s03_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/development_s03_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/development_s03_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/development_s03_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s00_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/threshold_s00_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "uops_executed": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/threshold_s00_baseline.csv",
+          "valid": 5000
+        },
+        "uops_issued": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/threshold_s00_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/threshold_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/threshold_s00_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/threshold_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s01_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/threshold_s01_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "uops_executed": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/threshold_s01_baseline.csv",
+          "valid": 5000
+        },
+        "uops_issued": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/threshold_s01_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/threshold_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/threshold_s01_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/threshold_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s02_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/threshold_s02_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "uops_executed": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/threshold_s02_baseline.csv",
+          "valid": 5000
+        },
+        "uops_issued": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/threshold_s02_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s02_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/threshold_s02_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/threshold_s02_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/threshold_s02_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s03_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/threshold_s03_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "uops_executed": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/threshold_s03_baseline.csv",
+          "valid": 5000
+        },
+        "uops_issued": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/threshold_s03_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s03_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/threshold_s03_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/threshold_s03_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/threshold_s03_reference.csv",
+          "valid": 200
+        }
+      },
+      "validation_s00_baseline": {
+        "instructions": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/validation_s00_baseline.csv",
+          "valid": 2000
+        },
+        "merged": 2000,
+        "uops_executed": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/validation_s00_baseline.csv",
+          "valid": 2000
+        },
+        "uops_issued": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/validation_s00_baseline.csv",
+          "valid": 2000
+        }
+      },
+      "validation_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/validation_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/validation_s00_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/validation_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "validation_s01_baseline": {
+        "instructions": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/validation_s01_baseline.csv",
+          "valid": 2000
+        },
+        "merged": 2000,
+        "uops_executed": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/validation_s01_baseline.csv",
+          "valid": 2000
+        },
+        "uops_issued": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/validation_s01_baseline.csv",
+          "valid": 2000
+        }
+      },
+      "validation_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/validation_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/validation_s01_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/validation_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "validation_s02_baseline": {
+        "instructions": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/validation_s02_baseline.csv",
+          "valid": 2000
+        },
+        "merged": 2000,
+        "uops_executed": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/validation_s02_baseline.csv",
+          "valid": 2000
+        },
+        "uops_issued": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/validation_s02_baseline.csv",
+          "valid": 2000
+        }
+      },
+      "validation_s02_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/structural-instructions/validation_s02_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-executed/validation_s02_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/set-masked-intermediate-constant/uops-issued/validation_s02_reference.csv",
+          "valid": 200
+        }
+      }
+    },
+    "skip-local-masked-operation": {
+      "attack_s00_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/attack_s00_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/attack_s00_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/attack_s00_attack.csv",
+          "valid": 500
+        }
+      },
+      "attack_s00_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/attack_s00_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/attack_s00_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/attack_s00_baseline.csv",
+          "valid": 500
+        }
+      },
+      "attack_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/attack_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/attack_s00_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/attack_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "attack_s01_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/attack_s01_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/attack_s01_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/attack_s01_attack.csv",
+          "valid": 500
+        }
+      },
+      "attack_s01_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/attack_s01_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/attack_s01_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/attack_s01_baseline.csv",
+          "valid": 500
+        }
+      },
+      "attack_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/attack_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/attack_s01_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/attack_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "calibration_s00_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/calibration_s00_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/calibration_s00_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/calibration_s00_baseline.csv",
+          "valid": 500
+        }
+      },
+      "calibration_s01_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/calibration_s01_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/calibration_s01_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/calibration_s01_baseline.csv",
+          "valid": 500
+        }
+      },
+      "calibration_s02_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/calibration_s02_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/calibration_s02_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/calibration_s02_baseline.csv",
+          "valid": 500
+        }
+      },
+      "calibration_s03_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/calibration_s03_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/calibration_s03_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/calibration_s03_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s00_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/development_s00_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/development_s00_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/development_s00_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s00_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/development_s00_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/development_s00_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/development_s00_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/development_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/development_s00_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/development_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "development_s01_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/development_s01_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/development_s01_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/development_s01_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s01_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/development_s01_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/development_s01_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/development_s01_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/development_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/development_s01_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/development_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "development_s02_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/development_s02_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/development_s02_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/development_s02_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s02_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/development_s02_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/development_s02_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/development_s02_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s02_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/development_s02_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/development_s02_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/development_s02_reference.csv",
+          "valid": 200
+        }
+      },
+      "development_s03_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/development_s03_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/development_s03_attack.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/development_s03_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s03_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/development_s03_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "uops_executed": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/development_s03_baseline.csv",
+          "valid": 500
+        },
+        "uops_issued": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/development_s03_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s03_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/development_s03_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/development_s03_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/development_s03_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s00_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/threshold_s00_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "uops_executed": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/threshold_s00_baseline.csv",
+          "valid": 5000
+        },
+        "uops_issued": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/threshold_s00_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/threshold_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/threshold_s00_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/threshold_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s01_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/threshold_s01_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "uops_executed": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/threshold_s01_baseline.csv",
+          "valid": 5000
+        },
+        "uops_issued": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/threshold_s01_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/threshold_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/threshold_s01_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/threshold_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s02_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/threshold_s02_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "uops_executed": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/threshold_s02_baseline.csv",
+          "valid": 5000
+        },
+        "uops_issued": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/threshold_s02_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s02_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/threshold_s02_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/threshold_s02_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/threshold_s02_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s03_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/threshold_s03_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "uops_executed": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/threshold_s03_baseline.csv",
+          "valid": 5000
+        },
+        "uops_issued": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/threshold_s03_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s03_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/threshold_s03_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/threshold_s03_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/threshold_s03_reference.csv",
+          "valid": 200
+        }
+      },
+      "validation_s00_baseline": {
+        "instructions": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/validation_s00_baseline.csv",
+          "valid": 2000
+        },
+        "merged": 2000,
+        "uops_executed": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/validation_s00_baseline.csv",
+          "valid": 2000
+        },
+        "uops_issued": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/validation_s00_baseline.csv",
+          "valid": 2000
+        }
+      },
+      "validation_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/validation_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/validation_s00_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/validation_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "validation_s01_baseline": {
+        "instructions": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/validation_s01_baseline.csv",
+          "valid": 2000
+        },
+        "merged": 2000,
+        "uops_executed": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/validation_s01_baseline.csv",
+          "valid": 2000
+        },
+        "uops_issued": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/validation_s01_baseline.csv",
+          "valid": 2000
+        }
+      },
+      "validation_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/validation_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/validation_s01_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/validation_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "validation_s02_baseline": {
+        "instructions": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/validation_s02_baseline.csv",
+          "valid": 2000
+        },
+        "merged": 2000,
+        "uops_executed": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/validation_s02_baseline.csv",
+          "valid": 2000
+        },
+        "uops_issued": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/validation_s02_baseline.csv",
+          "valid": 2000
+        }
+      },
+      "validation_s02_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/structural-instructions/validation_s02_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "uops_executed": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-executed/validation_s02_reference.csv",
+          "valid": 200
+        },
+        "uops_issued": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/single_executable/skip-local-masked-operation/uops-issued/validation_s02_reference.csv",
+          "valid": 200
+        }
+      }
+    }
+  },
+  "detector": {
+    "batch": "median of 10 traces without crossing session boundaries",
+    "constant_replacement_limit": "add and immediate-move paths retire the same number of instructions and can have the same uop count; standard counters do not provide a stable semantic opcode-class signal",
+    "feature_selection": "none; channels and directions are predeclared",
+    "hpc_channels": {
+      "structural": {
+        "detects": [
+          "skip-local-masked-operation",
+          "flip-masked-intermediate-bit"
+        ],
+        "feature": "structural-instructions.instructions",
+        "score": "absolute retired-instruction deviation from session-local benign reference",
+        "threshold": 0.0
+      },
+      "uop_substitution": {
+        "batch_threshold": {
+          "confidence": 0.95,
+          "false_positives": 0,
+          "one_sided_upper": 0.0003743964303524203,
+          "per_session_at_frozen_threshold": {
+            "flip-masked-intermediate-bit:s00": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "flip-masked-intermediate-bit:s01": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "flip-masked-intermediate-bit:s02": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "flip-masked-intermediate-bit:s03": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "replace-masked-intermediate-random:s00": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "replace-masked-intermediate-random:s01": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "replace-masked-intermediate-random:s02": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "replace-masked-intermediate-random:s03": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "set-masked-intermediate-constant:s00": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "set-masked-intermediate-constant:s01": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "set-masked-intermediate-constant:s02": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "set-masked-intermediate-constant:s03": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "skip-local-masked-operation:s00": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "skip-local-masked-operation:s01": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "skip-local-masked-operation:s02": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "skip-local-masked-operation:s03": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            }
+          },
+          "per_session_candidates": {
+            "flip-masked-intermediate-bit:s00": {
+              "allowed_false_positives": 0,
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 0.6744999999999999
+            },
+            "flip-masked-intermediate-bit:s01": {
+              "allowed_false_positives": 0,
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 1.3489815189531904
+            },
+            "flip-masked-intermediate-bit:s02": {
+              "allowed_false_positives": 0,
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 0.4496666666666666
+            },
+            "flip-masked-intermediate-bit:s03": {
+              "allowed_false_positives": 0,
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 1.6187999999999998
+            },
+            "replace-masked-intermediate-random:s00": {
+              "allowed_false_positives": 0,
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 0.0
+            },
+            "replace-masked-intermediate-random:s01": {
+              "allowed_false_positives": 0,
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 0.2248333333333333
+            },
+            "replace-masked-intermediate-random:s02": {
+              "allowed_false_positives": 0,
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 0.0
+            },
+            "replace-masked-intermediate-random:s03": {
+              "allowed_false_positives": 0,
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 0.4496666666666666
+            },
+            "set-masked-intermediate-constant:s00": {
+              "allowed_false_positives": 0,
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 0.7869058860560277
+            },
+            "set-masked-intermediate-constant:s01": {
+              "allowed_false_positives": 0,
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 0.4496666666666666
+            },
+            "set-masked-intermediate-constant:s02": {
+              "allowed_false_positives": 0,
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 0.4496666666666666
+            },
+            "set-masked-intermediate-constant:s03": {
+              "allowed_false_positives": 0,
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 0.2248333333333333
+            },
+            "skip-local-masked-operation:s00": {
+              "allowed_false_positives": 0,
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 0.2698
+            },
+            "skip-local-masked-operation:s01": {
+              "allowed_false_positives": 0,
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 0.0
+            },
+            "skip-local-masked-operation:s02": {
+              "allowed_false_positives": 0,
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 0.6744907594765952
+            },
+            "skip-local-masked-operation:s03": {
+              "allowed_false_positives": 0,
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 0.6744907594765952
+            }
+          },
+          "rate": 0.0,
+          "selection": "maximum of per-session confidence-guarded thresholds",
+          "target_fpr": 0.005,
+          "trials": 8000,
+          "value": 1.6187999999999998,
+          "worst_session_rate": 0.0
+        },
+        "features": [
+          "uops-issued.uops_issued_any",
+          "uops-executed.uops_executed_thread"
+        ],
+        "gate": "retired instruction count must equal session reference",
+        "intended_target": "random replacement implemented as a potentially move-eliminated register move",
+        "score": "maximum one-sided uop-issued or uop-executed deficit",
+        "single_threshold": {
+          "confidence": 0.95,
+          "false_positives": 83,
+          "one_sided_upper": 0.0012451467132319795,
+          "per_session_at_frozen_threshold": {
+            "flip-masked-intermediate-bit:s00": {
+              "false_positives": 4,
+              "one_sided_upper": 0.0018297605084528143,
+              "rate": 0.0008,
+              "trials": 5000
+            },
+            "flip-masked-intermediate-bit:s01": {
+              "false_positives": 10,
+              "one_sided_upper": 0.003390081981255356,
+              "rate": 0.002,
+              "trials": 5000
+            },
+            "flip-masked-intermediate-bit:s02": {
+              "false_positives": 5,
+              "one_sided_upper": 0.0021014479783970415,
+              "rate": 0.001,
+              "trials": 5000
+            },
+            "flip-masked-intermediate-bit:s03": {
+              "false_positives": 10,
+              "one_sided_upper": 0.003390081981255356,
+              "rate": 0.002,
+              "trials": 5000
+            },
+            "replace-masked-intermediate-random:s00": {
+              "false_positives": 3,
+              "one_sided_upper": 0.0015499942797071952,
+              "rate": 0.0006,
+              "trials": 5000
+            },
+            "replace-masked-intermediate-random:s01": {
+              "false_positives": 4,
+              "one_sided_upper": 0.0018297605084528143,
+              "rate": 0.0008,
+              "trials": 5000
+            },
+            "replace-masked-intermediate-random:s02": {
+              "false_positives": 8,
+              "one_sided_upper": 0.002885072435307779,
+              "rate": 0.0016,
+              "trials": 5000
+            },
+            "replace-masked-intermediate-random:s03": {
+              "false_positives": 4,
+              "one_sided_upper": 0.0018297605084528143,
+              "rate": 0.0008,
+              "trials": 5000
+            },
+            "set-masked-intermediate-constant:s00": {
+              "false_positives": 4,
+              "one_sided_upper": 0.0018297605084528143,
+              "rate": 0.0008,
+              "trials": 5000
+            },
+            "set-masked-intermediate-constant:s01": {
+              "false_positives": 8,
+              "one_sided_upper": 0.002885072435307779,
+              "rate": 0.0016,
+              "trials": 5000
+            },
+            "set-masked-intermediate-constant:s02": {
+              "false_positives": 3,
+              "one_sided_upper": 0.0015499942797071952,
+              "rate": 0.0006,
+              "trials": 5000
+            },
+            "set-masked-intermediate-constant:s03": {
+              "false_positives": 4,
+              "one_sided_upper": 0.0018297605084528143,
+              "rate": 0.0008,
+              "trials": 5000
+            },
+            "skip-local-masked-operation:s00": {
+              "false_positives": 1,
+              "one_sided_upper": 0.0009484177700057,
+              "rate": 0.0002,
+              "trials": 5000
+            },
+            "skip-local-masked-operation:s01": {
+              "false_positives": 5,
+              "one_sided_upper": 0.0021014479783970415,
+              "rate": 0.001,
+              "trials": 5000
+            },
+            "skip-local-masked-operation:s02": {
+              "false_positives": 1,
+              "one_sided_upper": 0.0009484177700057,
+              "rate": 0.0002,
+              "trials": 5000
+            },
+            "skip-local-masked-operation:s03": {
+              "false_positives": 9,
+              "one_sided_upper": 0.0031389372345019956,
+              "rate": 0.0018,
+              "trials": 5000
+            }
+          },
+          "per_session_candidates": {
+            "flip-masked-intermediate-bit:s00": {
+              "allowed_false_positives": 16,
+              "false_positives": 7,
+              "one_sided_upper": 0.002628006196477695,
+              "rate": 0.0014,
+              "trials": 5000,
+              "value": 0.6744999999999999
+            },
+            "flip-masked-intermediate-bit:s01": {
+              "allowed_false_positives": 16,
+              "false_positives": 10,
+              "one_sided_upper": 0.003390081981255356,
+              "rate": 0.002,
+              "trials": 5000,
+              "value": 1.3489815189531904
+            },
+            "flip-masked-intermediate-bit:s02": {
+              "allowed_false_positives": 16,
+              "false_positives": 16,
+              "one_sided_upper": 0.004856201426739341,
+              "rate": 0.0032,
+              "trials": 5000,
+              "value": 0.4496666666666666
+            },
+            "flip-masked-intermediate-bit:s03": {
+              "allowed_false_positives": 16,
+              "false_positives": 10,
+              "one_sided_upper": 0.003390081981255356,
+              "rate": 0.002,
+              "trials": 5000,
+              "value": 1.6187999999999998
+            },
+            "replace-masked-intermediate-random:s00": {
+              "allowed_false_positives": 16,
+              "false_positives": 3,
+              "one_sided_upper": 0.0015499942797071952,
+              "rate": 0.0006,
+              "trials": 5000,
+              "value": 0.8993333333333332
+            },
+            "replace-masked-intermediate-random:s01": {
+              "allowed_false_positives": 16,
+              "false_positives": 5,
+              "one_sided_upper": 0.0021014479783970415,
+              "rate": 0.001,
+              "trials": 5000,
+              "value": 0.8993333333333332
+            },
+            "replace-masked-intermediate-random:s02": {
+              "allowed_false_positives": 16,
+              "false_positives": 14,
+              "one_sided_upper": 0.004373844634514002,
+              "rate": 0.0028,
+              "trials": 5000,
+              "value": 0.4496666666666666
+            },
+            "replace-masked-intermediate-random:s03": {
+              "allowed_false_positives": 16,
+              "false_positives": 4,
+              "one_sided_upper": 0.0018297605084528143,
+              "rate": 0.0008,
+              "trials": 5000,
+              "value": 0.8993333333333332
+            },
+            "set-masked-intermediate-constant:s00": {
+              "allowed_false_positives": 16,
+              "false_positives": 7,
+              "one_sided_upper": 0.002628006196477695,
+              "rate": 0.0014,
+              "trials": 5000,
+              "value": 0.8993210126354603
+            },
+            "set-masked-intermediate-constant:s01": {
+              "allowed_false_positives": 16,
+              "false_positives": 15,
+              "one_sided_upper": 0.004615684985636267,
+              "rate": 0.003,
+              "trials": 5000,
+              "value": 0.4496666666666666
+            },
+            "set-masked-intermediate-constant:s02": {
+              "allowed_false_positives": 16,
+              "false_positives": 5,
+              "one_sided_upper": 0.0021014479783970415,
+              "rate": 0.001,
+              "trials": 5000,
+              "value": 0.4496666666666666
+            },
+            "set-masked-intermediate-constant:s03": {
+              "allowed_false_positives": 16,
+              "false_positives": 10,
+              "one_sided_upper": 0.003390081981255356,
+              "rate": 0.002,
+              "trials": 5000,
+              "value": 0.4496666666666666
+            },
+            "skip-local-masked-operation:s00": {
+              "allowed_false_positives": 16,
+              "false_positives": 1,
+              "one_sided_upper": 0.0009484177700057,
+              "rate": 0.0002,
+              "trials": 5000,
+              "value": 0.8993333333333332
+            },
+            "skip-local-masked-operation:s01": {
+              "allowed_false_positives": 16,
+              "false_positives": 10,
+              "one_sided_upper": 0.003390081981255356,
+              "rate": 0.002,
+              "trials": 5000,
+              "value": 0.4496666666666666
+            },
+            "skip-local-masked-operation:s02": {
+              "allowed_false_positives": 16,
+              "false_positives": 1,
+              "one_sided_upper": 0.0009484177700057,
+              "rate": 0.0002,
+              "trials": 5000,
+              "value": 1.3489815189531904
+            },
+            "skip-local-masked-operation:s03": {
+              "allowed_false_positives": 16,
+              "false_positives": 9,
+              "one_sided_upper": 0.0031389372345019956,
+              "rate": 0.0018,
+              "trials": 5000,
+              "value": 0.8993210126354603
+            }
+          },
+          "rate": 0.0010375,
+          "selection": "maximum of per-session confidence-guarded thresholds",
+          "target_fpr": 0.005,
+          "trials": 80000,
+          "value": 1.6187999999999998,
+          "worst_session_rate": 0.002
+        }
+      }
+    },
+    "hybrid_integrity_channel": {
+      "score": "used masked intermediate differs from redundantly computed normal intermediate",
+      "type": "non-HPC post-window redundant recomputation",
+      "window_effect": "comparison occurs after the PMU window and does not alter the target operation"
+    },
+    "name": "roulette-semantics-derived-two-tier-v1",
+    "normalization": "session-local benign reference median and robust scale"
+  },
+  "experiment": "Delvaux Roulette",
+  "validation_fpr": {
+    "batch_hpc": {
+      "by_session": {
+        "flip-masked-intermediate-bit:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "flip-masked-intermediate-bit:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "flip-masked-intermediate-bit:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "replace-masked-intermediate-random:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "replace-masked-intermediate-random:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "replace-masked-intermediate-random:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "set-masked-intermediate-constant:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "set-masked-intermediate-constant:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "set-masked-intermediate-constant:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "skip-local-masked-operation:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "skip-local-masked-operation:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "skip-local-masked-operation:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        }
+      },
+      "ci95": [
+        0.0,
+        0.0015358524754633357
+      ],
+      "positives": 0,
+      "rate": 0.0,
+      "trials": 2400,
+      "worst_session_rate": 0.0
+    },
+    "batch_hybrid": {
+      "by_session": {
+        "flip-masked-intermediate-bit:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "flip-masked-intermediate-bit:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "flip-masked-intermediate-bit:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "replace-masked-intermediate-random:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "replace-masked-intermediate-random:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "replace-masked-intermediate-random:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "set-masked-intermediate-constant:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "set-masked-intermediate-constant:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "set-masked-intermediate-constant:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "skip-local-masked-operation:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "skip-local-masked-operation:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "skip-local-masked-operation:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        }
+      },
+      "ci95": [
+        0.0,
+        0.0015358524754633357
+      ],
+      "positives": 0,
+      "rate": 0.0,
+      "trials": 2400,
+      "worst_session_rate": 0.0
+    },
+    "batch_two_tier": {
+      "by_session": {
+        "flip-masked-intermediate-bit:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "flip-masked-intermediate-bit:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "flip-masked-intermediate-bit:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "replace-masked-intermediate-random:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "replace-masked-intermediate-random:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "replace-masked-intermediate-random:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "set-masked-intermediate-constant:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "set-masked-intermediate-constant:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "set-masked-intermediate-constant:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "skip-local-masked-operation:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "skip-local-masked-operation:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "skip-local-masked-operation:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        }
+      },
+      "ci95": [
+        0.0,
+        0.0015358524754633357
+      ],
+      "positives": 0,
+      "rate": 0.0,
+      "trials": 2400,
+      "worst_session_rate": 0.0
+    },
+    "single_hpc": {
+      "by_session": {
+        "flip-masked-intermediate-bit:s00": {
+          "positives": 1,
+          "rate": 0.0005,
+          "trials": 2000
+        },
+        "flip-masked-intermediate-bit:s01": {
+          "positives": 3,
+          "rate": 0.0015,
+          "trials": 2000
+        },
+        "flip-masked-intermediate-bit:s02": {
+          "positives": 3,
+          "rate": 0.0015,
+          "trials": 2000
+        },
+        "replace-masked-intermediate-random:s00": {
+          "positives": 1,
+          "rate": 0.0005,
+          "trials": 2000
+        },
+        "replace-masked-intermediate-random:s01": {
+          "positives": 3,
+          "rate": 0.0015,
+          "trials": 2000
+        },
+        "replace-masked-intermediate-random:s02": {
+          "positives": 1,
+          "rate": 0.0005,
+          "trials": 2000
+        },
+        "set-masked-intermediate-constant:s00": {
+          "positives": 5,
+          "rate": 0.0025,
+          "trials": 2000
+        },
+        "set-masked-intermediate-constant:s01": {
+          "positives": 3,
+          "rate": 0.0015,
+          "trials": 2000
+        },
+        "set-masked-intermediate-constant:s02": {
+          "positives": 4,
+          "rate": 0.002,
+          "trials": 2000
+        },
+        "skip-local-masked-operation:s00": {
+          "positives": 3,
+          "rate": 0.0015,
+          "trials": 2000
+        },
+        "skip-local-masked-operation:s01": {
+          "positives": 2,
+          "rate": 0.001,
+          "trials": 2000
+        },
+        "skip-local-masked-operation:s02": {
+          "positives": 2,
+          "rate": 0.001,
+          "trials": 2000
+        }
+      },
+      "ci95": [
+        0.00087778831044653,
+        0.001832921038778902
+      ],
+      "positives": 31,
+      "rate": 0.0012916666666666667,
+      "trials": 24000,
+      "worst_session_rate": 0.0025
+    },
+    "single_hybrid": {
+      "by_session": {
+        "flip-masked-intermediate-bit:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "flip-masked-intermediate-bit:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "flip-masked-intermediate-bit:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "replace-masked-intermediate-random:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "replace-masked-intermediate-random:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "replace-masked-intermediate-random:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "set-masked-intermediate-constant:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "set-masked-intermediate-constant:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "set-masked-intermediate-constant:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "skip-local-masked-operation:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "skip-local-masked-operation:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "skip-local-masked-operation:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        }
+      },
+      "ci95": [
+        0.0,
+        0.00015369149883941386
+      ],
+      "positives": 0,
+      "rate": 0.0,
+      "trials": 24000,
+      "worst_session_rate": 0.0
+    },
+    "single_two_tier": {
+      "by_session": {
+        "flip-masked-intermediate-bit:s00": {
+          "positives": 1,
+          "rate": 0.0005,
+          "trials": 2000
+        },
+        "flip-masked-intermediate-bit:s01": {
+          "positives": 3,
+          "rate": 0.0015,
+          "trials": 2000
+        },
+        "flip-masked-intermediate-bit:s02": {
+          "positives": 3,
+          "rate": 0.0015,
+          "trials": 2000
+        },
+        "replace-masked-intermediate-random:s00": {
+          "positives": 1,
+          "rate": 0.0005,
+          "trials": 2000
+        },
+        "replace-masked-intermediate-random:s01": {
+          "positives": 3,
+          "rate": 0.0015,
+          "trials": 2000
+        },
+        "replace-masked-intermediate-random:s02": {
+          "positives": 1,
+          "rate": 0.0005,
+          "trials": 2000
+        },
+        "set-masked-intermediate-constant:s00": {
+          "positives": 5,
+          "rate": 0.0025,
+          "trials": 2000
+        },
+        "set-masked-intermediate-constant:s01": {
+          "positives": 3,
+          "rate": 0.0015,
+          "trials": 2000
+        },
+        "set-masked-intermediate-constant:s02": {
+          "positives": 4,
+          "rate": 0.002,
+          "trials": 2000
+        },
+        "skip-local-masked-operation:s00": {
+          "positives": 3,
+          "rate": 0.0015,
+          "trials": 2000
+        },
+        "skip-local-masked-operation:s01": {
+          "positives": 2,
+          "rate": 0.001,
+          "trials": 2000
+        },
+        "skip-local-masked-operation:s02": {
+          "positives": 2,
+          "rate": 0.001,
+          "trials": 2000
+        }
+      },
+      "ci95": [
+        0.00087778831044653,
+        0.001832921038778902
+      ],
+      "positives": 31,
+      "rate": 0.0012916666666666667,
+      "trials": 24000,
+      "worst_session_rate": 0.0025
+    }
+  }
+}

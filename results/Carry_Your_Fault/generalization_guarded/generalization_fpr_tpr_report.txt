@@ -1,0 +1,9 @@
+=== Carry Your Fault Generalization-Guarded PMU Detector ===
+Measurement passes: structural, cache, cache-detail, load-hits, load-misses-latency, stalls, recovery
+Available features: 19
+Selected stable directional features: 0
+Development cross-fit status: DEVELOPMENT_CROSS_FIT_FAILURE
+Detector generalization status: NO_STABLE_DIRECTIONAL_FEATURES
+
+NO_STABLE_DIRECTIONAL_FEATURES
+The analyzer intentionally did not construct a detector or report a final FPR/TPR operating point.

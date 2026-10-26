@@ -1,0 +1,68 @@
+=== Delvaux Roulette: set-masked-intermediate-constant baseline=single threshold=worst-session ===
+Available candidate features: 34; development-selected features: 3
+  frontend-uops-undelivered.idq_uops_not_delivered           direction=- dev_auc=0.717777 effect=0.752 session_consistency=1.000 weight=0.4591
+  uops-executed.uops_executed_thread                         direction=- dev_auc=0.728213 effect=0.450 session_consistency=0.750 weight=0.2875
+  resource-stalls-scoreboard.resource_stalls_scoreboard      direction=+ dev_auc=0.634069 effect=0.674 session_consistency=0.750 weight=0.2534
+
+Primary sparse directional detector:
+  Single threshold: FP=45/20000 upper=0.002884; threshold=2.027054
+  Validation: FP=41/6000 FPR=0.006833333; attack TP=15/1000 TPR=0.015000000; AUC=0.618111
+  Batch-10 metric=median-directional-score direction=+
+  Batch threshold: FP=1/2000 upper=0.002370; threshold=1.052348
+  Batch validation: FP=1/600 FPR=0.001666667; attack TP=0/100 TPR=0.000000000; AUC=0.730083
+  Cross-session single validation FPR:
+    s00: 13/2000 (0.006500); first=0.007000 second=0.006000
+    s01: 0/2000 (0.000000); first=0.000000 second=0.000000
+    s02: 28/2000 (0.014000); first=0.018000 second=0.010000
+  Worst-session single FPR=0.014000
+  Cross-session batch validation FPR:
+    s00: 0/200 (0.000000)
+    s01: 0/200 (0.000000)
+    s02: 1/200 (0.005000)
+  Cross-session batch attack TPR:
+    s00: 0/50 (0.000000)
+    s01: 0/50 (0.000000)
+  Worst-session batch FPR=0.005000
+
+Structural-only comparison detector:
+  Single threshold: FP=2/20000 upper=0.000315; threshold=0.000000
+  Validation: FP=3/6000 FPR=0.000500000; attack TP=0/1000 TPR=0.000000000; AUC=0.499750
+  Batch-10 metric=mean-directional-score direction=+
+  Batch threshold: FP=0/2000 upper=0.001497; threshold=0.025000
+  Batch validation: FP=0/600 FPR=0.000000000; attack TP=0/100 TPR=0.000000000; AUC=0.497500
+  Cross-session single validation FPR:
+    s00: 1/2000 (0.000500); first=0.000000 second=0.001000
+    s01: 1/2000 (0.000500); first=0.001000 second=0.000000
+    s02: 1/2000 (0.000500); first=0.001000 second=0.000000
+  Worst-session single FPR=0.000500
+  Cross-session batch validation FPR:
+    s00: 0/200 (0.000000)
+    s01: 0/200 (0.000000)
+    s02: 0/200 (0.000000)
+  Cross-session batch attack TPR:
+    s00: 0/50 (0.000000)
+    s01: 0/50 (0.000000)
+  Worst-session batch FPR=0.000000
+
+Fault semantic success: 1000/1000
+Largest normalized median shifts on final attack sessions:
+  cache-l1i.l1i_read_misses                                  session_z_delta=+3.710
+  execution-bound-loads.execution_bound_on_loads             session_z_delta=-1.686
+  uops-issued.uops_issued_any                                session_z_delta=+1.349
+  uops-executed.uops_executed_thread                         session_z_delta=-0.899
+  resource-stalls-scoreboard.resource_stalls_scoreboard      session_z_delta=+0.674
+  stalls-mem-any.stalls_mem_any                              session_z_delta=+0.648
+  recovery-cycles-any.recovery_cycles_any                    session_z_delta=+0.600
+  frontend-uops-undelivered.idq_uops_not_delivered           session_z_delta=+0.415
+  frontend-ms-uops.microcode_uops                            session_z_delta=+0.225
+  structural-instructions.cycles                             session_z_delta=+0.169
+  structural-instructions.instructions                       session_z_delta=+0.000
+  structural-branches.branches                               session_z_delta=+0.000
+  structural-branch-misses.branch_misses                     session_z_delta=+0.000
+  structural-loads.retired_loads                             session_z_delta=+0.000
+  structural-stores.retired_stores                           session_z_delta=+0.000
+  cache-l1d.l1d_read_misses                                  session_z_delta=+0.000
+  cache-llc.llc_read_misses                                  session_z_delta=+0.000
+  cache-dtlb.dtlb_read_misses                                session_z_delta=+0.000
+  cache-references.cache_references                          session_z_delta=+0.000
+  cache-misses.cache_misses                                  session_z_delta=+0.000

@@ -1,0 +1,81 @@
+BEGIN
+{
+    printf("PAIR_META mode=baseline expected_entries=1 expected_returns=1\n");
+}
+
+uprobe:/home/ruixiang/hpc-x86-defense/build/bin/xagawa_round3_kem_fault/xagawa_cmov_baseline_os_pair:PQCLEAN_KYBER512_CLEAN_crypto_kem_dec
+/pid == cpid/
+{
+    @active[tid] = 1;
+    @cmov_entries[tid] = 0;
+    @cmov_returns[tid] = 0;
+    @order_ok[tid] = 1;
+    @phase[tid] = 1;
+}
+
+uprobe:/home/ruixiang/hpc-x86-defense/build/bin/xagawa_round3_kem_fault/xagawa_cmov_baseline_os_pair:PQCLEAN_KYBER512_CLEAN_cmov
+/pid == cpid && @active[tid] == 1/
+{
+    @cmov_entries[tid] = @cmov_entries[tid] + 1;
+    if (@phase[tid] != 1) {
+        @order_ok[tid] = 0;
+    }
+    @phase[tid] = 2;
+}
+
+uretprobe:/home/ruixiang/hpc-x86-defense/build/bin/xagawa_round3_kem_fault/xagawa_cmov_baseline_os_pair:PQCLEAN_KYBER512_CLEAN_cmov
+/pid == cpid && @active[tid] == 1/
+{
+    @cmov_returns[tid] = @cmov_returns[tid] + 1;
+    if (@phase[tid] != 2) {
+        @order_ok[tid] = 0;
+    }
+    @phase[tid] = 3;
+}
+
+uretprobe:/home/ruixiang/hpc-x86-defense/build/bin/xagawa_round3_kem_fault/xagawa_cmov_baseline_os_pair:PQCLEAN_KYBER512_CLEAN_crypto_kem_dec
+/pid == cpid && @active[tid] == 1/
+{
+    @sample_index = @sample_index + 1;
+
+    $entries = @cmov_entries[tid];
+    $returns = @cmov_returns[tid];
+    $order = @order_ok[tid];
+    $phase = @phase[tid];
+
+    $contract_ok =
+        $entries == 1 &&
+        $returns == 1 &&
+        $order == 1 &&
+        $phase == 3;
+
+    $alarm = $contract_ok == 0;
+
+    printf(
+        "PAIR_SAMPLE mode=baseline sample=%d cmov_entries=%d cmov_returns=%d order_ok=%d final_phase=%d contract_ok=%d alarm=%d\n",
+        @sample_index,
+        $entries,
+        $returns,
+        $order,
+        $phase,
+        $contract_ok,
+        $alarm
+    );
+
+    delete(@active[tid]);
+    delete(@cmov_entries[tid]);
+    delete(@cmov_returns[tid]);
+    delete(@order_ok[tid]);
+    delete(@phase[tid]);
+}
+
+END
+{
+    printf("PAIR_END mode=baseline\n");
+    clear(@active);
+    clear(@cmov_entries);
+    clear(@cmov_returns);
+    clear(@order_ok);
+    clear(@phase);
+    clear(@sample_index);
+}

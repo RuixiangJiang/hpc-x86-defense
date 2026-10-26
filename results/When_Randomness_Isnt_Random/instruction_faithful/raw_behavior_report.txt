@@ -1,0 +1,320 @@
+=== When Randomness Isn't Random: instruction-faithful regions ===
+
+Region 1: skip one ADD during noiseseed pointer initialization.
+Region 2: disturb one LDR-equivalent loading coins pointer from stack.
+Region 3: disturb one LDR-equivalent loading sigma pointer from stack.
+
+============================================================
+Region 1: noiseseed initialization / skipped ADD
+============================================================
+[instructions]
+instructions: baseline mode=39, median=39 [39,39]; attack mode=38, median=38 [38,38]; mode delta=-1; median delta=-1
+cycles: baseline median=139 [136,148]; attack median=128 [126,137]; median delta=-11
+[per-session median deltas]
+  s00: instructions=-1, cycles=-13
+  s01: instructions=-1, cycles=-12
+  s02: instructions=-1, cycles=-11.500
+  s03: instructions=-1, cycles=-10
+
+[Region 1 retired-instruction detector]
+frozen baseline mode: 39
+FPR: 1/2000 = 0.0500%
+TPR: 2000/2000 = 100.0000%
+
+============================================================
+Region 2: coins memcpy / disturbed pointer LDR
+============================================================
+--- cache profile: matched-hot ---
+[instructions]
+instructions: baseline mode=41, median=41 [41,41]; attack mode=41, median=41 [41,41]; mode delta=0; median delta=0
+cycles: baseline median=142 [140,154.050]; attack median=143 [140,154]; median delta=1
+[per-session median deltas]
+  s00: instructions=0, cycles=2
+  s01: instructions=0, cycles=1
+  s02: instructions=0, cycles=3
+  s03: instructions=0, cycles=-2
+
+[retired-loads]
+retired_loads: baseline mode=11, median=11 [11,11]; attack mode=11, median=11 [11,11]; mode delta=0; median delta=0
+cycles: baseline median=143 [140,152]; attack median=145 [140,162]; median delta=2
+[per-session median deltas]
+  s00: retired_loads=0, cycles=2
+  s01: retired_loads=0, cycles=-1
+  s02: retired_loads=0, cycles=0
+  s03: retired_loads=0, cycles=8
+
+[retired-stores]
+retired_stores: baseline mode=10, median=10 [10,10]; attack mode=10, median=10 [10,10]; mode delta=0; median delta=0
+cycles: baseline median=144 [140,156]; attack median=144 [140,158]; median delta=0
+[per-session median deltas]
+  s00: retired_stores=0, cycles=-1
+  s01: retired_stores=0, cycles=3
+  s02: retired_stores=0, cycles=1
+  s03: retired_stores=0, cycles=2
+
+[l1d-misses]
+l1d_read_misses: baseline mode=0, median=0 [0,1]; attack mode=0, median=0 [0,1]; mode delta=0; median delta=0
+cycles: baseline median=144 [140,155]; attack median=143 [140,156]; median delta=-1
+[per-session median deltas]
+  s00: l1d_read_misses=0, cycles=0
+  s01: l1d_read_misses=0, cycles=2
+  s02: l1d_read_misses=0, cycles=0
+  s03: l1d_read_misses=0, cycles=-3
+
+[llc-misses]
+llc_read_misses: baseline mode=0, median=0 [0,0]; attack mode=0, median=0 [0,0]; mode delta=0; median delta=0
+cycles: baseline median=143 [140,155]; attack median=148 [140,165]; median delta=5
+[per-session median deltas]
+  s00: llc_read_misses=0, cycles=11
+  s01: llc_read_misses=0, cycles=1.500
+  s02: llc_read_misses=0, cycles=0
+  s03: llc_read_misses=0, cycles=11
+
+[dtlb-misses]
+dtlb_read_misses: baseline mode=0, median=0 [0,0]; attack mode=0, median=0 [0,0]; mode delta=0; median delta=0
+cycles: baseline median=145 [140,162]; attack median=144 [140,157]; median delta=-1
+[per-session median deltas]
+  s00: dtlb_read_misses=0, cycles=3
+  s01: dtlb_read_misses=0, cycles=-6
+  s02: dtlb_read_misses=0, cycles=-5.500
+  s03: dtlb_read_misses=0, cycles=0
+
+[cache-references]
+cache_references: baseline mode=0, median=0 [0,0]; attack mode=0, median=0 [0,0]; mode delta=0; median delta=0
+cycles: baseline median=145 [140,161.050]; attack median=144 [140,162]; median delta=-1
+[per-session median deltas]
+  s00: cache_references=0, cycles=-1
+  s01: cache_references=0, cycles=-4
+  s02: cache_references=0, cycles=8
+  s03: cache_references=0, cycles=-7
+
+[cache-misses]
+cache_misses: baseline mode=0, median=0 [0,0]; attack mode=0, median=0 [0,0]; mode delta=0; median delta=0
+cycles: baseline median=143 [140,155]; attack median=143 [140,152]; median delta=0
+[per-session median deltas]
+  s00: cache_misses=0, cycles=1
+  s01: cache_misses=0, cycles=-1
+  s02: cache_misses=0, cycles=-2
+  s03: cache_misses=0, cycles=-1
+
+--- cache profile: redirect-cold ---
+[instructions]
+instructions: baseline mode=41, median=41 [41,41]; attack mode=41, median=41 [41,41]; mode delta=0; median delta=0
+cycles: baseline median=143 [140,153.050]; attack median=143 [140,155]; median delta=0
+[per-session median deltas]
+  s00: instructions=0, cycles=4
+  s01: instructions=0, cycles=-1
+  s02: instructions=0, cycles=0
+  s03: instructions=0, cycles=-1
+
+[retired-loads]
+retired_loads: baseline mode=11, median=11 [11,11]; attack mode=11, median=11 [11,11]; mode delta=0; median delta=0
+cycles: baseline median=143 [140,154]; attack median=148 [140,164]; median delta=5
+[per-session median deltas]
+  s00: retired_loads=0, cycles=11
+  s01: retired_loads=0, cycles=1
+  s02: retired_loads=0, cycles=10
+  s03: retired_loads=0, cycles=-2
+
+[retired-stores]
+retired_stores: baseline mode=10, median=10 [10,10]; attack mode=10, median=10 [10,10]; mode delta=0; median delta=0
+cycles: baseline median=143 [140,154]; attack median=147 [140,163]; median delta=4
+[per-session median deltas]
+  s00: retired_stores=0, cycles=1
+  s01: retired_stores=0, cycles=10
+  s02: retired_stores=0, cycles=-1
+  s03: retired_stores=0, cycles=5
+
+[l1d-misses]
+l1d_read_misses: baseline mode=0, median=0 [0,1]; attack mode=1, median=1 [0,2]; mode delta=1; median delta=1
+cycles: baseline median=144 [140,155]; attack median=150 [140,166]; median delta=6
+[per-session median deltas]
+  s00: l1d_read_misses=1, cycles=4
+  s01: l1d_read_misses=1, cycles=12
+  s02: l1d_read_misses=1, cycles=8
+  s03: l1d_read_misses=0, cycles=5
+
+[llc-misses]
+llc_read_misses: baseline mode=0, median=0 [0,0]; attack mode=0, median=0 [0,0]; mode delta=0; median delta=0
+cycles: baseline median=142 [140,152]; attack median=145 [140,162]; median delta=3
+[per-session median deltas]
+  s00: llc_read_misses=0, cycles=7
+  s01: llc_read_misses=0, cycles=1
+  s02: llc_read_misses=0, cycles=1
+  s03: llc_read_misses=0, cycles=2
+
+[dtlb-misses]
+dtlb_read_misses: baseline mode=0, median=0 [0,0]; attack mode=0, median=0 [0,0]; mode delta=0; median delta=0
+cycles: baseline median=144 [140,154]; attack median=144 [140,162]; median delta=0
+[per-session median deltas]
+  s00: dtlb_read_misses=0, cycles=10
+  s01: dtlb_read_misses=0, cycles=2
+  s02: dtlb_read_misses=0, cycles=0
+  s03: dtlb_read_misses=0, cycles=-4
+
+[cache-references]
+cache_references: baseline mode=0, median=0 [0,0]; attack mode=0, median=0 [0,0]; mode delta=0; median delta=0
+cycles: baseline median=143 [140,152]; attack median=146 [140,163]; median delta=3
+[per-session median deltas]
+  s00: cache_references=0, cycles=-1
+  s01: cache_references=0, cycles=12
+  s02: cache_references=0, cycles=2
+  s03: cache_references=0, cycles=2
+
+[cache-misses]
+cache_misses: baseline mode=0, median=0 [0,0]; attack mode=0, median=0 [0,0]; mode delta=0; median delta=0
+cycles: baseline median=144 [140,162]; attack median=144 [140,159.100]; median delta=0
+[per-session median deltas]
+  s00: cache_misses=0, cycles=4
+  s01: cache_misses=0, cycles=-1
+  s02: cache_misses=0, cycles=-1.500
+  s03: cache_misses=0, cycles=-4
+
+============================================================
+Region 3: sigma initialization / disturbed pointer LDR
+============================================================
+--- cache profile: matched-hot ---
+[instructions]
+instructions: baseline mode=45, median=45 [45,45]; attack mode=45, median=45 [45,45]; mode delta=0; median delta=0
+cycles: baseline median=131 [127,141]; attack median=132 [129,144]; median delta=1
+[per-session median deltas]
+  s00: instructions=0, cycles=1
+  s01: instructions=0, cycles=-1
+  s02: instructions=0, cycles=2
+  s03: instructions=0, cycles=-2
+
+[retired-loads]
+retired_loads: baseline mode=13, median=13 [13,13]; attack mode=13, median=13 [13,13]; mode delta=0; median delta=0
+cycles: baseline median=132 [129,145]; attack median=133 [129,148]; median delta=1
+[per-session median deltas]
+  s00: retired_loads=0, cycles=4
+  s01: retired_loads=0, cycles=0
+  s02: retired_loads=0, cycles=1
+  s03: retired_loads=0, cycles=0
+
+[retired-stores]
+retired_stores: baseline mode=12, median=12 [12,12]; attack mode=12, median=12 [12,12]; mode delta=0; median delta=0
+cycles: baseline median=132 [129,148]; attack median=137 [129,150]; median delta=5
+[per-session median deltas]
+  s00: retired_stores=0, cycles=0
+  s01: retired_stores=0, cycles=10
+  s02: retired_stores=0, cycles=7
+  s03: retired_stores=0, cycles=2
+
+[l1d-misses]
+l1d_read_misses: baseline mode=0, median=0 [0,1]; attack mode=0, median=0 [0,1]; mode delta=0; median delta=0
+cycles: baseline median=133 [129,149]; attack median=137 [129,150]; median delta=4
+[per-session median deltas]
+  s00: l1d_read_misses=0, cycles=5
+  s01: l1d_read_misses=0, cycles=1
+  s02: l1d_read_misses=0, cycles=2
+  s03: l1d_read_misses=0, cycles=4
+
+[llc-misses]
+llc_read_misses: baseline mode=0, median=0 [0,0]; attack mode=0, median=0 [0,0]; mode delta=0; median delta=0
+cycles: baseline median=137 [129,150]; attack median=133 [129,148]; median delta=-4
+[per-session median deltas]
+  s00: llc_read_misses=0, cycles=5
+  s01: llc_read_misses=0, cycles=-4
+  s02: llc_read_misses=0, cycles=-9
+  s03: llc_read_misses=0, cycles=-2.500
+
+[dtlb-misses]
+dtlb_read_misses: baseline mode=0, median=0 [0,0]; attack mode=0, median=0 [0,0]; mode delta=0; median delta=0
+cycles: baseline median=133 [129,150]; attack median=134 [129,149]; median delta=1
+[per-session median deltas]
+  s00: dtlb_read_misses=0, cycles=2
+  s01: dtlb_read_misses=0, cycles=6
+  s02: dtlb_read_misses=0, cycles=-3
+  s03: dtlb_read_misses=0, cycles=2
+
+[cache-references]
+cache_references: baseline mode=0, median=0 [0,0]; attack mode=0, median=0 [0,0]; mode delta=0; median delta=0
+cycles: baseline median=130 [126,140]; attack median=131 [129,144]; median delta=1
+[per-session median deltas]
+  s00: cache_references=0, cycles=1
+  s01: cache_references=0, cycles=2
+  s02: cache_references=0, cycles=1
+  s03: cache_references=0, cycles=1
+
+[cache-misses]
+cache_misses: baseline mode=0, median=0 [0,0]; attack mode=0, median=0 [0,0]; mode delta=0; median delta=0
+cycles: baseline median=131 [126,142]; attack median=137 [129,153]; median delta=6
+[per-session median deltas]
+  s00: cache_misses=0, cycles=3
+  s01: cache_misses=0, cycles=13
+  s02: cache_misses=0, cycles=-0.500
+  s03: cache_misses=0, cycles=2
+
+--- cache profile: redirect-cold ---
+[instructions]
+instructions: baseline mode=45, median=45 [45,45]; attack mode=45, median=45 [45,45]; mode delta=0; median delta=0
+cycles: baseline median=131 [128,141]; attack median=133 [129,157]; median delta=2
+[per-session median deltas]
+  s00: instructions=0, cycles=0
+  s01: instructions=0, cycles=3.500
+  s02: instructions=0, cycles=4
+  s03: instructions=0, cycles=4
+
+[retired-loads]
+retired_loads: baseline mode=13, median=13 [13,13]; attack mode=13, median=13 [13,13]; mode delta=0; median delta=0
+cycles: baseline median=136 [129,149]; attack median=137 [129,150]; median delta=1
+[per-session median deltas]
+  s00: retired_loads=0, cycles=-3
+  s01: retired_loads=0, cycles=4
+  s02: retired_loads=0, cycles=6
+  s03: retired_loads=0, cycles=0
+
+[retired-stores]
+retired_stores: baseline mode=12, median=12 [12,12]; attack mode=12, median=12 [12,12]; mode delta=0; median delta=0
+cycles: baseline median=133 [129,150]; attack median=137 [129,151]; median delta=4
+[per-session median deltas]
+  s00: retired_stores=0, cycles=9
+  s01: retired_stores=0, cycles=4
+  s02: retired_stores=0, cycles=0
+  s03: retired_stores=0, cycles=-2
+
+[l1d-misses]
+l1d_read_misses: baseline mode=0, median=0 [0,1]; attack mode=1, median=1 [0,2]; mode delta=1; median delta=1
+cycles: baseline median=133 [129,145]; attack median=139 [129,152]; median delta=6
+[per-session median deltas]
+  s00: l1d_read_misses=1, cycles=6
+  s01: l1d_read_misses=1, cycles=8
+  s02: l1d_read_misses=1, cycles=10
+  s03: l1d_read_misses=-1, cycles=0
+
+[llc-misses]
+llc_read_misses: baseline mode=0, median=0 [0,0]; attack mode=0, median=0 [0,0]; mode delta=0; median delta=0
+cycles: baseline median=136 [129,150]; attack median=139 [129,150]; median delta=3
+[per-session median deltas]
+  s00: llc_read_misses=0, cycles=3
+  s01: llc_read_misses=0, cycles=3
+  s02: llc_read_misses=0, cycles=2
+  s03: llc_read_misses=0, cycles=6
+
+[dtlb-misses]
+dtlb_read_misses: baseline mode=0, median=0 [0,0]; attack mode=0, median=0 [0,0]; mode delta=0; median delta=0
+cycles: baseline median=133 [129,150]; attack median=140 [129,151]; median delta=7
+[per-session median deltas]
+  s00: dtlb_read_misses=0, cycles=2
+  s01: dtlb_read_misses=0, cycles=5
+  s02: dtlb_read_misses=0, cycles=1
+  s03: dtlb_read_misses=0, cycles=10
+
+[cache-references]
+cache_references: baseline mode=0, median=0 [0,0]; attack mode=0, median=0 [0,0]; mode delta=0; median delta=0
+cycles: baseline median=132 [128,143]; attack median=132 [129,146]; median delta=0
+[per-session median deltas]
+  s00: cache_references=0, cycles=1
+  s01: cache_references=0, cycles=-6
+  s02: cache_references=0, cycles=0
+  s03: cache_references=0, cycles=1
+
+[cache-misses]
+cache_misses: baseline mode=0, median=0 [0,0]; attack mode=0, median=0 [0,0]; mode delta=0; median delta=0
+cycles: baseline median=137 [128,153]; attack median=131 [129,144]; median delta=-6
+[per-session median deltas]
+  s00: cache_misses=0, cycles=0
+  s01: cache_misses=0, cycles=-12
+  s02: cache_misses=0, cycles=-3
+  s03: cache_misses=0, cycles=0

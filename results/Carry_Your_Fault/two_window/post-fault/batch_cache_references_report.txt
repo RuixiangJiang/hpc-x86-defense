@@ -1,0 +1,8 @@
+=== Batch-level cache-reference analysis: post-fault ===
+run=0 schedule_seed=20260715
+batch=  100 status=PAIR_ORDER_GENERALIZATION_FAILURE  FP=16/100 FPR=0.160000 CI95=[0.094310,0.246788] TP=9/10 TPR=0.900000 CI95=[0.554984,0.997471] AUC=0.925000 AUC_CI95=[0.795000,1.000000] order_guard=FAIL
+  order=AB blocks=5 effect=0.03 AUC=0.86 direction_match=True
+  order=BA blocks=5 effect=0.04 AUC=1.0 direction_match=True
+batch=  500 status=INSUFFICIENT_BATCHES: requires at least 5 non-overlapping batches in every dataset
+batch= 1000 status=INSUFFICIENT_BATCHES: requires at least 5 non-overlapping batches in every dataset
+batch= 5000 status=INSUFFICIENT_BATCHES: requires at least 5 non-overlapping batches in every dataset

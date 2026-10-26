@@ -1,0 +1,5 @@
+=== Batch-level cache-reference analysis: exact-a2b ===
+run=3 schedule_seed=2026385688
+batch= 1000 status=PAIR_ORDER_GENERALIZATION_FAILURE  FP=2/300 FPR=0.006667 CI95=[0.000808,0.023873] TP=1/100 TPR=0.010000 CI95=[0.000253,0.054459] AUC=0.498700 AUC_CI95=[0.414400,0.578051] order_guard=FAIL
+  order=AB blocks=50 effect=0.0030000000000000027 AUC=0.5228 direction_match=True
+  order=BA blocks=50 effect=-0.003999999999999997 AUC=0.474 direction_match=False

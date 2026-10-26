@@ -1,0 +1,27 @@
+Delvaux Roulette FPR/TPR evaluation
+======================================
+Fault model: Eq. (12) input manipulation + Table-4 instruction-2 share-add skip
+Target coefficient: 17
+Detector: instructions == 43
+
+Calibration: 500/500 valid
+Validation:  5000/5000 valid
+Attack:      500/500 valid
+
+False positives: 0/5000 (FPR=0.000000%)
+One-sided 95% FPR upper bound: 0.059897%
+Detected attacks: 500/500 (TPR=100.000000%)
+One-sided 95% TPR lower bound: 99.402645%
+
+Roulette full-comparison successes: 13/500 (2.600%)
+Target-symbol matches: 32/500 (6.400%)
+Fault changed target field element: 500/500 (100.000%)
+Re-encrypted compressed-symbol chi-square (df=15): 11.552
+
+[modal counter signature]
+cycles          :      149 ->      146 (delta -3)
+instructions    :       43 ->       42 (delta -1)
+branches        :        9 ->        9 (delta +0)
+branch-misses   :        1 ->        1 (delta +0)
+retired-loads   :       10 ->       10 (delta +0)
+retired-stores  :        9 ->        9 (delta +0)

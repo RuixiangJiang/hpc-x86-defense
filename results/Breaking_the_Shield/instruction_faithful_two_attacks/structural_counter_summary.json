@@ -1,0 +1,169 @@
+{
+  "paper": "Breaking the Shield",
+  "region1": {
+    "attack_cycles": {
+      "maximum": 50471,
+      "mean": 27162.258,
+      "median": 27236.5,
+      "minimum": 25844,
+      "mode": 27385,
+      "n": 2000,
+      "p05": 26172.9,
+      "p95": 27982.0,
+      "stdev": 1188.3607882783574
+    },
+    "attack_event": {
+      "maximum": 149830,
+      "mean": 149829.002,
+      "median": 149829.0,
+      "minimum": 149829,
+      "mode": 149829,
+      "n": 2000,
+      "p05": 149829.0,
+      "p95": 149829.0,
+      "stdev": 0.044687789151507874
+    },
+    "baseline_cycles": {
+      "maximum": 77625,
+      "mean": 48343.9905,
+      "median": 48518.5,
+      "minimum": 45897,
+      "mode": 46483,
+      "n": 2000,
+      "p05": 46383.0,
+      "p95": 51239.0,
+      "stdev": 2031.7550941959382
+    },
+    "baseline_event": {
+      "maximum": 269231,
+      "mean": 269230.0085,
+      "median": 269230.0,
+      "minimum": 269230,
+      "mode": 269230,
+      "n": 2000,
+      "p05": 269230.0,
+      "p95": 269230.0,
+      "stdev": 0.0918257370402846
+    },
+    "cycle_median_delta": -21282.0,
+    "detector": {
+      "attack_samples": 2000,
+      "baseline_samples": 2000,
+      "false_positives": 17,
+      "fpr": 0.0085,
+      "frozen_baseline_mode": 269230,
+      "tpr": 1.0,
+      "true_positives": 2000
+    },
+    "event": "instructions",
+    "event_median_delta": -119401.0,
+    "event_mode_delta": -119401,
+    "monitor": "retired instructions",
+    "per_session": [
+      {
+        "cycle_median_delta": -21561.0,
+        "event_median_delta": -119401.0,
+        "session": 0
+      },
+      {
+        "cycle_median_delta": -21412.0,
+        "event_median_delta": -119401.0,
+        "session": 1
+      },
+      {
+        "cycle_median_delta": -21157.0,
+        "event_median_delta": -119401.0,
+        "session": 2
+      },
+      {
+        "cycle_median_delta": -19790.0,
+        "event_median_delta": -119401.0,
+        "session": 3
+      }
+    ],
+    "region": "shake256-absorb-bne-skip"
+  },
+  "region2": {
+    "attack_cycles": {
+      "maximum": 985,
+      "mean": 130.5345,
+      "median": 128.0,
+      "minimum": 126,
+      "mode": 127,
+      "n": 2000,
+      "p05": 126.0,
+      "p95": 137.0,
+      "stdev": 20.104723566984262
+    },
+    "attack_event": {
+      "maximum": 10,
+      "mean": 10.0,
+      "median": 10.0,
+      "minimum": 10,
+      "mode": 10,
+      "n": 2000,
+      "p05": 10.0,
+      "p95": 10.0,
+      "stdev": 0.0
+    },
+    "baseline_cycles": {
+      "maximum": 193,
+      "mean": 144.0415,
+      "median": 142.0,
+      "minimum": 129,
+      "mode": 142,
+      "n": 2000,
+      "p05": 138.0,
+      "p95": 152.0,
+      "stdev": 5.440089616680846
+    },
+    "baseline_event": {
+      "maximum": 11,
+      "mean": 11.0,
+      "median": 11.0,
+      "minimum": 11,
+      "mode": 11,
+      "n": 2000,
+      "p05": 11.0,
+      "p95": 11.0,
+      "stdev": 0.0
+    },
+    "cycle_median_delta": -14.0,
+    "detector": {
+      "attack_samples": 2000,
+      "baseline_samples": 2000,
+      "false_positives": 0,
+      "fpr": 0.0,
+      "frozen_baseline_mode": 11,
+      "tpr": 1.0,
+      "true_positives": 2000
+    },
+    "event": "retired_loads",
+    "event_median_delta": -1.0,
+    "event_mode_delta": -1,
+    "monitor": "retired loads",
+    "per_session": [
+      {
+        "cycle_median_delta": -15.0,
+        "event_median_delta": -1.0,
+        "session": 0
+      },
+      {
+        "cycle_median_delta": -14.0,
+        "event_median_delta": -1.0,
+        "session": 1
+      },
+      {
+        "cycle_median_delta": -15.0,
+        "event_median_delta": -1.0,
+        "session": 2
+      },
+      {
+        "cycle_median_delta": -15.0,
+        "event_median_delta": -1.0,
+        "session": 3
+      }
+    ],
+    "region": "polyz-unpack-ldr-skip-zero"
+  }
+}

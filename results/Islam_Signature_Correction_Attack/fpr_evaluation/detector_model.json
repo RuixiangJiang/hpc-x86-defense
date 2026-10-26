@@ -1,0 +1,58 @@
+{
+  "calibration_consistency": {
+    "branches": {
+      "expected": 14376,
+      "matching_rate": 0.996,
+      "matching_samples": 498,
+      "maximum": 14377,
+      "minimum": 14376,
+      "valid_samples": 500
+    },
+    "instructions": {
+      "expected": 114026,
+      "matching_rate": 0.996,
+      "matching_samples": 498,
+      "maximum": 114027,
+      "minimum": 114026,
+      "valid_samples": 500
+    },
+    "retired-loads": {
+      "expected": 24669,
+      "matching_rate": 0.996,
+      "matching_samples": 498,
+      "maximum": 24670,
+      "minimum": 24669,
+      "valid_samples": 500
+    },
+    "retired-stores": {
+      "expected": 14537,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 14537,
+      "minimum": 14537,
+      "valid_samples": 500
+    }
+  },
+  "detector": "exact_modal_equality",
+  "events": [
+    "instructions",
+    "branches",
+    "retired-loads",
+    "retired-stores"
+  ],
+  "expected": {
+    "branches": 14376,
+    "instructions": 114026,
+    "retired-loads": 24669,
+    "retired-stores": 14537
+  },
+  "fault_injection_counted": false,
+  "fault_model": "single bit flip in one expanded int32_t s1 coefficient after unpack_sk and before NTT(s1)",
+  "measurement_window": "original polyvecl_ntt(&s1)",
+  "minimum_running_percent": 95.0,
+  "target": [
+    0,
+    17,
+    0
+  ]
+}

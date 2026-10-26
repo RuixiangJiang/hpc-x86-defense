@@ -1,0 +1,509 @@
+{
+  "batch": "median of 10 traces without crossing session boundaries",
+  "constant_replacement_limit": "add and immediate-move paths retire the same number of instructions and can have the same uop count; standard counters do not provide a stable semantic opcode-class signal",
+  "feature_selection": "none; channels and directions are predeclared",
+  "hpc_channels": {
+    "structural": {
+      "detects": [
+        "skip-local-masked-operation"
+      ],
+      "feature": "structural-instructions.instructions",
+      "score": "absolute retired-instruction deviation from session-local benign reference",
+      "threshold": 0.0
+    },
+    "uop_substitution": {
+      "batch_threshold": {
+        "confidence": 0.95,
+        "false_positives": 0,
+        "one_sided_upper": 0.0003743964303524203,
+        "per_session_at_frozen_threshold": {
+          "flip-masked-intermediate-bit:s00": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          },
+          "flip-masked-intermediate-bit:s01": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          },
+          "flip-masked-intermediate-bit:s02": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          },
+          "flip-masked-intermediate-bit:s03": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          },
+          "replace-masked-intermediate-random:s00": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          },
+          "replace-masked-intermediate-random:s01": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          },
+          "replace-masked-intermediate-random:s02": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          },
+          "replace-masked-intermediate-random:s03": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          },
+          "set-masked-intermediate-constant:s00": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          },
+          "set-masked-intermediate-constant:s01": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          },
+          "set-masked-intermediate-constant:s02": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          },
+          "set-masked-intermediate-constant:s03": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          },
+          "skip-local-masked-operation:s00": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          },
+          "skip-local-masked-operation:s01": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          },
+          "skip-local-masked-operation:s02": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          },
+          "skip-local-masked-operation:s03": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          }
+        },
+        "per_session_candidates": {
+          "flip-masked-intermediate-bit:s00": {
+            "allowed_false_positives": 0,
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500,
+            "value": 0.0
+          },
+          "flip-masked-intermediate-bit:s01": {
+            "allowed_false_positives": 0,
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500,
+            "value": 0.0
+          },
+          "flip-masked-intermediate-bit:s02": {
+            "allowed_false_positives": 0,
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500,
+            "value": 0.0
+          },
+          "flip-masked-intermediate-bit:s03": {
+            "allowed_false_positives": 0,
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500,
+            "value": 0.0
+          },
+          "replace-masked-intermediate-random:s00": {
+            "allowed_false_positives": 0,
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500,
+            "value": 0.0
+          },
+          "replace-masked-intermediate-random:s01": {
+            "allowed_false_positives": 0,
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500,
+            "value": 0.0
+          },
+          "replace-masked-intermediate-random:s02": {
+            "allowed_false_positives": 0,
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500,
+            "value": 0.0
+          },
+          "replace-masked-intermediate-random:s03": {
+            "allowed_false_positives": 0,
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500,
+            "value": 0.0
+          },
+          "set-masked-intermediate-constant:s00": {
+            "allowed_false_positives": 0,
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500,
+            "value": 0.0
+          },
+          "set-masked-intermediate-constant:s01": {
+            "allowed_false_positives": 0,
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500,
+            "value": 0.0
+          },
+          "set-masked-intermediate-constant:s02": {
+            "allowed_false_positives": 0,
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500,
+            "value": 0.0
+          },
+          "set-masked-intermediate-constant:s03": {
+            "allowed_false_positives": 0,
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500,
+            "value": 0.0
+          },
+          "skip-local-masked-operation:s00": {
+            "allowed_false_positives": 0,
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500,
+            "value": 0.0
+          },
+          "skip-local-masked-operation:s01": {
+            "allowed_false_positives": 0,
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500,
+            "value": 0.0
+          },
+          "skip-local-masked-operation:s02": {
+            "allowed_false_positives": 0,
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500,
+            "value": 0.0
+          },
+          "skip-local-masked-operation:s03": {
+            "allowed_false_positives": 0,
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500,
+            "value": 0.0
+          }
+        },
+        "rate": 0.0,
+        "selection": "maximum of per-session confidence-guarded thresholds",
+        "target_fpr": 0.005,
+        "trials": 8000,
+        "value": 0.0,
+        "worst_session_rate": 0.0
+      },
+      "features": [
+        "uops-issued.uops_issued_any",
+        "uops-executed.uops_executed_thread"
+      ],
+      "gate": "retired instruction count must equal session reference",
+      "intended_target": "random replacement implemented as a potentially move-eliminated register move",
+      "score": "maximum one-sided uop-issued or uop-executed deficit",
+      "single_threshold": {
+        "confidence": 0.95,
+        "false_positives": 0,
+        "one_sided_upper": 3.7445952302250245e-05,
+        "per_session_at_frozen_threshold": {
+          "flip-masked-intermediate-bit:s00": {
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000
+          },
+          "flip-masked-intermediate-bit:s01": {
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000
+          },
+          "flip-masked-intermediate-bit:s02": {
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000
+          },
+          "flip-masked-intermediate-bit:s03": {
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000
+          },
+          "replace-masked-intermediate-random:s00": {
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000
+          },
+          "replace-masked-intermediate-random:s01": {
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000
+          },
+          "replace-masked-intermediate-random:s02": {
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000
+          },
+          "replace-masked-intermediate-random:s03": {
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000
+          },
+          "set-masked-intermediate-constant:s00": {
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000
+          },
+          "set-masked-intermediate-constant:s01": {
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000
+          },
+          "set-masked-intermediate-constant:s02": {
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000
+          },
+          "set-masked-intermediate-constant:s03": {
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000
+          },
+          "skip-local-masked-operation:s00": {
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000
+          },
+          "skip-local-masked-operation:s01": {
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000
+          },
+          "skip-local-masked-operation:s02": {
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000
+          },
+          "skip-local-masked-operation:s03": {
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000
+          }
+        },
+        "per_session_candidates": {
+          "flip-masked-intermediate-bit:s00": {
+            "allowed_false_positives": 16,
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000,
+            "value": 0.0
+          },
+          "flip-masked-intermediate-bit:s01": {
+            "allowed_false_positives": 16,
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000,
+            "value": 0.0
+          },
+          "flip-masked-intermediate-bit:s02": {
+            "allowed_false_positives": 16,
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000,
+            "value": 0.0
+          },
+          "flip-masked-intermediate-bit:s03": {
+            "allowed_false_positives": 16,
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000,
+            "value": 0.0
+          },
+          "replace-masked-intermediate-random:s00": {
+            "allowed_false_positives": 16,
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000,
+            "value": 0.0
+          },
+          "replace-masked-intermediate-random:s01": {
+            "allowed_false_positives": 16,
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000,
+            "value": 0.0
+          },
+          "replace-masked-intermediate-random:s02": {
+            "allowed_false_positives": 16,
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000,
+            "value": 0.0
+          },
+          "replace-masked-intermediate-random:s03": {
+            "allowed_false_positives": 16,
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000,
+            "value": 0.0
+          },
+          "set-masked-intermediate-constant:s00": {
+            "allowed_false_positives": 16,
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000,
+            "value": 0.0
+          },
+          "set-masked-intermediate-constant:s01": {
+            "allowed_false_positives": 16,
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000,
+            "value": 0.0
+          },
+          "set-masked-intermediate-constant:s02": {
+            "allowed_false_positives": 16,
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000,
+            "value": 0.0
+          },
+          "set-masked-intermediate-constant:s03": {
+            "allowed_false_positives": 16,
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000,
+            "value": 0.0
+          },
+          "skip-local-masked-operation:s00": {
+            "allowed_false_positives": 16,
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000,
+            "value": 0.0
+          },
+          "skip-local-masked-operation:s01": {
+            "allowed_false_positives": 16,
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000,
+            "value": 0.0
+          },
+          "skip-local-masked-operation:s02": {
+            "allowed_false_positives": 16,
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000,
+            "value": 0.0
+          },
+          "skip-local-masked-operation:s03": {
+            "allowed_false_positives": 16,
+            "false_positives": 0,
+            "one_sided_upper": 0.0005989670023149134,
+            "rate": 0.0,
+            "trials": 5000,
+            "value": 0.0
+          }
+        },
+        "rate": 0.0,
+        "selection": "maximum of per-session confidence-guarded thresholds",
+        "target_fpr": 0.005,
+        "trials": 80000,
+        "value": 0.0,
+        "worst_session_rate": 0.0
+      }
+    }
+  },
+  "hybrid_integrity_channel": {
+    "score": "used masked intermediate differs from redundantly computed normal intermediate",
+    "type": "non-HPC post-window redundant recomputation",
+    "window_effect": "comparison occurs after the PMU window and does not alter the target operation"
+  },
+  "name": "roulette-semantics-derived-two-tier-v1",
+  "normalization": "session-local benign reference median and robust scale"
+}

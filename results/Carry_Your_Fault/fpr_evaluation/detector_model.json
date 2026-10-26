@@ -1,0 +1,59 @@
+{
+  "calibration_consistency": {
+    "branches": {
+      "expected": 9,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 9,
+      "minimum": 9,
+      "valid_samples": 500
+    },
+    "instructions": {
+      "expected": 68,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 68,
+      "minimum": 68,
+      "valid_samples": 500
+    },
+    "retired_loads": {
+      "expected": 14,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 14,
+      "minimum": 14,
+      "valid_samples": 500
+    },
+    "retired_stores": {
+      "expected": 10,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 10,
+      "minimum": 10,
+      "valid_samples": 500
+    }
+  },
+  "detector": "exact_modal_equality",
+  "events": [
+    "instructions",
+    "branches",
+    "retired_loads",
+    "retired_stores"
+  ],
+  "expected": {
+    "branches": 9,
+    "instructions": 68,
+    "retired_loads": 14,
+    "retired_stores": 10
+  },
+  "fault_injection_counted": false,
+  "fault_model": "stuck-at-1 at bit 11 of one arithmetic input share ga1[i], followed by the unchanged A2B carry-chain code",
+  "measurement_window": "the original 16-bit first-order masked-Kyber A2B conversion after its arithmetic input shares have been produced; the stuck-at-1 data value is established before PMU enable",
+  "minimum_running_percent": 95.0,
+  "runtime_attack_branch_counted": false,
+  "scope": "coefficient-level masked Decode/A2B propagation oracle; not a full belief-propagation key-recovery run",
+  "target": [
+    17,
+    11
+  ]
+}

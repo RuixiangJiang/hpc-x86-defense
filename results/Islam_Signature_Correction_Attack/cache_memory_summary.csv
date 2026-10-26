@@ -1,0 +1,17 @@
+counter_set,event,class,n,mode,mean,median,stdev,minimum,p05,p95,maximum
+cache-l1d,cache_references,baseline,500,0,0.03,0.0,0.3483427699418225,0,0.0,0.0,5
+cache-l1d,cache_references,attack,500,0,0.022,0.0,0.22274476528287224,0,0.0,0.0,3
+cache-l1d,cache_misses,baseline,500,0,0.0,0.0,0.0,0,0.0,0.0,0
+cache-l1d,cache_misses,attack,500,0,0.012,0.0,0.1546085625546996,0,0.0,0.0,2
+cache-l1d,l1d_read_accesses,baseline,500,24669,24669.004,24669.0,0.06318214912406725,24669,24669.0,24669.0,24670
+cache-l1d,l1d_read_accesses,attack,500,24669,24669.004,24669.0,0.06318214912406725,24669,24669.0,24669.0,24670
+cache-l1d,l1d_read_misses,baseline,500,16,15.67,16.0,2.0836946914397676,11,12.0,19.0,23
+cache-l1d,l1d_read_misses,attack,500,13,13.304,13.0,2.2816651796405116,8,10.0,17.0,21
+cache-llc-dtlb,llc_read_accesses,baseline,500,0,0.0,0.0,0.0,0,0.0,0.0,0
+cache-llc-dtlb,llc_read_accesses,attack,500,0,0.0,0.0,0.0,0,0.0,0.0,0
+cache-llc-dtlb,llc_read_misses,baseline,500,0,0.0,0.0,0.0,0,0.0,0.0,0
+cache-llc-dtlb,llc_read_misses,attack,500,0,0.0,0.0,0.0,0,0.0,0.0,0
+cache-llc-dtlb,dtlb_read_accesses,baseline,500,24669,24669.006,24669.0,0.0773042812773498,24669,24669.0,24669.0,24670
+cache-llc-dtlb,dtlb_read_accesses,attack,500,24669,24669.002,24669.0,0.044721359549995794,24669,24669.0,24669.0,24670
+cache-llc-dtlb,dtlb_read_misses,baseline,500,0,0.0,0.0,0.0,0,0.0,0.0,0
+cache-llc-dtlb,dtlb_read_misses,attack,500,0,0.0,0.0,0.0,0,0.0,0.0,0

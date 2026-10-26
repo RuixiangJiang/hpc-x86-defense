@@ -1,0 +1,28 @@
+=== Fiddling the Twiddle Constants: semantics-derived two-tier detector ===
+HPC structural channel: simultaneous retired instruction and retired load deficit.
+Pointer corruption is marked non-identifiable by the current coarse HPC set.
+Integrity results are post-window non-HPC results.
+
+HPC validation single FPR: 0/12000 (0.0000%)
+HPC validation batch FPR: 0/1200 (0.0000%)
+
+corrupt-twiddle-pointer:
+  identifiability: not-identifiable-by-current-coarse-hpc-set
+  HPC single TPR: 0.0000%
+  HPC batch TPR: 0.0000%
+  integrity single TPR: 100.0000%
+  integrity batch TPR: 100.0000%
+  two-tier single TPR: 100.0000%
+  two-tier batch TPR: 100.0000%
+  structural score median: 0.0000
+
+corrupt-loaded-twiddle-value:
+  identifiability: deterministic-instruction-and-load-deficit
+  HPC single TPR: 100.0000%
+  HPC batch TPR: 100.0000%
+  integrity single TPR: 100.0000%
+  integrity batch TPR: 100.0000%
+  two-tier single TPR: 100.0000%
+  two-tier batch TPR: 100.0000%
+  structural score median: 1.0000
+

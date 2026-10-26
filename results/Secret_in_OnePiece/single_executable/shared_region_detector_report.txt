@@ -1,0 +1,10 @@
+=== Secret in OnePiece: shared structural decoder-region detector ===
+Predeclared features: instructions deficit; retired-store deficit rescue channel
+No development-driven feature selection or raw cache/uop/stall features are used.
+Threshold mode: fixed-zero
+Single threshold=0.000000; validation FP=0/12000 FPR=0.0000% worst-session=0.0000%
+Batch-10 threshold=0.000000; validation FP=0/1200 FPR=0.0000% worst-session=0.0000%
+skip-bit-assignment: single TP=1000/1000 TPR=100.0000% AUC=1.000000; batch TP=100/100 TPR=100.0000% AUC=1.000000
+skip-or-operation: single TP=998/1000 TPR=99.8000% AUC=0.999000; batch TP=100/100 TPR=100.0000% AUC=1.000000
+JSON report: /home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/shared_region_detector_report.json
+CSV summary: /home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/shared_region_detector_summary.csv

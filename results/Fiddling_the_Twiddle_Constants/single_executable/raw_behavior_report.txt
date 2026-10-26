@@ -1,0 +1,47 @@
+=== Ravi Fiddling the Twiddle Constants: paper-aligned pointer redirection ===
+Window: shared PC-relative pointer load through one full target-polynomial NTT
+Condition-1 and Condition-2 are modeled as one attack: T is loaded in baseline; T* points to a zero table in attack.
+
+[structural]
+event                      base mode  attack mode  mode delta       base median [p05,p95]       attack median [p05,p95]   val FPR   val TPR
+cycles                          8225         8011        -214    8168.500 [7947,8394.050]          8154 [7935,8385.050]    0.0180    0.0273
+instructions                   40292        40292          +0         40292 [40292,40292]           40292 [40292,40292]    0.0007    0.0027
+branches                        3344         3344          +0            3344 [3344,3344]              3344 [3344,3344]    0.0007    0.0027
+branch_misses                     22           13          -9                  21 [14,25]                    21 [13,25]    0.0173    0.0187
+retired_loads                  10518        10518          +0         10518 [10518,10518]           10518 [10518,10518]    0.0007    0.0027
+retired_stores                  9239         9239          +0            9239 [9239,9239]              9239 [9239,9239]    0.0000    0.0000
+
+[per-session median deltas]
+  cycles: s00=42, s01=-10.500, s02=-136.500, s03=33
+  instructions: s00=0, s01=0, s02=0, s03=0
+  branches: s00=0, s01=0, s02=0, s03=0
+  branch_misses: s00=2, s01=0, s02=-6, s03=1
+  retired_loads: s00=0, s01=0, s02=0, s03=0
+  retired_stores: s00=0, s01=0, s02=0, s03=0
+
+[cache-l1d]
+event                      base mode  attack mode  mode delta       base median [p05,p95]       attack median [p05,p95]   val FPR   val TPR
+cache_references                   0            0          +0                     0 [0,0]                       0 [0,0]    0.0007    0.0000
+cache_misses                       0            0          +0                     0 [0,0]                       0 [0,0]    0.0000    0.0000
+l1d_read_accesses              10518        10518          +0         10518 [10518,10518]           10518 [10518,10518]    0.0020    0.0013
+l1d_read_misses                    1            9          +8                     1 [0,4]                      9 [6,12]    0.0080    0.8627
+
+[per-session median deltas]
+  cache_references: s00=0, s01=0, s02=0, s03=0
+  cache_misses: s00=0, s01=0, s02=0, s03=0
+  l1d_read_accesses: s00=0, s01=0, s02=0, s03=0
+  l1d_read_misses: s00=7, s01=6, s02=6, s03=10
+
+[cache-llc-dtlb]
+event                      base mode  attack mode  mode delta       base median [p05,p95]       attack median [p05,p95]   val FPR   val TPR
+llc_read_accesses                  0            0          +0                     0 [0,0]                       0 [0,0]    0.0007    0.0040
+llc_read_misses                    0            0          +0                     0 [0,0]                       0 [0,0]    0.0007    0.0040
+dtlb_read_accesses             10518        10518          +0         10518 [10518,10518]           10518 [10518,10518]    0.0027    0.0013
+dtlb_read_misses                   0            0          +0                     0 [0,0]                       0 [0,0]    0.0000    0.0000
+
+[per-session median deltas]
+  llc_read_accesses: s00=0, s01=0, s02=0, s03=0
+  llc_read_misses: s00=0, s01=0, s02=0, s03=0
+  dtlb_read_accesses: s00=0, s01=0, s02=0, s03=0
+  dtlb_read_misses: s00=0, s01=0, s02=0, s03=0
+

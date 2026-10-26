@@ -1,0 +1,11 @@
+=== Carry Your Fault independent replication summary ===
+runs=5: run_000_seed_2026071501, run_001_seed_2026176230, run_002_seed_2026280959, run_003_seed_2026385688, run_004_seed_2026490417
+
+[exact-a2b]
+batch= 1000 status=INSUFFICIENT_REPORTABLE_REPLICATES runs=0/5 median_AUC=nan min_AUC=nan FP=0/0 FPR=nan TP=0/0 TPR=nan direction_consistency=0.000
+
+[post-fault]
+batch= 1000 status=REPLICATE_MEDIAN_AUC_FAILURE       runs=5/5 median_AUC=0.7018 min_AUC=0.67215 FP=19/1500 FPR=0.012666666666666666 TP=25/500 TPR=0.05 direction_consistency=1.000
+
+[post-fault minus exact-a2b AUC]
+batch= 1000 paired_runs=5 median_delta=0.18130000000000002 CI95=[0.11130000000000007, 0.24614999999999998]

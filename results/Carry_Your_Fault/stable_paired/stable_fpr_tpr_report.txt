@@ -1,0 +1,32 @@
+=== Carry Your Fault Stable Paired PMU Detector ===
+Measurement passes: structural, cache, cache-detail, load-hits, load-misses-latency, stalls, recovery
+Available features: 19
+Diagnostic-only: cache.l1i_read_misses
+Selected stable directional features: 2 (top-k=8)
+  stalls.stalls_mem_any                         direction=+ paired_effect=+1.211031 profile_drift=0.000000 weight=0.895311
+  stalls.stalls_l1d_miss                        direction=- paired_effect=-0.141605 profile_drift=0.000000 weight=0.104689
+
+Frozen score threshold: 1.334461145
+Threshold alarm rate: 0.089600000
+Calibration-check alarm rate: 0.108400000
+Calibration score-median drift: 0.212165
+Calibration status: VALID
+
+Full stuck-at/carry-propagation oracle success: 1000/1000
+Independent validation/attack-test AUC: 0.388876500
+Paired test-baseline/attack AUC: 0.397711000
+
+Validation baseline: 10000; false positives: 1208; FPR: 0.120800000
+One-sided 95% FPR upper bound: 0.126292344
+Attack test: 1000; detected: 65; TPR: 0.065000000
+One-sided 95% TPR interval: [0.052643009, 0.079304680]
+
+Independent ROC diagnostics (calibration FPR shown per row):
+  target_fpr  calibration_fpr  validation_fpr  development_tpr  attack_test_tpr
+      0.100%           0.100%          0.080%           0.200%          0.200%
+      0.500%           0.520%          0.620%           0.400%          0.400%
+      1.000%           0.880%          1.230%           1.000%          0.700%
+      2.000%           1.680%          2.280%           4.900%          1.000%
+      5.000%           4.900%          5.610%          21.200%          3.000%
+     10.000%          10.840%         12.080%          56.100%          6.500%
+     20.000%          26.840%         31.170%          72.000%         12.300%

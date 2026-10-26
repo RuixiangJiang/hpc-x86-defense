@@ -1,0 +1,3290 @@
+{
+  "counter_sets": {
+    "cache-l1d": {
+      "audit": {
+        "s00": {
+          "attack_excluded": {},
+          "baseline_excluded": {}
+        },
+        "s01": {
+          "attack_excluded": {},
+          "baseline_excluded": {}
+        },
+        "s02": {
+          "attack_excluded": {},
+          "baseline_excluded": {}
+        },
+        "s03": {
+          "attack_excluded": {},
+          "baseline_excluded": {}
+        }
+      },
+      "development_session": "s00",
+      "events": {
+        "cache_misses": {
+          "attack": {
+            "histogram": {
+              "0": 2000
+            },
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p25": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "attack_minus_baseline": {
+            "mean": -0.0005,
+            "median": 0.0,
+            "mode": 0
+          },
+          "baseline": {
+            "histogram": {
+              "0": 1999,
+              "1": 1
+            },
+            "maximum": 1,
+            "mean": 0.0005,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p25": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "stdev": 0.022360679774997897
+          },
+          "detector": {
+            "development_fpr": 0.002,
+            "development_tpr": 0.0,
+            "direction": "high",
+            "threshold": 1,
+            "validation_auc_attack_high": 0.5,
+            "validation_fpr": 0.0,
+            "validation_tpr": 0.0
+          },
+          "per_session": {
+            "s00": {
+              "attack": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 499,
+                  "1": 1
+                },
+                "maximum": 1,
+                "mean": 0.002,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.044721359549995794
+              },
+              "mean_delta": -0.002,
+              "median_delta": 0.0
+            },
+            "s01": {
+              "attack": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0,
+              "median_delta": 0.0
+            },
+            "s02": {
+              "attack": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0,
+              "median_delta": 0.0
+            },
+            "s03": {
+              "attack": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0,
+              "median_delta": 0.0
+            }
+          }
+        },
+        "cache_references": {
+          "attack": {
+            "histogram": {
+              "0": 2000
+            },
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p25": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "attack_minus_baseline": {
+            "mean": -0.0015,
+            "median": 0.0,
+            "mode": 0
+          },
+          "baseline": {
+            "histogram": {
+              "0": 1997,
+              "1": 3
+            },
+            "maximum": 1,
+            "mean": 0.0015,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p25": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "stdev": 0.038710454009541304
+          },
+          "detector": {
+            "development_fpr": 0.004,
+            "development_tpr": 0.0,
+            "direction": "high",
+            "threshold": 1,
+            "validation_auc_attack_high": 0.49966666666666665,
+            "validation_fpr": 0.0006666666666666666,
+            "validation_tpr": 0.0
+          },
+          "per_session": {
+            "s00": {
+              "attack": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 498,
+                  "1": 2
+                },
+                "maximum": 1,
+                "mean": 0.004,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.06318214912406725
+              },
+              "mean_delta": -0.004,
+              "median_delta": 0.0
+            },
+            "s01": {
+              "attack": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 499,
+                  "1": 1
+                },
+                "maximum": 1,
+                "mean": 0.002,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.044721359549995794
+              },
+              "mean_delta": -0.002,
+              "median_delta": 0.0
+            },
+            "s02": {
+              "attack": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0,
+              "median_delta": 0.0
+            },
+            "s03": {
+              "attack": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0,
+              "median_delta": 0.0
+            }
+          }
+        },
+        "l1d_read_accesses": {
+          "attack": {
+            "histogram": {
+              "10518": 1997,
+              "10519": 3
+            },
+            "maximum": 10519,
+            "mean": 10518.0015,
+            "median": 10518.0,
+            "minimum": 10518,
+            "mode": 10518,
+            "n": 2000,
+            "p05": 10518.0,
+            "p25": 10518.0,
+            "p75": 10518.0,
+            "p95": 10518.0,
+            "stdev": 0.038710454009541304
+          },
+          "attack_minus_baseline": {
+            "mean": 0.0,
+            "median": 0.0,
+            "mode": 0
+          },
+          "baseline": {
+            "histogram": {
+              "10518": 1997,
+              "10519": 3
+            },
+            "maximum": 10519,
+            "mean": 10518.0015,
+            "median": 10518.0,
+            "minimum": 10518,
+            "mode": 10518,
+            "n": 2000,
+            "p05": 10518.0,
+            "p25": 10518.0,
+            "p75": 10518.0,
+            "p95": 10518.0,
+            "stdev": 0.038710454009541304
+          },
+          "detector": {
+            "development_fpr": 0.0,
+            "development_tpr": 0.002,
+            "direction": "high",
+            "threshold": 10519,
+            "validation_auc_attack_high": 0.49966666666666665,
+            "validation_fpr": 0.002,
+            "validation_tpr": 0.0013333333333333333
+          },
+          "per_session": {
+            "s00": {
+              "attack": {
+                "histogram": {
+                  "10518": 499,
+                  "10519": 1
+                },
+                "maximum": 10519,
+                "mean": 10518.002,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.044721359549995794
+              },
+              "baseline": {
+                "histogram": {
+                  "10518": 500
+                },
+                "maximum": 10518,
+                "mean": 10518.0,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0020000000004074536,
+              "median_delta": 0.0
+            },
+            "s01": {
+              "attack": {
+                "histogram": {
+                  "10518": 499,
+                  "10519": 1
+                },
+                "maximum": 10519,
+                "mean": 10518.002,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.044721359549995794
+              },
+              "baseline": {
+                "histogram": {
+                  "10518": 499,
+                  "10519": 1
+                },
+                "maximum": 10519,
+                "mean": 10518.002,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.044721359549995794
+              },
+              "mean_delta": 0.0,
+              "median_delta": 0.0
+            },
+            "s02": {
+              "attack": {
+                "histogram": {
+                  "10518": 500
+                },
+                "maximum": 10518,
+                "mean": 10518.0,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "10518": 499,
+                  "10519": 1
+                },
+                "maximum": 10519,
+                "mean": 10518.002,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.044721359549995794
+              },
+              "mean_delta": -0.0020000000004074536,
+              "median_delta": 0.0
+            },
+            "s03": {
+              "attack": {
+                "histogram": {
+                  "10518": 499,
+                  "10519": 1
+                },
+                "maximum": 10519,
+                "mean": 10518.002,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.044721359549995794
+              },
+              "baseline": {
+                "histogram": {
+                  "10518": 499,
+                  "10519": 1
+                },
+                "maximum": 10519,
+                "mean": 10518.002,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.044721359549995794
+              },
+              "mean_delta": 0.0,
+              "median_delta": 0.0
+            }
+          }
+        },
+        "l1d_read_misses": {
+          "attack": {
+            "histogram": {
+              "1": 2,
+              "10": 339,
+              "11": 174,
+              "12": 84,
+              "13": 22,
+              "14": 8,
+              "15": 5,
+              "16": 2,
+              "17": 1,
+              "18": 2,
+              "2": 2,
+              "4": 12,
+              "5": 48,
+              "6": 168,
+              "7": 263,
+              "8": 398,
+              "9": 470
+            },
+            "maximum": 18,
+            "mean": 8.7135,
+            "median": 9.0,
+            "minimum": 1,
+            "mode": 9,
+            "n": 2000,
+            "p05": 6.0,
+            "p25": 8.0,
+            "p75": 10.0,
+            "p95": 12.0,
+            "stdev": 1.8631031443973605
+          },
+          "attack_minus_baseline": {
+            "mean": 7.295,
+            "median": 8.0,
+            "mode": 8
+          },
+          "baseline": {
+            "histogram": {
+              "0": 517,
+              "1": 669,
+              "10": 1,
+              "11": 1,
+              "13": 1,
+              "15": 2,
+              "18": 1,
+              "2": 516,
+              "3": 197,
+              "4": 52,
+              "5": 25,
+              "6": 7,
+              "7": 3,
+              "8": 5,
+              "9": 3
+            },
+            "maximum": 18,
+            "mean": 1.4185,
+            "median": 1.0,
+            "minimum": 0,
+            "mode": 1,
+            "n": 2000,
+            "p05": 0.0,
+            "p25": 0.0,
+            "p75": 2.0,
+            "p95": 4.0,
+            "stdev": 1.4259643884819175
+          },
+          "detector": {
+            "development_fpr": 0.01,
+            "development_tpr": 0.948,
+            "direction": "high",
+            "threshold": 7,
+            "validation_auc_attack_high": 0.9947208888888889,
+            "validation_fpr": 0.008,
+            "validation_tpr": 0.8626666666666667
+          },
+          "per_session": {
+            "s00": {
+              "attack": {
+                "histogram": {
+                  "10": 101,
+                  "11": 53,
+                  "12": 26,
+                  "13": 7,
+                  "14": 3,
+                  "16": 1,
+                  "2": 2,
+                  "5": 4,
+                  "6": 20,
+                  "7": 52,
+                  "8": 113,
+                  "9": 118
+                },
+                "maximum": 16,
+                "mean": 9.056,
+                "median": 9.0,
+                "minimum": 2,
+                "mode": 9,
+                "n": 500,
+                "p05": 6.0,
+                "p25": 8.0,
+                "p75": 10.0,
+                "p95": 12.0,
+                "stdev": 1.7013680691176811
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 7,
+                  "1": 236,
+                  "10": 1,
+                  "11": 1,
+                  "13": 1,
+                  "15": 1,
+                  "2": 145,
+                  "3": 77,
+                  "4": 16,
+                  "5": 12,
+                  "6": 2,
+                  "7": 1
+                },
+                "maximum": 15,
+                "mean": 1.898,
+                "median": 2.0,
+                "minimum": 0,
+                "mode": 1,
+                "n": 500,
+                "p05": 1.0,
+                "p25": 1.0,
+                "p75": 2.0,
+                "p95": 4.0,
+                "stdev": 1.4154869149564138
+              },
+              "mean_delta": 7.1579999999999995,
+              "median_delta": 7.0
+            },
+            "s01": {
+              "attack": {
+                "histogram": {
+                  "1": 1,
+                  "10": 65,
+                  "11": 32,
+                  "12": 7,
+                  "13": 5,
+                  "15": 2,
+                  "16": 1,
+                  "17": 1,
+                  "4": 4,
+                  "5": 20,
+                  "6": 59,
+                  "7": 91,
+                  "8": 102,
+                  "9": 110
+                },
+                "maximum": 17,
+                "mean": 8.256,
+                "median": 8.0,
+                "minimum": 1,
+                "mode": 9,
+                "n": 500,
+                "p05": 5.950000000000003,
+                "p25": 7.0,
+                "p75": 9.0,
+                "p95": 11.0,
+                "stdev": 1.8594027959307338
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 26,
+                  "1": 192,
+                  "18": 1,
+                  "2": 166,
+                  "3": 71,
+                  "4": 27,
+                  "5": 11,
+                  "6": 3,
+                  "7": 1,
+                  "8": 1,
+                  "9": 1
+                },
+                "maximum": 18,
+                "mean": 1.92,
+                "median": 2.0,
+                "minimum": 0,
+                "mode": 1,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 1.0,
+                "p75": 2.0,
+                "p95": 4.0,
+                "stdev": 1.4048299164626217
+              },
+              "mean_delta": 6.336,
+              "median_delta": 6.0
+            },
+            "s02": {
+              "attack": {
+                "histogram": {
+                  "1": 1,
+                  "10": 44,
+                  "11": 16,
+                  "12": 7,
+                  "14": 1,
+                  "4": 8,
+                  "5": 23,
+                  "6": 81,
+                  "7": 90,
+                  "8": 113,
+                  "9": 116
+                },
+                "maximum": 14,
+                "mean": 7.852,
+                "median": 8.0,
+                "minimum": 1,
+                "mode": 9,
+                "n": 500,
+                "p05": 5.0,
+                "p25": 7.0,
+                "p75": 9.0,
+                "p95": 10.0,
+                "stdev": 1.6575859502193935
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 32,
+                  "1": 200,
+                  "15": 1,
+                  "2": 205,
+                  "3": 49,
+                  "4": 8,
+                  "5": 1,
+                  "6": 1,
+                  "8": 2,
+                  "9": 1
+                },
+                "maximum": 15,
+                "mean": 1.68,
+                "median": 2.0,
+                "minimum": 0,
+                "mode": 2,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 1.0,
+                "p75": 2.0,
+                "p95": 3.0,
+                "stdev": 1.1611617429050842
+              },
+              "mean_delta": 6.172000000000001,
+              "median_delta": 6.0
+            },
+            "s03": {
+              "attack": {
+                "histogram": {
+                  "10": 129,
+                  "11": 73,
+                  "12": 44,
+                  "13": 10,
+                  "14": 4,
+                  "15": 3,
+                  "18": 2,
+                  "5": 1,
+                  "6": 8,
+                  "7": 30,
+                  "8": 70,
+                  "9": 126
+                },
+                "maximum": 18,
+                "mean": 9.69,
+                "median": 10.0,
+                "minimum": 5,
+                "mode": 10,
+                "n": 500,
+                "p05": 7.0,
+                "p25": 9.0,
+                "p75": 11.0,
+                "p95": 12.0,
+                "stdev": 1.6671709323988562
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 452,
+                  "1": 41,
+                  "4": 1,
+                  "5": 1,
+                  "6": 1,
+                  "7": 1,
+                  "8": 2,
+                  "9": 1
+                },
+                "maximum": 9,
+                "mean": 0.176,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 1.0,
+                "stdev": 0.8499817279658143
+              },
+              "mean_delta": 9.514,
+              "median_delta": 10.0
+            }
+          }
+        }
+      },
+      "validation_sessions": [
+        "s01",
+        "s02",
+        "s03"
+      ]
+    },
+    "cache-llc-dtlb": {
+      "audit": {
+        "s00": {
+          "attack_excluded": {},
+          "baseline_excluded": {}
+        },
+        "s01": {
+          "attack_excluded": {},
+          "baseline_excluded": {}
+        },
+        "s02": {
+          "attack_excluded": {},
+          "baseline_excluded": {}
+        },
+        "s03": {
+          "attack_excluded": {},
+          "baseline_excluded": {}
+        }
+      },
+      "development_session": "s00",
+      "events": {
+        "dtlb_read_accesses": {
+          "attack": {
+            "histogram": {
+              "10518": 1998,
+              "10519": 2
+            },
+            "maximum": 10519,
+            "mean": 10518.001,
+            "median": 10518.0,
+            "minimum": 10518,
+            "mode": 10518,
+            "n": 2000,
+            "p05": 10518.0,
+            "p25": 10518.0,
+            "p75": 10518.0,
+            "p95": 10518.0,
+            "stdev": 0.031614865963260665
+          },
+          "attack_minus_baseline": {
+            "mean": -0.0010000000002037268,
+            "median": 0.0,
+            "mode": 0
+          },
+          "baseline": {
+            "histogram": {
+              "10518": 1996,
+              "10519": 4
+            },
+            "maximum": 10519,
+            "mean": 10518.002,
+            "median": 10518.0,
+            "minimum": 10518,
+            "mode": 10518,
+            "n": 2000,
+            "p05": 10518.0,
+            "p25": 10518.0,
+            "p75": 10518.0,
+            "p95": 10518.0,
+            "stdev": 0.044687789151507874
+          },
+          "detector": {
+            "development_fpr": 0.0,
+            "development_tpr": 0.0,
+            "direction": "high",
+            "threshold": 10519,
+            "validation_auc_attack_high": 0.49933333333333335,
+            "validation_fpr": 0.0026666666666666666,
+            "validation_tpr": 0.0013333333333333333
+          },
+          "per_session": {
+            "s00": {
+              "attack": {
+                "histogram": {
+                  "10518": 500
+                },
+                "maximum": 10518,
+                "mean": 10518.0,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "10518": 500
+                },
+                "maximum": 10518,
+                "mean": 10518.0,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0,
+              "median_delta": 0.0
+            },
+            "s01": {
+              "attack": {
+                "histogram": {
+                  "10518": 499,
+                  "10519": 1
+                },
+                "maximum": 10519,
+                "mean": 10518.002,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.044721359549995794
+              },
+              "baseline": {
+                "histogram": {
+                  "10518": 499,
+                  "10519": 1
+                },
+                "maximum": 10519,
+                "mean": 10518.002,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.044721359549995794
+              },
+              "mean_delta": 0.0,
+              "median_delta": 0.0
+            },
+            "s02": {
+              "attack": {
+                "histogram": {
+                  "10518": 499,
+                  "10519": 1
+                },
+                "maximum": 10519,
+                "mean": 10518.002,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.044721359549995794
+              },
+              "baseline": {
+                "histogram": {
+                  "10518": 499,
+                  "10519": 1
+                },
+                "maximum": 10519,
+                "mean": 10518.002,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.044721359549995794
+              },
+              "mean_delta": 0.0,
+              "median_delta": 0.0
+            },
+            "s03": {
+              "attack": {
+                "histogram": {
+                  "10518": 500
+                },
+                "maximum": 10518,
+                "mean": 10518.0,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "10518": 498,
+                  "10519": 2
+                },
+                "maximum": 10519,
+                "mean": 10518.004,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.06318214912406725
+              },
+              "mean_delta": -0.004000000000814907,
+              "median_delta": 0.0
+            }
+          }
+        },
+        "dtlb_read_misses": {
+          "attack": {
+            "histogram": {
+              "0": 2000
+            },
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p25": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "attack_minus_baseline": {
+            "mean": 0.0,
+            "median": 0.0,
+            "mode": 0
+          },
+          "baseline": {
+            "histogram": {
+              "0": 2000
+            },
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p25": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "detector": {
+            "development_fpr": 0.0,
+            "development_tpr": 0.0,
+            "direction": "high",
+            "threshold": 1,
+            "validation_auc_attack_high": 0.5,
+            "validation_fpr": 0.0,
+            "validation_tpr": 0.0
+          },
+          "per_session": {
+            "s00": {
+              "attack": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0,
+              "median_delta": 0.0
+            },
+            "s01": {
+              "attack": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0,
+              "median_delta": 0.0
+            },
+            "s02": {
+              "attack": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0,
+              "median_delta": 0.0
+            },
+            "s03": {
+              "attack": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0,
+              "median_delta": 0.0
+            }
+          }
+        },
+        "llc_read_accesses": {
+          "attack": {
+            "histogram": {
+              "0": 1994,
+              "1": 5,
+              "2": 1
+            },
+            "maximum": 2,
+            "mean": 0.0035,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p25": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "stdev": 0.06700742494305202
+          },
+          "attack_minus_baseline": {
+            "mean": 0.003,
+            "median": 0.0,
+            "mode": 0
+          },
+          "baseline": {
+            "histogram": {
+              "0": 1999,
+              "1": 1
+            },
+            "maximum": 1,
+            "mean": 0.0005,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p25": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "stdev": 0.022360679774997897
+          },
+          "detector": {
+            "development_fpr": 0.0,
+            "development_tpr": 0.0,
+            "direction": "high",
+            "threshold": 1,
+            "validation_auc_attack_high": 0.5016668888888889,
+            "validation_fpr": 0.0006666666666666666,
+            "validation_tpr": 0.004
+          },
+          "per_session": {
+            "s00": {
+              "attack": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0,
+              "median_delta": 0.0
+            },
+            "s01": {
+              "attack": {
+                "histogram": {
+                  "0": 499,
+                  "1": 1
+                },
+                "maximum": 1,
+                "mean": 0.002,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.044721359549995794
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.002,
+              "median_delta": 0.0
+            },
+            "s02": {
+              "attack": {
+                "histogram": {
+                  "0": 497,
+                  "1": 2,
+                  "2": 1
+                },
+                "maximum": 2,
+                "mean": 0.008,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.10936141842386353
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.008,
+              "median_delta": 0.0
+            },
+            "s03": {
+              "attack": {
+                "histogram": {
+                  "0": 498,
+                  "1": 2
+                },
+                "maximum": 1,
+                "mean": 0.004,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.06318214912406725
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 499,
+                  "1": 1
+                },
+                "maximum": 1,
+                "mean": 0.002,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.044721359549995794
+              },
+              "mean_delta": 0.002,
+              "median_delta": 0.0
+            }
+          }
+        },
+        "llc_read_misses": {
+          "attack": {
+            "histogram": {
+              "0": 1994,
+              "1": 5,
+              "2": 1
+            },
+            "maximum": 2,
+            "mean": 0.0035,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p25": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "stdev": 0.06700742494305202
+          },
+          "attack_minus_baseline": {
+            "mean": 0.003,
+            "median": 0.0,
+            "mode": 0
+          },
+          "baseline": {
+            "histogram": {
+              "0": 1999,
+              "1": 1
+            },
+            "maximum": 1,
+            "mean": 0.0005,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p25": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "stdev": 0.022360679774997897
+          },
+          "detector": {
+            "development_fpr": 0.0,
+            "development_tpr": 0.0,
+            "direction": "high",
+            "threshold": 1,
+            "validation_auc_attack_high": 0.5016668888888889,
+            "validation_fpr": 0.0006666666666666666,
+            "validation_tpr": 0.004
+          },
+          "per_session": {
+            "s00": {
+              "attack": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0,
+              "median_delta": 0.0
+            },
+            "s01": {
+              "attack": {
+                "histogram": {
+                  "0": 499,
+                  "1": 1
+                },
+                "maximum": 1,
+                "mean": 0.002,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.044721359549995794
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.002,
+              "median_delta": 0.0
+            },
+            "s02": {
+              "attack": {
+                "histogram": {
+                  "0": 497,
+                  "1": 2,
+                  "2": 1
+                },
+                "maximum": 2,
+                "mean": 0.008,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.10936141842386353
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 500
+                },
+                "maximum": 0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.008,
+              "median_delta": 0.0
+            },
+            "s03": {
+              "attack": {
+                "histogram": {
+                  "0": 498,
+                  "1": 2
+                },
+                "maximum": 1,
+                "mean": 0.004,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.06318214912406725
+              },
+              "baseline": {
+                "histogram": {
+                  "0": 499,
+                  "1": 1
+                },
+                "maximum": 1,
+                "mean": 0.002,
+                "median": 0.0,
+                "minimum": 0,
+                "mode": 0,
+                "n": 500,
+                "p05": 0.0,
+                "p25": 0.0,
+                "p75": 0.0,
+                "p95": 0.0,
+                "stdev": 0.044721359549995794
+              },
+              "mean_delta": 0.002,
+              "median_delta": 0.0
+            }
+          }
+        }
+      },
+      "validation_sessions": [
+        "s01",
+        "s02",
+        "s03"
+      ]
+    },
+    "structural": {
+      "audit": {
+        "s00": {
+          "attack_excluded": {},
+          "baseline_excluded": {}
+        },
+        "s01": {
+          "attack_excluded": {},
+          "baseline_excluded": {}
+        },
+        "s02": {
+          "attack_excluded": {},
+          "baseline_excluded": {}
+        },
+        "s03": {
+          "attack_excluded": {},
+          "baseline_excluded": {}
+        }
+      },
+      "development_session": "s00",
+      "events": {
+        "branch_misses": {
+          "attack": {
+            "histogram": {
+              "11": 1,
+              "13": 254,
+              "14": 153,
+              "15": 117,
+              "16": 112,
+              "17": 90,
+              "18": 87,
+              "19": 57,
+              "20": 50,
+              "21": 247,
+              "22": 244,
+              "23": 235,
+              "24": 160,
+              "25": 115,
+              "26": 44,
+              "27": 20,
+              "28": 7,
+              "29": 5,
+              "30": 1,
+              "32": 1
+            },
+            "maximum": 32,
+            "mean": 19.4715,
+            "median": 21.0,
+            "minimum": 11,
+            "mode": 13,
+            "n": 2000,
+            "p05": 13.0,
+            "p25": 15.0,
+            "p75": 23.0,
+            "p95": 25.0,
+            "stdev": 4.234401117798503
+          },
+          "attack_minus_baseline": {
+            "mean": -0.17249999999999943,
+            "median": 0.0,
+            "mode": -9
+          },
+          "baseline": {
+            "histogram": {
+              "13": 59,
+              "14": 254,
+              "15": 209,
+              "16": 110,
+              "17": 88,
+              "18": 75,
+              "19": 51,
+              "20": 30,
+              "21": 279,
+              "22": 295,
+              "23": 220,
+              "24": 145,
+              "25": 100,
+              "26": 54,
+              "27": 20,
+              "28": 7,
+              "29": 2,
+              "31": 1,
+              "37": 1
+            },
+            "maximum": 37,
+            "mean": 19.644,
+            "median": 21.0,
+            "minimum": 13,
+            "mode": 22,
+            "n": 2000,
+            "p05": 14.0,
+            "p25": 15.0,
+            "p75": 23.0,
+            "p95": 25.0,
+            "stdev": 4.008028960483449
+          },
+          "detector": {
+            "development_fpr": 0.01,
+            "development_tpr": 0.012,
+            "direction": "high",
+            "threshold": 27,
+            "validation_auc_attack_high": 0.47806377777777775,
+            "validation_fpr": 0.017333333333333333,
+            "validation_tpr": 0.018666666666666668
+          },
+          "per_session": {
+            "s00": {
+              "attack": {
+                "histogram": {
+                  "13": 118,
+                  "14": 36,
+                  "15": 25,
+                  "16": 18,
+                  "17": 19,
+                  "18": 18,
+                  "19": 11,
+                  "20": 9,
+                  "21": 37,
+                  "22": 66,
+                  "23": 54,
+                  "24": 39,
+                  "25": 27,
+                  "26": 17,
+                  "27": 4,
+                  "29": 2
+                },
+                "maximum": 29,
+                "mean": 18.854,
+                "median": 20.0,
+                "minimum": 13,
+                "mode": 13,
+                "n": 500,
+                "p05": 13.0,
+                "p25": 14.0,
+                "p75": 23.0,
+                "p95": 25.0,
+                "stdev": 4.618587088427236
+              },
+              "baseline": {
+                "histogram": {
+                  "13": 9,
+                  "14": 58,
+                  "15": 119,
+                  "16": 37,
+                  "17": 24,
+                  "18": 22,
+                  "19": 14,
+                  "20": 9,
+                  "21": 51,
+                  "22": 52,
+                  "23": 41,
+                  "24": 34,
+                  "25": 17,
+                  "26": 8,
+                  "27": 2,
+                  "28": 1,
+                  "29": 1,
+                  "37": 1
+                },
+                "maximum": 37,
+                "mean": 18.622,
+                "median": 18.0,
+                "minimum": 13,
+                "mode": 15,
+                "n": 500,
+                "p05": 14.0,
+                "p25": 15.0,
+                "p75": 22.0,
+                "p95": 25.0,
+                "stdev": 3.9742553278345922
+              },
+              "mean_delta": 0.23199999999999932,
+              "median_delta": 2.0
+            },
+            "s01": {
+              "attack": {
+                "histogram": {
+                  "13": 28,
+                  "14": 44,
+                  "15": 23,
+                  "16": 32,
+                  "17": 17,
+                  "18": 20,
+                  "19": 14,
+                  "20": 17,
+                  "21": 67,
+                  "22": 82,
+                  "23": 67,
+                  "24": 47,
+                  "25": 27,
+                  "26": 7,
+                  "27": 6,
+                  "28": 2
+                },
+                "maximum": 28,
+                "mean": 20.094,
+                "median": 21.0,
+                "minimum": 13,
+                "mode": 22,
+                "n": 500,
+                "p05": 13.0,
+                "p25": 16.0,
+                "p75": 23.0,
+                "p95": 25.0,
+                "stdev": 3.846915845589307
+              },
+              "baseline": {
+                "histogram": {
+                  "13": 22,
+                  "14": 61,
+                  "15": 30,
+                  "16": 25,
+                  "17": 27,
+                  "18": 17,
+                  "19": 15,
+                  "20": 9,
+                  "21": 105,
+                  "22": 65,
+                  "23": 52,
+                  "24": 31,
+                  "25": 29,
+                  "26": 7,
+                  "27": 4,
+                  "28": 1
+                },
+                "maximum": 28,
+                "mean": 19.676,
+                "median": 21.0,
+                "minimum": 13,
+                "mode": 21,
+                "n": 500,
+                "p05": 14.0,
+                "p25": 16.0,
+                "p75": 22.0,
+                "p95": 25.0,
+                "stdev": 3.8152504862125487
+              },
+              "mean_delta": 0.4180000000000028,
+              "median_delta": 0.0
+            },
+            "s02": {
+              "attack": {
+                "histogram": {
+                  "11": 1,
+                  "13": 108,
+                  "14": 62,
+                  "15": 58,
+                  "16": 52,
+                  "17": 39,
+                  "18": 33,
+                  "19": 22,
+                  "20": 10,
+                  "21": 6,
+                  "22": 18,
+                  "23": 25,
+                  "24": 23,
+                  "25": 23,
+                  "26": 10,
+                  "27": 6,
+                  "28": 2,
+                  "29": 2
+                },
+                "maximum": 29,
+                "mean": 17.24,
+                "median": 16.0,
+                "minimum": 11,
+                "mode": 13,
+                "n": 500,
+                "p05": 13.0,
+                "p25": 14.0,
+                "p75": 19.25,
+                "p95": 25.0,
+                "stdev": 4.193037458245812
+              },
+              "baseline": {
+                "histogram": {
+                  "13": 17,
+                  "14": 35,
+                  "15": 26,
+                  "16": 22,
+                  "17": 18,
+                  "18": 15,
+                  "19": 9,
+                  "20": 3,
+                  "21": 74,
+                  "22": 106,
+                  "23": 58,
+                  "24": 45,
+                  "25": 30,
+                  "26": 25,
+                  "27": 11,
+                  "28": 4,
+                  "29": 1,
+                  "31": 1
+                },
+                "maximum": 31,
+                "mean": 20.858,
+                "median": 22.0,
+                "minimum": 13,
+                "mode": 22,
+                "n": 500,
+                "p05": 14.0,
+                "p25": 18.0,
+                "p75": 23.0,
+                "p95": 26.0,
+                "stdev": 3.8365706756292393
+              },
+              "mean_delta": -3.618000000000002,
+              "median_delta": -6.0
+            },
+            "s03": {
+              "attack": {
+                "histogram": {
+                  "14": 11,
+                  "15": 11,
+                  "16": 10,
+                  "17": 15,
+                  "18": 16,
+                  "19": 10,
+                  "20": 14,
+                  "21": 137,
+                  "22": 78,
+                  "23": 89,
+                  "24": 51,
+                  "25": 38,
+                  "26": 10,
+                  "27": 4,
+                  "28": 3,
+                  "29": 1,
+                  "30": 1,
+                  "32": 1
+                },
+                "maximum": 32,
+                "mean": 21.698,
+                "median": 22.0,
+                "minimum": 14,
+                "mode": 21,
+                "n": 500,
+                "p05": 16.0,
+                "p25": 21.0,
+                "p75": 23.0,
+                "p95": 25.0,
+                "stdev": 2.718377300946394
+              },
+              "baseline": {
+                "histogram": {
+                  "13": 11,
+                  "14": 100,
+                  "15": 34,
+                  "16": 26,
+                  "17": 19,
+                  "18": 21,
+                  "19": 13,
+                  "20": 9,
+                  "21": 49,
+                  "22": 72,
+                  "23": 69,
+                  "24": 35,
+                  "25": 24,
+                  "26": 14,
+                  "27": 3,
+                  "28": 1
+                },
+                "maximum": 28,
+                "mean": 19.42,
+                "median": 21.0,
+                "minimum": 13,
+                "mode": 14,
+                "n": 500,
+                "p05": 14.0,
+                "p25": 15.0,
+                "p75": 23.0,
+                "p95": 25.0,
+                "stdev": 4.087666575941847
+              },
+              "mean_delta": 2.2779999999999987,
+              "median_delta": 1.0
+            }
+          }
+        },
+        "branches": {
+          "attack": {
+            "histogram": {
+              "3344": 1996,
+              "3345": 4
+            },
+            "maximum": 3345,
+            "mean": 3344.002,
+            "median": 3344.0,
+            "minimum": 3344,
+            "mode": 3344,
+            "n": 2000,
+            "p05": 3344.0,
+            "p25": 3344.0,
+            "p75": 3344.0,
+            "p95": 3344.0,
+            "stdev": 0.044687789151507874
+          },
+          "attack_minus_baseline": {
+            "mean": 0.0009999999997489795,
+            "median": 0.0,
+            "mode": 0
+          },
+          "baseline": {
+            "histogram": {
+              "3344": 1998,
+              "3345": 2
+            },
+            "maximum": 3345,
+            "mean": 3344.001,
+            "median": 3344.0,
+            "minimum": 3344,
+            "mode": 3344,
+            "n": 2000,
+            "p05": 3344.0,
+            "p25": 3344.0,
+            "p75": 3344.0,
+            "p95": 3344.0,
+            "stdev": 0.031614865963260665
+          },
+          "detector": {
+            "development_fpr": 0.002,
+            "development_tpr": 0.0,
+            "direction": "high",
+            "threshold": 3345,
+            "validation_auc_attack_high": 0.501,
+            "validation_fpr": 0.0006666666666666666,
+            "validation_tpr": 0.0026666666666666666
+          },
+          "per_session": {
+            "s00": {
+              "attack": {
+                "histogram": {
+                  "3344": 500
+                },
+                "maximum": 3344,
+                "mean": 3344.0,
+                "median": 3344.0,
+                "minimum": 3344,
+                "mode": 3344,
+                "n": 500,
+                "p05": 3344.0,
+                "p25": 3344.0,
+                "p75": 3344.0,
+                "p95": 3344.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "3344": 499,
+                  "3345": 1
+                },
+                "maximum": 3345,
+                "mean": 3344.002,
+                "median": 3344.0,
+                "minimum": 3344,
+                "mode": 3344,
+                "n": 500,
+                "p05": 3344.0,
+                "p25": 3344.0,
+                "p75": 3344.0,
+                "p95": 3344.0,
+                "stdev": 0.044721359549995794
+              },
+              "mean_delta": -0.0019999999999527063,
+              "median_delta": 0.0
+            },
+            "s01": {
+              "attack": {
+                "histogram": {
+                  "3344": 499,
+                  "3345": 1
+                },
+                "maximum": 3345,
+                "mean": 3344.002,
+                "median": 3344.0,
+                "minimum": 3344,
+                "mode": 3344,
+                "n": 500,
+                "p05": 3344.0,
+                "p25": 3344.0,
+                "p75": 3344.0,
+                "p95": 3344.0,
+                "stdev": 0.044721359549995794
+              },
+              "baseline": {
+                "histogram": {
+                  "3344": 500
+                },
+                "maximum": 3344,
+                "mean": 3344.0,
+                "median": 3344.0,
+                "minimum": 3344,
+                "mode": 3344,
+                "n": 500,
+                "p05": 3344.0,
+                "p25": 3344.0,
+                "p75": 3344.0,
+                "p95": 3344.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0019999999999527063,
+              "median_delta": 0.0
+            },
+            "s02": {
+              "attack": {
+                "histogram": {
+                  "3344": 498,
+                  "3345": 2
+                },
+                "maximum": 3345,
+                "mean": 3344.004,
+                "median": 3344.0,
+                "minimum": 3344,
+                "mode": 3344,
+                "n": 500,
+                "p05": 3344.0,
+                "p25": 3344.0,
+                "p75": 3344.0,
+                "p95": 3344.0,
+                "stdev": 0.06318214912406725
+              },
+              "baseline": {
+                "histogram": {
+                  "3344": 499,
+                  "3345": 1
+                },
+                "maximum": 3345,
+                "mean": 3344.002,
+                "median": 3344.0,
+                "minimum": 3344,
+                "mode": 3344,
+                "n": 500,
+                "p05": 3344.0,
+                "p25": 3344.0,
+                "p75": 3344.0,
+                "p95": 3344.0,
+                "stdev": 0.044721359549995794
+              },
+              "mean_delta": 0.0019999999999527063,
+              "median_delta": 0.0
+            },
+            "s03": {
+              "attack": {
+                "histogram": {
+                  "3344": 499,
+                  "3345": 1
+                },
+                "maximum": 3345,
+                "mean": 3344.002,
+                "median": 3344.0,
+                "minimum": 3344,
+                "mode": 3344,
+                "n": 500,
+                "p05": 3344.0,
+                "p25": 3344.0,
+                "p75": 3344.0,
+                "p95": 3344.0,
+                "stdev": 0.044721359549995794
+              },
+              "baseline": {
+                "histogram": {
+                  "3344": 500
+                },
+                "maximum": 3344,
+                "mean": 3344.0,
+                "median": 3344.0,
+                "minimum": 3344,
+                "mode": 3344,
+                "n": 500,
+                "p05": 3344.0,
+                "p25": 3344.0,
+                "p75": 3344.0,
+                "p95": 3344.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0019999999999527063,
+              "median_delta": 0.0
+            }
+          }
+        },
+        "cycles": {
+          "attack": {
+            "histogram": {
+              "8011": 12,
+              "8030": 8,
+              "8095": 10,
+              "8104": 9,
+              "8133": 10,
+              "8154": 11,
+              "8183": 9,
+              "8200": 9,
+              "8214": 11,
+              "8221": 9,
+              "8251": 9,
+              "8253": 8,
+              "8257": 9,
+              "8258": 8,
+              "8263": 9,
+              "8300": 10
+            },
+            "maximum": 14962,
+            "mean": 8169.1695,
+            "median": 8154.0,
+            "minimum": 7847,
+            "mode": 8011,
+            "n": 2000,
+            "p05": 7935.0,
+            "p25": 8031.0,
+            "p75": 8247.0,
+            "p95": 8385.05,
+            "stdev": 354.23801328312777
+          },
+          "attack_minus_baseline": {
+            "mean": -2.9705000000003565,
+            "median": -14.5,
+            "mode": -214
+          },
+          "baseline": {
+            "histogram": {
+              "8069": 12,
+              "8110": 9,
+              "8191": 9,
+              "8194": 9,
+              "8215": 10,
+              "8219": 11,
+              "8225": 13,
+              "8227": 12,
+              "8230": 9,
+              "8235": 9,
+              "8240": 9,
+              "8242": 10,
+              "8244": 10,
+              "8250": 10,
+              "8252": 11,
+              "8257": 10
+            },
+            "maximum": 14806,
+            "mean": 8172.14,
+            "median": 8168.5,
+            "minimum": 7886,
+            "mode": 8225,
+            "n": 2000,
+            "p05": 7947.0,
+            "p25": 8049.75,
+            "p75": 8251.25,
+            "p95": 8394.05,
+            "stdev": 260.3835117410342
+          },
+          "detector": {
+            "development_fpr": 0.01,
+            "development_tpr": 0.03,
+            "direction": "low",
+            "threshold": 7919,
+            "validation_auc_attack_high": 0.45516644444444443,
+            "validation_fpr": 0.018,
+            "validation_tpr": 0.027333333333333334
+          },
+          "per_session": {
+            "s00": {
+              "attack": {
+                "histogram": {
+                  "7966": 5,
+                  "7970": 4,
+                  "7976": 4,
+                  "8011": 5,
+                  "8013": 5,
+                  "8017": 4,
+                  "8033": 4,
+                  "8052": 3,
+                  "8084": 4,
+                  "8104": 6,
+                  "8189": 4,
+                  "8192": 3,
+                  "8251": 5,
+                  "8272": 4,
+                  "8276": 4,
+                  "8289": 3
+                },
+                "maximum": 8886,
+                "mean": 8150.744,
+                "median": 8150.0,
+                "minimum": 7882,
+                "mode": 8104,
+                "n": 500,
+                "p05": 7934.95,
+                "p25": 8016.0,
+                "p75": 8257.0,
+                "p95": 8410.55,
+                "stdev": 158.08741165395458
+              },
+              "baseline": {
+                "histogram": {
+                  "7987": 5,
+                  "7991": 4,
+                  "7998": 4,
+                  "8021": 4,
+                  "8028": 4,
+                  "8042": 4,
+                  "8049": 4,
+                  "8057": 4,
+                  "8064": 4,
+                  "8069": 6,
+                  "8108": 4,
+                  "8190": 4,
+                  "8235": 3,
+                  "8238": 3,
+                  "8267": 4,
+                  "8302": 4
+                },
+                "maximum": 9963,
+                "mean": 8145.388,
+                "median": 8108.0,
+                "minimum": 7888,
+                "mode": 8069,
+                "n": 500,
+                "p05": 7962.799999999999,
+                "p25": 8032.0,
+                "p75": 8234.25,
+                "p95": 8379.05,
+                "stdev": 173.52226776647902
+              },
+              "mean_delta": 5.355999999999767,
+              "median_delta": 42.0
+            },
+            "s01": {
+              "attack": {
+                "histogram": {
+                  "8030": 4,
+                  "8114": 4,
+                  "8133": 4,
+                  "8147": 4,
+                  "8154": 5,
+                  "8177": 4,
+                  "8178": 5,
+                  "8188": 4,
+                  "8194": 3,
+                  "8198": 4,
+                  "8210": 4,
+                  "8213": 5,
+                  "8254": 4,
+                  "8257": 4,
+                  "8279": 4,
+                  "8300": 4
+                },
+                "maximum": 14962,
+                "mean": 8214.098,
+                "median": 8166.0,
+                "minimum": 7879,
+                "mode": 8154,
+                "n": 500,
+                "p05": 7939.900000000001,
+                "p25": 8049.5,
+                "p75": 8246.25,
+                "p95": 8387.45,
+                "stdev": 581.9862131533712
+              },
+              "baseline": {
+                "histogram": {
+                  "7934": 3,
+                  "7988": 3,
+                  "7995": 3,
+                  "8009": 4,
+                  "8105": 3,
+                  "8163": 5,
+                  "8181": 4,
+                  "8191": 4,
+                  "8219": 5,
+                  "8227": 4,
+                  "8241": 4,
+                  "8242": 3,
+                  "8257": 6,
+                  "8281": 4,
+                  "8310": 4,
+                  "8313": 3
+                },
+                "maximum": 14806,
+                "mean": 8173.942,
+                "median": 8176.5,
+                "minimum": 7895,
+                "mode": 8257,
+                "n": 500,
+                "p05": 7941.9,
+                "p25": 8048.5,
+                "p75": 8250.0,
+                "p95": 8364.35,
+                "stdev": 329.186594904059
+              },
+              "mean_delta": 40.15599999999995,
+              "median_delta": -10.5
+            },
+            "s02": {
+              "attack": {
+                "histogram": {
+                  "7934": 4,
+                  "7948": 5,
+                  "7951": 4,
+                  "7986": 4,
+                  "7987": 4,
+                  "7988": 4,
+                  "7994": 5,
+                  "8011": 4,
+                  "8021": 4,
+                  "8044": 4,
+                  "8057": 5,
+                  "8079": 4,
+                  "8086": 4,
+                  "8090": 4,
+                  "8098": 4,
+                  "8121": 4
+                },
+                "maximum": 14387,
+                "mean": 8100.346,
+                "median": 8056.5,
+                "minimum": 7847,
+                "mode": 7948,
+                "n": 500,
+                "p05": 7919.900000000001,
+                "p25": 7979.5,
+                "p75": 8154.25,
+                "p95": 8348.0,
+                "stdev": 322.4867465297989
+              },
+              "baseline": {
+                "histogram": {
+                  "8178": 4,
+                  "8189": 4,
+                  "8200": 4,
+                  "8203": 5,
+                  "8213": 3,
+                  "8215": 4,
+                  "8220": 4,
+                  "8225": 5,
+                  "8227": 5,
+                  "8230": 5,
+                  "8231": 4,
+                  "8240": 4,
+                  "8242": 4,
+                  "8264": 5,
+                  "8280": 5,
+                  "8285": 4
+                },
+                "maximum": 10608,
+                "mean": 8188.732,
+                "median": 8193.0,
+                "minimum": 7886,
+                "mode": 8203,
+                "n": 500,
+                "p05": 7937.95,
+                "p25": 8080.0,
+                "p75": 8255.25,
+                "p95": 8409.9,
+                "stdev": 210.71072634394477
+              },
+              "mean_delta": -88.38600000000042,
+              "median_delta": -136.5
+            },
+            "s03": {
+              "attack": {
+                "histogram": {
+                  "8095": 4,
+                  "8151": 4,
+                  "8157": 4,
+                  "8164": 4,
+                  "8176": 4,
+                  "8200": 7,
+                  "8203": 4,
+                  "8214": 6,
+                  "8220": 5,
+                  "8221": 4,
+                  "8231": 4,
+                  "8234": 6,
+                  "8246": 4,
+                  "8258": 4,
+                  "8262": 4,
+                  "8263": 5
+                },
+                "maximum": 10583,
+                "mean": 8211.49,
+                "median": 8204.0,
+                "minimum": 7921,
+                "mode": 8200,
+                "n": 500,
+                "p05": 8020.0,
+                "p25": 8144.0,
+                "p75": 8260.25,
+                "p95": 8399.6,
+                "stdev": 161.5296801679193
+              },
+              "baseline": {
+                "histogram": {
+                  "7945": 4,
+                  "7954": 4,
+                  "8004": 4,
+                  "8013": 5,
+                  "8061": 4,
+                  "8073": 4,
+                  "8106": 3,
+                  "8110": 4,
+                  "8121": 4,
+                  "8219": 4,
+                  "8229": 4,
+                  "8244": 4,
+                  "8251": 3,
+                  "8252": 5,
+                  "8261": 4,
+                  "8428": 3
+                },
+                "maximum": 13937,
+                "mean": 8180.498,
+                "median": 8171.0,
+                "minimum": 7896,
+                "mode": 8013,
+                "n": 500,
+                "p05": 7947.9,
+                "p25": 8054.75,
+                "p75": 8266.75,
+                "p95": 8401.349999999999,
+                "stdev": 296.0859736691477
+              },
+              "mean_delta": 30.99200000000019,
+              "median_delta": 33.0
+            }
+          }
+        },
+        "instructions": {
+          "attack": {
+            "histogram": {
+              "40292": 1996,
+              "40293": 4
+            },
+            "maximum": 40293,
+            "mean": 40292.002,
+            "median": 40292.0,
+            "minimum": 40292,
+            "mode": 40292,
+            "n": 2000,
+            "p05": 40292.0,
+            "p25": 40292.0,
+            "p75": 40292.0,
+            "p95": 40292.0,
+            "stdev": 0.044687789151507874
+          },
+          "attack_minus_baseline": {
+            "mean": 0.0010000000038417056,
+            "median": 0.0,
+            "mode": 0
+          },
+          "baseline": {
+            "histogram": {
+              "40292": 1998,
+              "40293": 2
+            },
+            "maximum": 40293,
+            "mean": 40292.001,
+            "median": 40292.0,
+            "minimum": 40292,
+            "mode": 40292,
+            "n": 2000,
+            "p05": 40292.0,
+            "p25": 40292.0,
+            "p75": 40292.0,
+            "p95": 40292.0,
+            "stdev": 0.031614865963260665
+          },
+          "detector": {
+            "development_fpr": 0.002,
+            "development_tpr": 0.0,
+            "direction": "high",
+            "threshold": 40293,
+            "validation_auc_attack_high": 0.501,
+            "validation_fpr": 0.0006666666666666666,
+            "validation_tpr": 0.0026666666666666666
+          },
+          "per_session": {
+            "s00": {
+              "attack": {
+                "histogram": {
+                  "40292": 500
+                },
+                "maximum": 40292,
+                "mean": 40292.0,
+                "median": 40292.0,
+                "minimum": 40292,
+                "mode": 40292,
+                "n": 500,
+                "p05": 40292.0,
+                "p25": 40292.0,
+                "p75": 40292.0,
+                "p95": 40292.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "40292": 499,
+                  "40293": 1
+                },
+                "maximum": 40293,
+                "mean": 40292.002,
+                "median": 40292.0,
+                "minimum": 40292,
+                "mode": 40292,
+                "n": 500,
+                "p05": 40292.0,
+                "p25": 40292.0,
+                "p75": 40292.0,
+                "p95": 40292.0,
+                "stdev": 0.044721359549995794
+              },
+              "mean_delta": -0.0020000000004074536,
+              "median_delta": 0.0
+            },
+            "s01": {
+              "attack": {
+                "histogram": {
+                  "40292": 499,
+                  "40293": 1
+                },
+                "maximum": 40293,
+                "mean": 40292.002,
+                "median": 40292.0,
+                "minimum": 40292,
+                "mode": 40292,
+                "n": 500,
+                "p05": 40292.0,
+                "p25": 40292.0,
+                "p75": 40292.0,
+                "p95": 40292.0,
+                "stdev": 0.044721359549995794
+              },
+              "baseline": {
+                "histogram": {
+                  "40292": 500
+                },
+                "maximum": 40292,
+                "mean": 40292.0,
+                "median": 40292.0,
+                "minimum": 40292,
+                "mode": 40292,
+                "n": 500,
+                "p05": 40292.0,
+                "p25": 40292.0,
+                "p75": 40292.0,
+                "p95": 40292.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0020000000004074536,
+              "median_delta": 0.0
+            },
+            "s02": {
+              "attack": {
+                "histogram": {
+                  "40292": 498,
+                  "40293": 2
+                },
+                "maximum": 40293,
+                "mean": 40292.004,
+                "median": 40292.0,
+                "minimum": 40292,
+                "mode": 40292,
+                "n": 500,
+                "p05": 40292.0,
+                "p25": 40292.0,
+                "p75": 40292.0,
+                "p95": 40292.0,
+                "stdev": 0.06318214912406725
+              },
+              "baseline": {
+                "histogram": {
+                  "40292": 499,
+                  "40293": 1
+                },
+                "maximum": 40293,
+                "mean": 40292.002,
+                "median": 40292.0,
+                "minimum": 40292,
+                "mode": 40292,
+                "n": 500,
+                "p05": 40292.0,
+                "p25": 40292.0,
+                "p75": 40292.0,
+                "p95": 40292.0,
+                "stdev": 0.044721359549995794
+              },
+              "mean_delta": 0.0020000000004074536,
+              "median_delta": 0.0
+            },
+            "s03": {
+              "attack": {
+                "histogram": {
+                  "40292": 499,
+                  "40293": 1
+                },
+                "maximum": 40293,
+                "mean": 40292.002,
+                "median": 40292.0,
+                "minimum": 40292,
+                "mode": 40292,
+                "n": 500,
+                "p05": 40292.0,
+                "p25": 40292.0,
+                "p75": 40292.0,
+                "p95": 40292.0,
+                "stdev": 0.044721359549995794
+              },
+              "baseline": {
+                "histogram": {
+                  "40292": 500
+                },
+                "maximum": 40292,
+                "mean": 40292.0,
+                "median": 40292.0,
+                "minimum": 40292,
+                "mode": 40292,
+                "n": 500,
+                "p05": 40292.0,
+                "p25": 40292.0,
+                "p75": 40292.0,
+                "p95": 40292.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0020000000004074536,
+              "median_delta": 0.0
+            }
+          }
+        },
+        "retired_loads": {
+          "attack": {
+            "histogram": {
+              "10518": 1996,
+              "10519": 4
+            },
+            "maximum": 10519,
+            "mean": 10518.002,
+            "median": 10518.0,
+            "minimum": 10518,
+            "mode": 10518,
+            "n": 2000,
+            "p05": 10518.0,
+            "p25": 10518.0,
+            "p75": 10518.0,
+            "p95": 10518.0,
+            "stdev": 0.044687789151507874
+          },
+          "attack_minus_baseline": {
+            "mean": 0.0010000000002037268,
+            "median": 0.0,
+            "mode": 0
+          },
+          "baseline": {
+            "histogram": {
+              "10518": 1998,
+              "10519": 2
+            },
+            "maximum": 10519,
+            "mean": 10518.001,
+            "median": 10518.0,
+            "minimum": 10518,
+            "mode": 10518,
+            "n": 2000,
+            "p05": 10518.0,
+            "p25": 10518.0,
+            "p75": 10518.0,
+            "p95": 10518.0,
+            "stdev": 0.031614865963260665
+          },
+          "detector": {
+            "development_fpr": 0.002,
+            "development_tpr": 0.0,
+            "direction": "high",
+            "threshold": 10519,
+            "validation_auc_attack_high": 0.501,
+            "validation_fpr": 0.0006666666666666666,
+            "validation_tpr": 0.0026666666666666666
+          },
+          "per_session": {
+            "s00": {
+              "attack": {
+                "histogram": {
+                  "10518": 500
+                },
+                "maximum": 10518,
+                "mean": 10518.0,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "10518": 499,
+                  "10519": 1
+                },
+                "maximum": 10519,
+                "mean": 10518.002,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.044721359549995794
+              },
+              "mean_delta": -0.0020000000004074536,
+              "median_delta": 0.0
+            },
+            "s01": {
+              "attack": {
+                "histogram": {
+                  "10518": 499,
+                  "10519": 1
+                },
+                "maximum": 10519,
+                "mean": 10518.002,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.044721359549995794
+              },
+              "baseline": {
+                "histogram": {
+                  "10518": 500
+                },
+                "maximum": 10518,
+                "mean": 10518.0,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0020000000004074536,
+              "median_delta": 0.0
+            },
+            "s02": {
+              "attack": {
+                "histogram": {
+                  "10518": 498,
+                  "10519": 2
+                },
+                "maximum": 10519,
+                "mean": 10518.004,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.06318214912406725
+              },
+              "baseline": {
+                "histogram": {
+                  "10518": 499,
+                  "10519": 1
+                },
+                "maximum": 10519,
+                "mean": 10518.002,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.044721359549995794
+              },
+              "mean_delta": 0.0020000000004074536,
+              "median_delta": 0.0
+            },
+            "s03": {
+              "attack": {
+                "histogram": {
+                  "10518": 499,
+                  "10519": 1
+                },
+                "maximum": 10519,
+                "mean": 10518.002,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.044721359549995794
+              },
+              "baseline": {
+                "histogram": {
+                  "10518": 500
+                },
+                "maximum": 10518,
+                "mean": 10518.0,
+                "median": 10518.0,
+                "minimum": 10518,
+                "mode": 10518,
+                "n": 500,
+                "p05": 10518.0,
+                "p25": 10518.0,
+                "p75": 10518.0,
+                "p95": 10518.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0020000000004074536,
+              "median_delta": 0.0
+            }
+          }
+        },
+        "retired_stores": {
+          "attack": {
+            "histogram": {
+              "9239": 2000
+            },
+            "maximum": 9239,
+            "mean": 9239.0,
+            "median": 9239.0,
+            "minimum": 9239,
+            "mode": 9239,
+            "n": 2000,
+            "p05": 9239.0,
+            "p25": 9239.0,
+            "p75": 9239.0,
+            "p95": 9239.0,
+            "stdev": 0.0
+          },
+          "attack_minus_baseline": {
+            "mean": 0.0,
+            "median": 0.0,
+            "mode": 0
+          },
+          "baseline": {
+            "histogram": {
+              "9239": 2000
+            },
+            "maximum": 9239,
+            "mean": 9239.0,
+            "median": 9239.0,
+            "minimum": 9239,
+            "mode": 9239,
+            "n": 2000,
+            "p05": 9239.0,
+            "p25": 9239.0,
+            "p75": 9239.0,
+            "p95": 9239.0,
+            "stdev": 0.0
+          },
+          "detector": {
+            "development_fpr": 0.0,
+            "development_tpr": 0.0,
+            "direction": "high",
+            "threshold": 9240,
+            "validation_auc_attack_high": 0.5,
+            "validation_fpr": 0.0,
+            "validation_tpr": 0.0
+          },
+          "per_session": {
+            "s00": {
+              "attack": {
+                "histogram": {
+                  "9239": 500
+                },
+                "maximum": 9239,
+                "mean": 9239.0,
+                "median": 9239.0,
+                "minimum": 9239,
+                "mode": 9239,
+                "n": 500,
+                "p05": 9239.0,
+                "p25": 9239.0,
+                "p75": 9239.0,
+                "p95": 9239.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "9239": 500
+                },
+                "maximum": 9239,
+                "mean": 9239.0,
+                "median": 9239.0,
+                "minimum": 9239,
+                "mode": 9239,
+                "n": 500,
+                "p05": 9239.0,
+                "p25": 9239.0,
+                "p75": 9239.0,
+                "p95": 9239.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0,
+              "median_delta": 0.0
+            },
+            "s01": {
+              "attack": {
+                "histogram": {
+                  "9239": 500
+                },
+                "maximum": 9239,
+                "mean": 9239.0,
+                "median": 9239.0,
+                "minimum": 9239,
+                "mode": 9239,
+                "n": 500,
+                "p05": 9239.0,
+                "p25": 9239.0,
+                "p75": 9239.0,
+                "p95": 9239.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "9239": 500
+                },
+                "maximum": 9239,
+                "mean": 9239.0,
+                "median": 9239.0,
+                "minimum": 9239,
+                "mode": 9239,
+                "n": 500,
+                "p05": 9239.0,
+                "p25": 9239.0,
+                "p75": 9239.0,
+                "p95": 9239.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0,
+              "median_delta": 0.0
+            },
+            "s02": {
+              "attack": {
+                "histogram": {
+                  "9239": 500
+                },
+                "maximum": 9239,
+                "mean": 9239.0,
+                "median": 9239.0,
+                "minimum": 9239,
+                "mode": 9239,
+                "n": 500,
+                "p05": 9239.0,
+                "p25": 9239.0,
+                "p75": 9239.0,
+                "p95": 9239.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "9239": 500
+                },
+                "maximum": 9239,
+                "mean": 9239.0,
+                "median": 9239.0,
+                "minimum": 9239,
+                "mode": 9239,
+                "n": 500,
+                "p05": 9239.0,
+                "p25": 9239.0,
+                "p75": 9239.0,
+                "p95": 9239.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0,
+              "median_delta": 0.0
+            },
+            "s03": {
+              "attack": {
+                "histogram": {
+                  "9239": 500
+                },
+                "maximum": 9239,
+                "mean": 9239.0,
+                "median": 9239.0,
+                "minimum": 9239,
+                "mode": 9239,
+                "n": 500,
+                "p05": 9239.0,
+                "p25": 9239.0,
+                "p75": 9239.0,
+                "p95": 9239.0,
+                "stdev": 0.0
+              },
+              "baseline": {
+                "histogram": {
+                  "9239": 500
+                },
+                "maximum": 9239,
+                "mean": 9239.0,
+                "median": 9239.0,
+                "minimum": 9239,
+                "mode": 9239,
+                "n": 500,
+                "p05": 9239.0,
+                "p25": 9239.0,
+                "p75": 9239.0,
+                "p95": 9239.0,
+                "stdev": 0.0
+              },
+              "mean_delta": 0.0,
+              "median_delta": 0.0
+            }
+          }
+        }
+      },
+      "validation_sessions": [
+        "s01",
+        "s02",
+        "s03"
+      ]
+    }
+  },
+  "family": "redirect-twiddle-pointer-to-zero-array",
+  "window": "shared PC-relative pointer load through completion of one full target-polynomial NTT"
+}

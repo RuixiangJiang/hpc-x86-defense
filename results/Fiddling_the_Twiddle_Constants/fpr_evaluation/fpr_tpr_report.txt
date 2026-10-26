@@ -1,0 +1,18 @@
+=== Exact Modal-Vector Detector ===
+Detector events: instructions, branches, retired_loads, retired_stores
+Frozen baseline modal vector: instructions=453, branches=58, retired_loads=99, retired_stores=65
+Validation baseline: 5000; false positives: 1; FPR: 0.000200000
+One-sided 95% FPR upper bound: 0.000948418
+Attack samples: 500; detected: 500; TPR: 1.000000000
+One-sided 95% TPR lower bound: 0.994026448
+Local twiddle-fault semantic success: 500/500
+Invalid faulty signatures: 500/500
+Full fault oracle success: 500/500
+
+Modal attack-minus-baseline deltas:
+  cycles           -23
+  instructions     -2
+  branches         +0
+  branch_misses    +0
+  retired_loads    -1
+  retired_stores   +0

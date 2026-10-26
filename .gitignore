@@ -1,13 +1,9 @@
 build/
-results/*
-!results/.gitkeep
 perf.data*
 *.o
 *.a
 *.so
 *.d
-*.csv
-*.log
 core
 core.*
 __pycache__/

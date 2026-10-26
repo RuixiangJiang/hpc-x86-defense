@@ -1,0 +1,8 @@
+=== Batch-level cache-reference analysis: exact-a2b ===
+run=0 schedule_seed=20260715
+batch=  100 status=PAIR_ORDER_GENERALIZATION_FAILURE  FP=8/100 FPR=0.080000 CI95=[0.035172,0.151558] TP=1/10 TPR=0.100000 CI95=[0.002529,0.445016] AUC=0.645000 AUC_CI95=[0.344875,0.895000] order_guard=FAIL
+  order=AB blocks=5 effect=0.01 AUC=0.82 direction_match=True
+  order=BA blocks=5 effect=-0.01 AUC=0.5 direction_match=False
+batch=  500 status=INSUFFICIENT_BATCHES: requires at least 5 non-overlapping batches in every dataset
+batch= 1000 status=INSUFFICIENT_BATCHES: requires at least 5 non-overlapping batches in every dataset
+batch= 5000 status=INSUFFICIENT_BATCHES: requires at least 5 non-overlapping batches in every dataset

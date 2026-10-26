@@ -1,0 +1,175 @@
+{
+  "collections": [
+    {
+      "counter_set": "structural",
+      "mode": "baseline",
+      "path": "structural/s00_baseline.csv",
+      "samples": 500,
+      "session": "s00"
+    },
+    {
+      "counter_set": "structural",
+      "mode": "attack",
+      "path": "structural/s00_attack.csv",
+      "samples": 500,
+      "session": "s00"
+    },
+    {
+      "counter_set": "structural",
+      "mode": "attack",
+      "path": "structural/s01_attack.csv",
+      "samples": 500,
+      "session": "s01"
+    },
+    {
+      "counter_set": "structural",
+      "mode": "baseline",
+      "path": "structural/s01_baseline.csv",
+      "samples": 500,
+      "session": "s01"
+    },
+    {
+      "counter_set": "structural",
+      "mode": "baseline",
+      "path": "structural/s02_baseline.csv",
+      "samples": 500,
+      "session": "s02"
+    },
+    {
+      "counter_set": "structural",
+      "mode": "attack",
+      "path": "structural/s02_attack.csv",
+      "samples": 500,
+      "session": "s02"
+    },
+    {
+      "counter_set": "structural",
+      "mode": "attack",
+      "path": "structural/s03_attack.csv",
+      "samples": 500,
+      "session": "s03"
+    },
+    {
+      "counter_set": "structural",
+      "mode": "baseline",
+      "path": "structural/s03_baseline.csv",
+      "samples": 500,
+      "session": "s03"
+    },
+    {
+      "counter_set": "cache-l1d",
+      "mode": "baseline",
+      "path": "cache-l1d/s00_baseline.csv",
+      "samples": 500,
+      "session": "s00"
+    },
+    {
+      "counter_set": "cache-l1d",
+      "mode": "attack",
+      "path": "cache-l1d/s00_attack.csv",
+      "samples": 500,
+      "session": "s00"
+    },
+    {
+      "counter_set": "cache-l1d",
+      "mode": "attack",
+      "path": "cache-l1d/s01_attack.csv",
+      "samples": 500,
+      "session": "s01"
+    },
+    {
+      "counter_set": "cache-l1d",
+      "mode": "baseline",
+      "path": "cache-l1d/s01_baseline.csv",
+      "samples": 500,
+      "session": "s01"
+    },
+    {
+      "counter_set": "cache-l1d",
+      "mode": "baseline",
+      "path": "cache-l1d/s02_baseline.csv",
+      "samples": 500,
+      "session": "s02"
+    },
+    {
+      "counter_set": "cache-l1d",
+      "mode": "attack",
+      "path": "cache-l1d/s02_attack.csv",
+      "samples": 500,
+      "session": "s02"
+    },
+    {
+      "counter_set": "cache-l1d",
+      "mode": "attack",
+      "path": "cache-l1d/s03_attack.csv",
+      "samples": 500,
+      "session": "s03"
+    },
+    {
+      "counter_set": "cache-l1d",
+      "mode": "baseline",
+      "path": "cache-l1d/s03_baseline.csv",
+      "samples": 500,
+      "session": "s03"
+    },
+    {
+      "counter_set": "cache-llc-dtlb",
+      "mode": "baseline",
+      "path": "cache-llc-dtlb/s00_baseline.csv",
+      "samples": 500,
+      "session": "s00"
+    },
+    {
+      "counter_set": "cache-llc-dtlb",
+      "mode": "attack",
+      "path": "cache-llc-dtlb/s00_attack.csv",
+      "samples": 500,
+      "session": "s00"
+    },
+    {
+      "counter_set": "cache-llc-dtlb",
+      "mode": "attack",
+      "path": "cache-llc-dtlb/s01_attack.csv",
+      "samples": 500,
+      "session": "s01"
+    },
+    {
+      "counter_set": "cache-llc-dtlb",
+      "mode": "baseline",
+      "path": "cache-llc-dtlb/s01_baseline.csv",
+      "samples": 500,
+      "session": "s01"
+    },
+    {
+      "counter_set": "cache-llc-dtlb",
+      "mode": "baseline",
+      "path": "cache-llc-dtlb/s02_baseline.csv",
+      "samples": 500,
+      "session": "s02"
+    },
+    {
+      "counter_set": "cache-llc-dtlb",
+      "mode": "attack",
+      "path": "cache-llc-dtlb/s02_attack.csv",
+      "samples": 500,
+      "session": "s02"
+    },
+    {
+      "counter_set": "cache-llc-dtlb",
+      "mode": "attack",
+      "path": "cache-llc-dtlb/s03_attack.csv",
+      "samples": 500,
+      "session": "s03"
+    },
+    {
+      "counter_set": "cache-llc-dtlb",
+      "mode": "baseline",
+      "path": "cache-llc-dtlb/s03_baseline.csv",
+      "samples": 500,
+      "session": "s03"
+    }
+  ],
+  "family": "redirect-twiddle-pointer-to-zero-array",
+  "version": 3,
+  "window": "RIP-relative pointer-literal load through completion of one full target-polynomial NTT"
+}

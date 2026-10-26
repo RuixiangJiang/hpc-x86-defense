@@ -1,0 +1,27 @@
+=== Jendral Exact Modal-Vector Detector ===
+Detector events: instructions, branches, retired_loads, retired_stores
+Frozen baseline modal vector: instructions=455, branches=45, retired_loads=112, retired_stores=47
+Calibration baseline: 500 valid / 500 collected
+Validation baseline: 5000; false positives: 0; FPR: 0.000000000
+One-sided 95% FPR upper bound: 0.000598967
+Attack samples: 500; detected: 500; TPR: 1.000000000
+One-sided 95% TPR lower bound: 0.994026448
+Full single-trace oracle success: 500/500
+Public-seed reproduction success: 500/500
+z = y + c*s1 relation success: 500/500
+
+Modal attack-minus-baseline deltas:
+  cycles             -140
+  instructions       -415
+  branches           -36
+  branch_misses      +0
+  retired_loads      -103
+  retired_stores     -38
+
+Mean attack-minus-baseline deltas:
+  cycles             -143.846000
+  instructions       -415.000000
+  branches           -36.000000
+  branch_misses      -0.002000
+  retired_loads      -103.000000
+  retired_stores     -38.000000

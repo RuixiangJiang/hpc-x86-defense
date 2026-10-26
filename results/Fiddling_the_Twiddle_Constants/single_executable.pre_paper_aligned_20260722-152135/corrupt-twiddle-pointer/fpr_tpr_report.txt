@@ -1,0 +1,10 @@
+=== Fiddling the Twiddle Constants: corrupt-twiddle-pointer ===
+Detector: baseline-only session-local one-class PMU score
+Single threshold: 11.916167
+Validation: FP=67/6000 FPR=1.1167%
+Attack: TP=87/1000 TPR=8.7000% AUC=0.709489
+Batch-10 threshold: 9.670082
+Batch validation: FP=4/600 FPR=0.6667%
+Batch attack: TP=9/100 TPR=9.0000% AUC=0.793475
+Semantic success: 1000/1000
+Median family-specific structural score: 0.000000

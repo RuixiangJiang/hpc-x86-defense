@@ -1,0 +1,53 @@
+{
+  "calibration_consistency": {
+    "branches": {
+      "expected": 45,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 45,
+      "minimum": 45,
+      "valid_samples": 500
+    },
+    "instructions": {
+      "expected": 455,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 455,
+      "minimum": 455,
+      "valid_samples": 500
+    },
+    "retired_loads": {
+      "expected": 112,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 112,
+      "minimum": 112,
+      "valid_samples": 500
+    },
+    "retired_stores": {
+      "expected": 47,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 47,
+      "minimum": 47,
+      "valid_samples": 500
+    }
+  },
+  "detector": "exact_modal_equality",
+  "events": [
+    "instructions",
+    "branches",
+    "retired_loads",
+    "retired_stores"
+  ],
+  "expected": {
+    "branches": 45,
+    "instructions": 455,
+    "retired_loads": 112,
+    "retired_stores": 47
+  },
+  "fault_injection_counted": false,
+  "fault_model": "compile-time attack binary omits only the key absorb call",
+  "measurement_window": "single key absorb call in rhoprime = H(key || rnd || mu)",
+  "minimum_running_percent": 95.0
+}

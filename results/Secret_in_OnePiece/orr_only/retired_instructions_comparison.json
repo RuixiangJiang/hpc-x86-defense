@@ -1,0 +1,42 @@
+{
+  "attack": {
+    "count": 1000,
+    "maximum": 43709,
+    "mean": 43708.003,
+    "median": 43708.0,
+    "minimum": 43708,
+    "population_stdev": 0.05469003565550127
+  },
+  "baseline": {
+    "count": 1000,
+    "maximum": 43710,
+    "mean": 43709.001,
+    "median": 43709.0,
+    "minimum": 43709,
+    "population_stdev": 0.03160696125855822
+  },
+  "counter": "retired instructions",
+  "expected_delta_attack_minus_baseline": -1,
+  "experiment": "Secret in OnePiece OR-skip only",
+  "fault": "omit the target OR instruction while retaining load, clear, and writeback",
+  "minimum_running_percent": 95.0,
+  "paired": {
+    "common_samples": 1000,
+    "exact_minus_one_rate": 0.996,
+    "histogram": {
+      "-1": 996,
+      "-2": 1,
+      "0": 3
+    },
+    "statistics": {
+      "count": 1000,
+      "maximum": 0,
+      "mean": -0.998,
+      "median": -1.0,
+      "minimum": -2,
+      "population_stdev": 0.06321392251711644
+    }
+  },
+  "unpaired_mean_delta_attack_minus_baseline": -0.9979999999995925,
+  "unpaired_median_delta_attack_minus_baseline": -1.0
+}

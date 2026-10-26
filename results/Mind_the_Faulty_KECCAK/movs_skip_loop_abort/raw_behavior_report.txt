@@ -1,0 +1,53 @@
+=== Mind the Faulty KECCAK: skipped-MOVS loop abort ===
+Baseline: MOVS-equivalent executes; branch is taken; 24 rounds.
+Attack: that one instruction is omitted; same branch is not taken; 8 rounds.
+
+[structural-instructions]
+instructions: baseline mode=25073, median=25073 [25073,25073]; attack mode=8384, median=8384 [8384,8384]; mode delta=-16689; median delta=-16689
+cycles: baseline median=4787 [4697.950,5178]; attack median=1791 [1766,1974.050]; median delta=-2996
+[per-session median deltas]
+  s00: instructions=-16689, cycles=-2984.500
+  s01: instructions=-16689, cycles=-3026
+  s02: instructions=-16689, cycles=-2953
+  s03: instructions=-16689, cycles=-3019
+
+[structural-branches]
+branches: baseline mode=1858, median=1858 [1858,1858]; attack mode=626, median=626 [626,626]; mode delta=-1232; median delta=-1232
+cycles: baseline median=4749 [4671,5173]; attack median=1786 [1757,1985.050]; median delta=-2963
+[per-session median deltas]
+  s00: branches=-1232, cycles=-3002
+  s01: branches=-1232, cycles=-2937
+  s02: branches=-1232, cycles=-2961.500
+  s03: branches=-1232, cycles=-2927.500
+
+[structural-branch-misses]
+branch_misses: baseline mode=1, median=1 [1,2]; attack mode=1, median=1 [1,1]; mode delta=0; median delta=0
+cycles: baseline median=4734 [4668.950,5148.100]; attack median=1783 [1760,1971]; median delta=-2951
+[per-session median deltas]
+  s00: branch_misses=-1, cycles=-2946.500
+  s01: branch_misses=0, cycles=-2962
+  s02: branch_misses=0, cycles=-2939
+  s03: branch_misses=0, cycles=-2958.500
+
+[structural-loads]
+retired_loads: baseline mode=5457, median=5457 [5457,5457]; attack mode=1825, median=1825 [1825,1825]; mode delta=-3632; median delta=-3632
+cycles: baseline median=4735 [4661,5003]; attack median=1741 [1693,1822]; median delta=-2994
+[per-session median deltas]
+  s00: retired_loads=-3632, cycles=-2990
+  s01: retired_loads=-3632, cycles=-3047.500
+  s02: retired_loads=-3632, cycles=-2963
+  s03: retired_loads=-3632, cycles=-2986
+
+[structural-stores]
+retired_stores: baseline mode=2385, median=2385 [2385,2385]; attack mode=801, median=801 [801,801]; mode delta=-1584; median delta=-1584
+cycles: baseline median=4765 [4667.950,5057.100]; attack median=1746 [1692,1832]; median delta=-3019
+[per-session median deltas]
+  s00: retired_stores=-1584, cycles=-2997.500
+  s01: retired_stores=-1584, cycles=-2984
+  s02: retired_stores=-1584, cycles=-2984
+  s03: retired_stores=-1584, cycles=-3145
+
+[retired-instruction detector]
+frozen baseline mode: 25073
+FPR: 2/2000 = 0.1000%
+TPR: 2000/2000 = 100.0000%

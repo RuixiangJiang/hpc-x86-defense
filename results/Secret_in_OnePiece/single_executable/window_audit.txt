@@ -1,0 +1,10 @@
+Window verification passed:
+  exactly one executable exists: /home/ruixiang/hpc-x86-defense/build/bin/secret_in_onepiece/sio_single
+  the same ELF implements two baseline and two attack semantic cases
+  all 42 PMU counter sets are selected at runtime
+  family/mode selection and masked input construction finish before PMU enable
+  each measurement wrapper directly calls one fixed full-decoder target once
+  the full decoder uses normal prefix, one fixed target operation, and normal suffix
+  skip-bit-assignment retains load, clear, and OR but omits exactly the final destination writeback
+  skip-or-operation retains load, clear, and writeback but omits exactly the target OR
+  semantic oracles, comparisons, tags, CPU checks, and CSV output are outside the PMU window

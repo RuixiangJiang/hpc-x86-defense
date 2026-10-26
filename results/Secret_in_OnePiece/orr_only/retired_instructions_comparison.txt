@@ -1,0 +1,18 @@
+Secret in OnePiece: OR-skip retired-instruction comparison
+===========================================================
+
+Baseline valid samples : 1000
+Attack valid samples   : 1000
+Baseline median        : 43709.0
+Attack median          : 43708.0
+Median delta           : -1
+Baseline mean          : 43709.001000
+Attack mean            : 43708.003000
+Mean delta             : -0.998000
+Expected delta         : -1 retired instruction
+
+Paired common samples  : 1000
+Paired median delta    : -1
+Paired mean delta      : -0.998000
+Exact -1 paired rate  : 99.60%
+Paired delta histogram : {-2: 1, -1: 996, 0: 3}

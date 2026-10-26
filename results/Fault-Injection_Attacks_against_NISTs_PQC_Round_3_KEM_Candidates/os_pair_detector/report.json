@@ -1,0 +1,95 @@
+{
+  "attack": {
+    "alarm_rate": 1.0,
+    "alarms": 500,
+    "cmov_entry_histogram": {
+      "0": 500
+    },
+    "cmov_return_histogram": {
+      "0": 500
+    },
+    "contract_ok": 0,
+    "contract_ok_rate": 0.0,
+    "final_phase_histogram": {
+      "1": 500
+    },
+    "first_alarm_samples": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "first_missed_alarm_samples": [],
+    "mode": "skip-cmov",
+    "order_failures": 0,
+    "samples": 500
+  },
+  "baseline": {
+    "alarm_rate": 0.0,
+    "alarms": 0,
+    "cmov_entry_histogram": {
+      "1": 500
+    },
+    "cmov_return_histogram": {
+      "1": 500
+    },
+    "contract_ok": 500,
+    "contract_ok_rate": 1.0,
+    "final_phase_histogram": {
+      "3": 500
+    },
+    "first_alarm_samples": [],
+    "first_missed_alarm_samples": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "mode": "baseline",
+    "order_failures": 0,
+    "samples": 500
+  },
+  "contract": {
+    "accepted_final_phase": 3,
+    "cmov_entries": 1,
+    "cmov_returns": 1,
+    "order": "decap-enter -> cmov-enter -> cmov-return -> decap-return"
+  },
+  "detector": "os_uprobe_cmov_call_pair",
+  "false_negatives": 0,
+  "false_positive_rate": 0.0,
+  "true_positive_rate": 1.0,
+  "zero_false_positive_one_sided_95_percent_upper_bound": 0.005973551516349596
+}

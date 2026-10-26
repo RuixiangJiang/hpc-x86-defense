@@ -1,0 +1,10 @@
+=== Ravi et al., Fiddling the Twiddle Constants ===
+One executable; two independent fault families; baseline-only frozen detector.
+
+family                                      FPR        TPR        AUC    batch FPR    batch TPR
+corrupt-twiddle-pointer                 1.1167%    8.7000%   0.709489      0.6667%      9.0000%
+corrupt-loaded-twiddle-value            0.3167%    1.1000%   0.735725      0.0000%      0.0000%
+
+Interpretation:
+  corrupt-loaded-twiddle-value omits the selected load and therefore has a deterministic retired instruction/load deficit.
+  corrupt-twiddle-pointer keeps the load and butterfly control flow unchanged; low TPR would represent an HPC identifiability limit rather than a failed semantic simulation.

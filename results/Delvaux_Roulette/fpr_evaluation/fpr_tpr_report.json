@@ -1,0 +1,179 @@
+{
+  "attack_detection_metrics": {
+    "false_negative_rate": 0.0,
+    "false_negatives": 0,
+    "first_false_negative_samples": [],
+    "tpr_one_sided_95_percent_lower_bound": 0.9940264484836452,
+    "true_positive_rate": 1.0,
+    "true_positives": 500,
+    "valid_attack_samples": 500
+  },
+  "counter_signature": {
+    "branch-misses": {
+      "attack_mode": 1,
+      "attack_mode_rate": 0.988,
+      "baseline_mode": 1,
+      "baseline_mode_rate": 0.994,
+      "mode_delta": 0
+    },
+    "branches": {
+      "attack_mode": 9,
+      "attack_mode_rate": 1.0,
+      "baseline_mode": 9,
+      "baseline_mode_rate": 1.0,
+      "mode_delta": 0
+    },
+    "cycles": {
+      "attack_mode": 146,
+      "attack_mode_rate": 0.158,
+      "baseline_mode": 149,
+      "baseline_mode_rate": 0.168,
+      "mode_delta": -3
+    },
+    "instructions": {
+      "attack_mode": 42,
+      "attack_mode_rate": 1.0,
+      "baseline_mode": 43,
+      "baseline_mode_rate": 1.0,
+      "mode_delta": -1
+    },
+    "retired-loads": {
+      "attack_mode": 10,
+      "attack_mode_rate": 1.0,
+      "baseline_mode": 10,
+      "baseline_mode_rate": 1.0,
+      "mode_delta": 0
+    },
+    "retired-stores": {
+      "attack_mode": 9,
+      "attack_mode_rate": 1.0,
+      "baseline_mode": 9,
+      "baseline_mode_rate": 1.0,
+      "mode_delta": 0
+    }
+  },
+  "datasets": {
+    "attack": {
+      "collected": 500,
+      "excluded": 0,
+      "exclusion_rate": 0.0,
+      "exclusion_reasons": {},
+      "expected_mode": "skip-add",
+      "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/fpr_evaluation/attack_skip_add.csv",
+      "target_coeff": 17,
+      "valid": 500
+    },
+    "calibration": {
+      "collected": 500,
+      "excluded": 0,
+      "exclusion_rate": 0.0,
+      "exclusion_reasons": {},
+      "expected_mode": "baseline",
+      "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/fpr_evaluation/baseline_calibration.csv",
+      "target_coeff": 17,
+      "valid": 500
+    },
+    "validation": {
+      "collected": 5000,
+      "excluded": 0,
+      "exclusion_rate": 0.0,
+      "exclusion_reasons": {},
+      "expected_mode": "baseline",
+      "path": "/home/ruixiang/hpc-x86-defense/results/Delvaux_Roulette/fpr_evaluation/baseline_validation.csv",
+      "target_coeff": 17,
+      "valid": 5000
+    }
+  },
+  "false_positive_metrics": {
+    "false_positive_rate": 0.0,
+    "false_positives": 0,
+    "first_false_positive_samples": [],
+    "fpr_one_sided_95_percent_upper_bound": 0.0005989670023149134,
+    "specificity": 1.0,
+    "valid_validation_samples": 5000
+  },
+  "model": {
+    "calibration_consistency": {
+      "instructions": {
+        "expected": 43,
+        "matching_rate": 1.0,
+        "matching_samples": 500,
+        "maximum": 43,
+        "minimum": 43,
+        "valid_samples": 500
+      }
+    },
+    "chosen_ciphertext_manipulation": "compressed v[target] += 4 mod 16 (Eq. 12)",
+    "detector": "exact_modal_equality",
+    "events": [
+      "instructions"
+    ],
+    "expected": {
+      "instructions": 43
+    },
+    "fault_model": "first-order arithmetic masking; final INTT layer; skip a+b on one share (Table 4 instruction 2)",
+    "minimum_running_percent": 95.0,
+    "target_coeff": 17
+  },
+  "roulette_semantics": {
+    "attack_oracle_success": {
+      "one_sided_95_percent_lower_bound": 0.015446105866893808,
+      "one_sided_95_percent_upper_bound": 0.04101986816043751,
+      "rate": 0.026,
+      "successes": 13,
+      "trials": 500
+    },
+    "attack_reencrypted_symbol_distribution": {
+      "0": 34,
+      "1": 28,
+      "10": 31,
+      "11": 34,
+      "12": 39,
+      "13": 25,
+      "14": 27,
+      "15": 30,
+      "2": 26,
+      "3": 29,
+      "4": 24,
+      "5": 35,
+      "6": 41,
+      "7": 29,
+      "8": 35,
+      "9": 33
+    },
+    "attack_target_coefficient_changed": {
+      "one_sided_95_percent_lower_bound": 0.9940264484836452,
+      "one_sided_95_percent_upper_bound": 1.0,
+      "rate": 1.0,
+      "successes": 500,
+      "trials": 500
+    },
+    "attack_target_symbol_match": {
+      "one_sided_95_percent_lower_bound": 0.04696196185391105,
+      "one_sided_95_percent_upper_bound": 0.08501322218600288,
+      "rate": 0.064,
+      "successes": 32,
+      "trials": 500
+    },
+    "baseline_oracle_success": {
+      "one_sided_95_percent_lower_bound": 0.0,
+      "one_sided_95_percent_upper_bound": 0.005973551516349557,
+      "rate": 0.0,
+      "successes": 0,
+      "trials": 500
+    },
+    "uniformity_diagnostic": {
+      "expected_per_symbol": 31.25,
+      "maximum_absolute_count_deviation": 9.75,
+      "note": "This is a descriptive diagnostic, not a pass/fail criterion and no asymptotic p-value is asserted.",
+      "pearson_chi_square_df15": 11.552
+    },
+    "validation_oracle_success": {
+      "one_sided_95_percent_lower_bound": 0.0,
+      "one_sided_95_percent_upper_bound": 0.0005989670023149134,
+      "rate": 0.0,
+      "successes": 0,
+      "trials": 5000
+    }
+  }
+}

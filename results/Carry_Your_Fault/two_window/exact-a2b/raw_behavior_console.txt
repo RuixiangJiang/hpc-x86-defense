@@ -1,0 +1,139 @@
+=== Carry Your Fault: raw baseline vs attack PMU behavior ===
+Window: exact-a2b
+Fault establishment and semantic audit are outside the PMU window.
+Data: paired development samples plus paired independent test samples.
+
+[structural]
+event                         base mode attack mode  mode delta        base median [p05,p95]        attack median [p05,p95]  median delta
+cycles                              195         195           0                197 [163,224]                  197 [162,225]             0
+instructions                         89          89           0                   89 [89,89]                     89 [89,89]             0
+branches                             10          10           0                   10 [10,10]                     10 [10,10]             0
+branch_misses                         1           1           0                      1 [1,1]                        1 [1,1]             0
+retired_loads                        21          21           0                   21 [21,21]                     21 [21,21]             0
+retired_stores                       16          16           0                   16 [16,16]                     16 [16,16]             0
+[split median deltas]
+  cycles: development=-5, test=2
+  instructions: development=0, test=0
+  branches: development=0, test=0
+  branch_misses: development=0, test=0
+  retired_loads: development=0, test=0
+  retired_stores: development=0, test=0
+[paired delta and temporal-block direction]
+  cycles: paired median=0 [p05=-37,p95=41.050], block medians +/0/-=6/6/8, range=[-32.500,40.500]
+  instructions: paired median=0 [p05=0,p95=0], block medians +/0/-=0/20/0, range=[0,0]
+  branches: paired median=0 [p05=0,p95=0], block medians +/0/-=0/20/0, range=[0,0]
+  branch_misses: paired median=0 [p05=0,p95=0], block medians +/0/-=0/20/0, range=[0,0]
+  retired_loads: paired median=0 [p05=0,p95=0], block medians +/0/-=0/20/0, range=[0,0]
+  retired_stores: paired median=0 [p05=0,p95=0], block medians +/0/-=0/20/0, range=[0,0]
+
+[cache]
+event                         base mode attack mode  mode delta        base median [p05,p95]        attack median [p05,p95]  median delta
+cycles                              162         162           0                187 [162,218]                  177 [162,220]           -10
+instructions                         89          89           0                   89 [89,89]                     89 [89,89]             0
+l1d_read_misses                       0           0           0                      0 [0,2]                        0 [0,2]             0
+l1i_read_misses                      13          14           1                    15 [9,36]                      14 [7,23]            -1
+llc_read_misses                       0           0           0                      0 [0,0]                        0 [0,0]             0
+dtlb_read_misses                      0           0           0                      0 [0,0]                        0 [0,0]             0
+[split median deltas]
+  cycles: development=-20, test=6.500
+  instructions: development=0, test=0
+  l1d_read_misses: development=0, test=-1
+  l1i_read_misses: development=-2, test=-1
+  llc_read_misses: development=0, test=0
+  dtlb_read_misses: development=0, test=0
+[paired delta and temporal-block direction]
+  cycles: paired median=-2 [p05=-42,p95=36], block medians +/0/-=6/2/12, range=[-36,31]
+  instructions: paired median=0 [p05=0,p95=0], block medians +/0/-=0/20/0, range=[0,0]
+  l1d_read_misses: paired median=0 [p05=-1,p95=1], block medians +/0/-=0/20/0, range=[0,0]
+  l1i_read_misses: paired median=-1 [p05=-19,p95=10], block medians +/0/-=7/3/10, range=[-23,10]
+  llc_read_misses: paired median=0 [p05=0,p95=0], block medians +/0/-=0/20/0, range=[0,0]
+  dtlb_read_misses: paired median=0 [p05=0,p95=0], block medians +/0/-=0/20/0, range=[0,0]
+
+[cache-detail]
+event                         base mode attack mode  mode delta        base median [p05,p95]        attack median [p05,p95]  median delta
+cycles                              162         162           0                191 [162,225]                  177 [162,218]           -14
+instructions                         89          89           0                   89 [89,89]                     89 [89,89]             0
+cache_references                      0           0           0                      0 [0,0]                        0 [0,0]             0
+cache_misses                          0           0           0                      0 [0,0]                        0 [0,0]             0
+l1d_replacements                      1           1           0                      1 [0,4]                        1 [0,4]             0
+l2_request_misses                     0           0           0                      0 [0,0]                        0 [0,0]             0
+[split median deltas]
+  cycles: development=-10, test=-10
+  instructions: development=0, test=0
+  cache_references: development=0, test=0
+  cache_misses: development=0, test=0
+  l1d_replacements: development=0, test=0
+  l2_request_misses: development=0, test=0
+[paired delta and temporal-block direction]
+  cycles: paired median=-7 [p05=-45,p95=38], block medians +/0/-=5/2/13, range=[-40,32]
+  instructions: paired median=0 [p05=0,p95=0], block medians +/0/-=0/20/0, range=[0,0]
+  cache_references: paired median=0 [p05=0,p95=0], block medians +/0/-=0/20/0, range=[0,0]
+  cache_misses: paired median=0 [p05=0,p95=0], block medians +/0/-=0/20/0, range=[0,0]
+  l1d_replacements: paired median=0 [p05=-2,p95=2], block medians +/0/-=1/16/3, range=[-1,1]
+  l2_request_misses: paired median=0 [p05=0,p95=0], block medians +/0/-=0/20/0, range=[0,0]
+
+[load-hits]
+event                         base mode attack mode  mode delta        base median [p05,p95]        attack median [p05,p95]  median delta
+cycles                              162         162           0            165 [162,189.050]                  170 [162,188]             5
+instructions                         89          89           0                   89 [89,89]                     89 [89,89]             0
+unavailable: load_l1_hit, load_l2_hit, load_l3_hit, load_l3_miss
+[split median deltas]
+  cycles: development=4, test=4
+  instructions: development=0, test=0
+[paired delta and temporal-block direction]
+  cycles: paired median=0 [p05=-19,p95=16], block medians +/0/-=9/6/5, range=[-2,6]
+  instructions: paired median=0 [p05=0,p95=0], block medians +/0/-=0/20/0, range=[0,0]
+
+[load-misses-latency]
+event                         base mode attack mode  mode delta        base median [p05,p95]        attack median [p05,p95]  median delta
+cycles                              162         162           0                170 [162,195]                  170 [162,192]             0
+instructions                         89          89           0                   89 [89,89]                     89 [89,89]             0
+unavailable: load_l1_miss, load_l2_miss, load_l3_miss, long_latency_loads
+[split median deltas]
+  cycles: development=-1, test=1
+  instructions: development=0, test=0
+[paired delta and temporal-block direction]
+  cycles: paired median=0 [p05=-19,p95=16], block medians +/0/-=6/6/8, range=[-8,8]
+  instructions: paired median=0 [p05=0,p95=0], block medians +/0/-=0/20/0, range=[0,0]
+
+[stalls]
+event                         base mode attack mode  mode delta        base median [p05,p95]        attack median [p05,p95]  median delta
+cycles                              195         162         -33                196 [162,221]                  183 [161,218]           -13
+instructions                         89          89           0                   89 [89,89]                     89 [89,89]             0
+stalls_l1d_miss                       0           0           0                      0 [0,8]                        0 [0,7]             0
+stalls_mem_any                      135         100         -35                136 [102,155]                  116 [100,152]           -20
+unavailable: stalled_frontend_cycles, stalled_backend_cycles
+[split median deltas]
+  cycles: development=-20, test=-1
+  instructions: development=0, test=0
+  stalls_l1d_miss: development=0, test=0
+  stalls_mem_any: development=-24, test=-7.500
+[paired delta and temporal-block direction]
+  cycles: paired median=-11 [p05=-44,p95=35], block medians +/0/-=7/3/10, range=[-34,34]
+  instructions: paired median=0 [p05=0,p95=0], block medians +/0/-=0/20/0, range=[0,0]
+  stalls_l1d_miss: paired median=0 [p05=-7,p95=4], block medians +/0/-=0/20/0, range=[0,0]
+  stalls_mem_any: paired median=-10 [p05=-42,p95=35], block medians +/0/-=8/1/11, range=[-35,34]
+
+[recovery]
+event                         base mode attack mode  mode delta        base median [p05,p95]        attack median [p05,p95]  median delta
+cycles                              162         194          32            184 [162,221.050]                  194 [161,219]            10
+instructions                         89          89           0                   89 [89,89]                     89 [89,89]             0
+machine_clears                        0           0           0                      0 [0,0]                        0 [0,0]             0
+memory_ordering_clears                0           0           0                      0 [0,0]                        0 [0,0]             0
+recovery_cycles                      10          10           0                    10 [4,16]                      10 [4,16]             0
+unavailable: recovery_cycles_any
+[split median deltas]
+  cycles: development=5, test=1
+  instructions: development=0, test=0
+  machine_clears: development=0, test=0
+  memory_ordering_clears: development=0, test=0
+  recovery_cycles: development=0, test=0
+[paired delta and temporal-block direction]
+  cycles: paired median=2 [p05=-47,p95=41], block medians +/0/-=13/0/7, range=[-46,33]
+  instructions: paired median=0 [p05=0,p95=0], block medians +/0/-=0/20/0, range=[0,0]
+  machine_clears: paired median=0 [p05=0,p95=0], block medians +/0/-=0/20/0, range=[0,0]
+  memory_ordering_clears: paired median=0 [p05=0,p95=0], block medians +/0/-=0/20/0, range=[0,0]
+  recovery_cycles: paired median=0 [p05=-10,p95=10], block medians +/0/-=0/17/3, range=[-2,0]
+[written] /home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/raw_behavior_report.txt
+[written] /home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/raw_behavior_summary.csv
+[written] /home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/raw_behavior_summary.json

@@ -1,0 +1,43 @@
+=== Delvaux Roulette: semantics-derived two-tier detector ===
+Primary HPC structural channel: any retired-instruction deviation from session reference.
+Conditional random-replacement channel: uop deficit while retired instructions remain unchanged.
+Constant replacement is explicitly marked non-identifiable with the current standard HPC set.
+Hybrid integrity is a separate post-window redundant recomputation channel, not an HPC result.
+
+HPC validation single FPR: 1/24000 (0.0042%)
+HPC validation batch FPR: 0/2400 (0.0000%)
+Uop single threshold: 0.000000
+Uop batch threshold: 0.000000
+
+skip-local-masked-operation:
+  identifiability: deterministic-retired-instruction-structure
+  HPC single TPR: 100.0000%
+  HPC batch TPR: 100.0000%
+  hybrid single TPR: 99.9000%
+  hybrid batch TPR: 100.0000%
+  two-tier single TPR: 100.0000%
+  two-tier batch TPR: 100.0000%
+set-masked-intermediate-constant:
+  identifiability: cache-memory-behavior-evaluated-by-family-analyzer
+  HPC single TPR: 0.0000%
+  HPC batch TPR: 0.0000%
+  hybrid single TPR: 100.0000%
+  hybrid batch TPR: 100.0000%
+  two-tier single TPR: 100.0000%
+  two-tier batch TPR: 100.0000%
+replace-masked-intermediate-random:
+  identifiability: cache-memory-behavior-evaluated-by-family-analyzer
+  HPC single TPR: 0.0000%
+  HPC batch TPR: 0.0000%
+  hybrid single TPR: 100.0000%
+  hybrid batch TPR: 100.0000%
+  two-tier single TPR: 100.0000%
+  two-tier batch TPR: 100.0000%
+flip-masked-intermediate-bit:
+  identifiability: cache-memory-behavior-evaluated-by-family-analyzer
+  HPC single TPR: 0.0000%
+  HPC batch TPR: 0.0000%
+  hybrid single TPR: 100.0000%
+  hybrid batch TPR: 100.0000%
+  two-tier single TPR: 100.0000%
+  two-tier batch TPR: 100.0000%

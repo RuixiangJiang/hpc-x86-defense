@@ -1,0 +1,378 @@
+{
+  "architectural_signature_indistinguishable": true,
+  "attack_detection_metrics": {
+    "false_negative_rate": 0.992,
+    "false_negatives": 496,
+    "first_false_negative_samples": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "tpr_one_sided_95_percent_lower_bound": 0.0027371153991176643,
+    "true_positive_rate": 0.008,
+    "true_positives": 4,
+    "valid_attack_samples": 500
+  },
+  "counter_signatures": {
+    "branch-misses": {
+      "attack": {
+        "maximum": 100,
+        "mean": 82.848,
+        "median": 84.0,
+        "minimum": 52,
+        "mode": 91,
+        "mode_count": 44,
+        "mode_rate": 0.088,
+        "sample_stdev": 8.749514501274687
+      },
+      "attack_mean_delta": -0.9339999999999975,
+      "attack_mode_delta": 2,
+      "calibration": {
+        "maximum": 135,
+        "mean": 83.782,
+        "median": 87.0,
+        "minimum": 59,
+        "mode": 89,
+        "mode_count": 55,
+        "mode_rate": 0.11,
+        "sample_stdev": 8.425226696640248
+      },
+      "validation": {
+        "maximum": 103,
+        "mean": 76.6556,
+        "median": 78.0,
+        "minimum": 50,
+        "mode": 88,
+        "mode_count": 235,
+        "mode_rate": 0.047,
+        "sample_stdev": 10.311501057111432
+      }
+    },
+    "branches": {
+      "attack": {
+        "maximum": 14377,
+        "mean": 14376.008,
+        "median": 14376.0,
+        "minimum": 14376,
+        "mode": 14376,
+        "mode_count": 496,
+        "mode_rate": 0.992,
+        "sample_stdev": 0.08917344788453135
+      },
+      "attack_mean_delta": 0.003999999998995918,
+      "attack_mode_delta": 0,
+      "calibration": {
+        "maximum": 14377,
+        "mean": 14376.004,
+        "median": 14376.0,
+        "minimum": 14376,
+        "mode": 14376,
+        "mode_count": 498,
+        "mode_rate": 0.996,
+        "sample_stdev": 0.06318214912406725
+      },
+      "validation": {
+        "maximum": 14377,
+        "mean": 14376.0046,
+        "median": 14376.0,
+        "minimum": 14376,
+        "mode": 14376,
+        "mode_count": 4977,
+        "mode_rate": 0.9954,
+        "sample_stdev": 0.06767389416303925
+      }
+    },
+    "cycles": {
+      "attack": {
+        "maximum": 39227,
+        "mean": 25691.028,
+        "median": 25558.5,
+        "minimum": 24635,
+        "mode": 25501,
+        "mode_count": 4,
+        "mode_rate": 0.008,
+        "sample_stdev": 1075.52907389507
+      },
+      "attack_mean_delta": -13.082000000002154,
+      "attack_mode_delta": -79,
+      "calibration": {
+        "maximum": 37295,
+        "mean": 25704.11,
+        "median": 25617.5,
+        "minimum": 24797,
+        "mode": 25580,
+        "mode_count": 4,
+        "mode_rate": 0.008,
+        "sample_stdev": 725.500986396659
+      },
+      "validation": {
+        "maximum": 42260,
+        "mean": 25509.0292,
+        "median": 25417.5,
+        "minimum": 24515,
+        "mode": 25510,
+        "mode_count": 14,
+        "mode_rate": 0.0028,
+        "sample_stdev": 966.3429664943698
+      }
+    },
+    "instructions": {
+      "attack": {
+        "maximum": 114027,
+        "mean": 114026.008,
+        "median": 114026.0,
+        "minimum": 114026,
+        "mode": 114026,
+        "mode_count": 496,
+        "mode_rate": 0.992,
+        "sample_stdev": 0.08917344788453135
+      },
+      "attack_mean_delta": 0.004000000000814907,
+      "attack_mode_delta": 0,
+      "calibration": {
+        "maximum": 114027,
+        "mean": 114026.004,
+        "median": 114026.0,
+        "minimum": 114026,
+        "mode": 114026,
+        "mode_count": 498,
+        "mode_rate": 0.996,
+        "sample_stdev": 0.06318214912406725
+      },
+      "validation": {
+        "maximum": 114027,
+        "mean": 114026.0046,
+        "median": 114026.0,
+        "minimum": 114026,
+        "mode": 114026,
+        "mode_count": 4977,
+        "mode_rate": 0.9954,
+        "sample_stdev": 0.06767389416303925
+      }
+    },
+    "retired-loads": {
+      "attack": {
+        "maximum": 24670,
+        "mean": 24669.008,
+        "median": 24669.0,
+        "minimum": 24669,
+        "mode": 24669,
+        "mode_count": 496,
+        "mode_rate": 0.992,
+        "sample_stdev": 0.08917344788453135
+      },
+      "attack_mean_delta": 0.004000000000814907,
+      "attack_mode_delta": 0,
+      "calibration": {
+        "maximum": 24670,
+        "mean": 24669.004,
+        "median": 24669.0,
+        "minimum": 24669,
+        "mode": 24669,
+        "mode_count": 498,
+        "mode_rate": 0.996,
+        "sample_stdev": 0.06318214912406725
+      },
+      "validation": {
+        "maximum": 24670,
+        "mean": 24669.0046,
+        "median": 24669.0,
+        "minimum": 24669,
+        "mode": 24669,
+        "mode_count": 4977,
+        "mode_rate": 0.9954,
+        "sample_stdev": 0.06767389416303925
+      }
+    },
+    "retired-stores": {
+      "attack": {
+        "maximum": 14537,
+        "mean": 14537.0,
+        "median": 14537.0,
+        "minimum": 14537,
+        "mode": 14537,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "attack_mean_delta": 0.0,
+      "attack_mode_delta": 0,
+      "calibration": {
+        "maximum": 14537,
+        "mean": 14537.0,
+        "median": 14537.0,
+        "minimum": 14537,
+        "mode": 14537,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "validation": {
+        "maximum": 14537,
+        "mean": 14537.0,
+        "median": 14537.0,
+        "minimum": 14537,
+        "mode": 14537,
+        "mode_count": 5000,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      }
+    }
+  },
+  "datasets": {
+    "attack": {
+      "collected": 500,
+      "excluded": 0,
+      "exclusion_rate": 0.0,
+      "exclusion_reasons": {},
+      "mode": "single-bit-flip",
+      "path": "/home/ruixiang/hpc-x86-defense/results/Islam_Signature_Correction_Attack/fpr_evaluation/attack_single_bit_flip.csv",
+      "target": [
+        0,
+        17,
+        0
+      ],
+      "valid": 500
+    },
+    "calibration": {
+      "collected": 500,
+      "excluded": 0,
+      "exclusion_rate": 0.0,
+      "exclusion_reasons": {},
+      "mode": "baseline",
+      "path": "/home/ruixiang/hpc-x86-defense/results/Islam_Signature_Correction_Attack/fpr_evaluation/baseline_calibration.csv",
+      "target": [
+        0,
+        17,
+        0
+      ],
+      "valid": 500
+    },
+    "validation": {
+      "collected": 5000,
+      "excluded": 0,
+      "exclusion_rate": 0.0,
+      "exclusion_reasons": {},
+      "mode": "baseline",
+      "path": "/home/ruixiang/hpc-x86-defense/results/Islam_Signature_Correction_Attack/fpr_evaluation/baseline_validation.csv",
+      "target": [
+        0,
+        17,
+        0
+      ],
+      "valid": 5000
+    }
+  },
+  "false_positive_metrics": {
+    "false_positive_rate": 0.0046,
+    "false_positives": 23,
+    "first_false_positive_samples": [
+      133,
+      319,
+      1173,
+      1340,
+      1656,
+      1885,
+      2162,
+      2288,
+      2551,
+      2576,
+      2597,
+      2696,
+      2728,
+      2814,
+      3534,
+      3547,
+      3560,
+      3966,
+      4187,
+      4396
+    ],
+    "fpr_one_sided_95_percent_upper_bound": 0.006510827320170732,
+    "specificity": 0.9954,
+    "valid_validation_samples": 5000
+  },
+  "interpretation": "A data-only memory fault is not expected to change retired instruction, branch, load, or store counts in a constant-time victim path. A low victim-side TPR is therefore an honest negative result, not a reason to move the XOR into the PMU window.",
+  "model": {
+    "calibration_consistency": {
+      "branches": {
+        "expected": 14376,
+        "matching_rate": 0.996,
+        "matching_samples": 498,
+        "maximum": 14377,
+        "minimum": 14376,
+        "valid_samples": 500
+      },
+      "instructions": {
+        "expected": 114026,
+        "matching_rate": 0.996,
+        "matching_samples": 498,
+        "maximum": 114027,
+        "minimum": 114026,
+        "valid_samples": 500
+      },
+      "retired-loads": {
+        "expected": 24669,
+        "matching_rate": 0.996,
+        "matching_samples": 498,
+        "maximum": 24670,
+        "minimum": 24669,
+        "valid_samples": 500
+      },
+      "retired-stores": {
+        "expected": 14537,
+        "matching_rate": 1.0,
+        "matching_samples": 500,
+        "maximum": 14537,
+        "minimum": 14537,
+        "valid_samples": 500
+      }
+    },
+    "detector": "exact_modal_equality",
+    "events": [
+      "instructions",
+      "branches",
+      "retired-loads",
+      "retired-stores"
+    ],
+    "expected": {
+      "branches": 14376,
+      "instructions": 114026,
+      "retired-loads": 24669,
+      "retired-stores": 14537
+    },
+    "fault_injection_counted": false,
+    "fault_model": "single bit flip in one expanded int32_t s1 coefficient after unpack_sk and before NTT(s1)",
+    "measurement_window": "original polyvecl_ntt(&s1)",
+    "minimum_running_percent": 95.0,
+    "target": [
+      0,
+      17,
+      0
+    ]
+  },
+  "signature_correction_semantics": {
+    "direct_correction_rate": 1.0,
+    "direct_corrections_accepted": 500,
+    "exact_single_bit_faults": 500,
+    "faulty_signatures_rejected": 500,
+    "valid_attack_samples": 500
+  }
+}

@@ -1,0 +1,14 @@
+Xagawa OS call-pair detector
+============================
+Contract: exactly one cmov entry and one cmov return in the required order per decapsulation.
+
+Baseline alarms (false positives): 0/500 (0.00%)
+Attack alarms (true positives):    500/500 (100.00%)
+Attack misses (false negatives):   0/500
+
+Baseline cmov-entry histogram: {'1': 500}
+Baseline cmov-return histogram: {'1': 500}
+Attack cmov-entry histogram:   {'0': 500}
+Attack cmov-return histogram:  {'0': 500}
+
+[written] /home/ruixiang/hpc-x86-defense/results/Fault-Injection_Attacks_against_NISTs_PQC_Round_3_KEM_Candidates/os_pair_detector/report.json

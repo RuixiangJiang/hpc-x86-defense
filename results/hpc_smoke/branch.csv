@@ -1,0 +1,8 @@
+# started on Mon Jul 13 16:41:41 2026
+
+59479528,,cpu_core/cycles/u,11501850,100.00,,
+53651281,,cpu_core/instructions/u,11501850,100.00,0.90,insn per cycle
+13033458,,cpu_core/branches/u,11501850,100.00,,
+2001196,,cpu_core/branch-misses/u,11501850,100.00,15.35,of all branches
+5945,,cpu_core/cache-references/u,11501850,100.00,,
+180,,cpu_core/cache-misses/u,11501850,100.00,3.03,of all cache refs

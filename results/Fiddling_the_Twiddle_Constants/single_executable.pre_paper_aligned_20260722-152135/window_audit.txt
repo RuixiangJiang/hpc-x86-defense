@@ -1,0 +1,9 @@
+single executable: /home/ruixiang/hpc-x86-defense/build/bin/ravi_fiddling_twiddle/fiddling_twiddle_single
+sha256: 8889bfac67323cba81bb2a36fd2647baf39ae50da35a71c5be4aba4662194ea0
+target vec: 0
+target index: 8
+pointer offset: 64
+pointer attack: wrong pointer prepared before PMU enable; original load retained
+loaded-value attack: existing skipped-load/stale-zero primitive retained
+family/mode dispatch: function pointer selected before measurement wrapper
+status: PASS

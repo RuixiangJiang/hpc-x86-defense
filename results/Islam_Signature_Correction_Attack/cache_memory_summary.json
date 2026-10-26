@@ -1,0 +1,332 @@
+{
+  "counter_sets": {
+    "cache-l1d": {
+      "attack_excluded": {},
+      "baseline_excluded": {},
+      "events": {
+        "cache-misses": {
+          "attack": {
+            "histogram": {
+              "0": 497,
+              "2": 3
+            },
+            "maximum": 2,
+            "mean": 0.012,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 500,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.1546085625546996
+          },
+          "attack_minus_baseline": {
+            "mean": 0.012,
+            "median": 0.0,
+            "mode": 0
+          },
+          "baseline": {
+            "histogram": {
+              "0": 500
+            },
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 500,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          }
+        },
+        "cache-references": {
+          "attack": {
+            "histogram": {
+              "0": 495,
+              "2": 4,
+              "3": 1
+            },
+            "maximum": 3,
+            "mean": 0.022,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 500,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.22274476528287224
+          },
+          "attack_minus_baseline": {
+            "mean": -0.008,
+            "median": 0.0,
+            "mode": 0
+          },
+          "baseline": {
+            "histogram": {
+              "0": 496,
+              "2": 1,
+              "4": 2,
+              "5": 1
+            },
+            "maximum": 5,
+            "mean": 0.03,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 500,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.3483427699418225
+          }
+        },
+        "l1d-read-accesses": {
+          "attack": {
+            "histogram": {
+              "24669": 498,
+              "24670": 2
+            },
+            "maximum": 24670,
+            "mean": 24669.004,
+            "median": 24669.0,
+            "minimum": 24669,
+            "mode": 24669,
+            "n": 500,
+            "p05": 24669.0,
+            "p95": 24669.0,
+            "stdev": 0.06318214912406725
+          },
+          "attack_minus_baseline": {
+            "mean": 0.0,
+            "median": 0.0,
+            "mode": 0
+          },
+          "baseline": {
+            "histogram": {
+              "24669": 498,
+              "24670": 2
+            },
+            "maximum": 24670,
+            "mean": 24669.004,
+            "median": 24669.0,
+            "minimum": 24669,
+            "mode": 24669,
+            "n": 500,
+            "p05": 24669.0,
+            "p95": 24669.0,
+            "stdev": 0.06318214912406725
+          }
+        },
+        "l1d-read-misses": {
+          "attack": {
+            "histogram": {
+              "8": 5,
+              "9": 18,
+              "10": 42,
+              "11": 47,
+              "12": 59,
+              "13": 95,
+              "14": 81,
+              "15": 76,
+              "16": 39,
+              "17": 22,
+              "18": 9,
+              "19": 5,
+              "20": 1,
+              "21": 1
+            },
+            "maximum": 21,
+            "mean": 13.304,
+            "median": 13.0,
+            "minimum": 8,
+            "mode": 13,
+            "n": 500,
+            "p05": 10.0,
+            "p95": 17.0,
+            "stdev": 2.2816651796405116
+          },
+          "attack_minus_baseline": {
+            "mean": -2.3659999999999997,
+            "median": -3.0,
+            "mode": -3
+          },
+          "baseline": {
+            "histogram": {
+              "11": 4,
+              "12": 22,
+              "13": 45,
+              "14": 81,
+              "15": 88,
+              "16": 97,
+              "17": 79,
+              "18": 42,
+              "19": 20,
+              "20": 12,
+              "21": 6,
+              "22": 1,
+              "23": 3
+            },
+            "maximum": 23,
+            "mean": 15.67,
+            "median": 16.0,
+            "minimum": 11,
+            "mode": 16,
+            "n": 500,
+            "p05": 12.0,
+            "p95": 19.0,
+            "stdev": 2.0836946914397676
+          }
+        }
+      }
+    },
+    "cache-llc-dtlb": {
+      "attack_excluded": {},
+      "baseline_excluded": {},
+      "events": {
+        "dtlb-read-accesses": {
+          "attack": {
+            "histogram": {
+              "24669": 499,
+              "24670": 1
+            },
+            "maximum": 24670,
+            "mean": 24669.002,
+            "median": 24669.0,
+            "minimum": 24669,
+            "mode": 24669,
+            "n": 500,
+            "p05": 24669.0,
+            "p95": 24669.0,
+            "stdev": 0.044721359549995794
+          },
+          "attack_minus_baseline": {
+            "mean": -0.004000000000814907,
+            "median": 0.0,
+            "mode": 0
+          },
+          "baseline": {
+            "histogram": {
+              "24669": 497,
+              "24670": 3
+            },
+            "maximum": 24670,
+            "mean": 24669.006,
+            "median": 24669.0,
+            "minimum": 24669,
+            "mode": 24669,
+            "n": 500,
+            "p05": 24669.0,
+            "p95": 24669.0,
+            "stdev": 0.0773042812773498
+          }
+        },
+        "dtlb-read-misses": {
+          "attack": {
+            "histogram": {
+              "0": 500
+            },
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 500,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "attack_minus_baseline": {
+            "mean": 0.0,
+            "median": 0.0,
+            "mode": 0
+          },
+          "baseline": {
+            "histogram": {
+              "0": 500
+            },
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 500,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          }
+        },
+        "llc-read-accesses": {
+          "attack": {
+            "histogram": {
+              "0": 500
+            },
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 500,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "attack_minus_baseline": {
+            "mean": 0.0,
+            "median": 0.0,
+            "mode": 0
+          },
+          "baseline": {
+            "histogram": {
+              "0": 500
+            },
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 500,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          }
+        },
+        "llc-read-misses": {
+          "attack": {
+            "histogram": {
+              "0": 500
+            },
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 500,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "attack_minus_baseline": {
+            "mean": 0.0,
+            "median": 0.0,
+            "mode": 0
+          },
+          "baseline": {
+            "histogram": {
+              "0": 500
+            },
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 500,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          }
+        }
+      }
+    }
+  },
+  "scope": "victim polyvecl_ntt(s1) PMU window"
+}

@@ -1,0 +1,120 @@
+{
+  "any_reportable": true,
+  "bootstrap_iterations": 2000,
+  "experiment": "Carry Your Fault batch-level cache-reference analysis",
+  "feature": "cache-detail.cache_references",
+  "method": "non-overlapping batch means; direction learned from paired development data; threshold frozen from independent baseline threshold data; FPR measured on baseline validation and TPR on independent paired attack-test batches; AB/BA order is audited at collection-block granularity",
+  "minimum_batches": 10,
+  "points": [
+    {
+      "batch_size": 1000,
+      "calibration": {
+        "batches": 300,
+        "false_positives": 2,
+        "fpr": 0.006666666666666667,
+        "fpr_ci_95": [
+          0.0008083864127991483,
+          0.023873497572173677
+        ]
+      },
+      "calibration_pass": true,
+      "counts": {
+        "calibration": 300,
+        "development_pairs": 100,
+        "test_pairs": 100,
+        "threshold": 300,
+        "validation": 300
+      },
+      "development_effect": 0.004999999999999998,
+      "development_mean_effect": 0.005730000000000001,
+      "direction": "increase",
+      "false_positive_metrics": {
+        "baseline_batches": 300,
+        "false_positives": 3,
+        "fpr_ci_95": [
+          0.0020670072350904437,
+          0.028944511255693077
+        ],
+        "observed_fpr": 0.01
+      },
+      "observed_fpr": 0.01,
+      "observed_tpr": 0.02,
+      "order_guard": {
+        "auc_pass": true,
+        "available": true,
+        "development": {
+          "AB": {
+            "auc": 0.6366,
+            "blocks": 50,
+            "direction_match": true,
+            "mean_effect": 0.00626,
+            "median_effect": 0.005500000000000001
+          },
+          "BA": {
+            "auc": 0.6184,
+            "blocks": 50,
+            "direction_match": true,
+            "mean_effect": 0.0052,
+            "median_effect": 0.0034999999999999996
+          }
+        },
+        "direction_pass": true,
+        "minimum_blocks_per_order": 20,
+        "pass": true,
+        "required": true,
+        "test": {
+          "AB": {
+            "auc": 0.759,
+            "blocks": 50,
+            "direction_match": true,
+            "mean_effect": 0.011040000000000001,
+            "median_effect": 0.0115
+          },
+          "BA": {
+            "auc": 0.7126,
+            "blocks": 50,
+            "direction_match": true,
+            "mean_effect": 0.00782,
+            "median_effect": 0.008
+          }
+        }
+      },
+      "reportable": true,
+      "separation_pass": true,
+      "status": "REPORTABLE_BATCH_POINT",
+      "target_fpr": 0.01,
+      "test_auc": 0.7369,
+      "test_auc_ci_95": [
+        0.6769975,
+        0.7959025000000001
+      ],
+      "test_paired_mean_effect": 0.009430000000000001,
+      "test_paired_median_effect": 0.009500000000000001,
+      "test_paired_median_effect_ci_95": [
+        0.0055,
+        0.013000000000000001
+      ],
+      "threshold": 0.051,
+      "true_positive_metrics": {
+        "attack_batches": 100,
+        "observed_tpr": 0.02,
+        "tpr_ci_95": [
+          0.0024313368239423433,
+          0.0703839324710695
+        ],
+        "true_positives": 2
+      }
+    }
+  ],
+  "run": {
+    "csv_run_ids": [
+      1
+    ],
+    "csv_schedule_seeds": [
+      2026176230
+    ],
+    "requested_run_id": 1,
+    "requested_schedule_seed": 2026176230
+  },
+  "window": "post-fault"
+}

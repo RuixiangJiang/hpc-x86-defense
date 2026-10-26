@@ -1,0 +1,926 @@
+{
+  "attacks": {
+    "corrupt-loaded-twiddle-value": {
+      "batch": {
+        "batch_size": 10,
+        "hpc": {
+          "by_session": {
+            "corrupt-loaded-twiddle-value:s00": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            },
+            "corrupt-loaded-twiddle-value:s01": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            }
+          },
+          "positives": 100,
+          "rate": 1.0,
+          "trials": 100,
+          "worst_session_rate": 1.0
+        },
+        "integrity": {
+          "by_session": {
+            "corrupt-loaded-twiddle-value:s00": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            },
+            "corrupt-loaded-twiddle-value:s01": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            }
+          },
+          "positives": 100,
+          "rate": 1.0,
+          "trials": 100,
+          "worst_session_rate": 1.0
+        },
+        "two_tier": {
+          "by_session": {
+            "corrupt-loaded-twiddle-value:s00": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            },
+            "corrupt-loaded-twiddle-value:s01": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            }
+          },
+          "positives": 100,
+          "rate": 1.0,
+          "trials": 100,
+          "worst_session_rate": 1.0
+        }
+      },
+      "hpc_identifiability": "deterministic-instruction-and-load-deficit",
+      "single": {
+        "hpc": {
+          "by_session": {
+            "corrupt-loaded-twiddle-value:s00": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            },
+            "corrupt-loaded-twiddle-value:s01": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            }
+          },
+          "positives": 1000,
+          "rate": 1.0,
+          "trials": 1000,
+          "worst_session_rate": 1.0
+        },
+        "integrity": {
+          "by_session": {
+            "corrupt-loaded-twiddle-value:s00": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            },
+            "corrupt-loaded-twiddle-value:s01": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            }
+          },
+          "positives": 1000,
+          "rate": 1.0,
+          "trials": 1000,
+          "worst_session_rate": 1.0
+        },
+        "two_tier": {
+          "by_session": {
+            "corrupt-loaded-twiddle-value:s00": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            },
+            "corrupt-loaded-twiddle-value:s01": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            }
+          },
+          "positives": 1000,
+          "rate": 1.0,
+          "trials": 1000,
+          "worst_session_rate": 1.0
+        }
+      },
+      "structural_score_median": 1.0
+    },
+    "corrupt-twiddle-pointer": {
+      "batch": {
+        "batch_size": 10,
+        "hpc": {
+          "by_session": {
+            "corrupt-twiddle-pointer:s00": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 50
+            },
+            "corrupt-twiddle-pointer:s01": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 50
+            }
+          },
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 100,
+          "worst_session_rate": 0.0
+        },
+        "integrity": {
+          "by_session": {
+            "corrupt-twiddle-pointer:s00": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            },
+            "corrupt-twiddle-pointer:s01": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            }
+          },
+          "positives": 100,
+          "rate": 1.0,
+          "trials": 100,
+          "worst_session_rate": 1.0
+        },
+        "two_tier": {
+          "by_session": {
+            "corrupt-twiddle-pointer:s00": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            },
+            "corrupt-twiddle-pointer:s01": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            }
+          },
+          "positives": 100,
+          "rate": 1.0,
+          "trials": 100,
+          "worst_session_rate": 1.0
+        }
+      },
+      "hpc_identifiability": "not-identifiable-by-current-coarse-hpc-set",
+      "single": {
+        "hpc": {
+          "by_session": {
+            "corrupt-twiddle-pointer:s00": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "corrupt-twiddle-pointer:s01": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 500
+            }
+          },
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 1000,
+          "worst_session_rate": 0.0
+        },
+        "integrity": {
+          "by_session": {
+            "corrupt-twiddle-pointer:s00": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            },
+            "corrupt-twiddle-pointer:s01": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            }
+          },
+          "positives": 1000,
+          "rate": 1.0,
+          "trials": 1000,
+          "worst_session_rate": 1.0
+        },
+        "two_tier": {
+          "by_session": {
+            "corrupt-twiddle-pointer:s00": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            },
+            "corrupt-twiddle-pointer:s01": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            }
+          },
+          "positives": 1000,
+          "rate": 1.0,
+          "trials": 1000,
+          "worst_session_rate": 1.0
+        }
+      },
+      "structural_score_median": 0.0
+    }
+  },
+  "collection_audit": {
+    "corrupt-loaded-twiddle-value": {
+      "attack_s00_attack": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/attack_s00_attack.csv",
+        "valid": 500
+      },
+      "attack_s00_baseline": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/attack_s00_baseline.csv",
+        "valid": 500
+      },
+      "attack_s00_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/attack_s00_reference.csv",
+        "valid": 200
+      },
+      "attack_s01_attack": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/attack_s01_attack.csv",
+        "valid": 500
+      },
+      "attack_s01_baseline": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/attack_s01_baseline.csv",
+        "valid": 500
+      },
+      "attack_s01_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/attack_s01_reference.csv",
+        "valid": 200
+      },
+      "calibration_s00_baseline": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/calibration_s00_baseline.csv",
+        "valid": 500
+      },
+      "calibration_s01_baseline": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/calibration_s01_baseline.csv",
+        "valid": 500
+      },
+      "calibration_s02_baseline": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/calibration_s02_baseline.csv",
+        "valid": 500
+      },
+      "calibration_s03_baseline": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/calibration_s03_baseline.csv",
+        "valid": 500
+      },
+      "development_s00_attack": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/development_s00_attack.csv",
+        "valid": 500
+      },
+      "development_s00_baseline": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/development_s00_baseline.csv",
+        "valid": 500
+      },
+      "development_s00_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/development_s00_reference.csv",
+        "valid": 200
+      },
+      "development_s01_attack": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/development_s01_attack.csv",
+        "valid": 500
+      },
+      "development_s01_baseline": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/development_s01_baseline.csv",
+        "valid": 500
+      },
+      "development_s01_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/development_s01_reference.csv",
+        "valid": 200
+      },
+      "development_s02_attack": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/development_s02_attack.csv",
+        "valid": 500
+      },
+      "development_s02_baseline": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/development_s02_baseline.csv",
+        "valid": 500
+      },
+      "development_s02_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/development_s02_reference.csv",
+        "valid": 200
+      },
+      "development_s03_attack": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/development_s03_attack.csv",
+        "valid": 500
+      },
+      "development_s03_baseline": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/development_s03_baseline.csv",
+        "valid": 500
+      },
+      "development_s03_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/development_s03_reference.csv",
+        "valid": 200
+      },
+      "threshold_s00_baseline": {
+        "collected": 5000,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/threshold_s00_baseline.csv",
+        "valid": 5000
+      },
+      "threshold_s00_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/threshold_s00_reference.csv",
+        "valid": 200
+      },
+      "threshold_s01_baseline": {
+        "collected": 5000,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/threshold_s01_baseline.csv",
+        "valid": 5000
+      },
+      "threshold_s01_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/threshold_s01_reference.csv",
+        "valid": 200
+      },
+      "threshold_s02_baseline": {
+        "collected": 5000,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/threshold_s02_baseline.csv",
+        "valid": 5000
+      },
+      "threshold_s02_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/threshold_s02_reference.csv",
+        "valid": 200
+      },
+      "threshold_s03_baseline": {
+        "collected": 5000,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/threshold_s03_baseline.csv",
+        "valid": 5000
+      },
+      "threshold_s03_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/threshold_s03_reference.csv",
+        "valid": 200
+      },
+      "validation_s00_baseline": {
+        "collected": 2000,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/validation_s00_baseline.csv",
+        "valid": 2000
+      },
+      "validation_s00_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/validation_s00_reference.csv",
+        "valid": 200
+      },
+      "validation_s01_baseline": {
+        "collected": 2000,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/validation_s01_baseline.csv",
+        "valid": 2000
+      },
+      "validation_s01_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/validation_s01_reference.csv",
+        "valid": 200
+      },
+      "validation_s02_baseline": {
+        "collected": 2000,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/validation_s02_baseline.csv",
+        "valid": 2000
+      },
+      "validation_s02_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-loaded-twiddle-value/validation_s02_reference.csv",
+        "valid": 200
+      }
+    },
+    "corrupt-twiddle-pointer": {
+      "attack_s00_attack": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/attack_s00_attack.csv",
+        "valid": 500
+      },
+      "attack_s00_baseline": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/attack_s00_baseline.csv",
+        "valid": 500
+      },
+      "attack_s00_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/attack_s00_reference.csv",
+        "valid": 200
+      },
+      "attack_s01_attack": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/attack_s01_attack.csv",
+        "valid": 500
+      },
+      "attack_s01_baseline": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/attack_s01_baseline.csv",
+        "valid": 500
+      },
+      "attack_s01_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/attack_s01_reference.csv",
+        "valid": 200
+      },
+      "calibration_s00_baseline": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/calibration_s00_baseline.csv",
+        "valid": 500
+      },
+      "calibration_s01_baseline": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/calibration_s01_baseline.csv",
+        "valid": 500
+      },
+      "calibration_s02_baseline": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/calibration_s02_baseline.csv",
+        "valid": 500
+      },
+      "calibration_s03_baseline": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/calibration_s03_baseline.csv",
+        "valid": 500
+      },
+      "development_s00_attack": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/development_s00_attack.csv",
+        "valid": 500
+      },
+      "development_s00_baseline": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/development_s00_baseline.csv",
+        "valid": 500
+      },
+      "development_s00_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/development_s00_reference.csv",
+        "valid": 200
+      },
+      "development_s01_attack": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/development_s01_attack.csv",
+        "valid": 500
+      },
+      "development_s01_baseline": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/development_s01_baseline.csv",
+        "valid": 500
+      },
+      "development_s01_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/development_s01_reference.csv",
+        "valid": 200
+      },
+      "development_s02_attack": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/development_s02_attack.csv",
+        "valid": 500
+      },
+      "development_s02_baseline": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/development_s02_baseline.csv",
+        "valid": 500
+      },
+      "development_s02_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/development_s02_reference.csv",
+        "valid": 200
+      },
+      "development_s03_attack": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/development_s03_attack.csv",
+        "valid": 500
+      },
+      "development_s03_baseline": {
+        "collected": 500,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/development_s03_baseline.csv",
+        "valid": 500
+      },
+      "development_s03_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/development_s03_reference.csv",
+        "valid": 200
+      },
+      "threshold_s00_baseline": {
+        "collected": 5000,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/threshold_s00_baseline.csv",
+        "valid": 5000
+      },
+      "threshold_s00_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/threshold_s00_reference.csv",
+        "valid": 200
+      },
+      "threshold_s01_baseline": {
+        "collected": 5000,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/threshold_s01_baseline.csv",
+        "valid": 5000
+      },
+      "threshold_s01_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/threshold_s01_reference.csv",
+        "valid": 200
+      },
+      "threshold_s02_baseline": {
+        "collected": 5000,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/threshold_s02_baseline.csv",
+        "valid": 5000
+      },
+      "threshold_s02_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/threshold_s02_reference.csv",
+        "valid": 200
+      },
+      "threshold_s03_baseline": {
+        "collected": 5000,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/threshold_s03_baseline.csv",
+        "valid": 5000
+      },
+      "threshold_s03_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/threshold_s03_reference.csv",
+        "valid": 200
+      },
+      "validation_s00_baseline": {
+        "collected": 2000,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/validation_s00_baseline.csv",
+        "valid": 2000
+      },
+      "validation_s00_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/validation_s00_reference.csv",
+        "valid": 200
+      },
+      "validation_s01_baseline": {
+        "collected": 2000,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/validation_s01_baseline.csv",
+        "valid": 2000
+      },
+      "validation_s01_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/validation_s01_reference.csv",
+        "valid": 200
+      },
+      "validation_s02_baseline": {
+        "collected": 2000,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/validation_s02_baseline.csv",
+        "valid": 2000
+      },
+      "validation_s02_reference": {
+        "collected": 200,
+        "excluded": {},
+        "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/single_executable/corrupt-twiddle-pointer/validation_s02_reference.csv",
+        "valid": 200
+      }
+    }
+  },
+  "detector": {
+    "hpc_channel": {
+      "expected_signature": "one omitted twiddle-load instruction and one omitted retired load",
+      "family": "corrupt-loaded-twiddle-value",
+      "features": [
+        "instructions",
+        "retired_loads"
+      ],
+      "score": "minimum of the session-local retired-instruction deficit and retired-load deficit",
+      "threshold": 0.0
+    },
+    "integrity_channel": {
+      "condition": "used twiddle index/value differs from the intended twiddle index/value",
+      "type": "non-HPC post-window semantic integrity check"
+    },
+    "name": "semantics-derived-two-tier-v1",
+    "pointer_hpc_limit": "pointer corruption retains the same instruction, load, branch, and store structure; the current coarse HPC set has no deterministic address-sensitive signal",
+    "two_tier_alarm": "HPC structural alarm OR integrity alarm"
+  },
+  "experiment": "Ravi et al., Fiddling the Twiddle Constants",
+  "validation": {
+    "batch_hpc": {
+      "by_session": {
+        "corrupt-loaded-twiddle-value:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "corrupt-loaded-twiddle-value:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "corrupt-loaded-twiddle-value:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "corrupt-twiddle-pointer:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "corrupt-twiddle-pointer:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "corrupt-twiddle-pointer:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        }
+      },
+      "positives": 0,
+      "rate": 0.0,
+      "trials": 1200,
+      "worst_session_rate": 0.0
+    },
+    "batch_integrity": {
+      "by_session": {
+        "corrupt-loaded-twiddle-value:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "corrupt-loaded-twiddle-value:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "corrupt-loaded-twiddle-value:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "corrupt-twiddle-pointer:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "corrupt-twiddle-pointer:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "corrupt-twiddle-pointer:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        }
+      },
+      "positives": 0,
+      "rate": 0.0,
+      "trials": 1200,
+      "worst_session_rate": 0.0
+    },
+    "batch_two_tier": {
+      "by_session": {
+        "corrupt-loaded-twiddle-value:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "corrupt-loaded-twiddle-value:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "corrupt-loaded-twiddle-value:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "corrupt-twiddle-pointer:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "corrupt-twiddle-pointer:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "corrupt-twiddle-pointer:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        }
+      },
+      "positives": 0,
+      "rate": 0.0,
+      "trials": 1200,
+      "worst_session_rate": 0.0
+    },
+    "single_hpc": {
+      "by_session": {
+        "corrupt-loaded-twiddle-value:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "corrupt-loaded-twiddle-value:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "corrupt-loaded-twiddle-value:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "corrupt-twiddle-pointer:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "corrupt-twiddle-pointer:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "corrupt-twiddle-pointer:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        }
+      },
+      "positives": 0,
+      "rate": 0.0,
+      "trials": 12000,
+      "worst_session_rate": 0.0
+    },
+    "single_integrity": {
+      "by_session": {
+        "corrupt-loaded-twiddle-value:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "corrupt-loaded-twiddle-value:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "corrupt-loaded-twiddle-value:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "corrupt-twiddle-pointer:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "corrupt-twiddle-pointer:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "corrupt-twiddle-pointer:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        }
+      },
+      "positives": 0,
+      "rate": 0.0,
+      "trials": 12000,
+      "worst_session_rate": 0.0
+    },
+    "single_two_tier": {
+      "by_session": {
+        "corrupt-loaded-twiddle-value:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "corrupt-loaded-twiddle-value:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "corrupt-loaded-twiddle-value:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "corrupt-twiddle-pointer:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "corrupt-twiddle-pointer:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "corrupt-twiddle-pointer:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        }
+      },
+      "positives": 0,
+      "rate": 0.0,
+      "trials": 12000,
+      "worst_session_rate": 0.0
+    }
+  }
+}

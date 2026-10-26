@@ -1,0 +1,28 @@
+================================================================
+Number Not Used Once: independent FPR/TPR evaluation
+================================================================
+
+[frozen detector]
+  rule: flag a sample if any detector event differs
+        from its modal calibration value
+  instructions     expected=37       calibration-match=500/500 (100.00%)
+  retired-loads    expected=9        calibration-match=500/500 (100.00%)
+  retired-stores   expected=9        calibration-match=500/500 (100.00%)
+
+[datasets]
+  calibration  collected=500    valid=500    excluded=0      exclusion-rate=0.0000%
+  validation   collected=5000   valid=5000   excluded=0      exclusion-rate=0.0000%
+  attack       collected=500    valid=500    excluded=0      exclusion-rate=0.0000%
+
+[false-positive evaluation]
+  false positives: 0/5000
+  observed FPR:    0.000000%
+  specificity:     100.000000%
+  one-sided 95% Clopper-Pearson FPR upper bound: 0.059897%
+
+[attack evaluation]
+  true positives:  500/500
+  observed TPR:    100.000000%
+  observed FNR:    0.000000%
+  one-sided 95% Clopper-Pearson TPR lower bound: 99.402645%
+  exact (-1 instruction, -1 load, -1 store) signature: 500/500 (100.00%)

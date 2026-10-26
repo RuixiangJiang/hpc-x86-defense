@@ -1,0 +1,7 @@
+=== Carry Your Fault two-window summary ===
+exact-a2b    single=MISSING single_reportable=False batch_reportable=False
+post-fault   single=MISSING single_reportable=False batch_reportable=False
+
+- Exact A2B remains a negative-control result: no reportable single-trace detector was forced.
+- Post-fault propagation did not satisfy the single-trace generalization guard.
+- No cache-reference batch size met the minimum independent-batch and calibration/separation requirements.

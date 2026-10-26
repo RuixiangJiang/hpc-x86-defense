@@ -1,0 +1,2 @@
+[audit] mode=baseline target=4 used=4 expected=4 duplicate=-1 progression-errors=0 duplicate-output-equal=0 semantic-valid=1
+[done] mode=baseline samples=500 output=/home/ruixiang/hpc-x86-defense/results/Number_Not_Used_Once/fpr_evaluation/baseline_calibration.csv

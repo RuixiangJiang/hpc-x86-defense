@@ -1,0 +1,367 @@
+
+/home/ruixiang/hpc-x86-defense/build/bin/secret_in_onepiece/sio_single:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000002e10 <sio_decoder_baseline_target>:
+    2e10:	endbr64
+    2e14:	push   %rbp
+    2e15:	xor    %eax,%eax
+    2e17:	mov    %rsp,%rbp
+    2e1a:	push   %r12
+    2e1c:	mov    %rdi,%r12
+    2e1f:	push   %rbx
+    2e20:	mov    0x10(%rdi),%rcx
+    2e24:	mov    0x18(%rdi),%rbx
+    2e28:	nopl   0x0(%rax,%rax,1)
+    2e30:	movzwl (%rcx,%rax,1),%edx
+    2e34:	mov    %dx,(%rbx,%rax,1)
+    2e38:	add    $0x2,%rax
+    2e3c:	cmp    $0x100,%rax
+    2e42:	jne    2e30 <sio_decoder_baseline_target+0x20>
+    2e44:	mov    %r12,%rdi
+    2e47:	call   2770 <sio_decode_prefix>
+    2e4c:	lea    0x22(%rbx),%rdi
+    2e50:	call   2dd0 <sio_target_insert_baseline>
+    2e55:	pop    %rbx
+    2e56:	mov    %r12,%rdi
+    2e59:	pop    %r12
+    2e5b:	pop    %rbp
+    2e5c:	jmp    27d0 <sio_decode_suffix>
+
+Disassembly of section .fini:
+
+/home/ruixiang/hpc-x86-defense/build/bin/secret_in_onepiece/sio_single:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000002e70 <sio_decoder_skip_assignment_target>:
+    2e70:	endbr64
+    2e74:	push   %rbp
+    2e75:	xor    %eax,%eax
+    2e77:	mov    %rsp,%rbp
+    2e7a:	push   %r12
+    2e7c:	mov    %rdi,%r12
+    2e7f:	push   %rbx
+    2e80:	mov    0x10(%rdi),%rcx
+    2e84:	mov    0x18(%rdi),%rbx
+    2e88:	nopl   0x0(%rax,%rax,1)
+    2e90:	movzwl (%rcx,%rax,1),%edx
+    2e94:	mov    %dx,(%rbx,%rax,1)
+    2e98:	add    $0x2,%rax
+    2e9c:	cmp    $0x100,%rax
+    2ea2:	jne    2e90 <sio_decoder_skip_assignment_target+0x20>
+    2ea4:	mov    %r12,%rdi
+    2ea7:	call   2770 <sio_decode_prefix>
+    2eac:	lea    0x22(%rbx),%rdi
+    2eb0:	call   2df0 <sio_target_skip_assignment>
+    2eb5:	pop    %rbx
+    2eb6:	mov    %r12,%rdi
+    2eb9:	pop    %r12
+    2ebb:	pop    %rbp
+    2ebc:	jmp    27d0 <sio_decode_suffix>
+
+Disassembly of section .fini:
+
+/home/ruixiang/hpc-x86-defense/build/bin/secret_in_onepiece/sio_single:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000002ed0 <sio_decoder_skip_or_target>:
+    2ed0:	endbr64
+    2ed4:	push   %rbp
+    2ed5:	xor    %eax,%eax
+    2ed7:	mov    %rsp,%rbp
+    2eda:	push   %r12
+    2edc:	mov    %rdi,%r12
+    2edf:	push   %rbx
+    2ee0:	mov    0x10(%rdi),%rcx
+    2ee4:	mov    0x18(%rdi),%rbx
+    2ee8:	nopl   0x0(%rax,%rax,1)
+    2ef0:	movzwl (%rcx,%rax,1),%edx
+    2ef4:	mov    %dx,(%rbx,%rax,1)
+    2ef8:	add    $0x2,%rax
+    2efc:	cmp    $0x100,%rax
+    2f02:	jne    2ef0 <sio_decoder_skip_or_target+0x20>
+    2f04:	mov    %r12,%rdi
+    2f07:	call   2770 <sio_decode_prefix>
+    2f0c:	lea    0x22(%rbx),%rdi
+    2f10:	call   2e00 <sio_target_skip_or>
+    2f15:	pop    %rbx
+    2f16:	mov    %r12,%rdi
+    2f19:	pop    %r12
+    2f1b:	pop    %rbp
+    2f1c:	jmp    27d0 <sio_decode_suffix>
+
+Disassembly of section .fini:
+
+/home/ruixiang/hpc-x86-defense/build/bin/secret_in_onepiece/sio_single:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000002f30 <sio_measure_decoder_baseline>:
+    2f30:	endbr64
+    2f34:	mov    0x3146(%rip),%eax        # 6080 <sio_hpc_ready>
+    2f3a:	test   %eax,%eax
+    2f3c:	jne    2f50 <sio_measure_decoder_baseline+0x20>
+    2f3e:	movl   $0xffffffed,0x3130(%rip)        # 6078 <sio_snapshot+0x38>
+    2f48:	ret
+    2f49:	nopl   0x0(%rax)
+    2f50:	push   %rbp
+    2f51:	mov    %rsp,%rbp
+    2f54:	push   %r12
+    2f56:	push   %rbx
+    2f57:	mov    %rdi,%rbx
+    2f5a:	movl   $0x0,0x3114(%rip)        # 6078 <sio_snapshot+0x38>
+    2f64:	mov    0x309d(%rip),%r12d        # 6008 <sio_fds>
+    2f6b:	xor    %eax,%eax
+    2f6d:	mov    $0x1,%edx
+    2f72:	mov    $0x2403,%esi
+    2f77:	mov    %r12d,%edi
+    2f7a:	call   11a0 <ioctl@plt>
+    2f7f:	test   %eax,%eax
+    2f81:	je     2f92 <sio_measure_decoder_baseline+0x62>
+    2f83:	call   1180 <__errno_location@plt>
+    2f88:	mov    (%rax),%eax
+    2f8a:	neg    %eax
+    2f8c:	mov    %eax,0x30e6(%rip)        # 6078 <sio_snapshot+0x38>
+    2f92:	xor    %eax,%eax
+    2f94:	mov    $0x1,%edx
+    2f99:	mov    $0x2400,%esi
+    2f9e:	mov    %r12d,%edi
+    2fa1:	call   11a0 <ioctl@plt>
+    2fa6:	test   %eax,%eax
+    2fa8:	je     2fb9 <sio_measure_decoder_baseline+0x89>
+    2faa:	call   1180 <__errno_location@plt>
+    2faf:	mov    (%rax),%eax
+    2fb1:	neg    %eax
+    2fb3:	mov    %eax,0x30bf(%rip)        # 6078 <sio_snapshot+0x38>
+    2fb9:	mov    %rbx,%rdi
+    2fbc:	call   2e10 <sio_decoder_baseline_target>
+    2fc1:	pop    %rbx
+    2fc2:	pop    %r12
+    2fc4:	pop    %rbp
+    2fc5:	jmp    28b0 <sio_hpc_end>
+
+Disassembly of section .fini:
+
+/home/ruixiang/hpc-x86-defense/build/bin/secret_in_onepiece/sio_single:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000002fd0 <sio_measure_decoder_skip_assignment>:
+    2fd0:	endbr64
+    2fd4:	mov    0x30a6(%rip),%eax        # 6080 <sio_hpc_ready>
+    2fda:	test   %eax,%eax
+    2fdc:	jne    2ff0 <sio_measure_decoder_skip_assignment+0x20>
+    2fde:	movl   $0xffffffed,0x3090(%rip)        # 6078 <sio_snapshot+0x38>
+    2fe8:	ret
+    2fe9:	nopl   0x0(%rax)
+    2ff0:	push   %rbp
+    2ff1:	mov    %rsp,%rbp
+    2ff4:	push   %r12
+    2ff6:	push   %rbx
+    2ff7:	mov    %rdi,%rbx
+    2ffa:	movl   $0x0,0x3074(%rip)        # 6078 <sio_snapshot+0x38>
+    3004:	mov    0x2ffd(%rip),%r12d        # 6008 <sio_fds>
+    300b:	xor    %eax,%eax
+    300d:	mov    $0x1,%edx
+    3012:	mov    $0x2403,%esi
+    3017:	mov    %r12d,%edi
+    301a:	call   11a0 <ioctl@plt>
+    301f:	test   %eax,%eax
+    3021:	je     3032 <sio_measure_decoder_skip_assignment+0x62>
+    3023:	call   1180 <__errno_location@plt>
+    3028:	mov    (%rax),%eax
+    302a:	neg    %eax
+    302c:	mov    %eax,0x3046(%rip)        # 6078 <sio_snapshot+0x38>
+    3032:	xor    %eax,%eax
+    3034:	mov    $0x1,%edx
+    3039:	mov    $0x2400,%esi
+    303e:	mov    %r12d,%edi
+    3041:	call   11a0 <ioctl@plt>
+    3046:	test   %eax,%eax
+    3048:	je     3059 <sio_measure_decoder_skip_assignment+0x89>
+    304a:	call   1180 <__errno_location@plt>
+    304f:	mov    (%rax),%eax
+    3051:	neg    %eax
+    3053:	mov    %eax,0x301f(%rip)        # 6078 <sio_snapshot+0x38>
+    3059:	mov    %rbx,%rdi
+    305c:	call   2e70 <sio_decoder_skip_assignment_target>
+    3061:	pop    %rbx
+    3062:	pop    %r12
+    3064:	pop    %rbp
+    3065:	jmp    28b0 <sio_hpc_end>
+
+Disassembly of section .fini:
+
+/home/ruixiang/hpc-x86-defense/build/bin/secret_in_onepiece/sio_single:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000003070 <sio_measure_decoder_skip_or>:
+    3070:	endbr64
+    3074:	mov    0x3006(%rip),%eax        # 6080 <sio_hpc_ready>
+    307a:	test   %eax,%eax
+    307c:	jne    3090 <sio_measure_decoder_skip_or+0x20>
+    307e:	movl   $0xffffffed,0x2ff0(%rip)        # 6078 <sio_snapshot+0x38>
+    3088:	ret
+    3089:	nopl   0x0(%rax)
+    3090:	push   %rbp
+    3091:	mov    %rsp,%rbp
+    3094:	push   %r12
+    3096:	push   %rbx
+    3097:	mov    %rdi,%rbx
+    309a:	movl   $0x0,0x2fd4(%rip)        # 6078 <sio_snapshot+0x38>
+    30a4:	mov    0x2f5d(%rip),%r12d        # 6008 <sio_fds>
+    30ab:	xor    %eax,%eax
+    30ad:	mov    $0x1,%edx
+    30b2:	mov    $0x2403,%esi
+    30b7:	mov    %r12d,%edi
+    30ba:	call   11a0 <ioctl@plt>
+    30bf:	test   %eax,%eax
+    30c1:	je     30d2 <sio_measure_decoder_skip_or+0x62>
+    30c3:	call   1180 <__errno_location@plt>
+    30c8:	mov    (%rax),%eax
+    30ca:	neg    %eax
+    30cc:	mov    %eax,0x2fa6(%rip)        # 6078 <sio_snapshot+0x38>
+    30d2:	xor    %eax,%eax
+    30d4:	mov    $0x1,%edx
+    30d9:	mov    $0x2400,%esi
+    30de:	mov    %r12d,%edi
+    30e1:	call   11a0 <ioctl@plt>
+    30e6:	test   %eax,%eax
+    30e8:	je     30f9 <sio_measure_decoder_skip_or+0x89>
+    30ea:	call   1180 <__errno_location@plt>
+    30ef:	mov    (%rax),%eax
+    30f1:	neg    %eax
+    30f3:	mov    %eax,0x2f7f(%rip)        # 6078 <sio_snapshot+0x38>
+    30f9:	mov    %rbx,%rdi
+    30fc:	call   2ed0 <sio_decoder_skip_or_target>
+    3101:	pop    %rbx
+    3102:	pop    %r12
+    3104:	pop    %rbp
+    3105:	jmp    28b0 <sio_hpc_end>
+
+Disassembly of section .fini:
+
+/home/ruixiang/hpc-x86-defense/build/bin/secret_in_onepiece/sio_single:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000002dd0 <sio_target_insert_baseline>:
+    2dd0:	endbr64
+    2dd4:	movzwl (%rdi),%eax
+    2dd7:	and    $0xffffffdf,%eax
+    2dda:	or     $0x20,%eax
+    2ddd:	mov    %ax,(%rdi)
+    2de0:	ret
+
+Disassembly of section .fini:
+
+/home/ruixiang/hpc-x86-defense/build/bin/secret_in_onepiece/sio_single:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000002df0 <sio_target_skip_assignment>:
+    2df0:	endbr64
+    2df4:	movzwl (%rdi),%eax
+    2df7:	and    $0xffffffdf,%eax
+    2dfa:	or     $0x20,%eax
+    2dfd:	ret
+
+Disassembly of section .fini:
+
+/home/ruixiang/hpc-x86-defense/build/bin/secret_in_onepiece/sio_single:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000002e00 <sio_target_skip_or>:
+    2e00:	endbr64
+    2e04:	movzwl (%rdi),%eax
+    2e07:	and    $0xffffffdf,%eax
+    2e0a:	mov    %ax,(%rdi)
+    2e0d:	ret
+
+Disassembly of section .fini:

@@ -1,0 +1,54 @@
+=== Carry Your Fault Unified Directional PMU Detector ===
+Measurement passes: structural, cache, cache-detail, load-hits, load-misses-latency, stalls, recovery
+Available unified features: 19
+Unavailable/skipped features: 11
+  unavailable: load-hits.load_l1_hit
+  unavailable: load-hits.load_l2_hit
+  unavailable: load-hits.load_l3_hit
+  unavailable: load-hits.load_l3_miss
+  unavailable: load-misses-latency.load_l1_miss
+  unavailable: load-misses-latency.load_l2_miss
+  unavailable: load-misses-latency.load_l3_miss
+  unavailable: load-misses-latency.long_latency_loads
+  unavailable: stalls.stalled_frontend_cycles
+  unavailable: stalls.stalled_backend_cycles
+  unavailable: recovery.recovery_cycles_any
+
+Selected directional features: 6 (top-k=12)
+  cache.l1i_read_misses                         direction=- effect=-4.721435 weight=0.781267
+  cache.l1d_read_misses                         direction=+ effect=+0.465000 weight=0.076945
+  stalls.stalls_l1d_miss                        direction=+ effect=+0.320575 weight=0.053046
+  structural.cycles                             direction=- effect=-0.308623 weight=0.051069
+  cache-detail.l1d_replacements                 direction=- effect=-0.132875 weight=0.021987
+  stalls.stalls_mem_any                         direction=- effect=-0.094800 weight=0.015687
+
+Requested threshold-baseline FPR: 0.200000
+Frozen unified score threshold: 4.803935213
+Threshold-baseline empirical alarm rate: 1000/5000 = 0.200000000
+
+Validation baseline: 10000; false positives: 0; FPR: 0.000000000
+One-sided 95% FPR upper bound: 0.000299528
+Attack development: 1000; detected: 72; TPR: 0.072000000
+Attack test: 1000; detected: 0; TPR: 0.000000000
+One-sided 95% TPR lower bound: 0.000000000
+One-sided 95% TPR upper bound: 0.002991250
+Full stuck-at/carry-propagation oracle success: 1000/1000
+Independent attack-test AUC: 0.557423150
+
+Score distributions:
+  threshold          min=0.076945 median=4.320733 mean=4.427189 max=5.961445
+  validation         min=0.000000 median=0.103908 mean=0.232356 max=2.398655
+  attack_development min=0.000000 median=3.785680 mean=2.970701 max=5.843812
+  attack_test        min=0.000000 median=0.145153 mean=0.328154 max=2.144604
+
+Independent ROC operating points:
+  target_fpr  validation_fpr  development_tpr  attack_test_tpr
+      0.100%          0.000%           0.100%          0.000%
+      0.500%          0.000%           0.200%          0.000%
+      1.000%          0.000%           0.300%          0.000%
+      2.000%          0.000%           0.500%          0.000%
+      5.000%          0.000%           1.100%          0.000%
+     10.000%          0.000%           2.800%          0.000%
+     20.000%          0.000%           7.200%          0.000%
+
+[important] Even after adding cache/stall/recovery events, the independent attack-test TPR is not above the validation FPR. The PMU feature distributions do not provide generalizable separation at this operating point.

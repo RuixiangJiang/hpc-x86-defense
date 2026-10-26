@@ -1,0 +1,36 @@
+=== Breaking the Shield: instruction-faithful two-attack experiment ===
+
+Region 1 monitor: retired instructions.
+Region 2 monitor: retired loads.
+
+============================================================
+Region 1: SHAKE256 absorb / skipped BNE loop-back branch
+============================================================
+monitor: retired instructions
+instructions: baseline mode=269230, median=269230 [269230,269230]; attack mode=149829, median=149829 [149829,149829]; mode delta=-119401; median delta=-119401
+cycles: baseline median=48518.500 [46383,51239]; attack median=27236.500 [26172.900,27982]; median delta=-21282
+[per-session median deltas]
+  s00: instructions=-119401, cycles=-21561
+  s01: instructions=-119401, cycles=-21412
+  s02: instructions=-119401, cycles=-21157
+  s03: instructions=-119401, cycles=-19790
+[instructions mode detector]
+frozen baseline mode: 269230
+FPR: 17/2000 = 0.8500%
+TPR: 2000/2000 = 100.0000%
+
+============================================================
+Region 2: polyz_unpack / skipped LDR.W with zero register
+============================================================
+monitor: retired loads
+retired_loads: baseline mode=11, median=11 [11,11]; attack mode=10, median=10 [10,10]; mode delta=-1; median delta=-1
+cycles: baseline median=142 [138,152]; attack median=128 [126,137]; median delta=-14
+[per-session median deltas]
+  s00: retired_loads=-1, cycles=-15
+  s01: retired_loads=-1, cycles=-14
+  s02: retired_loads=-1, cycles=-15
+  s03: retired_loads=-1, cycles=-15
+[retired_loads mode detector]
+frozen baseline mode: 11
+FPR: 0/2000 = 0.0000%
+TPR: 2000/2000 = 100.0000%

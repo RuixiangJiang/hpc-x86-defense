@@ -1,0 +1,56 @@
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=1
+[verify] semantic self-test family=skip-local-masked-operation mode=attack counter-set=1
+[verify] semantic self-test family=set-masked-intermediate-constant mode=baseline counter-set=1
+[verify] semantic self-test family=set-masked-intermediate-constant mode=attack counter-set=1
+[verify] semantic self-test family=replace-masked-intermediate-random mode=baseline counter-set=1
+[verify] semantic self-test family=replace-masked-intermediate-random mode=attack counter-set=1
+[verify] semantic self-test family=flip-masked-intermediate-bit mode=baseline counter-set=1
+[verify] semantic self-test family=flip-masked-intermediate-bit mode=attack counter-set=1
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=1
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=2
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=3
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=4
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=5
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=6
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=7
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=8
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=9
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=10
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=11
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=12
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=13
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=14
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=15
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=16
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=17
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=18
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=19
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=20
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=21
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=22
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=23
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=24
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=25
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=26
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=27
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=28
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=29
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=30
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=31
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=32
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=33
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=34
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=35
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=36
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=37
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=38
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=39
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=40
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=41
+[verify] semantic self-test family=skip-local-masked-operation mode=baseline counter-set=42
+Window verification passed:
+  skip baseline uses x86 PADdW as the UADD16 analogue
+  skip attack omits exactly that packed add
+  constant/random retain one MOV replacement
+  bit-flip baseline and attack call the same measured target
+  bit-flip target contains no synthetic XOR

@@ -1,0 +1,330 @@
+{
+  "collections": [
+    {
+      "domain": "0x596e679a26ea038a",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s00",
+      "stage": "calibration",
+      "stem": "calibration_s00_baseline"
+    },
+    {
+      "domain": "0x5881d1577d34107d",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s01",
+      "stage": "calibration",
+      "stem": "calibration_s01_baseline"
+    },
+    {
+      "domain": "0x50dda5966619a463",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s02",
+      "stage": "calibration",
+      "stem": "calibration_s02_baseline"
+    },
+    {
+      "domain": "0x5b1d1ccd7fe4efdf",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s03",
+      "stage": "calibration",
+      "stem": "calibration_s03_baseline"
+    },
+    {
+      "domain": "0x5273c4324ff37c7c",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s00",
+      "stage": "development",
+      "stem": "development_s00_reference"
+    },
+    {
+      "domain": "0x5d5cefb55db27973",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s00",
+      "stage": "development",
+      "stem": "development_s00_baseline"
+    },
+    {
+      "domain": "0x542f6126360635af",
+      "expected_attack": true,
+      "kind": "attack",
+      "samples": 500,
+      "session": "s00",
+      "stage": "development",
+      "stem": "development_s00_attack"
+    },
+    {
+      "domain": "0x5f8dde3d0631d65d",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s01",
+      "stage": "development",
+      "stem": "development_s01_reference"
+    },
+    {
+      "domain": "0x5a72b6404213e345",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s01",
+      "stage": "development",
+      "stem": "development_s01_baseline"
+    },
+    {
+      "domain": "0x550131b615487144",
+      "expected_attack": true,
+      "kind": "attack",
+      "samples": 500,
+      "session": "s01",
+      "stage": "development",
+      "stem": "development_s01_attack"
+    },
+    {
+      "domain": "0x526f6481f13395a0",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s02",
+      "stage": "development",
+      "stem": "development_s02_reference"
+    },
+    {
+      "domain": "0x5dda6e42660e9f7f",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s02",
+      "stage": "development",
+      "stem": "development_s02_baseline"
+    },
+    {
+      "domain": "0x5ebe340887715a5d",
+      "expected_attack": true,
+      "kind": "attack",
+      "samples": 500,
+      "session": "s02",
+      "stage": "development",
+      "stem": "development_s02_attack"
+    },
+    {
+      "domain": "0x527f53b89cefc458",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s03",
+      "stage": "development",
+      "stem": "development_s03_reference"
+    },
+    {
+      "domain": "0x53685f8b67d5dd0b",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s03",
+      "stage": "development",
+      "stem": "development_s03_baseline"
+    },
+    {
+      "domain": "0x591c51e9d047e4cf",
+      "expected_attack": true,
+      "kind": "attack",
+      "samples": 500,
+      "session": "s03",
+      "stage": "development",
+      "stem": "development_s03_attack"
+    },
+    {
+      "domain": "0x53425328ca4760c0",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s00",
+      "stage": "threshold",
+      "stem": "threshold_s00_reference"
+    },
+    {
+      "domain": "0x50459b1abdd83272",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 5000,
+      "session": "s00",
+      "stage": "threshold",
+      "stem": "threshold_s00_baseline"
+    },
+    {
+      "domain": "0x5b483cbd19d83ebf",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s01",
+      "stage": "threshold",
+      "stem": "threshold_s01_reference"
+    },
+    {
+      "domain": "0x5103cbd56976f168",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 5000,
+      "session": "s01",
+      "stage": "threshold",
+      "stem": "threshold_s01_baseline"
+    },
+    {
+      "domain": "0x5142df4699b52aa6",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s02",
+      "stage": "threshold",
+      "stem": "threshold_s02_reference"
+    },
+    {
+      "domain": "0x5b441dc1ecdb490c",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 5000,
+      "session": "s02",
+      "stage": "threshold",
+      "stem": "threshold_s02_baseline"
+    },
+    {
+      "domain": "0x5a3bd27d3a7e82ce",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s03",
+      "stage": "threshold",
+      "stem": "threshold_s03_reference"
+    },
+    {
+      "domain": "0x5eba7e349f1a9b94",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 5000,
+      "session": "s03",
+      "stage": "threshold",
+      "stem": "threshold_s03_baseline"
+    },
+    {
+      "domain": "0x5a0383b59d2e024e",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s00",
+      "stage": "validation",
+      "stem": "validation_s00_reference"
+    },
+    {
+      "domain": "0x5ec797a040a44e07",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 2000,
+      "session": "s00",
+      "stage": "validation",
+      "stem": "validation_s00_baseline"
+    },
+    {
+      "domain": "0x5c503a8a5e168cf2",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s01",
+      "stage": "validation",
+      "stem": "validation_s01_reference"
+    },
+    {
+      "domain": "0x5dcbb79186dda08f",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 2000,
+      "session": "s01",
+      "stage": "validation",
+      "stem": "validation_s01_baseline"
+    },
+    {
+      "domain": "0x5cf45b8256fe781c",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s02",
+      "stage": "validation",
+      "stem": "validation_s02_reference"
+    },
+    {
+      "domain": "0x50634e072e06f978",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 2000,
+      "session": "s02",
+      "stage": "validation",
+      "stem": "validation_s02_baseline"
+    },
+    {
+      "domain": "0x5fbecae703d02900",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s00",
+      "stage": "attack",
+      "stem": "attack_s00_reference"
+    },
+    {
+      "domain": "0x5337b2600b96cab5",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s00",
+      "stage": "attack",
+      "stem": "attack_s00_baseline"
+    },
+    {
+      "domain": "0x595287e49d554f1f",
+      "expected_attack": true,
+      "kind": "attack",
+      "samples": 500,
+      "session": "s00",
+      "stage": "attack",
+      "stem": "attack_s00_attack"
+    },
+    {
+      "domain": "0x52f8c7cd995bece1",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s01",
+      "stage": "attack",
+      "stem": "attack_s01_reference"
+    },
+    {
+      "domain": "0x511dd00597b48fe4",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s01",
+      "stage": "attack",
+      "stem": "attack_s01_baseline"
+    },
+    {
+      "domain": "0x56ac4a3ff3656288",
+      "expected_attack": true,
+      "kind": "attack",
+      "samples": 500,
+      "session": "s01",
+      "stage": "attack",
+      "stem": "attack_s01_attack"
+    }
+  ],
+  "description": "Wang Secret in OnePiece two-family single-ELF multi-session collection",
+  "version": 4
+}

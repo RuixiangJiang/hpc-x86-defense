@@ -1,0 +1,946 @@
+
+/home/ruixiang/hpc-x86-defense/build/bin/delvaux_roulette/rou_single:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000004240 <rou_target_masked_add_baseline>:
+    4240:	endbr64
+    4244:	mov    %edi,%eax
+    4246:	add    %esi,%eax
+    4248:	ret
+
+Disassembly of section .fini:
+
+/home/ruixiang/hpc-x86-defense/build/bin/delvaux_roulette/rou_single:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000004250 <rou_target_skip_local_masked_operation>:
+    4250:	endbr64
+    4254:	mov    %edi,%eax
+    4256:	ret
+
+Disassembly of section .fini:
+
+/home/ruixiang/hpc-x86-defense/build/bin/delvaux_roulette/rou_single:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000004260 <rou_target_set_masked_intermediate_constant>:
+    4260:	endbr64
+    4264:	mov    %edi,%eax
+    4266:	mov    %edx,%eax
+    4268:	ret
+
+Disassembly of section .fini:
+
+/home/ruixiang/hpc-x86-defense/build/bin/delvaux_roulette/rou_single:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000004270 <rou_target_replace_masked_intermediate_random>:
+    4270:	endbr64
+    4274:	mov    %edi,%eax
+    4276:	mov    %edx,%eax
+    4278:	ret
+
+Disassembly of section .fini:
+
+/home/ruixiang/hpc-x86-defense/build/bin/delvaux_roulette/rou_single:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000004280 <rou_target_flip_masked_intermediate_bit>:
+    4280:	endbr64
+    4284:	mov    %edi,%eax
+    4286:	add    %esi,%eax
+    4288:	xor    %ecx,%eax
+    428a:	ret
+
+Disassembly of section .fini:
+
+/home/ruixiang/hpc-x86-defense/build/bin/delvaux_roulette/rou_single:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+00000000000047d0 <rou_measure_masked_add_baseline>:
+    47d0:	endbr64
+    47d4:	push   %rbp
+    47d5:	mov    %rsp,%rbp
+    47d8:	push   %r15
+    47da:	push   %r14
+    47dc:	push   %r13
+    47de:	push   %r12
+    47e0:	push   %rbx
+    47e1:	mov    %edi,%ebx
+    47e3:	sub    $0x8,%rsp
+    47e7:	mov    0x5953(%rip),%eax        # a140 <rou_hpc_ready>
+    47ed:	test   %eax,%eax
+    47ef:	jne    4810 <rou_measure_masked_add_baseline+0x40>
+    47f1:	movl   $0xffffffed,0x593d(%rip)        # a138 <rou_snapshot+0x38>
+    47fb:	add    $0x8,%rsp
+    47ff:	mov    %ebx,%eax
+    4801:	pop    %rbx
+    4802:	pop    %r12
+    4804:	pop    %r13
+    4806:	pop    %r14
+    4808:	pop    %r15
+    480a:	pop    %rbp
+    480b:	ret
+    480c:	nopl   0x0(%rax)
+    4810:	movl   $0x0,0x591e(%rip)        # a138 <rou_snapshot+0x38>
+    481a:	mov    %esi,%r12d
+    481d:	mov    %edx,%r14d
+    4820:	mov    %ecx,%r13d
+    4823:	mov    0x57f6(%rip),%r15d        # a020 <rou_fds>
+    482a:	xor    %eax,%eax
+    482c:	mov    $0x1,%edx
+    4831:	mov    $0x2403,%esi
+    4836:	mov    %r15d,%edi
+    4839:	call   11f0 <ioctl@plt>
+    483e:	test   %eax,%eax
+    4840:	je     4851 <rou_measure_masked_add_baseline+0x81>
+    4842:	call   11c0 <__errno_location@plt>
+    4847:	mov    (%rax),%eax
+    4849:	neg    %eax
+    484b:	mov    %eax,0x58e7(%rip)        # a138 <rou_snapshot+0x38>
+    4851:	xor    %eax,%eax
+    4853:	mov    $0x1,%edx
+    4858:	mov    $0x2400,%esi
+    485d:	mov    %r15d,%edi
+    4860:	call   11f0 <ioctl@plt>
+    4865:	test   %eax,%eax
+    4867:	je     4878 <rou_measure_masked_add_baseline+0xa8>
+    4869:	call   11c0 <__errno_location@plt>
+    486e:	mov    (%rax),%eax
+    4870:	neg    %eax
+    4872:	mov    %eax,0x58c0(%rip)        # a138 <rou_snapshot+0x38>
+    4878:	mov    %ebx,%edi
+    487a:	mov    %r13d,%ecx
+    487d:	mov    %r14d,%edx
+    4880:	mov    %r12d,%esi
+    4883:	call   4240 <rou_target_masked_add_baseline>
+    4888:	mov    %eax,%ebx
+    488a:	call   4310 <rou_hpc_end>
+    488f:	jmp    47fb <rou_measure_masked_add_baseline+0x2b>
+
+Disassembly of section .fini:
+
+/home/ruixiang/hpc-x86-defense/build/bin/delvaux_roulette/rou_single:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000004490 <rou_measure_skip_local_masked_operation>:
+    4490:	endbr64
+    4494:	push   %rbp
+    4495:	mov    %rsp,%rbp
+    4498:	push   %r15
+    449a:	push   %r14
+    449c:	push   %r13
+    449e:	push   %r12
+    44a0:	push   %rbx
+    44a1:	mov    %edi,%ebx
+    44a3:	sub    $0x8,%rsp
+    44a7:	mov    0x5c93(%rip),%eax        # a140 <rou_hpc_ready>
+    44ad:	test   %eax,%eax
+    44af:	jne    44d0 <rou_measure_skip_local_masked_operation+0x40>
+    44b1:	movl   $0xffffffed,0x5c7d(%rip)        # a138 <rou_snapshot+0x38>
+    44bb:	add    $0x8,%rsp
+    44bf:	mov    %ebx,%eax
+    44c1:	pop    %rbx
+    44c2:	pop    %r12
+    44c4:	pop    %r13
+    44c6:	pop    %r14
+    44c8:	pop    %r15
+    44ca:	pop    %rbp
+    44cb:	ret
+    44cc:	nopl   0x0(%rax)
+    44d0:	movl   $0x0,0x5c5e(%rip)        # a138 <rou_snapshot+0x38>
+    44da:	mov    %esi,%r12d
+    44dd:	mov    %edx,%r14d
+    44e0:	mov    %ecx,%r13d
+    44e3:	mov    0x5b36(%rip),%r15d        # a020 <rou_fds>
+    44ea:	xor    %eax,%eax
+    44ec:	mov    $0x1,%edx
+    44f1:	mov    $0x2403,%esi
+    44f6:	mov    %r15d,%edi
+    44f9:	call   11f0 <ioctl@plt>
+    44fe:	test   %eax,%eax
+    4500:	je     4511 <rou_measure_skip_local_masked_operation+0x81>
+    4502:	call   11c0 <__errno_location@plt>
+    4507:	mov    (%rax),%eax
+    4509:	neg    %eax
+    450b:	mov    %eax,0x5c27(%rip)        # a138 <rou_snapshot+0x38>
+    4511:	xor    %eax,%eax
+    4513:	mov    $0x1,%edx
+    4518:	mov    $0x2400,%esi
+    451d:	mov    %r15d,%edi
+    4520:	call   11f0 <ioctl@plt>
+    4525:	test   %eax,%eax
+    4527:	je     4538 <rou_measure_skip_local_masked_operation+0xa8>
+    4529:	call   11c0 <__errno_location@plt>
+    452e:	mov    (%rax),%eax
+    4530:	neg    %eax
+    4532:	mov    %eax,0x5c00(%rip)        # a138 <rou_snapshot+0x38>
+    4538:	mov    %ebx,%edi
+    453a:	mov    %r13d,%ecx
+    453d:	mov    %r14d,%edx
+    4540:	mov    %r12d,%esi
+    4543:	call   4250 <rou_target_skip_local_masked_operation>
+    4548:	mov    %eax,%ebx
+    454a:	call   4310 <rou_hpc_end>
+    454f:	jmp    44bb <rou_measure_skip_local_masked_operation+0x2b>
+
+Disassembly of section .fini:
+
+/home/ruixiang/hpc-x86-defense/build/bin/delvaux_roulette/rou_single:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000004630 <rou_measure_set_masked_intermediate_constant>:
+    4630:	endbr64
+    4634:	push   %rbp
+    4635:	mov    %rsp,%rbp
+    4638:	push   %r15
+    463a:	push   %r14
+    463c:	push   %r13
+    463e:	push   %r12
+    4640:	push   %rbx
+    4641:	mov    %edi,%ebx
+    4643:	sub    $0x8,%rsp
+    4647:	mov    0x5af3(%rip),%eax        # a140 <rou_hpc_ready>
+    464d:	test   %eax,%eax
+    464f:	jne    4670 <rou_measure_set_masked_intermediate_constant+0x40>
+    4651:	movl   $0xffffffed,0x5add(%rip)        # a138 <rou_snapshot+0x38>
+    465b:	add    $0x8,%rsp
+    465f:	mov    %ebx,%eax
+    4661:	pop    %rbx
+    4662:	pop    %r12
+    4664:	pop    %r13
+    4666:	pop    %r14
+    4668:	pop    %r15
+    466a:	pop    %rbp
+    466b:	ret
+    466c:	nopl   0x0(%rax)
+    4670:	movl   $0x0,0x5abe(%rip)        # a138 <rou_snapshot+0x38>
+    467a:	mov    %esi,%r12d
+    467d:	mov    %edx,%r14d
+    4680:	mov    %ecx,%r13d
+    4683:	mov    0x5996(%rip),%r15d        # a020 <rou_fds>
+    468a:	xor    %eax,%eax
+    468c:	mov    $0x1,%edx
+    4691:	mov    $0x2403,%esi
+    4696:	mov    %r15d,%edi
+    4699:	call   11f0 <ioctl@plt>
+    469e:	test   %eax,%eax
+    46a0:	je     46b1 <rou_measure_set_masked_intermediate_constant+0x81>
+    46a2:	call   11c0 <__errno_location@plt>
+    46a7:	mov    (%rax),%eax
+    46a9:	neg    %eax
+    46ab:	mov    %eax,0x5a87(%rip)        # a138 <rou_snapshot+0x38>
+    46b1:	xor    %eax,%eax
+    46b3:	mov    $0x1,%edx
+    46b8:	mov    $0x2400,%esi
+    46bd:	mov    %r15d,%edi
+    46c0:	call   11f0 <ioctl@plt>
+    46c5:	test   %eax,%eax
+    46c7:	je     46d8 <rou_measure_set_masked_intermediate_constant+0xa8>
+    46c9:	call   11c0 <__errno_location@plt>
+    46ce:	mov    (%rax),%eax
+    46d0:	neg    %eax
+    46d2:	mov    %eax,0x5a60(%rip)        # a138 <rou_snapshot+0x38>
+    46d8:	mov    %ebx,%edi
+    46da:	mov    %r13d,%ecx
+    46dd:	mov    %r14d,%edx
+    46e0:	mov    %r12d,%esi
+    46e3:	call   4260 <rou_target_set_masked_intermediate_constant>
+    46e8:	mov    %eax,%ebx
+    46ea:	call   4310 <rou_hpc_end>
+    46ef:	jmp    465b <rou_measure_set_masked_intermediate_constant+0x2b>
+
+Disassembly of section .fini:
+
+/home/ruixiang/hpc-x86-defense/build/bin/delvaux_roulette/rou_single:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000004700 <rou_measure_replace_masked_intermediate_random>:
+    4700:	endbr64
+    4704:	push   %rbp
+    4705:	mov    %rsp,%rbp
+    4708:	push   %r15
+    470a:	push   %r14
+    470c:	push   %r13
+    470e:	push   %r12
+    4710:	push   %rbx
+    4711:	mov    %edi,%ebx
+    4713:	sub    $0x8,%rsp
+    4717:	mov    0x5a23(%rip),%eax        # a140 <rou_hpc_ready>
+    471d:	test   %eax,%eax
+    471f:	jne    4740 <rou_measure_replace_masked_intermediate_random+0x40>
+    4721:	movl   $0xffffffed,0x5a0d(%rip)        # a138 <rou_snapshot+0x38>
+    472b:	add    $0x8,%rsp
+    472f:	mov    %ebx,%eax
+    4731:	pop    %rbx
+    4732:	pop    %r12
+    4734:	pop    %r13
+    4736:	pop    %r14
+    4738:	pop    %r15
+    473a:	pop    %rbp
+    473b:	ret
+    473c:	nopl   0x0(%rax)
+    4740:	movl   $0x0,0x59ee(%rip)        # a138 <rou_snapshot+0x38>
+    474a:	mov    %esi,%r12d
+    474d:	mov    %edx,%r14d
+    4750:	mov    %ecx,%r13d
+    4753:	mov    0x58c6(%rip),%r15d        # a020 <rou_fds>
+    475a:	xor    %eax,%eax
+    475c:	mov    $0x1,%edx
+    4761:	mov    $0x2403,%esi
+    4766:	mov    %r15d,%edi
+    4769:	call   11f0 <ioctl@plt>
+    476e:	test   %eax,%eax
+    4770:	je     4781 <rou_measure_replace_masked_intermediate_random+0x81>
+    4772:	call   11c0 <__errno_location@plt>
+    4777:	mov    (%rax),%eax
+    4779:	neg    %eax
+    477b:	mov    %eax,0x59b7(%rip)        # a138 <rou_snapshot+0x38>
+    4781:	xor    %eax,%eax
+    4783:	mov    $0x1,%edx
+    4788:	mov    $0x2400,%esi
+    478d:	mov    %r15d,%edi
+    4790:	call   11f0 <ioctl@plt>
+    4795:	test   %eax,%eax
+    4797:	je     47a8 <rou_measure_replace_masked_intermediate_random+0xa8>
+    4799:	call   11c0 <__errno_location@plt>
+    479e:	mov    (%rax),%eax
+    47a0:	neg    %eax
+    47a2:	mov    %eax,0x5990(%rip)        # a138 <rou_snapshot+0x38>
+    47a8:	mov    %ebx,%edi
+    47aa:	mov    %r13d,%ecx
+    47ad:	mov    %r14d,%edx
+    47b0:	mov    %r12d,%esi
+    47b3:	call   4270 <rou_target_replace_masked_intermediate_random>
+    47b8:	mov    %eax,%ebx
+    47ba:	call   4310 <rou_hpc_end>
+    47bf:	jmp    472b <rou_measure_replace_masked_intermediate_random+0x2b>
+
+Disassembly of section .fini:
+
+/home/ruixiang/hpc-x86-defense/build/bin/delvaux_roulette/rou_single:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000004560 <rou_measure_flip_masked_intermediate_bit>:
+    4560:	endbr64
+    4564:	push   %rbp
+    4565:	mov    %rsp,%rbp
+    4568:	push   %r15
+    456a:	push   %r14
+    456c:	push   %r13
+    456e:	push   %r12
+    4570:	push   %rbx
+    4571:	mov    %edi,%ebx
+    4573:	sub    $0x8,%rsp
+    4577:	mov    0x5bc3(%rip),%eax        # a140 <rou_hpc_ready>
+    457d:	test   %eax,%eax
+    457f:	jne    45a0 <rou_measure_flip_masked_intermediate_bit+0x40>
+    4581:	movl   $0xffffffed,0x5bad(%rip)        # a138 <rou_snapshot+0x38>
+    458b:	add    $0x8,%rsp
+    458f:	mov    %ebx,%eax
+    4591:	pop    %rbx
+    4592:	pop    %r12
+    4594:	pop    %r13
+    4596:	pop    %r14
+    4598:	pop    %r15
+    459a:	pop    %rbp
+    459b:	ret
+    459c:	nopl   0x0(%rax)
+    45a0:	movl   $0x0,0x5b8e(%rip)        # a138 <rou_snapshot+0x38>
+    45aa:	mov    %esi,%r12d
+    45ad:	mov    %edx,%r14d
+    45b0:	mov    %ecx,%r13d
+    45b3:	mov    0x5a66(%rip),%r15d        # a020 <rou_fds>
+    45ba:	xor    %eax,%eax
+    45bc:	mov    $0x1,%edx
+    45c1:	mov    $0x2403,%esi
+    45c6:	mov    %r15d,%edi
+    45c9:	call   11f0 <ioctl@plt>
+    45ce:	test   %eax,%eax
+    45d0:	je     45e1 <rou_measure_flip_masked_intermediate_bit+0x81>
+    45d2:	call   11c0 <__errno_location@plt>
+    45d7:	mov    (%rax),%eax
+    45d9:	neg    %eax
+    45db:	mov    %eax,0x5b57(%rip)        # a138 <rou_snapshot+0x38>
+    45e1:	xor    %eax,%eax
+    45e3:	mov    $0x1,%edx
+    45e8:	mov    $0x2400,%esi
+    45ed:	mov    %r15d,%edi
+    45f0:	call   11f0 <ioctl@plt>
+    45f5:	test   %eax,%eax
+    45f7:	je     4608 <rou_measure_flip_masked_intermediate_bit+0xa8>
+    45f9:	call   11c0 <__errno_location@plt>
+    45fe:	mov    (%rax),%eax
+    4600:	neg    %eax
+    4602:	mov    %eax,0x5b30(%rip)        # a138 <rou_snapshot+0x38>
+    4608:	mov    %ebx,%edi
+    460a:	mov    %r13d,%ecx
+    460d:	mov    %r14d,%edx
+    4610:	mov    %r12d,%esi
+    4613:	call   4280 <rou_target_flip_masked_intermediate_bit>
+    4618:	mov    %eax,%ebx
+    461a:	call   4310 <rou_hpc_end>
+    461f:	jmp    458b <rou_measure_flip_masked_intermediate_bit+0x2b>
+
+Disassembly of section .fini:
+
+/home/ruixiang/hpc-x86-defense/build/bin/delvaux_roulette/rou_single:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000004ef0 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply>:
+    4ef0:	endbr64
+    4ef4:	push   %rbp
+    4ef5:	mov    %rsp,%rbp
+    4ef8:	push   %r15
+    4efa:	push   %r14
+    4efc:	push   %r13
+    4efe:	mov    %rdi,%r13
+    4f01:	push   %r12
+    4f03:	push   %rbx
+    4f04:	sub    $0x658,%rsp
+    4f0b:	mov    0x5107(%rip),%eax        # a018 <rou_target_coeff>
+    4f11:	mov    0x51cc(%rip),%r10d        # a0e4 <rou_reencrypt_active>
+    4f18:	mov    %eax,-0x638(%rbp)
+    4f1e:	test   %r10d,%r10d
+    4f21:	je     52f6 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x406>
+    4f27:	xor    %eax,%eax
+    4f29:	mov    0x50e5(%rip),%edx        # a014 <rou_selected_constant>
+    4f2f:	mov    $0xf,%ecx
+    4f34:	lea    0x5125(%rip),%rdi        # a060 <rou_audit>
+    4f3b:	rep stos %rax,%es:(%rdi)
+    4f3e:	mov    0x50cc(%rip),%ecx        # a010 <rou_selected_flip_bit>
+    4f44:	mov    0x5196(%rip),%eax        # a0e0 <rou_runtime_mode>
+    4f4a:	mov    %edx,0x5120(%rip)        # a070 <rou_audit+0x10>
+    4f50:	mov    $0x1,%edx
+    4f55:	mov    -0x638(%rbp),%ebx
+    4f5b:	shl    %cl,%edx
+    4f5d:	addq   $0x1,0x5173(%rip)        # a0d8 <rou_reencrypt_invocations>
+    4f65:	mov    %edx,0x5131(%rip)        # a09c <rou_audit+0x3c>
+    4f6b:	xor    %edx,%edx
+    4f6d:	cmp    $0x1,%eax
+    4f70:	sete   %dl
+    4f73:	mov    %eax,0x5117(%rip)        # a090 <rou_audit+0x30>
+    4f79:	mov    %edx,0x5129(%rip)        # a0a8 <rou_audit+0x48>
+    4f7f:	xor    %edx,%edx
+    4f81:	cmp    $0x2,%eax
+    4f84:	sete   %dl
+    4f87:	mov    %ebx,0x5107(%rip)        # a094 <rou_audit+0x34>
+    4f8d:	mov    %edx,0x5119(%rip)        # a0ac <rou_audit+0x4c>
+    4f93:	xor    %edx,%edx
+    4f95:	cmp    $0x3,%eax
+    4f98:	sete   %dl
+    4f9b:	cmp    $0x4,%eax
+    4f9e:	mov    %ecx,0x50f4(%rip)        # a098 <rou_audit+0x38>
+    4fa4:	sete   %al
+    4fa7:	mov    %edx,0x5103(%rip)        # a0b0 <rou_audit+0x50>
+    4fad:	movzbl %al,%eax
+    4fb0:	mov    %eax,0x50fe(%rip)        # a0b4 <rou_audit+0x54>
+    4fb6:	cmp    $0x7f,%ebx
+    4fb9:	ja     52ec <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x3fc>
+    4fbf:	lea    -0x630(%rbp),%rbx
+    4fc6:	lea    -0x630(%rbp),%rdi
+    4fcd:	mov    $0x40,%ecx
+    4fd2:	mov    %r13,%rsi
+    4fd5:	rep movsq %ds:(%rsi),%es:(%rdi)
+    4fd8:	mov    %rbx,%rdi
+    4fdb:	call   3b70 <PQCLEAN_KYBER768_CLEAN_poly_invntt_tomont>
+    4fe0:	mov    0x5026(%rip),%eax        # a00c <rou_mask_prng_state>
+    4fe6:	xor    %r8d,%r8d
+    4fe9:	lea    -0x430(%rbp),%rsi
+    4ff0:	lea    -0x230(%rbp),%r11
+    4ff7:	nopw   0x0(%rax,%rax,1)
+    5000:	movswq 0x0(%r13,%r8,1),%rdi
+    5006:	mov    %rdi,%rdx
+    5009:	imul   $0xffffffff9d7dbb41,%rdi,%rdi
+    5010:	mov    %edx,%ecx
+    5012:	sar    $0x1f,%ecx
+    5015:	shr    $0x20,%rdi
+    5019:	add    %edx,%edi
+    501b:	sar    $0xb,%edi
+    501e:	sub    %ecx,%edi
+    5020:	imul   $0xd01,%edi,%ecx
+    5026:	mov    %edx,%edi
+    5028:	sub    %ecx,%edi
+    502a:	lea    0xd01(%rdi),%edx
+    5030:	cmovs  %edx,%edi
+    5033:	nopl   0x0(%rax,%rax,1)
+    5038:	mov    %eax,%edx
+    503a:	shl    $0xd,%edx
+    503d:	xor    %eax,%edx
+    503f:	mov    %edx,%eax
+    5041:	shr    $0x11,%eax
+    5044:	xor    %eax,%edx
+    5046:	mov    %edx,%ecx
+    5048:	mov    %edx,%eax
+    504a:	shl    $0x5,%ecx
+    504d:	xor    %ecx,%eax
+    504f:	cmp    %ecx,%edx
+    5051:	je     5310 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x420>
+    5057:	cmp    $0xfffffab6,%eax
+    505c:	ja     5038 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x148>
+    505e:	mov    %eax,%edx
+    5060:	mov    %eax,%ecx
+    5062:	imul   $0x3afb7681,%rdx,%rdx
+    5069:	shr    $0x20,%rdx
+    506d:	sub    %edx,%ecx
+    506f:	shr    $1,%ecx
+    5071:	add    %edx,%ecx
+    5073:	mov    %eax,%edx
+    5075:	shr    $0xb,%ecx
+    5078:	imul   $0xd01,%ecx,%ecx
+    507e:	sub    %ecx,%edx
+    5080:	mov    %edx,%ecx
+    5082:	nopw   0x0(%rax,%rax,1)
+    5088:	sub    %edx,%edi
+    508a:	mov    %cx,(%r8,%rsi,1)
+    508f:	lea    0xd01(%rdi),%edx
+    5095:	cmovs  %edx,%edi
+    5098:	mov    %di,(%r11,%r8,1)
+    509d:	add    $0x2,%r8
+    50a1:	cmp    $0x200,%r8
+    50a8:	jne    5000 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x110>
+    50ae:	mov    $0x7,%r12d
+    50b4:	mov    %eax,0x4f52(%rip)        # a00c <rou_mask_prng_state>
+    50ba:	mov    $0x7f,%r14d
+    50c0:	mov    $0x2,%r10d
+    50c6:	movl   $0x0,-0x65c(%rbp)
+    50d0:	mov    %r12d,-0x664(%rbp)
+    50d7:	mov    %r13,-0x670(%rbp)
+    50de:	mov    %rsi,-0x640(%rbp)
+    50e5:	mov    %r11,-0x648(%rbp)
+    50ec:	mov    %rbx,-0x678(%rbp)
+    50f3:	mov    %r14d,%eax
+    50f6:	xor    %r8d,%r8d
+    50f9:	nopl   0x0(%rax)
+    5100:	lea    0x27b9(%rip),%rbx        # 78c0 <PQCLEAN_KYBER768_CLEAN_zetas>
+    5107:	lea    (%r8,%r10,1),%r11d
+    510b:	sub    $0x1,%r14d
+    510f:	movswl (%rbx,%rax,2),%eax
+    5113:	cmp    %r11d,%r8d
+    5116:	jae    5621 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x731>
+    511c:	cmp    $0x80,%r10d
+    5123:	mov    %eax,-0x654(%rbp)
+    5129:	mov    %r8d,%ebx
+    512c:	mov    %r10d,-0x64c(%rbp)
+    5133:	mov    %r14d,-0x660(%rbp)
+    513a:	mov    %r11d,-0x650(%rbp)
+    5141:	sete   -0x655(%rbp)
+    5148:	jmp    5285 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x395>
+    514d:	nopl   (%rax)
+    5150:	movswl %ax,%edi
+    5153:	mov    0x4eaf(%rip),%eax        # a008 <rou_fault_prng_state>
+    5159:	movswl %r13w,%esi
+    515d:	lea    (%rdi,%rsi,1),%r9d
+    5161:	mov    %eax,%edx
+    5163:	shl    $0xd,%edx
+    5166:	xor    %edx,%eax
+    5168:	mov    %eax,%edx
+    516a:	shr    $0x11,%edx
+    516d:	xor    %edx,%eax
+    516f:	mov    %eax,%ecx
+    5171:	mov    %eax,%edx
+    5173:	shl    $0x5,%ecx
+    5176:	xor    %ecx,%edx
+    5178:	cmp    %ecx,%eax
+    517a:	je     5360 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x470>
+    5180:	movswl %dx,%eax
+    5183:	mov    %edx,0x4e7f(%rip)        # a008 <rou_fault_prng_state>
+    5189:	xor    $0x40,%dh
+    518c:	cmp    %eax,%r9d
+    518f:	movswl %dx,%edx
+    5192:	cmove  %edx,%eax
+    5195:	cmpl   $0x2,0x4f44(%rip)        # a0e0 <rou_runtime_mode>
+    519c:	mov    %eax,%edx
+    519e:	jne    51a6 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x2b6>
+    51a0:	mov    0x4e6e(%rip),%edx        # a014 <rou_selected_constant>
+    51a6:	mov    0x4e64(%rip),%ecx        # a010 <rou_selected_flip_bit>
+    51ac:	mov    %r9d,0x4eb5(%rip)        # a068 <rou_audit+0x8>
+    51b3:	mov    $0x1,%r11d
+    51b9:	lea    0x4ea0(%rip),%r10        # a060 <rou_audit>
+    51c0:	mov    0x4f21(%rip),%r9d        # a0e8 <rou_measurement_enabled>
+    51c7:	mov    %edi,(%r10)
+    51ca:	shl    %cl,%r11d
+    51cd:	mov    %esi,0x4e91(%rip)        # a064 <rou_audit+0x4>
+    51d3:	mov    %eax,0x4e9b(%rip)        # a074 <rou_audit+0x14>
+    51d9:	mov    %r11d,%ecx
+    51dc:	test   %r9d,%r9d
+    51df:	je     5328 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x438>
+    51e5:	mov    0x4f54(%rip),%r8d        # a140 <rou_hpc_ready>
+    51ec:	test   %r8d,%r8d
+    51ef:	je     5328 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x438>
+    51f5:	call   *0x4e55(%rip)        # a050 <rou_selected_measure>
+    51fb:	movswl %ax,%edi
+    51fe:	mov    %eax,0x4e68(%rip)        # a06c <rou_audit+0xc>
+    5204:	call   4130 <PQCLEAN_KYBER768_CLEAN_barrett_reduce>
+    5209:	movl   $0x1,-0x65c(%rbp)
+    5213:	sub    -0x634(%rbp),%r13w
+    521b:	mov    -0x640(%rbp),%rsi
+    5222:	movswl %r13w,%edi
+    5226:	mov    -0x654(%rbp),%r13d
+    522d:	mov    %ax,(%rsi,%rbx,2)
+    5231:	imul   %r13d,%edi
+    5235:	call   4110 <PQCLEAN_KYBER768_CLEAN_montgomery_reduce>
+    523a:	lea    (%r15,%r12,1),%edi
+    523e:	sub    %r15d,%r12d
+    5241:	mov    %ax,-0x430(%rbp,%r14,2)
+    524a:	movswl %di,%edi
+    524d:	call   4130 <PQCLEAN_KYBER768_CLEAN_barrett_reduce>
+    5252:	movswl %r12w,%edi
+    5256:	mov    -0x648(%rbp),%rsi
+    525d:	imul   %r13d,%edi
+    5261:	mov    %ax,(%rsi,%rbx,2)
+    5265:	add    $0x1,%rbx
+    5269:	call   4110 <PQCLEAN_KYBER768_CLEAN_montgomery_reduce>
+    526e:	mov    %ax,-0x230(%rbp,%r14,2)
+    5277:	mov    -0x650(%rbp),%eax
+    527d:	cmp    %eax,%ebx
+    527f:	jae    5338 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x448>
+    5285:	mov    -0x64c(%rbp),%esi
+    528b:	mov    -0x640(%rbp),%rax
+    5292:	lea    (%rsi,%rbx,1),%r14d
+    5296:	movzwl (%rax,%rbx,2),%eax
+    529a:	mov    -0x648(%rbp),%rsi
+    52a1:	movzwl -0x430(%rbp,%r14,2),%r13d
+    52aa:	movzwl -0x230(%rbp,%r14,2),%r12d
+    52b3:	mov    %ax,-0x634(%rbp)
+    52ba:	movzwl (%rsi,%rbx,2),%r15d
+    52bf:	cmp    %ebx,-0x638(%rbp)
+    52c5:	jne    52d4 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x3e4>
+    52c7:	cmpb   $0x0,-0x655(%rbp)
+    52ce:	jne    5150 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x260>
+    52d4:	movzwl -0x634(%rbp),%eax
+    52db:	lea    (%rax,%r13,1),%edi
+    52df:	movswl %di,%edi
+    52e2:	call   4130 <PQCLEAN_KYBER768_CLEAN_barrett_reduce>
+    52e7:	jmp    5213 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x323>
+    52ec:	movl   $0xffffffde,0x4e42(%rip)        # a138 <rou_snapshot+0x38>
+    52f6:	add    $0x658,%rsp
+    52fd:	mov    %r13,%rdi
+    5300:	pop    %rbx
+    5301:	pop    %r12
+    5303:	pop    %r13
+    5305:	pop    %r14
+    5307:	pop    %r15
+    5309:	pop    %rbp
+    530a:	jmp    3b70 <PQCLEAN_KYBER768_CLEAN_poly_invntt_tomont>
+    530f:	nop
+    5310:	mov    $0xccd,%ecx
+    5315:	mov    $0xccd,%edx
+    531a:	mov    $0x6d2b79f5,%eax
+    531f:	jmp    5088 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x198>
+    5324:	nopl   0x0(%rax)
+    5328:	call   *0x4d2a(%rip)        # a058 <rou_selected_target>
+    532e:	jmp    51fb <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x30b>
+    5333:	nopl   0x0(%rax,%rax,1)
+    5338:	mov    -0x64c(%rbp),%r10d
+    533f:	mov    -0x660(%rbp),%r14d
+    5346:	lea    (%rax,%r10,1),%r8d
+    534a:	cmp    $0xff,%r8d
+    5351:	ja     536f <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x47f>
+    5353:	mov    %r14d,%eax
+    5356:	jmp    5100 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x210>
+    535b:	nopl   0x0(%rax,%rax,1)
+    5360:	mov    $0x79f5,%eax
+    5365:	mov    $0x6d2b79f5,%edx
+    536a:	jmp    5183 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x293>
+    536f:	add    %r10d,%r10d
+    5372:	subl   $0x1,-0x664(%rbp)
+    5379:	jne    50f3 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x203>
+    537f:	mov    -0x664(%rbp),%r12d
+    5386:	mov    -0x640(%rbp),%rsi
+    538d:	xor    %r15d,%r15d
+    5390:	mov    -0x678(%rbp),%rbx
+    5397:	mov    -0x648(%rbp),%r11
+    539e:	mov    -0x670(%rbp),%r13
+    53a5:	mov    %r12d,-0x634(%rbp)
+    53ac:	mov    %rsi,%r14
+    53af:	mov    %r15,%r12
+    53b2:	mov    %rbx,-0x640(%rbp)
+    53b9:	mov    %r11,%rbx
+    53bc:	nopl   0x0(%rax)
+    53c0:	movswl (%r12,%r14,1),%edi
+    53c5:	imul   $0x5a1,%edi,%edi
+    53cb:	call   4110 <PQCLEAN_KYBER768_CLEAN_montgomery_reduce>
+    53d0:	movswl (%rbx,%r12,1),%edi
+    53d5:	mov    %ax,(%r12,%r14,1)
+    53da:	mov    %eax,%r15d
+    53dd:	imul   $0x5a1,%edi,%edi
+    53e3:	call   4110 <PQCLEAN_KYBER768_CLEAN_montgomery_reduce>
+    53e8:	lea    (%r15,%rax,1),%edi
+    53ec:	mov    %ax,(%rbx,%r12,1)
+    53f1:	movswl %di,%edi
+    53f4:	call   4130 <PQCLEAN_KYBER768_CLEAN_barrett_reduce>
+    53f9:	mov    %ax,0x0(%r13,%r12,1)
+    53ff:	add    $0x2,%r12
+    5403:	cmp    $0x200,%r12
+    540a:	jne    53c0 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x4d0>
+    540c:	mov    -0x638(%rbp),%edx
+    5412:	mov    -0x640(%rbp),%rbx
+    5419:	mov    %r14,%rsi
+    541c:	movabs $0x100000001b3,%r9
+    5426:	mov    -0x634(%rbp),%r12d
+    542d:	movswq -0x630(%rbp,%rdx,2),%rcx
+    5436:	mov    %rbx,%r8
+    5439:	mov    %rcx,%rax
+    543c:	imul   $0xffffffff9d7dbb41,%rcx,%rcx
+    5443:	mov    %eax,%edi
+    5445:	sar    $0x1f,%edi
+    5448:	shr    $0x20,%rcx
+    544c:	add    %eax,%ecx
+    544e:	sar    $0xb,%ecx
+    5451:	sub    %edi,%ecx
+    5453:	imul   $0xd01,%ecx,%edi
+    5459:	sub    %edi,%eax
+    545b:	movswq 0x0(%r13,%rdx,2),%rdi
+    5461:	mov    %eax,%ecx
+    5463:	lea    0xd01(%rax),%eax
+    5469:	cmovs  %eax,%ecx
+    546c:	mov    %rdi,%rax
+    546f:	imul   $0xffffffff9d7dbb41,%rdi,%rdi
+    5476:	cltd
+    5477:	mov    %ecx,0x4bfb(%rip)        # a078 <rou_audit+0x18>
+    547d:	mov    %ecx,%r10d
+    5480:	shr    $0x20,%rdi
+    5484:	add    %eax,%edi
+    5486:	sar    $0xb,%edi
+    5489:	sub    %edx,%edi
+    548b:	imul   $0xd01,%edi,%edx
+    5491:	sub    %edx,%eax
+    5493:	mov    %eax,%edi
+    5495:	lea    0xd01(%rax),%eax
+    549b:	cmovs  %eax,%edi
+    549e:	xor    %eax,%eax
+    54a0:	mov    %edi,0x4bd6(%rip)        # a07c <rou_audit+0x1c>
+    54a6:	cmp    %ecx,%edi
+    54a8:	setne  %al
+    54ab:	mov    %eax,0x4bef(%rip)        # a0a0 <rou_audit+0x40>
+    54b1:	movabs $0x14650fb0739d0383,%rax
+    54bb:	nopl   0x0(%rax,%rax,1)
+    54c0:	movzwl (%r8),%ecx
+    54c4:	add    $0x2,%r8
+    54c8:	movzbl %cl,%edx
+    54cb:	xor    %rax,%rdx
+    54ce:	movzbl %ch,%eax
+    54d1:	imul   %r9,%rdx
+    54d5:	xor    %rdx,%rax
+    54d8:	imul   %r9,%rax
+    54dc:	cmp    %r8,%rsi
+    54df:	jne    54c0 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x5d0>
+    54e1:	mov    %rax,0x4b98(%rip)        # a080 <rou_audit+0x20>
+    54e8:	mov    %r13,%rsi
+    54eb:	lea    0x200(%r13),%r9
+    54f2:	movabs $0x14650fb0739d0383,%rax
+    54fc:	movabs $0x100000001b3,%r8
+    5506:	cs nopw 0x0(%rax,%rax,1)
+    5510:	movzwl (%rsi),%ecx
+    5513:	add    $0x2,%rsi
+    5517:	movzbl %cl,%edx
+    551a:	xor    %rax,%rdx
+    551d:	movzbl %ch,%eax
+    5520:	imul   %r8,%rdx
+    5524:	xor    %rdx,%rax
+    5527:	imul   %r8,%rax
+    552b:	cmp    %rsi,%r9
+    552e:	jne    5510 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x620>
+    5530:	mov    %rax,0x4b51(%rip)        # a088 <rou_audit+0x28>
+    5537:	mov    %r10d,%ecx
+    553a:	xor    %r9d,%r9d
+    553d:	xor    %esi,%esi
+    553f:	nop
+    5540:	cmp    %esi,-0x638(%rbp)
+    5546:	je     5618 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x728>
+    554c:	movswq (%rbx,%rsi,2),%rax
+    5551:	mov    %rax,%rdx
+    5554:	imul   $0xffffffff9d7dbb41,%rax,%rax
+    555b:	mov    %edx,%r8d
+    555e:	sar    $0x1f,%r8d
+    5562:	shr    $0x20,%rax
+    5566:	add    %edx,%eax
+    5568:	sar    $0xb,%eax
+    556b:	sub    %r8d,%eax
+    556e:	imul   $0xd01,%eax,%r8d
+    5575:	mov    %edx,%eax
+    5577:	sub    %r8d,%eax
+    557a:	lea    0xd01(%rax),%edx
+    5580:	cmovs  %edx,%eax
+    5583:	movswq 0x0(%r13,%rsi,2),%rdx
+    5589:	mov    %rdx,%r8
+    558c:	imul   $0xffffffff9d7dbb41,%rdx,%rdx
+    5593:	mov    %r8d,%r10d
+    5596:	sar    $0x1f,%r10d
+    559a:	shr    $0x20,%rdx
+    559e:	add    %r8d,%edx
+    55a1:	sar    $0xb,%edx
+    55a4:	sub    %r10d,%edx
+    55a7:	imul   $0xd01,%edx,%r10d
+    55ae:	mov    %r8d,%edx
+    55b1:	sub    %r10d,%edx
+    55b4:	lea    0xd01(%rdx),%r8d
+    55bb:	cmovs  %r8d,%edx
+    55bf:	cmp    %eax,%edx
+    55c1:	setne  %al
+    55c4:	add    $0x1,%rsi
+    55c8:	movzbl %al,%eax
+    55cb:	add    %eax,%r9d
+    55ce:	cmp    $0x100,%rsi
+    55d5:	jne    5540 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x650>
+    55db:	mov    0x4aff(%rip),%eax        # a0e0 <rou_runtime_mode>
+    55e1:	mov    %r9d,0x4abc(%rip)        # a0a4 <rou_audit+0x44>
+    55e8:	test   %eax,%eax
+    55ea:	setne  %dl
+    55ed:	setne  %sil
+    55f1:	movzbl %dl,%edx
+    55f4:	mov    %edx,0x4abe(%rip)        # a0b8 <rou_audit+0x58>
+    55fa:	cmp    $0x4,%eax
+    55fd:	ja     1306 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply.cold>
+    5603:	lea    0x23de(%rip),%rdx        # 79e8 <PQCLEAN_KYBER768_CLEAN_zetas+0x128>
+    560a:	movslq (%rdx,%rax,4),%rax
+    560e:	add    %rdx,%rax
+    5611:	notrack jmp *%rax
+    5614:	nopl   0x0(%rax)
+    5618:	add    $0x1,%rsi
+    561c:	jmp    5540 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x650>
+    5621:	mov    %r11d,%r8d
+    5624:	jmp    5353 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x463>
+    5629:	mov    0x4a45(%rip),%eax        # a074 <rou_audit+0x14>
+    562f:	test   %r9d,%r9d
+    5632:	jne    5651 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x761>
+    5634:	mov    -0x65c(%rbp),%edx
+    563a:	test   %edx,%edx
+    563c:	je     5651 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x761>
+    563e:	cmp    %eax,0x4a28(%rip)        # a06c <rou_audit+0xc>
+    5644:	jne    5651 <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x761>
+    5646:	cmp    %ecx,%edi
+    5648:	sete   %al
+    564b:	or     %esi,%eax
+    564d:	movzbl %al,%r12d
+    5651:	mov    %r12d,0x4a7c(%rip)        # a0d4 <rou_audit+0x74>
+    5658:	add    $0x658,%rsp
+    565f:	pop    %rbx
+    5660:	pop    %r12
+    5662:	pop    %r13
+    5664:	pop    %r14
+    5666:	pop    %r15
+    5668:	pop    %rbp
+    5669:	ret
+    566a:	mov    0x4a00(%rip),%eax        # a070 <rou_audit+0x10>
+    5670:	jmp    562f <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x73f>
+    5672:	mov    0x49e8(%rip),%eax        # a060 <rou_audit>
+    5678:	jmp    562f <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x73f>
+    567a:	mov    0x49e8(%rip),%eax        # a068 <rou_audit+0x8>
+    5680:	jmp    562f <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x73f>
+    5682:	mov    0x49e0(%rip),%eax        # a068 <rou_audit+0x8>
+    5688:	xor    0x4a0e(%rip),%eax        # a09c <rou_audit+0x3c>
+    568e:	jmp    562f <PQCLEAN_KYBER768_CLEAN_roulette_masked_invntt_apply+0x73f>
+
+Disassembly of section .fini:

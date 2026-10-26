@@ -1,0 +1,80 @@
+{
+  "datasets": {
+    "attack": {
+      "collected": 500,
+      "excluded": 0,
+      "exclusion_rate": 0.0,
+      "exclusion_reasons": {},
+      "path": "/home/ruixiang/hpc-x86-defense/results/Number_Not_Used_Once/fpr_evaluation/attack_skip_increment.csv",
+      "valid": 500
+    },
+    "calibration": {
+      "collected": 500,
+      "excluded": 0,
+      "exclusion_rate": 0.0,
+      "exclusion_reasons": {},
+      "path": "/home/ruixiang/hpc-x86-defense/results/Number_Not_Used_Once/fpr_evaluation/baseline_calibration.csv",
+      "valid": 500
+    },
+    "validation": {
+      "collected": 5000,
+      "excluded": 0,
+      "exclusion_rate": 0.0,
+      "exclusion_reasons": {},
+      "path": "/home/ruixiang/hpc-x86-defense/results/Number_Not_Used_Once/fpr_evaluation/baseline_validation.csv",
+      "valid": 5000
+    }
+  },
+  "metrics": {
+    "attack_signature_match_rate": 1.0,
+    "attack_signature_matches": 500,
+    "false_negative_rate": 0.0,
+    "false_positive_rate": 0.0,
+    "false_positives": 0,
+    "fpr_one_sided_95_percent_upper_bound": 0.0005989670023149134,
+    "specificity": 1.0,
+    "tpr_one_sided_95_percent_lower_bound": 0.9940264484836452,
+    "true_positive_rate": 1.0,
+    "true_positives": 500
+  },
+  "model": {
+    "calibration_consistency": {
+      "instructions": {
+        "expected": 37,
+        "matching_rate": 1.0,
+        "matching_samples": 500,
+        "maximum": 37,
+        "minimum": 37,
+        "valid_samples": 500
+      },
+      "retired-loads": {
+        "expected": 9,
+        "matching_rate": 1.0,
+        "matching_samples": 500,
+        "maximum": 9,
+        "minimum": 9,
+        "valid_samples": 500
+      },
+      "retired-stores": {
+        "expected": 9,
+        "matching_rate": 1.0,
+        "matching_samples": 500,
+        "maximum": 9,
+        "minimum": 9,
+        "valid_samples": 500
+      }
+    },
+    "detector": "exact_modal_equality",
+    "events": [
+      "instructions",
+      "retired-loads",
+      "retired-stores"
+    ],
+    "expected": {
+      "instructions": 37,
+      "retired-loads": 9,
+      "retired-stores": 9
+    },
+    "minimum_running_percent": 95.0
+  }
+}

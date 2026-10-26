@@ -1,0 +1,89 @@
+{
+  "attack_labels_used_for_threshold": false,
+  "batch_size": 10,
+  "batch_threshold": {
+    "false_positives": 5,
+    "per_session_at_frozen_threshold": {
+      "s00": {
+        "false_positives": 0,
+        "rate": 0.0,
+        "trials": 500
+      },
+      "s01": {
+        "false_positives": 0,
+        "rate": 0.0,
+        "trials": 500
+      },
+      "s02": {
+        "false_positives": 0,
+        "rate": 0.0,
+        "trials": 500
+      },
+      "s03": {
+        "false_positives": 5,
+        "rate": 0.01,
+        "trials": 500
+      }
+    },
+    "per_session_candidates": {
+      "s00": 1.2240758227538209,
+      "s01": 1.1562698733884489,
+      "s02": 1.9122074999999987,
+      "s03": 9.670081666666663
+    },
+    "rate": 0.0025,
+    "selection": "maximum per-session empirical 99.00th percentile",
+    "trials": 2000,
+    "value": 9.670081666666663
+  },
+  "events": [
+    "cycles",
+    "instructions",
+    "branches",
+    "branch_misses",
+    "retired_loads",
+    "retired_stores"
+  ],
+  "family_specific_structural_comparison": {
+    "corrupt-loaded-twiddle-value": "instruction/load deficit",
+    "corrupt-twiddle-pointer": "no deterministic coarse structural signature"
+  },
+  "feature_selection": "none",
+  "name": "baseline-only-session-local-one-class",
+  "score": "maximum absolute session-local robust z score",
+  "single_threshold": {
+    "false_positives": 86,
+    "per_session_at_frozen_threshold": {
+      "s00": {
+        "false_positives": 0,
+        "rate": 0.0,
+        "trials": 5000
+      },
+      "s01": {
+        "false_positives": 5,
+        "rate": 0.001,
+        "trials": 5000
+      },
+      "s02": {
+        "false_positives": 32,
+        "rate": 0.0064,
+        "trials": 5000
+      },
+      "s03": {
+        "false_positives": 49,
+        "rate": 0.0098,
+        "trials": 5000
+      }
+    },
+    "per_session_candidates": {
+      "s00": 1.6237740505918032,
+      "s01": 2.1198281012121565,
+      "s02": 6.969833333333333,
+      "s03": 11.916166666666665
+    },
+    "rate": 0.0043,
+    "selection": "maximum per-session empirical 99.00th percentile",
+    "trials": 20000,
+    "value": 11.916166666666665
+  }
+}

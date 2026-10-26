@@ -1,0 +1,58 @@
+{
+  "calibration_consistency": {
+    "branches": {
+      "expected": 58,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 58,
+      "minimum": 58,
+      "valid_samples": 500
+    },
+    "instructions": {
+      "expected": 453,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 453,
+      "minimum": 453,
+      "valid_samples": 500
+    },
+    "retired_loads": {
+      "expected": 99,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 99,
+      "minimum": 99,
+      "valid_samples": 500
+    },
+    "retired_stores": {
+      "expected": 65,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 65,
+      "minimum": 65,
+      "valid_samples": 500
+    }
+  },
+  "detector": "exact_modal_equality",
+  "events": [
+    "instructions",
+    "branches",
+    "retired_loads",
+    "retired_stores"
+  ],
+  "expected": {
+    "branches": 58,
+    "instructions": 453,
+    "retired_loads": 99,
+    "retired_stores": 65
+  },
+  "fault_injection_counted": false,
+  "fault_model": "instruction skip/corruption of the target twiddle load, leaving a stale zero twiddle while preserving NTT control flow",
+  "measurement_window": "one Dilithium2 forward-NTT twiddle group; baseline includes the original twiddle load; attack omits that load and runs all butterflies with stale zero",
+  "minimum_running_percent": 95.0,
+  "runtime_attack_branch_counted": false,
+  "target": [
+    0,
+    8
+  ]
+}

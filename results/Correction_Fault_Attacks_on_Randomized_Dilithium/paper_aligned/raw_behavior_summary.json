@@ -1,0 +1,975 @@
+{
+  "attack_1": {
+    "attack_minus_baseline": {
+      "mean": -1.0,
+      "median": -1.0,
+      "mode": -1
+    },
+    "attack_retired_instructions": {
+      "histogram": {
+        "46": 1000
+      },
+      "maximum": 46,
+      "mean": 46.0,
+      "median": 46.0,
+      "minimum": 46,
+      "mode": 46,
+      "n": 1000,
+      "p05": 46.0,
+      "p95": 46.0,
+      "stdev": 0.0
+    },
+    "baseline_retired_instructions": {
+      "histogram": {
+        "47": 1000
+      },
+      "maximum": 47,
+      "mean": 47.0,
+      "median": 47.0,
+      "minimum": 47,
+      "mode": 47,
+      "n": 1000,
+      "p05": 47.0,
+      "p95": 47.0,
+      "stdev": 0.0
+    },
+    "window": "two operand loads, optional ADD, result store"
+  },
+  "attack_2": {
+    "counter_sets": {
+      "cache-l1d": {
+        "events": {
+          "cache_misses": {
+            "attack": {
+              "histogram": {
+                "0": 2000
+              },
+              "maximum": 0,
+              "mean": 0.0,
+              "median": 0.0,
+              "minimum": 0,
+              "mode": 0,
+              "n": 2000,
+              "p05": 0.0,
+              "p95": 0.0,
+              "stdev": 0.0
+            },
+            "attack_minus_baseline": {
+              "mean": -0.002,
+              "median": 0.0,
+              "mode": 0
+            },
+            "baseline": {
+              "histogram": {
+                "0": 1996,
+                "1": 4
+              },
+              "maximum": 1,
+              "mean": 0.002,
+              "median": 0.0,
+              "minimum": 0,
+              "mode": 0,
+              "n": 2000,
+              "p05": 0.0,
+              "p95": 0.0,
+              "stdev": 0.044687789151507874
+            }
+          },
+          "cache_references": {
+            "attack": {
+              "histogram": {
+                "0": 1954,
+                "1": 11,
+                "10": 1,
+                "2": 9,
+                "3": 3,
+                "4": 6,
+                "5": 2,
+                "6": 8,
+                "7": 3,
+                "8": 2,
+                "9": 1
+              },
+              "maximum": 10,
+              "mean": 0.088,
+              "median": 0.0,
+              "minimum": 0,
+              "mode": 0,
+              "n": 2000,
+              "p05": 0.0,
+              "p95": 0.0,
+              "stdev": 0.6888347019592667
+            },
+            "attack_minus_baseline": {
+              "mean": 0.08299999999999999,
+              "median": 0.0,
+              "mode": 0
+            },
+            "baseline": {
+              "histogram": {
+                "0": 1992,
+                "1": 7,
+                "3": 1
+              },
+              "maximum": 3,
+              "mean": 0.005,
+              "median": 0.0,
+              "minimum": 0,
+              "mode": 0,
+              "n": 2000,
+              "p05": 0.0,
+              "p95": 0.0,
+              "stdev": 0.08932518958696574
+            }
+          },
+          "l1d_read_accesses": {
+            "attack": {
+              "histogram": {
+                "45266": 1981,
+                "45267": 19
+              },
+              "maximum": 45267,
+              "mean": 45266.0095,
+              "median": 45266.0,
+              "minimum": 45266,
+              "mode": 45266,
+              "n": 2000,
+              "p05": 45266.0,
+              "p95": 45266.0,
+              "stdev": 0.09702812596672321
+            },
+            "attack_minus_baseline": {
+              "mean": -0.0029999999969732016,
+              "median": 0.0,
+              "mode": 0
+            },
+            "baseline": {
+              "histogram": {
+                "45266": 1975,
+                "45267": 25
+              },
+              "maximum": 45267,
+              "mean": 45266.0125,
+              "median": 45266.0,
+              "minimum": 45266,
+              "mode": 45266,
+              "n": 2000,
+              "p05": 45266.0,
+              "p95": 45266.0,
+              "stdev": 0.11113021624419364
+            }
+          },
+          "l1d_read_misses": {
+            "attack": {
+              "histogram": {
+                "40": 60,
+                "41": 56,
+                "42": 84,
+                "43": 98,
+                "44": 116,
+                "45": 106,
+                "46": 114,
+                "47": 115,
+                "48": 127,
+                "49": 104,
+                "50": 119,
+                "51": 115,
+                "52": 89,
+                "53": 115,
+                "54": 74,
+                "55": 64
+              },
+              "maximum": 188,
+              "mean": 47.3865,
+              "median": 48.0,
+              "minimum": 24,
+              "mode": 48,
+              "n": 2000,
+              "p05": 35.0,
+              "p95": 57.0,
+              "stdev": 7.851301753187799
+            },
+            "attack_minus_baseline": {
+              "mean": -0.4230000000000018,
+              "median": 0.0,
+              "mode": 1
+            },
+            "baseline": {
+              "histogram": {
+                "41": 61,
+                "42": 83,
+                "43": 74,
+                "44": 92,
+                "45": 90,
+                "46": 121,
+                "47": 133,
+                "48": 115,
+                "49": 121,
+                "50": 106,
+                "51": 121,
+                "52": 99,
+                "53": 91,
+                "54": 90,
+                "55": 74,
+                "56": 55
+              },
+              "maximum": 133,
+              "mean": 47.8095,
+              "median": 48.0,
+              "minimum": 22,
+              "mode": 47,
+              "n": 2000,
+              "p05": 36.0,
+              "p95": 59.0,
+              "stdev": 7.2790591494402985
+            }
+          }
+        },
+        "per_session": {
+          "s00": {
+            "cache_misses": {
+              "attack_median": 0.0,
+              "baseline_median": 0.0,
+              "median_delta": 0.0
+            },
+            "cache_references": {
+              "attack_median": 0.0,
+              "baseline_median": 0.0,
+              "median_delta": 0.0
+            },
+            "l1d_read_accesses": {
+              "attack_median": 45266.0,
+              "baseline_median": 45266.0,
+              "median_delta": 0.0
+            },
+            "l1d_read_misses": {
+              "attack_median": 48.0,
+              "baseline_median": 47.0,
+              "median_delta": 1.0
+            }
+          },
+          "s01": {
+            "cache_misses": {
+              "attack_median": 0.0,
+              "baseline_median": 0.0,
+              "median_delta": 0.0
+            },
+            "cache_references": {
+              "attack_median": 0.0,
+              "baseline_median": 0.0,
+              "median_delta": 0.0
+            },
+            "l1d_read_accesses": {
+              "attack_median": 45266.0,
+              "baseline_median": 45266.0,
+              "median_delta": 0.0
+            },
+            "l1d_read_misses": {
+              "attack_median": 43.5,
+              "baseline_median": 46.0,
+              "median_delta": -2.5
+            }
+          },
+          "s02": {
+            "cache_misses": {
+              "attack_median": 0.0,
+              "baseline_median": 0.0,
+              "median_delta": 0.0
+            },
+            "cache_references": {
+              "attack_median": 0.0,
+              "baseline_median": 0.0,
+              "median_delta": 0.0
+            },
+            "l1d_read_accesses": {
+              "attack_median": 45266.0,
+              "baseline_median": 45266.0,
+              "median_delta": 0.0
+            },
+            "l1d_read_misses": {
+              "attack_median": 48.0,
+              "baseline_median": 50.0,
+              "median_delta": -2.0
+            }
+          },
+          "s03": {
+            "cache_misses": {
+              "attack_median": 0.0,
+              "baseline_median": 0.0,
+              "median_delta": 0.0
+            },
+            "cache_references": {
+              "attack_median": 0.0,
+              "baseline_median": 0.0,
+              "median_delta": 0.0
+            },
+            "l1d_read_accesses": {
+              "attack_median": 45266.0,
+              "baseline_median": 45266.0,
+              "median_delta": 0.0
+            },
+            "l1d_read_misses": {
+              "attack_median": 50.0,
+              "baseline_median": 48.0,
+              "median_delta": 2.0
+            }
+          }
+        },
+        "window": "matrix pointwise multiplication A*z through reduce and inverse NTT"
+      },
+      "cache-llc-dtlb": {
+        "events": {
+          "dtlb_read_accesses": {
+            "attack": {
+              "histogram": {
+                "45266": 1979,
+                "45267": 21
+              },
+              "maximum": 45267,
+              "mean": 45266.0105,
+              "median": 45266.0,
+              "minimum": 45266,
+              "mode": 45266,
+              "n": 2000,
+              "p05": 45266.0,
+              "p95": 45266.0,
+              "stdev": 0.10195561521435133
+            },
+            "attack_minus_baseline": {
+              "mean": -0.0025000000023283064,
+              "median": 0.0,
+              "mode": 0
+            },
+            "baseline": {
+              "histogram": {
+                "45266": 1974,
+                "45267": 26
+              },
+              "maximum": 45267,
+              "mean": 45266.013,
+              "median": 45266.0,
+              "minimum": 45266,
+              "mode": 45266,
+              "n": 2000,
+              "p05": 45266.0,
+              "p95": 45266.0,
+              "stdev": 0.11330233320349002
+            }
+          },
+          "dtlb_read_misses": {
+            "attack": {
+              "histogram": {
+                "0": 2000
+              },
+              "maximum": 0,
+              "mean": 0.0,
+              "median": 0.0,
+              "minimum": 0,
+              "mode": 0,
+              "n": 2000,
+              "p05": 0.0,
+              "p95": 0.0,
+              "stdev": 0.0
+            },
+            "attack_minus_baseline": {
+              "mean": 0.0,
+              "median": 0.0,
+              "mode": 0
+            },
+            "baseline": {
+              "histogram": {
+                "0": 2000
+              },
+              "maximum": 0,
+              "mean": 0.0,
+              "median": 0.0,
+              "minimum": 0,
+              "mode": 0,
+              "n": 2000,
+              "p05": 0.0,
+              "p95": 0.0,
+              "stdev": 0.0
+            }
+          },
+          "llc_read_accesses": {
+            "attack": {
+              "histogram": {
+                "0": 1985,
+                "1": 15
+              },
+              "maximum": 1,
+              "mean": 0.0075,
+              "median": 0.0,
+              "minimum": 0,
+              "mode": 0,
+              "n": 2000,
+              "p05": 0.0,
+              "p95": 0.0,
+              "stdev": 0.08629874701795173
+            },
+            "attack_minus_baseline": {
+              "mean": 0.004,
+              "median": 0.0,
+              "mode": 0
+            },
+            "baseline": {
+              "histogram": {
+                "0": 1993,
+                "1": 7
+              },
+              "maximum": 1,
+              "mean": 0.0035,
+              "median": 0.0,
+              "minimum": 0,
+              "mode": 0,
+              "n": 2000,
+              "p05": 0.0,
+              "p95": 0.0,
+              "stdev": 0.059071945518779784
+            }
+          },
+          "llc_read_misses": {
+            "attack": {
+              "histogram": {
+                "0": 1999,
+                "1": 1
+              },
+              "maximum": 1,
+              "mean": 0.0005,
+              "median": 0.0,
+              "minimum": 0,
+              "mode": 0,
+              "n": 2000,
+              "p05": 0.0,
+              "p95": 0.0,
+              "stdev": 0.022360679774997897
+            },
+            "attack_minus_baseline": {
+              "mean": -0.003,
+              "median": 0.0,
+              "mode": 0
+            },
+            "baseline": {
+              "histogram": {
+                "0": 1993,
+                "1": 7
+              },
+              "maximum": 1,
+              "mean": 0.0035,
+              "median": 0.0,
+              "minimum": 0,
+              "mode": 0,
+              "n": 2000,
+              "p05": 0.0,
+              "p95": 0.0,
+              "stdev": 0.059071945518779784
+            }
+          }
+        },
+        "per_session": {
+          "s00": {
+            "dtlb_read_accesses": {
+              "attack_median": 45266.0,
+              "baseline_median": 45266.0,
+              "median_delta": 0.0
+            },
+            "dtlb_read_misses": {
+              "attack_median": 0.0,
+              "baseline_median": 0.0,
+              "median_delta": 0.0
+            },
+            "llc_read_accesses": {
+              "attack_median": 0.0,
+              "baseline_median": 0.0,
+              "median_delta": 0.0
+            },
+            "llc_read_misses": {
+              "attack_median": 0.0,
+              "baseline_median": 0.0,
+              "median_delta": 0.0
+            }
+          },
+          "s01": {
+            "dtlb_read_accesses": {
+              "attack_median": 45266.0,
+              "baseline_median": 45266.0,
+              "median_delta": 0.0
+            },
+            "dtlb_read_misses": {
+              "attack_median": 0.0,
+              "baseline_median": 0.0,
+              "median_delta": 0.0
+            },
+            "llc_read_accesses": {
+              "attack_median": 0.0,
+              "baseline_median": 0.0,
+              "median_delta": 0.0
+            },
+            "llc_read_misses": {
+              "attack_median": 0.0,
+              "baseline_median": 0.0,
+              "median_delta": 0.0
+            }
+          },
+          "s02": {
+            "dtlb_read_accesses": {
+              "attack_median": 45266.0,
+              "baseline_median": 45266.0,
+              "median_delta": 0.0
+            },
+            "dtlb_read_misses": {
+              "attack_median": 0.0,
+              "baseline_median": 0.0,
+              "median_delta": 0.0
+            },
+            "llc_read_accesses": {
+              "attack_median": 0.0,
+              "baseline_median": 0.0,
+              "median_delta": 0.0
+            },
+            "llc_read_misses": {
+              "attack_median": 0.0,
+              "baseline_median": 0.0,
+              "median_delta": 0.0
+            }
+          },
+          "s03": {
+            "dtlb_read_accesses": {
+              "attack_median": 45266.0,
+              "baseline_median": 45266.0,
+              "median_delta": 0.0
+            },
+            "dtlb_read_misses": {
+              "attack_median": 0.0,
+              "baseline_median": 0.0,
+              "median_delta": 0.0
+            },
+            "llc_read_accesses": {
+              "attack_median": 0.0,
+              "baseline_median": 0.0,
+              "median_delta": 0.0
+            },
+            "llc_read_misses": {
+              "attack_median": 0.0,
+              "baseline_median": 0.0,
+              "median_delta": 0.0
+            }
+          }
+        },
+        "window": "matrix pointwise multiplication A*z through reduce and inverse NTT"
+      },
+      "structural": {
+        "events": {
+          "branch_misses": {
+            "attack": {
+              "histogram": {
+                "111": 13,
+                "115": 97,
+                "116": 82,
+                "117": 19,
+                "118": 15,
+                "119": 122,
+                "120": 36,
+                "121": 26,
+                "122": 63,
+                "123": 767,
+                "124": 416,
+                "125": 148,
+                "126": 81,
+                "127": 46,
+                "128": 14,
+                "130": 8
+              },
+              "maximum": 137,
+              "mean": 122.2515,
+              "median": 123.0,
+              "minimum": 76,
+              "mode": 123,
+              "n": 2000,
+              "p05": 115.0,
+              "p95": 126.0,
+              "stdev": 3.9430979902711574
+            },
+            "attack_minus_baseline": {
+              "mean": 0.1424999999999983,
+              "median": 0.0,
+              "mode": 0
+            },
+            "baseline": {
+              "histogram": {
+                "111": 12,
+                "114": 14,
+                "115": 104,
+                "116": 80,
+                "117": 25,
+                "118": 26,
+                "119": 122,
+                "120": 35,
+                "121": 22,
+                "122": 112,
+                "123": 593,
+                "124": 520,
+                "125": 140,
+                "126": 113,
+                "127": 24,
+                "128": 13
+              },
+              "maximum": 138,
+              "mean": 122.109,
+              "median": 123.0,
+              "minimum": 71,
+              "mode": 123,
+              "n": 2000,
+              "p05": 115.0,
+              "p95": 126.0,
+              "stdev": 4.6797509585999615
+            }
+          },
+          "branches": {
+            "attack": {
+              "histogram": {
+                "36007": 1982,
+                "36008": 18
+              },
+              "maximum": 36008,
+              "mean": 36007.009,
+              "median": 36007.0,
+              "minimum": 36007,
+              "mode": 36007,
+              "n": 2000,
+              "p05": 36007.0,
+              "p95": 36007.0,
+              "stdev": 0.0944640764040248
+            },
+            "attack_minus_baseline": {
+              "mean": -0.0010000000038417056,
+              "median": 0.0,
+              "mode": 0
+            },
+            "baseline": {
+              "histogram": {
+                "36007": 1980,
+                "36008": 20
+              },
+              "maximum": 36008,
+              "mean": 36007.01,
+              "median": 36007.0,
+              "minimum": 36007,
+              "mode": 36007,
+              "n": 2000,
+              "p05": 36007.0,
+              "p95": 36007.0,
+              "stdev": 0.09952362772848526
+            }
+          },
+          "cycles": {
+            "attack": {
+              "histogram": {
+                "50297": 5,
+                "50549": 6,
+                "50550": 7,
+                "50613": 6,
+                "50618": 6,
+                "50651": 5,
+                "50675": 5,
+                "50697": 6,
+                "50749": 5,
+                "50756": 5,
+                "50785": 6,
+                "50786": 6,
+                "50801": 6,
+                "50811": 6,
+                "50877": 7,
+                "51231": 5
+              },
+              "maximum": 81635,
+              "mean": 51026.1415,
+              "median": 50791.0,
+              "minimum": 49658,
+              "mode": 50550,
+              "n": 2000,
+              "p05": 50136.95,
+              "p95": 51813.1,
+              "stdev": 1592.627030068937
+            },
+            "attack_minus_baseline": {
+              "mean": -140.02900000000227,
+              "median": -16.0,
+              "mode": -432
+            },
+            "baseline": {
+              "histogram": {
+                "50481": 6,
+                "50501": 5,
+                "50542": 6,
+                "50658": 6,
+                "50665": 6,
+                "50673": 6,
+                "50678": 5,
+                "50729": 6,
+                "50752": 6,
+                "50802": 5,
+                "50810": 5,
+                "50858": 5,
+                "50872": 5,
+                "50955": 5,
+                "50982": 7,
+                "50987": 6
+              },
+              "maximum": 70014,
+              "mean": 51166.1705,
+              "median": 50807.0,
+              "minimum": 49547,
+              "mode": 50982,
+              "n": 2000,
+              "p05": 50165.0,
+              "p95": 51935.100000000006,
+              "stdev": 1979.0488772789517
+            }
+          },
+          "instructions": {
+            "attack": {
+              "histogram": {
+                "271415": 1982,
+                "271416": 18
+              },
+              "maximum": 271416,
+              "mean": 271415.009,
+              "median": 271415.0,
+              "minimum": 271415,
+              "mode": 271415,
+              "n": 2000,
+              "p05": 271415.0,
+              "p95": 271415.0,
+              "stdev": 0.0944640764040248
+            },
+            "attack_minus_baseline": {
+              "mean": -0.0009999999892897904,
+              "median": 0.0,
+              "mode": 0
+            },
+            "baseline": {
+              "histogram": {
+                "271415": 1980,
+                "271416": 20
+              },
+              "maximum": 271416,
+              "mean": 271415.01,
+              "median": 271415.0,
+              "minimum": 271415,
+              "mode": 271415,
+              "n": 2000,
+              "p05": 271415.0,
+              "p95": 271415.0,
+              "stdev": 0.09952362772848526
+            }
+          },
+          "retired_loads": {
+            "attack": {
+              "histogram": {
+                "45266": 1982,
+                "45267": 18
+              },
+              "maximum": 45267,
+              "mean": 45266.009,
+              "median": 45266.0,
+              "minimum": 45266,
+              "mode": 45266,
+              "n": 2000,
+              "p05": 45266.0,
+              "p95": 45266.0,
+              "stdev": 0.0944640764040248
+            },
+            "attack_minus_baseline": {
+              "mean": -0.0010000000038417056,
+              "median": 0.0,
+              "mode": 0
+            },
+            "baseline": {
+              "histogram": {
+                "45266": 1980,
+                "45267": 20
+              },
+              "maximum": 45267,
+              "mean": 45266.01,
+              "median": 45266.0,
+              "minimum": 45266,
+              "mode": 45266,
+              "n": 2000,
+              "p05": 45266.0,
+              "p95": 45266.0,
+              "stdev": 0.09952362772848526
+            }
+          },
+          "retired_stores": {
+            "attack": {
+              "histogram": {
+                "36098": 2000
+              },
+              "maximum": 36098,
+              "mean": 36098.0,
+              "median": 36098.0,
+              "minimum": 36098,
+              "mode": 36098,
+              "n": 2000,
+              "p05": 36098.0,
+              "p95": 36098.0,
+              "stdev": 0.0
+            },
+            "attack_minus_baseline": {
+              "mean": 0.0,
+              "median": 0.0,
+              "mode": 0
+            },
+            "baseline": {
+              "histogram": {
+                "36098": 2000
+              },
+              "maximum": 36098,
+              "mean": 36098.0,
+              "median": 36098.0,
+              "minimum": 36098,
+              "mode": 36098,
+              "n": 2000,
+              "p05": 36098.0,
+              "p95": 36098.0,
+              "stdev": 0.0
+            }
+          }
+        },
+        "per_session": {
+          "s00": {
+            "branch_misses": {
+              "attack_median": 124.0,
+              "baseline_median": 124.0,
+              "median_delta": 0.0
+            },
+            "branches": {
+              "attack_median": 36007.0,
+              "baseline_median": 36007.0,
+              "median_delta": 0.0
+            },
+            "cycles": {
+              "attack_median": 50686.0,
+              "baseline_median": 50810.5,
+              "median_delta": -124.5
+            },
+            "instructions": {
+              "attack_median": 271415.0,
+              "baseline_median": 271415.0,
+              "median_delta": 0.0
+            },
+            "retired_loads": {
+              "attack_median": 45266.0,
+              "baseline_median": 45266.0,
+              "median_delta": 0.0
+            },
+            "retired_stores": {
+              "attack_median": 36098.0,
+              "baseline_median": 36098.0,
+              "median_delta": 0.0
+            }
+          },
+          "s01": {
+            "branch_misses": {
+              "attack_median": 123.0,
+              "baseline_median": 123.0,
+              "median_delta": 0.0
+            },
+            "branches": {
+              "attack_median": 36007.0,
+              "baseline_median": 36007.0,
+              "median_delta": 0.0
+            },
+            "cycles": {
+              "attack_median": 50666.0,
+              "baseline_median": 50814.5,
+              "median_delta": -148.5
+            },
+            "instructions": {
+              "attack_median": 271415.0,
+              "baseline_median": 271415.0,
+              "median_delta": 0.0
+            },
+            "retired_loads": {
+              "attack_median": 45266.0,
+              "baseline_median": 45266.0,
+              "median_delta": 0.0
+            },
+            "retired_stores": {
+              "attack_median": 36098.0,
+              "baseline_median": 36098.0,
+              "median_delta": 0.0
+            }
+          },
+          "s02": {
+            "branch_misses": {
+              "attack_median": 123.0,
+              "baseline_median": 124.0,
+              "median_delta": -1.0
+            },
+            "branches": {
+              "attack_median": 36007.0,
+              "baseline_median": 36007.0,
+              "median_delta": 0.0
+            },
+            "cycles": {
+              "attack_median": 50865.0,
+              "baseline_median": 50836.0,
+              "median_delta": 29.0
+            },
+            "instructions": {
+              "attack_median": 271415.0,
+              "baseline_median": 271415.0,
+              "median_delta": 0.0
+            },
+            "retired_loads": {
+              "attack_median": 45266.0,
+              "baseline_median": 45266.0,
+              "median_delta": 0.0
+            },
+            "retired_stores": {
+              "attack_median": 36098.0,
+              "baseline_median": 36098.0,
+              "median_delta": 0.0
+            }
+          },
+          "s03": {
+            "branch_misses": {
+              "attack_median": 123.0,
+              "baseline_median": 123.0,
+              "median_delta": 0.0
+            },
+            "branches": {
+              "attack_median": 36007.0,
+              "baseline_median": 36007.0,
+              "median_delta": 0.0
+            },
+            "cycles": {
+              "attack_median": 50951.0,
+              "baseline_median": 50755.5,
+              "median_delta": 195.5
+            },
+            "instructions": {
+              "attack_median": 271415.0,
+              "baseline_median": 271415.0,
+              "median_delta": 0.0
+            },
+            "retired_loads": {
+              "attack_median": 45266.0,
+              "baseline_median": 45266.0,
+              "median_delta": 0.0
+            },
+            "retired_stores": {
+              "attack_median": 36098.0,
+              "baseline_median": 36098.0,
+              "median_delta": 0.0
+            }
+          }
+        },
+        "window": "matrix pointwise multiplication A*z through reduce and inverse NTT"
+      }
+    }
+  },
+  "paper": "Krahmer et al., Correction Fault Attacks on Randomized Dilithium"
+}

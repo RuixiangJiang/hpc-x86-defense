@@ -1,0 +1,28 @@
+=== Delvaux Roulette: operation-level session-calibrated detector ===
+Baseline, all attacks, and every PMU pass use the same rou_single executable.
+Primary thresholds use the most conservative per-session confidence-guarded threshold.
+
+Primary detector results:
+attack                       FPR        worst FPR   TPR        AUC       batch FPR   batch worst batch TPR  
+skip-local-masked-operation    0.0000%    0.0000% 100.0000%  1.000000    0.0000%    0.0000%  100.0000%
+set-masked-intermediate-constant   0.6833%    0.8500%   1.2000%  0.484579    0.1667%    0.5000%    0.0000%
+replace-masked-intermediate-random   0.8333%    1.1000%   0.2000%  0.361595    1.0000%    1.5000%    0.0000%
+flip-masked-intermediate-bit   0.7167%    1.1000%   0.5000%  0.477450    0.1667%    0.5000%    1.0000%
+
+Directly calibrated operation-level unified detector:
+  single: FP=58/6000 FPR=0.9667% worst-session=1.3500%
+    skip-local-masked-operation: TP=1000/1000 TPR=100.0000% AUC=1.000000
+    set-masked-intermediate-constant: TP=7/1000 TPR=0.7000% AUC=0.513376
+    replace-masked-intermediate-random: TP=3/1000 TPR=0.3000% AUC=0.436234
+    flip-masked-intermediate-bit: TP=9/1000 TPR=0.9000% AUC=0.462287
+  batch-10: FP=6/600 FPR=1.0000% worst-session=1.5000%
+    skip-local-masked-operation: TP=100/100 TPR=100.0000% AUC=1.000000
+    set-masked-intermediate-constant: TP=2/100 TPR=2.0000% AUC=0.562450
+    replace-masked-intermediate-random: TP=0/100 TPR=0.0000% AUC=0.347400
+    flip-masked-intermediate-bit: TP=2/100 TPR=2.0000% AUC=0.471650
+
+Semantic success:
+  skip-local-masked-operation: 1000/1000
+  set-masked-intermediate-constant: 1000/1000
+  replace-masked-intermediate-random: 1000/1000
+  flip-masked-intermediate-bit: 1000/1000

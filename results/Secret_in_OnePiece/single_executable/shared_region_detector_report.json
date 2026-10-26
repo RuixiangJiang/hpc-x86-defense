@@ -1,0 +1,1690 @@
+{
+  "attacks": {
+    "skip-bit-assignment": {
+      "batch": {
+        "auc": 1.0,
+        "batch_size": 10,
+        "contextual_baseline_fpr": {
+          "by_session": {
+            "skip-bit-assignment:s00": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 50
+            },
+            "skip-bit-assignment:s01": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.0,
+            0.03621669264517642
+          ],
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 100,
+          "worst_session_rate": 0.0
+        },
+        "metric": "median shared structural score",
+        "tpr": {
+          "by_session": {
+            "skip-bit-assignment:s00": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            },
+            "skip-bit-assignment:s01": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.9637833073548128,
+            1.0
+          ],
+          "positives": 100,
+          "rate": 1.0,
+          "trials": 100,
+          "worst_session_rate": 1.0
+        }
+      },
+      "semantic_success": {
+        "rate": 1.0,
+        "successes": 1000,
+        "trials": 1000
+      },
+      "single_trace": {
+        "auc": 1.0,
+        "contextual_baseline_fpr": {
+          "by_session": {
+            "skip-bit-assignment:s00": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "skip-bit-assignment:s01": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.0,
+            0.003682083896865672
+          ],
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 1000,
+          "worst_session_rate": 0.0
+        },
+        "tpr": {
+          "by_session": {
+            "skip-bit-assignment:s00": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            },
+            "skip-bit-assignment:s01": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.9963179161031168,
+            1.0
+          ],
+          "positives": 1000,
+          "rate": 1.0,
+          "trials": 1000,
+          "worst_session_rate": 1.0
+        }
+      }
+    },
+    "skip-or-operation": {
+      "batch": {
+        "auc": 1.0,
+        "batch_size": 10,
+        "contextual_baseline_fpr": {
+          "by_session": {
+            "skip-or-operation:s00": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 50
+            },
+            "skip-or-operation:s01": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.0,
+            0.03621669264517642
+          ],
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 100,
+          "worst_session_rate": 0.0
+        },
+        "metric": "median shared structural score",
+        "tpr": {
+          "by_session": {
+            "skip-or-operation:s00": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            },
+            "skip-or-operation:s01": {
+              "positives": 50,
+              "rate": 1.0,
+              "trials": 50
+            }
+          },
+          "ci95": [
+            0.9637833073548128,
+            1.0
+          ],
+          "positives": 100,
+          "rate": 1.0,
+          "trials": 100,
+          "worst_session_rate": 1.0
+        }
+      },
+      "semantic_success": {
+        "rate": 1.0,
+        "successes": 1000,
+        "trials": 1000
+      },
+      "single_trace": {
+        "auc": 0.999,
+        "contextual_baseline_fpr": {
+          "by_session": {
+            "skip-or-operation:s00": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "skip-or-operation:s01": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.0,
+            0.003682083896865672
+          ],
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 1000,
+          "worst_session_rate": 0.0
+        },
+        "tpr": {
+          "by_session": {
+            "skip-or-operation:s00": {
+              "positives": 498,
+              "rate": 0.996,
+              "trials": 500
+            },
+            "skip-or-operation:s01": {
+              "positives": 500,
+              "rate": 1.0,
+              "trials": 500
+            }
+          },
+          "ci95": [
+            0.9927941610885278,
+            0.9997576988831227
+          ],
+          "positives": 998,
+          "rate": 0.998,
+          "trials": 1000,
+          "worst_session_rate": 1.0
+        }
+      }
+    }
+  },
+  "collection_audit": {
+    "skip-bit-assignment": {
+      "attack_s00_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/attack_s00_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/attack_s00_attack.csv",
+          "valid": 500
+        }
+      },
+      "attack_s00_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/attack_s00_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/attack_s00_baseline.csv",
+          "valid": 500
+        }
+      },
+      "attack_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/attack_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/attack_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "attack_s01_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/attack_s01_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/attack_s01_attack.csv",
+          "valid": 500
+        }
+      },
+      "attack_s01_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/attack_s01_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/attack_s01_baseline.csv",
+          "valid": 500
+        }
+      },
+      "attack_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/attack_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/attack_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "calibration_s00_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/calibration_s00_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/calibration_s00_baseline.csv",
+          "valid": 500
+        }
+      },
+      "calibration_s01_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/calibration_s01_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/calibration_s01_baseline.csv",
+          "valid": 500
+        }
+      },
+      "calibration_s02_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/calibration_s02_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/calibration_s02_baseline.csv",
+          "valid": 500
+        }
+      },
+      "calibration_s03_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/calibration_s03_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/calibration_s03_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s00_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/development_s00_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/development_s00_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s00_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/development_s00_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/development_s00_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/development_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/development_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "development_s01_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/development_s01_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/development_s01_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s01_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/development_s01_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/development_s01_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/development_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/development_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "development_s02_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/development_s02_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/development_s02_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s02_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/development_s02_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/development_s02_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s02_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/development_s02_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/development_s02_reference.csv",
+          "valid": 200
+        }
+      },
+      "development_s03_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/development_s03_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/development_s03_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s03_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/development_s03_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/development_s03_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s03_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/development_s03_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/development_s03_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s00_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/threshold_s00_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "retired_stores": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/threshold_s00_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/threshold_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/threshold_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s01_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/threshold_s01_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "retired_stores": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/threshold_s01_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/threshold_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/threshold_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s02_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/threshold_s02_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "retired_stores": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/threshold_s02_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s02_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/threshold_s02_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/threshold_s02_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s03_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/threshold_s03_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "retired_stores": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/threshold_s03_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s03_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/threshold_s03_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/threshold_s03_reference.csv",
+          "valid": 200
+        }
+      },
+      "validation_s00_baseline": {
+        "instructions": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/validation_s00_baseline.csv",
+          "valid": 2000
+        },
+        "merged": 2000,
+        "retired_stores": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/validation_s00_baseline.csv",
+          "valid": 2000
+        }
+      },
+      "validation_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/validation_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/validation_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "validation_s01_baseline": {
+        "instructions": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/validation_s01_baseline.csv",
+          "valid": 2000
+        },
+        "merged": 2000,
+        "retired_stores": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/validation_s01_baseline.csv",
+          "valid": 2000
+        }
+      },
+      "validation_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/validation_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/validation_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "validation_s02_baseline": {
+        "instructions": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/validation_s02_baseline.csv",
+          "valid": 2000
+        },
+        "merged": 2000,
+        "retired_stores": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/validation_s02_baseline.csv",
+          "valid": 2000
+        }
+      },
+      "validation_s02_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-instructions/validation_s02_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-bit-assignment/structural-stores/validation_s02_reference.csv",
+          "valid": 200
+        }
+      }
+    },
+    "skip-or-operation": {
+      "attack_s00_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/attack_s00_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/attack_s00_attack.csv",
+          "valid": 500
+        }
+      },
+      "attack_s00_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/attack_s00_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/attack_s00_baseline.csv",
+          "valid": 500
+        }
+      },
+      "attack_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/attack_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/attack_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "attack_s01_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/attack_s01_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/attack_s01_attack.csv",
+          "valid": 500
+        }
+      },
+      "attack_s01_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/attack_s01_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/attack_s01_baseline.csv",
+          "valid": 500
+        }
+      },
+      "attack_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/attack_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/attack_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "calibration_s00_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/calibration_s00_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/calibration_s00_baseline.csv",
+          "valid": 500
+        }
+      },
+      "calibration_s01_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/calibration_s01_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/calibration_s01_baseline.csv",
+          "valid": 500
+        }
+      },
+      "calibration_s02_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/calibration_s02_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/calibration_s02_baseline.csv",
+          "valid": 500
+        }
+      },
+      "calibration_s03_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/calibration_s03_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/calibration_s03_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s00_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/development_s00_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/development_s00_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s00_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/development_s00_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/development_s00_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/development_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/development_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "development_s01_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/development_s01_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/development_s01_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s01_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/development_s01_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/development_s01_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/development_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/development_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "development_s02_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/development_s02_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/development_s02_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s02_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/development_s02_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/development_s02_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s02_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/development_s02_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/development_s02_reference.csv",
+          "valid": 200
+        }
+      },
+      "development_s03_attack": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/development_s03_attack.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/development_s03_attack.csv",
+          "valid": 500
+        }
+      },
+      "development_s03_baseline": {
+        "instructions": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/development_s03_baseline.csv",
+          "valid": 500
+        },
+        "merged": 500,
+        "retired_stores": {
+          "collected": 500,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/development_s03_baseline.csv",
+          "valid": 500
+        }
+      },
+      "development_s03_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/development_s03_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/development_s03_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s00_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/threshold_s00_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "retired_stores": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/threshold_s00_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/threshold_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/threshold_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s01_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/threshold_s01_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "retired_stores": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/threshold_s01_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/threshold_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/threshold_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s02_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/threshold_s02_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "retired_stores": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/threshold_s02_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s02_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/threshold_s02_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/threshold_s02_reference.csv",
+          "valid": 200
+        }
+      },
+      "threshold_s03_baseline": {
+        "instructions": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/threshold_s03_baseline.csv",
+          "valid": 5000
+        },
+        "merged": 5000,
+        "retired_stores": {
+          "collected": 5000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/threshold_s03_baseline.csv",
+          "valid": 5000
+        }
+      },
+      "threshold_s03_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/threshold_s03_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/threshold_s03_reference.csv",
+          "valid": 200
+        }
+      },
+      "validation_s00_baseline": {
+        "instructions": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/validation_s00_baseline.csv",
+          "valid": 2000
+        },
+        "merged": 2000,
+        "retired_stores": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/validation_s00_baseline.csv",
+          "valid": 2000
+        }
+      },
+      "validation_s00_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/validation_s00_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/validation_s00_reference.csv",
+          "valid": 200
+        }
+      },
+      "validation_s01_baseline": {
+        "instructions": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/validation_s01_baseline.csv",
+          "valid": 2000
+        },
+        "merged": 2000,
+        "retired_stores": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/validation_s01_baseline.csv",
+          "valid": 2000
+        }
+      },
+      "validation_s01_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/validation_s01_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/validation_s01_reference.csv",
+          "valid": 200
+        }
+      },
+      "validation_s02_baseline": {
+        "instructions": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/validation_s02_baseline.csv",
+          "valid": 2000
+        },
+        "merged": 2000,
+        "retired_stores": {
+          "collected": 2000,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/validation_s02_baseline.csv",
+          "valid": 2000
+        }
+      },
+      "validation_s02_reference": {
+        "instructions": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-instructions/validation_s02_reference.csv",
+          "valid": 200
+        },
+        "merged": 200,
+        "retired_stores": {
+          "collected": 200,
+          "excluded": {},
+          "path": "/home/ruixiang/hpc-x86-defense/results/Secret_in_OnePiece/single_executable/skip-or-operation/structural-stores/validation_s02_reference.csv",
+          "valid": 200
+        }
+      }
+    }
+  },
+  "detector": {
+    "batch_score": "median of 10 single-trace scores within one collection session",
+    "development_audit": {
+      "skip-bit-assignment": {
+        "attack_median": 1.0,
+        "auc": 1.0,
+        "benign_median": 0.0
+      },
+      "skip-or-operation": {
+        "attack_median": 1.0,
+        "auc": 0.99825,
+        "benign_median": 0.0
+      }
+    },
+    "feature_selection": "none; features and directions are predeclared",
+    "features": [
+      {
+        "direction": "deficit",
+        "feature": "structural-instructions.instructions",
+        "role": "common channel for assignment-skip and OR-skip"
+      },
+      {
+        "direction": "deficit",
+        "feature": "structural-stores.retired_stores",
+        "role": "assignment-skip rescue channel; neutral for OR-skip"
+      }
+    ],
+    "global_scale": {
+      "instructions": 1.0,
+      "retired_stores": 1.0
+    },
+    "name": "shared-structural-decoder-region-v1",
+    "normalization": "session-local benign reference median and robust scale",
+    "scope": "one bitsliced masked decoder target shared by both fault families",
+    "session_scale_floor": 0.5,
+    "single_score": "max(one-sided normalized instruction deficit, one-sided normalized store deficit)",
+    "threshold": {
+      "batch": {
+        "calibrated_diagnostic": {
+          "confidence": 0.95,
+          "false_positives": 0,
+          "one_sided_upper": 0.0007486526880177799,
+          "per_session_at_frozen_threshold": {
+            "skip-bit-assignment:s00": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "skip-bit-assignment:s01": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "skip-bit-assignment:s02": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "skip-bit-assignment:s03": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "skip-or-operation:s00": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "skip-or-operation:s01": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "skip-or-operation:s02": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            },
+            "skip-or-operation:s03": {
+              "false_positives": 0,
+              "one_sided_upper": 0.005973551516349557,
+              "rate": 0.0,
+              "trials": 500
+            }
+          },
+          "per_session_candidates": {
+            "skip-bit-assignment:s00": {
+              "allowed_false_positives": 1,
+              "confidence_guarded_upper": 0.005973551516349557,
+              "false_positives": 0,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 0.0
+            },
+            "skip-bit-assignment:s01": {
+              "allowed_false_positives": 1,
+              "confidence_guarded_upper": 0.005973551516349557,
+              "false_positives": 0,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 0.0
+            },
+            "skip-bit-assignment:s02": {
+              "allowed_false_positives": 1,
+              "confidence_guarded_upper": 0.005973551516349557,
+              "false_positives": 0,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 0.0
+            },
+            "skip-bit-assignment:s03": {
+              "allowed_false_positives": 1,
+              "confidence_guarded_upper": 0.005973551516349557,
+              "false_positives": 0,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 0.0
+            },
+            "skip-or-operation:s00": {
+              "allowed_false_positives": 1,
+              "confidence_guarded_upper": 0.005973551516349557,
+              "false_positives": 0,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 0.0
+            },
+            "skip-or-operation:s01": {
+              "allowed_false_positives": 1,
+              "confidence_guarded_upper": 0.005973551516349557,
+              "false_positives": 0,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 0.0
+            },
+            "skip-or-operation:s02": {
+              "allowed_false_positives": 1,
+              "confidence_guarded_upper": 0.005973551516349557,
+              "false_positives": 0,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 0.0
+            },
+            "skip-or-operation:s03": {
+              "allowed_false_positives": 1,
+              "confidence_guarded_upper": 0.005973551516349557,
+              "false_positives": 0,
+              "rate": 0.0,
+              "trials": 500,
+              "value": 0.0
+            }
+          },
+          "rate": 0.0,
+          "selection": "maximum of per-collection-session confidence-guarded thresholds",
+          "target_fpr": 0.01,
+          "trials": 4000,
+          "value": 0.0,
+          "worst_session_rate": 0.0
+        },
+        "confidence": 0.95,
+        "selection": "predeclared semantic threshold on median batch score",
+        "target_fpr": 0.01,
+        "value": 0.0
+      },
+      "single": {
+        "calibrated_diagnostic": {
+          "confidence": 0.95,
+          "false_positives": 0,
+          "one_sided_upper": 7.489050240515666e-05,
+          "per_session_at_frozen_threshold": {
+            "skip-bit-assignment:s00": {
+              "false_positives": 0,
+              "one_sided_upper": 0.0005989670023149134,
+              "rate": 0.0,
+              "trials": 5000
+            },
+            "skip-bit-assignment:s01": {
+              "false_positives": 0,
+              "one_sided_upper": 0.0005989670023149134,
+              "rate": 0.0,
+              "trials": 5000
+            },
+            "skip-bit-assignment:s02": {
+              "false_positives": 0,
+              "one_sided_upper": 0.0005989670023149134,
+              "rate": 0.0,
+              "trials": 5000
+            },
+            "skip-bit-assignment:s03": {
+              "false_positives": 0,
+              "one_sided_upper": 0.0005989670023149134,
+              "rate": 0.0,
+              "trials": 5000
+            },
+            "skip-or-operation:s00": {
+              "false_positives": 0,
+              "one_sided_upper": 0.0005989670023149134,
+              "rate": 0.0,
+              "trials": 5000
+            },
+            "skip-or-operation:s01": {
+              "false_positives": 0,
+              "one_sided_upper": 0.0005989670023149134,
+              "rate": 0.0,
+              "trials": 5000
+            },
+            "skip-or-operation:s02": {
+              "false_positives": 0,
+              "one_sided_upper": 0.0005989670023149134,
+              "rate": 0.0,
+              "trials": 5000
+            },
+            "skip-or-operation:s03": {
+              "false_positives": 0,
+              "one_sided_upper": 0.0005989670023149134,
+              "rate": 0.0,
+              "trials": 5000
+            }
+          },
+          "per_session_candidates": {
+            "skip-bit-assignment:s00": {
+              "allowed_false_positives": 38,
+              "confidence_guarded_upper": 0.0005989670023149134,
+              "false_positives": 0,
+              "rate": 0.0,
+              "trials": 5000,
+              "value": 0.0
+            },
+            "skip-bit-assignment:s01": {
+              "allowed_false_positives": 38,
+              "confidence_guarded_upper": 0.0005989670023149134,
+              "false_positives": 0,
+              "rate": 0.0,
+              "trials": 5000,
+              "value": 0.0
+            },
+            "skip-bit-assignment:s02": {
+              "allowed_false_positives": 38,
+              "confidence_guarded_upper": 0.0005989670023149134,
+              "false_positives": 0,
+              "rate": 0.0,
+              "trials": 5000,
+              "value": 0.0
+            },
+            "skip-bit-assignment:s03": {
+              "allowed_false_positives": 38,
+              "confidence_guarded_upper": 0.0005989670023149134,
+              "false_positives": 0,
+              "rate": 0.0,
+              "trials": 5000,
+              "value": 0.0
+            },
+            "skip-or-operation:s00": {
+              "allowed_false_positives": 38,
+              "confidence_guarded_upper": 0.0005989670023149134,
+              "false_positives": 0,
+              "rate": 0.0,
+              "trials": 5000,
+              "value": 0.0
+            },
+            "skip-or-operation:s01": {
+              "allowed_false_positives": 38,
+              "confidence_guarded_upper": 0.0005989670023149134,
+              "false_positives": 0,
+              "rate": 0.0,
+              "trials": 5000,
+              "value": 0.0
+            },
+            "skip-or-operation:s02": {
+              "allowed_false_positives": 38,
+              "confidence_guarded_upper": 0.0005989670023149134,
+              "false_positives": 0,
+              "rate": 0.0,
+              "trials": 5000,
+              "value": 0.0
+            },
+            "skip-or-operation:s03": {
+              "allowed_false_positives": 38,
+              "confidence_guarded_upper": 0.0005989670023149134,
+              "false_positives": 0,
+              "rate": 0.0,
+              "trials": 5000,
+              "value": 0.0
+            }
+          },
+          "rate": 0.0,
+          "selection": "maximum of per-collection-session confidence-guarded thresholds",
+          "target_fpr": 0.01,
+          "trials": 40000,
+          "value": 0.0,
+          "worst_session_rate": 0.0
+        },
+        "confidence": 0.95,
+        "selection": "predeclared semantic threshold: any positive structural deficit",
+        "target_fpr": 0.01,
+        "value": 0.0
+      }
+    },
+    "threshold_mode": "fixed-zero",
+    "z_clip": 4.0
+  },
+  "experiment": "Secret in OnePiece",
+  "validation_fpr": {
+    "batch": {
+      "by_session": {
+        "skip-bit-assignment:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "skip-bit-assignment:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "skip-bit-assignment:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "skip-or-operation:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "skip-or-operation:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        },
+        "skip-or-operation:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 200
+        }
+      },
+      "ci95": [
+        0.0,
+        0.0030693461081002845
+      ],
+      "positives": 0,
+      "rate": 0.0,
+      "trials": 1200,
+      "worst_session_rate": 0.0
+    },
+    "single_trace": {
+      "by_session": {
+        "skip-bit-assignment:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "skip-bit-assignment:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "skip-bit-assignment:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "skip-or-operation:s00": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "skip-or-operation:s01": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        },
+        "skip-or-operation:s02": {
+          "positives": 0,
+          "rate": 0.0,
+          "trials": 2000
+        }
+      },
+      "ci95": [
+        0.0,
+        0.00030735937660201216
+      ],
+      "positives": 0,
+      "rate": 0.0,
+      "trials": 12000,
+      "worst_session_rate": 0.0
+    }
+  }
+}

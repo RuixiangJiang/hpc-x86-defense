@@ -1,0 +1,3 @@
+attack,single_fpr,single_worst_fpr,single_tpr,single_auc,batch_fpr,batch_worst_fpr,batch_tpr,batch_auc
+skip-bit-assignment,0.0,0.0,1.0,1.0,0.0,0.0,1.0,1.0
+skip-or-operation,0.0,0.0,0.998,0.999,0.0,0.0,1.0,1.0

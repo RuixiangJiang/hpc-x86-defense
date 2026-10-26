@@ -1,0 +1,366 @@
+{
+  "collections": [
+    {
+      "baseline_policy": "single",
+      "domain": "0x53fa9fc17873c827",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s00",
+      "stage": "calibration",
+      "stem": "calibration_s00_baseline"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x52c7aa1948f99415",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s01",
+      "stage": "calibration",
+      "stem": "calibration_s01_baseline"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x5bffb279274b746c",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s02",
+      "stage": "calibration",
+      "stem": "calibration_s02_baseline"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x53f5bba5c62ab564",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s03",
+      "stage": "calibration",
+      "stem": "calibration_s03_baseline"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x5ce9015aee667408",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s00",
+      "stage": "development",
+      "stem": "development_s00_reference"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x5bd1fa33c649e482",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s00",
+      "stage": "development",
+      "stem": "development_s00_baseline"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x5997dcedbe36cfe3",
+      "expected_attack": true,
+      "kind": "attack",
+      "samples": 500,
+      "session": "s00",
+      "stage": "development",
+      "stem": "development_s00_attack"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x58919394da00599d",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s01",
+      "stage": "development",
+      "stem": "development_s01_reference"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x5b3ce2e9a79df6db",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s01",
+      "stage": "development",
+      "stem": "development_s01_baseline"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x570c18e5df596fda",
+      "expected_attack": true,
+      "kind": "attack",
+      "samples": 500,
+      "session": "s01",
+      "stage": "development",
+      "stem": "development_s01_attack"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x5e4bb93366648068",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s02",
+      "stage": "development",
+      "stem": "development_s02_reference"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x5f94a2ddf4f1494a",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s02",
+      "stage": "development",
+      "stem": "development_s02_baseline"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x59bf5e3c325ec52c",
+      "expected_attack": true,
+      "kind": "attack",
+      "samples": 500,
+      "session": "s02",
+      "stage": "development",
+      "stem": "development_s02_attack"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x5123a7c3d8a86936",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s03",
+      "stage": "development",
+      "stem": "development_s03_reference"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x5e0325f64da94455",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s03",
+      "stage": "development",
+      "stem": "development_s03_baseline"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x56ddd5f8aa1b883d",
+      "expected_attack": true,
+      "kind": "attack",
+      "samples": 500,
+      "session": "s03",
+      "stage": "development",
+      "stem": "development_s03_attack"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x58ec22e681b58321",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s00",
+      "stage": "threshold",
+      "stem": "threshold_s00_reference"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x53a8765c99cb42c3",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 5000,
+      "session": "s00",
+      "stage": "threshold",
+      "stem": "threshold_s00_baseline"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x5a68ad30f70fb4ae",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s01",
+      "stage": "threshold",
+      "stem": "threshold_s01_reference"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x550ac8511933a579",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 5000,
+      "session": "s01",
+      "stage": "threshold",
+      "stem": "threshold_s01_baseline"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x56a9482d1aaf4095",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s02",
+      "stage": "threshold",
+      "stem": "threshold_s02_reference"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x5a5a412d38f4cda3",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 5000,
+      "session": "s02",
+      "stage": "threshold",
+      "stem": "threshold_s02_baseline"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x5f06e6d2a6edebd2",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s03",
+      "stage": "threshold",
+      "stem": "threshold_s03_reference"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x5dd063a98860f634",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 5000,
+      "session": "s03",
+      "stage": "threshold",
+      "stem": "threshold_s03_baseline"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x5619ac4c40786ee9",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s00",
+      "stage": "validation",
+      "stem": "validation_s00_reference"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x55a29e6de81e3c0c",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 2000,
+      "session": "s00",
+      "stage": "validation",
+      "stem": "validation_s00_baseline"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x5278b03f3870726c",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s01",
+      "stage": "validation",
+      "stem": "validation_s01_reference"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x54a30b9f9b7359c3",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 2000,
+      "session": "s01",
+      "stage": "validation",
+      "stem": "validation_s01_baseline"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x5e784f53df85b11e",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s02",
+      "stage": "validation",
+      "stem": "validation_s02_reference"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x59fcfd34289d2dc5",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 2000,
+      "session": "s02",
+      "stage": "validation",
+      "stem": "validation_s02_baseline"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x5f01036810c55bc8",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s00",
+      "stage": "attack",
+      "stem": "attack_s00_reference"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x551e212aeb25fef1",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s00",
+      "stage": "attack",
+      "stem": "attack_s00_baseline"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x51ddc81c6a589cfd",
+      "expected_attack": true,
+      "kind": "attack",
+      "samples": 500,
+      "session": "s00",
+      "stage": "attack",
+      "stem": "attack_s00_attack"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x539d9648f5d8bf02",
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s01",
+      "stage": "attack",
+      "stem": "attack_s01_reference"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x517448bad5b52f63",
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s01",
+      "stage": "attack",
+      "stem": "attack_s01_baseline"
+    },
+    {
+      "baseline_policy": "single",
+      "domain": "0x540db2e6395b6b67",
+      "expected_attack": true,
+      "kind": "attack",
+      "samples": 500,
+      "session": "s01",
+      "stage": "attack",
+      "stem": "attack_s01_attack"
+    }
+  ],
+  "description": "Delvaux Roulette four-family single-ELF multi-session collection",
+  "version": 1
+}

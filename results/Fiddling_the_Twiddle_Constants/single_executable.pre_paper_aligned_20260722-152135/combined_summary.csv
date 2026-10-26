@@ -1,0 +1,3 @@
+family,single_fpr,single_tpr,single_auc,batch_fpr,batch_tpr,batch_auc,semantic_successes,semantic_trials
+corrupt-twiddle-pointer,0.011166666666666667,0.087,0.7094890833333334,0.006666666666666667,0.09,0.793475,1000,1000
+corrupt-loaded-twiddle-value,0.0031666666666666666,0.011,0.7357254166666667,0.0,0.0,0.6917,1000,1000

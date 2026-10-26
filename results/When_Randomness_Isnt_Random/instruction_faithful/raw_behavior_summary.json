@@ -1,0 +1,2406 @@
+{
+  "paper": "When Randomness Isn't Random",
+  "regions": {
+    "region1": {
+      "instruction_detector": {
+        "attack_samples": 2000,
+        "baseline_mode": 39,
+        "baseline_samples": 2000,
+        "false_positives": 1,
+        "fpr": 0.0005,
+        "tpr": 1.0,
+        "true_positives": 2000
+      },
+      "region-only": {
+        "instructions": {
+          "attack": {
+            "maximum": 38,
+            "mean": 38.0,
+            "median": 38.0,
+            "minimum": 38,
+            "mode": 38,
+            "n": 2000,
+            "p05": 38.0,
+            "p95": 38.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 40,
+            "mean": 39.0005,
+            "median": 39.0,
+            "minimum": 39,
+            "mode": 39,
+            "n": 2000,
+            "p05": 39.0,
+            "p95": 39.0,
+            "stdev": 0.022360679774997897
+          },
+          "cycles_attack": {
+            "maximum": 247,
+            "mean": 129.6195,
+            "median": 128.0,
+            "minimum": 126,
+            "mode": 126,
+            "n": 2000,
+            "p05": 126.0,
+            "p95": 137.0,
+            "stdev": 5.848916537473515
+          },
+          "cycles_baseline": {
+            "maximum": 547,
+            "mean": 140.931,
+            "median": 139.0,
+            "minimum": 128,
+            "mode": 139,
+            "n": 2000,
+            "p05": 136.0,
+            "p95": 148.0,
+            "stdev": 10.392316350052079
+          },
+          "cycles_median_delta": -11.0,
+          "event": "instructions",
+          "median_delta": -1.0,
+          "mode_delta": -1,
+          "per_session": [
+            {
+              "cycle_median_delta": -13.0,
+              "event_median_delta": -1.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": -12.0,
+              "event_median_delta": -1.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": -11.5,
+              "event_median_delta": -1.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": -10.0,
+              "event_median_delta": -1.0,
+              "session": 3
+            }
+          ]
+        }
+      }
+    },
+    "region2": {
+      "matched-hot": {
+        "cache-misses": {
+          "attack": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 180,
+            "mean": 144.459,
+            "median": 143.0,
+            "minimum": 130,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 152.0,
+            "stdev": 4.965143031440417
+          },
+          "cycles_baseline": {
+            "maximum": 203,
+            "mean": 145.3385,
+            "median": 143.0,
+            "minimum": 139,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 155.0,
+            "stdev": 5.7626835772065
+          },
+          "cycles_median_delta": 0.0,
+          "event": "cache_misses",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 1.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": -1.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": -2.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": -1.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "cache-references": {
+          "attack": {
+            "maximum": 1,
+            "mean": 0.001,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.031614865963260665
+          },
+          "baseline": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 496,
+            "mean": 147.1245,
+            "median": 144.0,
+            "minimum": 132,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 162.0,
+            "stdev": 10.498433611932406
+          },
+          "cycles_baseline": {
+            "maximum": 193,
+            "mean": 147.257,
+            "median": 145.0,
+            "minimum": 139,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 161.04999999999995,
+            "stdev": 7.131365871247583
+          },
+          "cycles_median_delta": -1.0,
+          "event": "cache_references",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": -1.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": -4.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 8.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": -7.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "dtlb-misses": {
+          "attack": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 239,
+            "mean": 146.009,
+            "median": 144.0,
+            "minimum": 139,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 157.0,
+            "stdev": 6.235572161405082
+          },
+          "cycles_baseline": {
+            "maximum": 209,
+            "mean": 147.167,
+            "median": 145.0,
+            "minimum": 130,
+            "mode": 140,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 162.0,
+            "stdev": 7.04591608428126
+          },
+          "cycles_median_delta": -1.0,
+          "event": "dtlb_read_misses",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 3.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": -6.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": -5.5,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": 0.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "instructions": {
+          "attack": {
+            "maximum": 41,
+            "mean": 41.0,
+            "median": 41.0,
+            "minimum": 41,
+            "mode": 41,
+            "n": 2000,
+            "p05": 41.0,
+            "p95": 41.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 41,
+            "mean": 41.0,
+            "median": 41.0,
+            "minimum": 41,
+            "mode": 41,
+            "n": 2000,
+            "p05": 41.0,
+            "p95": 41.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 552,
+            "mean": 145.118,
+            "median": 143.0,
+            "minimum": 139,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 154.0,
+            "stdev": 12.019122499285313
+          },
+          "cycles_baseline": {
+            "maximum": 282,
+            "mean": 144.724,
+            "median": 142.0,
+            "minimum": 136,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 154.04999999999995,
+            "stdev": 6.549600952448794
+          },
+          "cycles_median_delta": 1.0,
+          "event": "instructions",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 2.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": 1.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 3.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": -2.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "l1d-misses": {
+          "attack": {
+            "maximum": 7,
+            "mean": 0.2015,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 1.0,
+            "stdev": 0.4438425938596498
+          },
+          "baseline": {
+            "maximum": 8,
+            "mean": 0.295,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 1.0,
+            "stdev": 0.5376983910891774
+          },
+          "cycles_attack": {
+            "maximum": 244,
+            "mean": 145.6145,
+            "median": 143.0,
+            "minimum": 129,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 156.0,
+            "stdev": 6.511227825371875
+          },
+          "cycles_baseline": {
+            "maximum": 485,
+            "mean": 145.844,
+            "median": 144.0,
+            "minimum": 137,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 155.0,
+            "stdev": 9.977296087548435
+          },
+          "cycles_median_delta": -1.0,
+          "event": "l1d_read_misses",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 0.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": 2.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 0.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": -3.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "llc-misses": {
+          "attack": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 524,
+            "mean": 150.0065,
+            "median": 148.0,
+            "minimum": 129,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 165.0,
+            "stdev": 12.46435468922918
+          },
+          "cycles_baseline": {
+            "maximum": 218,
+            "mean": 145.1215,
+            "median": 143.0,
+            "minimum": 128,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 155.0,
+            "stdev": 6.330543076057449
+          },
+          "cycles_median_delta": 5.0,
+          "event": "llc_read_misses",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 11.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": 1.5,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 0.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": 11.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "retired-loads": {
+          "attack": {
+            "maximum": 11,
+            "mean": 11.0,
+            "median": 11.0,
+            "minimum": 11,
+            "mode": 11,
+            "n": 2000,
+            "p05": 11.0,
+            "p95": 11.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 11,
+            "mean": 11.0,
+            "median": 11.0,
+            "minimum": 11,
+            "mode": 11,
+            "n": 2000,
+            "p05": 11.0,
+            "p95": 11.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 246,
+            "mean": 147.186,
+            "median": 145.0,
+            "minimum": 139,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 162.0,
+            "stdev": 7.258012356815455
+          },
+          "cycles_baseline": {
+            "maximum": 260,
+            "mean": 144.762,
+            "median": 143.0,
+            "minimum": 130,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 152.0,
+            "stdev": 5.846832366706111
+          },
+          "cycles_median_delta": 2.0,
+          "event": "retired_loads",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 2.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": -1.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 0.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": 8.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "retired-stores": {
+          "attack": {
+            "maximum": 10,
+            "mean": 10.0,
+            "median": 10.0,
+            "minimum": 10,
+            "mode": 10,
+            "n": 2000,
+            "p05": 10.0,
+            "p95": 10.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 10,
+            "mean": 10.0,
+            "median": 10.0,
+            "minimum": 10,
+            "mode": 10,
+            "n": 2000,
+            "p05": 10.0,
+            "p95": 10.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 201,
+            "mean": 146.708,
+            "median": 144.0,
+            "minimum": 126,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 158.0,
+            "stdev": 6.564090160853971
+          },
+          "cycles_baseline": {
+            "maximum": 275,
+            "mean": 145.788,
+            "median": 144.0,
+            "minimum": 127,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 156.0,
+            "stdev": 6.687482127722235
+          },
+          "cycles_median_delta": 0.0,
+          "event": "retired_stores",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": -1.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": 3.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 1.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": 2.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        }
+      },
+      "redirect-cold": {
+        "cache-misses": {
+          "attack": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 244,
+            "mean": 146.737,
+            "median": 144.0,
+            "minimum": 133,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 159.0999999999999,
+            "stdev": 7.664803037443389
+          },
+          "cycles_baseline": {
+            "maximum": 217,
+            "mean": 146.7575,
+            "median": 144.0,
+            "minimum": 139,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 162.0,
+            "stdev": 7.208305874946858
+          },
+          "cycles_median_delta": 0.0,
+          "event": "cache_misses",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 4.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": -1.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": -1.5,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": -4.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "cache-references": {
+          "attack": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 189,
+            "mean": 147.4525,
+            "median": 146.0,
+            "minimum": 130,
+            "mode": 140,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 163.0,
+            "stdev": 7.244445095545357
+          },
+          "cycles_baseline": {
+            "maximum": 259,
+            "mean": 144.414,
+            "median": 143.0,
+            "minimum": 131,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 152.0,
+            "stdev": 5.723896006458046
+          },
+          "cycles_median_delta": 3.0,
+          "event": "cache_references",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": -1.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": 12.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 2.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": 2.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "dtlb-misses": {
+          "attack": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 212,
+            "mean": 146.7475,
+            "median": 144.0,
+            "minimum": 133,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 162.0,
+            "stdev": 6.771829338243334
+          },
+          "cycles_baseline": {
+            "maximum": 254,
+            "mean": 145.2605,
+            "median": 144.0,
+            "minimum": 130,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 154.0,
+            "stdev": 6.078084509584646
+          },
+          "cycles_median_delta": 0.0,
+          "event": "dtlb_read_misses",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 10.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": 2.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 0.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": -4.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "instructions": {
+          "attack": {
+            "maximum": 41,
+            "mean": 41.0,
+            "median": 41.0,
+            "minimum": 41,
+            "mode": 41,
+            "n": 2000,
+            "p05": 41.0,
+            "p95": 41.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 41,
+            "mean": 41.0,
+            "median": 41.0,
+            "minimum": 41,
+            "mode": 41,
+            "n": 2000,
+            "p05": 41.0,
+            "p95": 41.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 185,
+            "mean": 144.841,
+            "median": 143.0,
+            "minimum": 133,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 155.0,
+            "stdev": 5.4559694648523
+          },
+          "cycles_baseline": {
+            "maximum": 209,
+            "mean": 144.4735,
+            "median": 143.0,
+            "minimum": 139,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 153.04999999999995,
+            "stdev": 5.217653658959401
+          },
+          "cycles_median_delta": 0.0,
+          "event": "instructions",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 4.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": -1.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 0.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": -1.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "l1d-misses": {
+          "attack": {
+            "maximum": 5,
+            "mean": 0.6515,
+            "median": 1.0,
+            "minimum": 0,
+            "mode": 1,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 2.0,
+            "stdev": 0.6342309314730863
+          },
+          "baseline": {
+            "maximum": 5,
+            "mean": 0.18,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 1.0,
+            "stdev": 0.40084952310073296
+          },
+          "cycles_attack": {
+            "maximum": 239,
+            "mean": 150.967,
+            "median": 150.0,
+            "minimum": 129,
+            "mode": 155,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 166.0,
+            "stdev": 8.932905988797954
+          },
+          "cycles_baseline": {
+            "maximum": 218,
+            "mean": 145.6565,
+            "median": 144.0,
+            "minimum": 130,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 155.0,
+            "stdev": 5.452556550506215
+          },
+          "cycles_median_delta": 6.0,
+          "event": "l1d_read_misses",
+          "median_delta": 1.0,
+          "mode_delta": 1,
+          "per_session": [
+            {
+              "cycle_median_delta": 4.0,
+              "event_median_delta": 1.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": 12.0,
+              "event_median_delta": 1.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 8.0,
+              "event_median_delta": 1.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": 5.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "llc-misses": {
+          "attack": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 290,
+            "mean": 147.4635,
+            "median": 145.0,
+            "minimum": 129,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 162.0,
+            "stdev": 7.5997069366365295
+          },
+          "cycles_baseline": {
+            "maximum": 208,
+            "mean": 144.525,
+            "median": 142.0,
+            "minimum": 132,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 152.0,
+            "stdev": 5.183706242178718
+          },
+          "cycles_median_delta": 3.0,
+          "event": "llc_read_misses",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 7.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": 1.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 1.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": 2.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "retired-loads": {
+          "attack": {
+            "maximum": 11,
+            "mean": 11.0,
+            "median": 11.0,
+            "minimum": 11,
+            "mode": 11,
+            "n": 2000,
+            "p05": 11.0,
+            "p95": 11.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 11,
+            "mean": 11.0,
+            "median": 11.0,
+            "minimum": 11,
+            "mode": 11,
+            "n": 2000,
+            "p05": 11.0,
+            "p95": 11.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 185,
+            "mean": 148.9675,
+            "median": 148.0,
+            "minimum": 129,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 164.0,
+            "stdev": 7.3055546890470495
+          },
+          "cycles_baseline": {
+            "maximum": 227,
+            "mean": 145.041,
+            "median": 143.0,
+            "minimum": 130,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 154.0,
+            "stdev": 5.826087078419157
+          },
+          "cycles_median_delta": 5.0,
+          "event": "retired_loads",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 11.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": 1.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 10.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": -2.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "retired-stores": {
+          "attack": {
+            "maximum": 10,
+            "mean": 10.0,
+            "median": 10.0,
+            "minimum": 10,
+            "mode": 10,
+            "n": 2000,
+            "p05": 10.0,
+            "p95": 10.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 10,
+            "mean": 10.0,
+            "median": 10.0,
+            "minimum": 10,
+            "mode": 10,
+            "n": 2000,
+            "p05": 10.0,
+            "p95": 10.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 264,
+            "mean": 148.025,
+            "median": 147.0,
+            "minimum": 129,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 163.0,
+            "stdev": 8.172623256056939
+          },
+          "cycles_baseline": {
+            "maximum": 188,
+            "mean": 144.9535,
+            "median": 143.0,
+            "minimum": 128,
+            "mode": 141,
+            "n": 2000,
+            "p05": 140.0,
+            "p95": 154.0,
+            "stdev": 5.241667224046546
+          },
+          "cycles_median_delta": 4.0,
+          "event": "retired_stores",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 1.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": 10.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": -1.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": 5.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        }
+      }
+    },
+    "region3": {
+      "matched-hot": {
+        "cache-misses": {
+          "attack": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 249,
+            "mean": 137.673,
+            "median": 137.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 153.0,
+            "stdev": 9.085281623102585
+          },
+          "cycles_baseline": {
+            "maximum": 179,
+            "mean": 132.704,
+            "median": 131.0,
+            "minimum": 126,
+            "mode": 129,
+            "n": 2000,
+            "p05": 126.0,
+            "p95": 142.0,
+            "stdev": 5.436189849521448
+          },
+          "cycles_median_delta": 6.0,
+          "event": "cache_misses",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 3.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": 13.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": -0.5,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": 2.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "cache-references": {
+          "attack": {
+            "maximum": 4,
+            "mean": 0.002,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.08944271909999159
+          },
+          "baseline": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 168,
+            "mean": 133.779,
+            "median": 131.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 144.0,
+            "stdev": 5.679461870949728
+          },
+          "cycles_baseline": {
+            "maximum": 218,
+            "mean": 131.9915,
+            "median": 130.0,
+            "minimum": 124,
+            "mode": 129,
+            "n": 2000,
+            "p05": 126.0,
+            "p95": 140.0,
+            "stdev": 5.083241822273642
+          },
+          "cycles_median_delta": 1.0,
+          "event": "cache_references",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 1.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": 2.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 1.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": 1.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "dtlb-misses": {
+          "attack": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 257,
+            "mean": 135.8145,
+            "median": 134.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 149.0,
+            "stdev": 7.767899322206743
+          },
+          "cycles_baseline": {
+            "maximum": 186,
+            "mean": 135.527,
+            "median": 133.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 150.0,
+            "stdev": 6.886362028748961
+          },
+          "cycles_median_delta": 1.0,
+          "event": "dtlb_read_misses",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 2.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": 6.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": -3.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": 2.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "instructions": {
+          "attack": {
+            "maximum": 45,
+            "mean": 45.0,
+            "median": 45.0,
+            "minimum": 45,
+            "mode": 45,
+            "n": 2000,
+            "p05": 45.0,
+            "p95": 45.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 45,
+            "mean": 45.0,
+            "median": 45.0,
+            "minimum": 45,
+            "mode": 45,
+            "n": 2000,
+            "p05": 45.0,
+            "p95": 45.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 206,
+            "mean": 133.992,
+            "median": 132.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 144.0,
+            "stdev": 6.155313147189994
+          },
+          "cycles_baseline": {
+            "maximum": 267,
+            "mean": 132.8465,
+            "median": 131.0,
+            "minimum": 126,
+            "mode": 129,
+            "n": 2000,
+            "p05": 127.0,
+            "p95": 141.0,
+            "stdev": 6.424607033723454
+          },
+          "cycles_median_delta": 1.0,
+          "event": "instructions",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 1.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": -1.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 2.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": -2.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "l1d-misses": {
+          "attack": {
+            "maximum": 9,
+            "mean": 0.1945,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 1.0,
+            "stdev": 0.49577479395705626
+          },
+          "baseline": {
+            "maximum": 4,
+            "mean": 0.2105,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 1.0,
+            "stdev": 0.4475375905412569
+          },
+          "cycles_attack": {
+            "maximum": 331,
+            "mean": 136.518,
+            "median": 137.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 150.0,
+            "stdev": 8.506518466929588
+          },
+          "cycles_baseline": {
+            "maximum": 585,
+            "mean": 135.319,
+            "median": 133.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 149.0,
+            "stdev": 12.06453544516961
+          },
+          "cycles_median_delta": 4.0,
+          "event": "l1d_read_misses",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 5.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": 1.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 2.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": 4.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "llc-misses": {
+          "attack": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 194,
+            "mean": 135.8715,
+            "median": 133.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 148.0,
+            "stdev": 6.7250725684207495
+          },
+          "cycles_baseline": {
+            "maximum": 214,
+            "mean": 137.6065,
+            "median": 137.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 150.0,
+            "stdev": 7.781576589426371
+          },
+          "cycles_median_delta": -4.0,
+          "event": "llc_read_misses",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 5.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": -4.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": -9.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": -2.5,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "retired-loads": {
+          "attack": {
+            "maximum": 13,
+            "mean": 13.0,
+            "median": 13.0,
+            "minimum": 13,
+            "mode": 13,
+            "n": 2000,
+            "p05": 13.0,
+            "p95": 13.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 13,
+            "mean": 13.0,
+            "median": 13.0,
+            "minimum": 13,
+            "mode": 13,
+            "n": 2000,
+            "p05": 13.0,
+            "p95": 13.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 256,
+            "mean": 135.529,
+            "median": 133.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 148.0,
+            "stdev": 7.302453143359119
+          },
+          "cycles_baseline": {
+            "maximum": 209,
+            "mean": 134.3985,
+            "median": 132.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 145.0,
+            "stdev": 6.366786138458432
+          },
+          "cycles_median_delta": 1.0,
+          "event": "retired_loads",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 4.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": 0.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 1.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": 0.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "retired-stores": {
+          "attack": {
+            "maximum": 12,
+            "mean": 12.0,
+            "median": 12.0,
+            "minimum": 12,
+            "mode": 12,
+            "n": 2000,
+            "p05": 12.0,
+            "p95": 12.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 12,
+            "mean": 12.0,
+            "median": 12.0,
+            "minimum": 12,
+            "mode": 12,
+            "n": 2000,
+            "p05": 12.0,
+            "p95": 12.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 23090,
+            "mean": 148.4075,
+            "median": 137.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 150.0,
+            "stdev": 513.2964475478889
+          },
+          "cycles_baseline": {
+            "maximum": 200,
+            "mean": 134.444,
+            "median": 132.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 148.0,
+            "stdev": 6.600351984793052
+          },
+          "cycles_median_delta": 5.0,
+          "event": "retired_stores",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 0.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": 10.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 7.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": 2.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        }
+      },
+      "redirect-cold": {
+        "cache-misses": {
+          "attack": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 195,
+            "mean": 133.446,
+            "median": 131.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 144.0,
+            "stdev": 5.98615076660288
+          },
+          "cycles_baseline": {
+            "maximum": 246,
+            "mean": 137.596,
+            "median": 137.0,
+            "minimum": 124,
+            "mode": 129,
+            "n": 2000,
+            "p05": 128.0,
+            "p95": 153.0,
+            "stdev": 9.098855894522929
+          },
+          "cycles_median_delta": -6.0,
+          "event": "cache_misses",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 0.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": -12.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": -3.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": 0.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "cache-references": {
+          "attack": {
+            "maximum": 1,
+            "mean": 0.0005,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.022360679774997897
+          },
+          "baseline": {
+            "maximum": 1,
+            "mean": 0.0005,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.022360679774997897
+          },
+          "cycles_attack": {
+            "maximum": 1042,
+            "mean": 134.597,
+            "median": 132.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 146.0,
+            "stdev": 21.357824545928533
+          },
+          "cycles_baseline": {
+            "maximum": 206,
+            "mean": 133.67,
+            "median": 132.0,
+            "minimum": 126,
+            "mode": 129,
+            "n": 2000,
+            "p05": 128.0,
+            "p95": 143.0,
+            "stdev": 5.937821895647613
+          },
+          "cycles_median_delta": 0.0,
+          "event": "cache_references",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 1.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": -6.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 0.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": 1.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "dtlb-misses": {
+          "attack": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 451,
+            "mean": 139.189,
+            "median": 140.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 151.0,
+            "stdev": 10.197611222110728
+          },
+          "cycles_baseline": {
+            "maximum": 418,
+            "mean": 135.902,
+            "median": 133.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 150.0,
+            "stdev": 9.8153740011979
+          },
+          "cycles_median_delta": 7.0,
+          "event": "dtlb_read_misses",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 2.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": 5.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 1.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": 10.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "instructions": {
+          "attack": {
+            "maximum": 46,
+            "mean": 45.0005,
+            "median": 45.0,
+            "minimum": 45,
+            "mode": 45,
+            "n": 2000,
+            "p05": 45.0,
+            "p95": 45.0,
+            "stdev": 0.022360679774997897
+          },
+          "baseline": {
+            "maximum": 45,
+            "mean": 45.0,
+            "median": 45.0,
+            "minimum": 45,
+            "mode": 45,
+            "n": 2000,
+            "p05": 45.0,
+            "p95": 45.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 472,
+            "mean": 136.6215,
+            "median": 133.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 157.0,
+            "stdev": 12.23225456634581
+          },
+          "cycles_baseline": {
+            "maximum": 242,
+            "mean": 132.568,
+            "median": 131.0,
+            "minimum": 126,
+            "mode": 129,
+            "n": 2000,
+            "p05": 128.0,
+            "p95": 141.0,
+            "stdev": 5.6977722229088865
+          },
+          "cycles_median_delta": 2.0,
+          "event": "instructions",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 0.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": 3.5,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 4.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": 4.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "l1d-misses": {
+          "attack": {
+            "maximum": 7,
+            "mean": 0.627,
+            "median": 1.0,
+            "minimum": 0,
+            "mode": 1,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 2.0,
+            "stdev": 0.622145105474706
+          },
+          "baseline": {
+            "maximum": 6,
+            "mean": 0.3525,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 1.0,
+            "stdev": 0.5043519956020139
+          },
+          "cycles_attack": {
+            "maximum": 556,
+            "mean": 139.057,
+            "median": 139.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 152.0,
+            "stdev": 12.541826011384863
+          },
+          "cycles_baseline": {
+            "maximum": 196,
+            "mean": 135.056,
+            "median": 133.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 145.0,
+            "stdev": 6.429582705501457
+          },
+          "cycles_median_delta": 6.0,
+          "event": "l1d_read_misses",
+          "median_delta": 1.0,
+          "mode_delta": 1,
+          "per_session": [
+            {
+              "cycle_median_delta": 6.0,
+              "event_median_delta": 1.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": 8.0,
+              "event_median_delta": 1.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 10.0,
+              "event_median_delta": 1.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": 0.0,
+              "event_median_delta": -1.0,
+              "session": 3
+            }
+          ]
+        },
+        "llc-misses": {
+          "attack": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 267,
+            "mean": 138.1015,
+            "median": 139.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 150.0,
+            "stdev": 7.714074878144029
+          },
+          "cycles_baseline": {
+            "maximum": 219,
+            "mean": 137.079,
+            "median": 136.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 150.0,
+            "stdev": 7.353964876153533
+          },
+          "cycles_median_delta": 3.0,
+          "event": "llc_read_misses",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 3.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": 3.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 2.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": 6.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "retired-loads": {
+          "attack": {
+            "maximum": 13,
+            "mean": 13.0,
+            "median": 13.0,
+            "minimum": 13,
+            "mode": 13,
+            "n": 2000,
+            "p05": 13.0,
+            "p95": 13.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 13,
+            "mean": 13.0,
+            "median": 13.0,
+            "minimum": 13,
+            "mode": 13,
+            "n": 2000,
+            "p05": 13.0,
+            "p95": 13.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 23099,
+            "mean": 148.8345,
+            "median": 137.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 150.0,
+            "stdev": 513.4916366799172
+          },
+          "cycles_baseline": {
+            "maximum": 179,
+            "mean": 136.269,
+            "median": 136.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 149.0,
+            "stdev": 6.752735647081091
+          },
+          "cycles_median_delta": 1.0,
+          "event": "retired_loads",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": -3.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": 4.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 6.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": 0.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        },
+        "retired-stores": {
+          "attack": {
+            "maximum": 12,
+            "mean": 12.0,
+            "median": 12.0,
+            "minimum": 12,
+            "mode": 12,
+            "n": 2000,
+            "p05": 12.0,
+            "p95": 12.0,
+            "stdev": 0.0
+          },
+          "baseline": {
+            "maximum": 12,
+            "mean": 12.0,
+            "median": 12.0,
+            "minimum": 12,
+            "mode": 12,
+            "n": 2000,
+            "p05": 12.0,
+            "p95": 12.0,
+            "stdev": 0.0
+          },
+          "cycles_attack": {
+            "maximum": 207,
+            "mean": 137.418,
+            "median": 137.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 151.0,
+            "stdev": 7.610008680419361
+          },
+          "cycles_baseline": {
+            "maximum": 194,
+            "mean": 135.527,
+            "median": 133.0,
+            "minimum": 128,
+            "mode": 129,
+            "n": 2000,
+            "p05": 129.0,
+            "p95": 150.0,
+            "stdev": 6.989613605141173
+          },
+          "cycles_median_delta": 4.0,
+          "event": "retired_stores",
+          "median_delta": 0.0,
+          "mode_delta": 0,
+          "per_session": [
+            {
+              "cycle_median_delta": 9.0,
+              "event_median_delta": 0.0,
+              "session": 0
+            },
+            {
+              "cycle_median_delta": 4.0,
+              "event_median_delta": 0.0,
+              "session": 1
+            },
+            {
+              "cycle_median_delta": 0.0,
+              "event_median_delta": 0.0,
+              "session": 2
+            },
+            {
+              "cycle_median_delta": -2.0,
+              "event_median_delta": 0.0,
+              "session": 3
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1480 @@
+{
+  "calibration_check": {
+    "allowed_alarm_rate_difference": 0.0448,
+    "calibration_alarm_rate": 0.1084,
+    "failure_reasons": [],
+    "maximum_feature_drift": 1.0,
+    "maximum_observed_feature_drift": 0.18631241133226747,
+    "maximum_score_median_drift": 1.0,
+    "passed": true,
+    "score_median_drift": 0.21216532154796286,
+    "selected_feature_drifts": {
+      "stalls.stalls_l1d_miss": {
+        "calibration_center": 0.0,
+        "standardized_drift": 0.0,
+        "threshold_center": 0.0
+      },
+      "stalls.stalls_mem_any": {
+        "calibration_center": 90.0,
+        "standardized_drift": 0.18631241133226747,
+        "threshold_center": 88.0
+      }
+    },
+    "status": "VALID",
+    "threshold_alarm_rate": 0.0896
+  },
+  "datasets": {
+    "attack_development": {
+      "common_valid_samples": 1000,
+      "passes": {
+        "cache": {
+          "available_mask": 63,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/cache/attack_development.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "cache-detail": {
+          "available_mask": 63,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/cache-detail/attack_development.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "load-hits": {
+          "available_mask": 3,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 60,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/load-hits/attack_development.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "load-misses-latency": {
+          "available_mask": 3,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 60,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/load-misses-latency/attack_development.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "recovery": {
+          "available_mask": 31,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 32,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/recovery/attack_development.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "stalls": {
+          "available_mask": 51,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 12,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/stalls/attack_development.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "structural": {
+          "available_mask": 63,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/structural/attack_development.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        }
+      },
+      "sample_max": 24999,
+      "sample_min": 24000
+    },
+    "attack_test": {
+      "common_valid_samples": 1000,
+      "passes": {
+        "cache": {
+          "available_mask": 63,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/cache/attack_test.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "cache-detail": {
+          "available_mask": 63,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/cache-detail/attack_test.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "load-hits": {
+          "available_mask": 3,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 60,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/load-hits/attack_test.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "load-misses-latency": {
+          "available_mask": 3,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 60,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/load-misses-latency/attack_test.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "recovery": {
+          "available_mask": 31,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 32,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/recovery/attack_test.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "stalls": {
+          "available_mask": 51,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 12,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/stalls/attack_test.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "structural": {
+          "available_mask": 63,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/structural/attack_test.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        }
+      },
+      "sample_max": 25999,
+      "sample_min": 25000
+    },
+    "calibration": {
+      "common_valid_samples": 5000,
+      "passes": {
+        "cache": {
+          "available_mask": 63,
+          "collected": 5000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/cache/baseline_calibration.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 5000
+        },
+        "cache-detail": {
+          "available_mask": 63,
+          "collected": 5000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/cache-detail/baseline_calibration.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 5000
+        },
+        "load-hits": {
+          "available_mask": 3,
+          "collected": 5000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 60,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/load-hits/baseline_calibration.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 5000
+        },
+        "load-misses-latency": {
+          "available_mask": 3,
+          "collected": 5000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 60,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/load-misses-latency/baseline_calibration.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 5000
+        },
+        "recovery": {
+          "available_mask": 31,
+          "collected": 5000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 32,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/recovery/baseline_calibration.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 5000
+        },
+        "stalls": {
+          "available_mask": 51,
+          "collected": 5000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 12,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/stalls/baseline_calibration.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 5000
+        },
+        "structural": {
+          "available_mask": 63,
+          "collected": 5000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/structural/baseline_calibration.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 5000
+        }
+      },
+      "sample_max": 13999,
+      "sample_min": 9000
+    },
+    "development_baseline": {
+      "common_valid_samples": 1000,
+      "passes": {
+        "cache": {
+          "available_mask": 63,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/cache/baseline_attack_development.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "cache-detail": {
+          "available_mask": 63,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/cache-detail/baseline_attack_development.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "load-hits": {
+          "available_mask": 3,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 60,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/load-hits/baseline_attack_development.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "load-misses-latency": {
+          "available_mask": 3,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 60,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/load-misses-latency/baseline_attack_development.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "recovery": {
+          "available_mask": 31,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 32,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/recovery/baseline_attack_development.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "stalls": {
+          "available_mask": 51,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 12,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/stalls/baseline_attack_development.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "structural": {
+          "available_mask": 63,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/structural/baseline_attack_development.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        }
+      },
+      "sample_max": 24999,
+      "sample_min": 24000
+    },
+    "profile_a": {
+      "common_valid_samples": 2000,
+      "passes": {
+        "cache": {
+          "available_mask": 63,
+          "collected": 2000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/cache/baseline_profile_a.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 2000
+        },
+        "cache-detail": {
+          "available_mask": 63,
+          "collected": 2000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/cache-detail/baseline_profile_a.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 2000
+        },
+        "load-hits": {
+          "available_mask": 3,
+          "collected": 2000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 60,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/load-hits/baseline_profile_a.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 2000
+        },
+        "load-misses-latency": {
+          "available_mask": 3,
+          "collected": 2000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 60,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/load-misses-latency/baseline_profile_a.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 2000
+        },
+        "recovery": {
+          "available_mask": 31,
+          "collected": 2000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 32,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/recovery/baseline_profile_a.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 2000
+        },
+        "stalls": {
+          "available_mask": 51,
+          "collected": 2000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 12,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/stalls/baseline_profile_a.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 2000
+        },
+        "structural": {
+          "available_mask": 63,
+          "collected": 2000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/structural/baseline_profile_a.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 2000
+        }
+      },
+      "sample_max": 1999,
+      "sample_min": 0
+    },
+    "profile_b": {
+      "common_valid_samples": 2000,
+      "passes": {
+        "cache": {
+          "available_mask": 63,
+          "collected": 2000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/cache/baseline_profile_b.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 2000
+        },
+        "cache-detail": {
+          "available_mask": 63,
+          "collected": 2000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/cache-detail/baseline_profile_b.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 2000
+        },
+        "load-hits": {
+          "available_mask": 3,
+          "collected": 2000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 60,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/load-hits/baseline_profile_b.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 2000
+        },
+        "load-misses-latency": {
+          "available_mask": 3,
+          "collected": 2000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 60,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/load-misses-latency/baseline_profile_b.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 2000
+        },
+        "recovery": {
+          "available_mask": 31,
+          "collected": 2000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 32,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/recovery/baseline_profile_b.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 2000
+        },
+        "stalls": {
+          "available_mask": 51,
+          "collected": 2000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 12,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/stalls/baseline_profile_b.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 2000
+        },
+        "structural": {
+          "available_mask": 63,
+          "collected": 2000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/structural/baseline_profile_b.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 2000
+        }
+      },
+      "sample_max": 3999,
+      "sample_min": 2000
+    },
+    "test_baseline": {
+      "common_valid_samples": 1000,
+      "passes": {
+        "cache": {
+          "available_mask": 63,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/cache/baseline_attack_test.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "cache-detail": {
+          "available_mask": 63,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/cache-detail/baseline_attack_test.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "load-hits": {
+          "available_mask": 3,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 60,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/load-hits/baseline_attack_test.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "load-misses-latency": {
+          "available_mask": 3,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 60,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/load-misses-latency/baseline_attack_test.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "recovery": {
+          "available_mask": 31,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 32,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/recovery/baseline_attack_test.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "stalls": {
+          "available_mask": 51,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 12,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/stalls/baseline_attack_test.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        },
+        "structural": {
+          "available_mask": 63,
+          "collected": 1000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/structural/baseline_attack_test.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 1000
+        }
+      },
+      "sample_max": 25999,
+      "sample_min": 25000
+    },
+    "threshold": {
+      "common_valid_samples": 5000,
+      "passes": {
+        "cache": {
+          "available_mask": 63,
+          "collected": 5000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/cache/baseline_threshold.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 5000
+        },
+        "cache-detail": {
+          "available_mask": 63,
+          "collected": 5000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/cache-detail/baseline_threshold.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 5000
+        },
+        "load-hits": {
+          "available_mask": 3,
+          "collected": 5000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 60,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/load-hits/baseline_threshold.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 5000
+        },
+        "load-misses-latency": {
+          "available_mask": 3,
+          "collected": 5000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 60,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/load-misses-latency/baseline_threshold.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 5000
+        },
+        "recovery": {
+          "available_mask": 31,
+          "collected": 5000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 32,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/recovery/baseline_threshold.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 5000
+        },
+        "stalls": {
+          "available_mask": 51,
+          "collected": 5000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 12,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/stalls/baseline_threshold.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 5000
+        },
+        "structural": {
+          "available_mask": 63,
+          "collected": 5000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/structural/baseline_threshold.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 5000
+        }
+      },
+      "sample_max": 8999,
+      "sample_min": 4000
+    },
+    "validation": {
+      "common_valid_samples": 10000,
+      "passes": {
+        "cache": {
+          "available_mask": 63,
+          "collected": 10000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/cache/baseline_validation.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 10000
+        },
+        "cache-detail": {
+          "available_mask": 63,
+          "collected": 10000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/cache-detail/baseline_validation.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 10000
+        },
+        "load-hits": {
+          "available_mask": 3,
+          "collected": 10000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 60,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/load-hits/baseline_validation.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 10000
+        },
+        "load-misses-latency": {
+          "available_mask": 3,
+          "collected": 10000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 60,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/load-misses-latency/baseline_validation.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 10000
+        },
+        "recovery": {
+          "available_mask": 31,
+          "collected": 10000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 32,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/recovery/baseline_validation.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 10000
+        },
+        "stalls": {
+          "available_mask": 51,
+          "collected": 10000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 12,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/stalls/baseline_validation.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 10000
+        },
+        "structural": {
+          "available_mask": 63,
+          "collected": 10000,
+          "dropped_by_cross_pass_intersection": 0,
+          "exclusion_reasons": {},
+          "message_domain": 1129924145,
+          "open_error_mask": 0,
+          "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/stable_paired/structural/baseline_validation.csv",
+          "requested_mask": 63,
+          "valid_before_intersection": 10000
+        }
+      },
+      "sample_max": 23999,
+      "sample_min": 14000
+    }
+  },
+  "diagnostic_roc_operating_points": [
+    {
+      "attack_development_tpr": 0.002,
+      "attack_test_tpr": 0.002,
+      "calibration_baseline_alarm_rate": 0.001,
+      "requested_target_fpr": 0.001,
+      "score_threshold": 9.925054763862025,
+      "threshold_baseline_alarm_rate": 0.001,
+      "validation_fpr": 0.0008
+    },
+    {
+      "attack_development_tpr": 0.004,
+      "attack_test_tpr": 0.004,
+      "calibration_baseline_alarm_rate": 0.0052,
+      "requested_target_fpr": 0.005,
+      "score_threshold": 3.419556683347421,
+      "threshold_baseline_alarm_rate": 0.005,
+      "validation_fpr": 0.0062
+    },
+    {
+      "attack_development_tpr": 0.01,
+      "attack_test_tpr": 0.007,
+      "calibration_baseline_alarm_rate": 0.0088,
+      "requested_target_fpr": 0.01,
+      "score_threshold": 2.7523261109869486,
+      "threshold_baseline_alarm_rate": 0.0096,
+      "validation_fpr": 0.0123
+    },
+    {
+      "attack_development_tpr": 0.049,
+      "attack_test_tpr": 0.01,
+      "calibration_baseline_alarm_rate": 0.0168,
+      "requested_target_fpr": 0.02,
+      "score_threshold": 2.3353070032616534,
+      "threshold_baseline_alarm_rate": 0.0176,
+      "validation_fpr": 0.0228
+    },
+    {
+      "attack_development_tpr": 0.212,
+      "attack_test_tpr": 0.03,
+      "calibration_baseline_alarm_rate": 0.049,
+      "requested_target_fpr": 0.05,
+      "score_threshold": 1.8348840739912988,
+      "threshold_baseline_alarm_rate": 0.0494,
+      "validation_fpr": 0.0561
+    },
+    {
+      "attack_development_tpr": 0.561,
+      "attack_test_tpr": 0.065,
+      "calibration_baseline_alarm_rate": 0.1084,
+      "requested_target_fpr": 0.1,
+      "score_threshold": 1.3344611447209447,
+      "threshold_baseline_alarm_rate": 0.0896,
+      "validation_fpr": 0.1208
+    },
+    {
+      "attack_development_tpr": 0.72,
+      "attack_test_tpr": 0.123,
+      "calibration_baseline_alarm_rate": 0.2684,
+      "requested_target_fpr": 0.2,
+      "score_threshold": 0.7506343939055314,
+      "threshold_baseline_alarm_rate": 0.1978,
+      "validation_fpr": 0.3117
+    }
+  ],
+  "final_metrics": {
+    "detected_attacks": 65,
+    "false_positive_rate": 0.1208,
+    "false_positives": 1208,
+    "fpr_one_sided_95_percent_upper_bound": 0.12629234444682513,
+    "reportable": true,
+    "tpr_one_sided_95_percent_lower_bound": 0.05264300922198745,
+    "tpr_one_sided_95_percent_upper_bound": 0.07930468011919894,
+    "true_positive_rate": 0.065,
+    "valid_attack_test_samples": 1000,
+    "valid_validation_samples": 10000
+  },
+  "independent_validation_attack_test_auc": 0.3888765,
+  "model": {
+    "available_features": [
+      "structural.cycles",
+      "structural.instructions",
+      "structural.branches",
+      "structural.branch_misses",
+      "structural.retired_loads",
+      "structural.retired_stores",
+      "cache.l1d_read_misses",
+      "cache.l1i_read_misses",
+      "cache.llc_read_misses",
+      "cache.dtlb_read_misses",
+      "cache-detail.cache_references",
+      "cache-detail.cache_misses",
+      "cache-detail.l1d_replacements",
+      "cache-detail.l2_request_misses",
+      "stalls.stalls_l1d_miss",
+      "stalls.stalls_mem_any",
+      "recovery.machine_clears",
+      "recovery.memory_ordering_clears",
+      "recovery.recovery_cycles"
+    ],
+    "baseline_feature_models_from_profile_a": {
+      "cache-detail.cache_misses": {
+        "center": 0.0,
+        "iqr": 0.0,
+        "mad": 0.0,
+        "maximum": 0.0,
+        "minimum": 0.0,
+        "q1": 0.0,
+        "q3": 0.0,
+        "sample_stdev": 0.0,
+        "scale": 1.0
+      },
+      "cache-detail.cache_references": {
+        "center": 0.0,
+        "iqr": 0.0,
+        "mad": 0.0,
+        "maximum": 6.0,
+        "minimum": 0.0,
+        "q1": 0.0,
+        "q3": 0.0,
+        "sample_stdev": 0.18416557354521942,
+        "scale": 1.0
+      },
+      "cache-detail.l1d_replacements": {
+        "center": 1.0,
+        "iqr": 1.0,
+        "mad": 1.0,
+        "maximum": 13.0,
+        "minimum": 0.0,
+        "q1": 0.0,
+        "q3": 1.0,
+        "sample_stdev": 1.1716766461279071,
+        "scale": 1.4826
+      },
+      "cache-detail.l2_request_misses": {
+        "center": 0.0,
+        "iqr": 0.0,
+        "mad": 0.0,
+        "maximum": 6.0,
+        "minimum": 0.0,
+        "q1": 0.0,
+        "q3": 0.0,
+        "sample_stdev": 0.28495543476112184,
+        "scale": 1.0
+      },
+      "cache.dtlb_read_misses": {
+        "center": 0.0,
+        "iqr": 0.0,
+        "mad": 0.0,
+        "maximum": 0.0,
+        "minimum": 0.0,
+        "q1": 0.0,
+        "q3": 0.0,
+        "sample_stdev": 0.0,
+        "scale": 1.0
+      },
+      "cache.l1d_read_misses": {
+        "center": 0.0,
+        "iqr": 1.0,
+        "mad": 0.0,
+        "maximum": 9.0,
+        "minimum": 0.0,
+        "q1": 0.0,
+        "q3": 1.0,
+        "sample_stdev": 0.8485598251675861,
+        "scale": 1.0
+      },
+      "cache.l1i_read_misses": {
+        "center": 12.0,
+        "iqr": 5.0,
+        "mad": 3.0,
+        "maximum": 31.0,
+        "minimum": 5.0,
+        "q1": 9.0,
+        "q3": 14.0,
+        "sample_stdev": 3.1008146148452376,
+        "scale": 4.4478
+      },
+      "cache.llc_read_misses": {
+        "center": 0.0,
+        "iqr": 0.0,
+        "mad": 0.0,
+        "maximum": 0.0,
+        "minimum": 0.0,
+        "q1": 0.0,
+        "q3": 0.0,
+        "sample_stdev": 0.0,
+        "scale": 1.0
+      },
+      "recovery.machine_clears": {
+        "center": 0.0,
+        "iqr": 0.0,
+        "mad": 0.0,
+        "maximum": 0.0,
+        "minimum": 0.0,
+        "q1": 0.0,
+        "q3": 0.0,
+        "sample_stdev": 0.0,
+        "scale": 1.0
+      },
+      "recovery.memory_ordering_clears": {
+        "center": 0.0,
+        "iqr": 0.0,
+        "mad": 0.0,
+        "maximum": 0.0,
+        "minimum": 0.0,
+        "q1": 0.0,
+        "q3": 0.0,
+        "sample_stdev": 0.0,
+        "scale": 1.0
+      },
+      "recovery.recovery_cycles": {
+        "center": 10.0,
+        "iqr": 4.0,
+        "mad": 2.0,
+        "maximum": 16.0,
+        "minimum": 4.0,
+        "q1": 8.0,
+        "q3": 12.0,
+        "sample_stdev": 2.6860847484094426,
+        "scale": 2.9652
+      },
+      "stalls.stalls_l1d_miss": {
+        "center": 0.0,
+        "iqr": 1.0,
+        "mad": 0.0,
+        "maximum": 49.0,
+        "minimum": 0.0,
+        "q1": 0.0,
+        "q3": 1.0,
+        "sample_stdev": 3.9758354636248354,
+        "scale": 3.9758354636248354
+      },
+      "stalls.stalls_mem_any": {
+        "center": 88.0,
+        "iqr": 12.0,
+        "mad": 4.0,
+        "maximum": 230.0,
+        "minimum": 81.0,
+        "q1": 84.0,
+        "q3": 96.0,
+        "sample_stdev": 10.734657909790144,
+        "scale": 10.734657909790144
+      },
+      "structural.branch_misses": {
+        "center": 1.0,
+        "iqr": 0.0,
+        "mad": 0.0,
+        "maximum": 2.0,
+        "minimum": 0.0,
+        "q1": 1.0,
+        "q3": 1.0,
+        "sample_stdev": 0.054776822198125574,
+        "scale": 1.0
+      },
+      "structural.branches": {
+        "center": 9.0,
+        "iqr": 0.0,
+        "mad": 0.0,
+        "maximum": 9.0,
+        "minimum": 9.0,
+        "q1": 9.0,
+        "q3": 9.0,
+        "sample_stdev": 0.0,
+        "scale": 1.0
+      },
+      "structural.cycles": {
+        "center": 153.0,
+        "iqr": 17.0,
+        "mad": 9.0,
+        "maximum": 290.0,
+        "minimum": 142.0,
+        "q1": 144.0,
+        "q3": 161.0,
+        "sample_stdev": 12.514041728002391,
+        "scale": 13.343399999999999
+      },
+      "structural.instructions": {
+        "center": 68.0,
+        "iqr": 0.0,
+        "mad": 0.0,
+        "maximum": 68.0,
+        "minimum": 68.0,
+        "q1": 68.0,
+        "q3": 68.0,
+        "sample_stdev": 0.0,
+        "scale": 1.0
+      },
+      "structural.retired_loads": {
+        "center": 14.0,
+        "iqr": 0.0,
+        "mad": 0.0,
+        "maximum": 14.0,
+        "minimum": 14.0,
+        "q1": 14.0,
+        "q3": 14.0,
+        "sample_stdev": 0.0,
+        "scale": 1.0
+      },
+      "structural.retired_stores": {
+        "center": 10.0,
+        "iqr": 0.0,
+        "mad": 0.0,
+        "maximum": 10.0,
+        "minimum": 10.0,
+        "q1": 10.0,
+        "q3": 10.0,
+        "sample_stdev": 0.0,
+        "scale": 1.0
+      }
+    },
+    "calibration_check": {
+      "allowed_alarm_rate_difference": 0.0448,
+      "calibration_alarm_rate": 0.1084,
+      "failure_reasons": [],
+      "maximum_feature_drift": 1.0,
+      "maximum_observed_feature_drift": 0.18631241133226747,
+      "maximum_score_median_drift": 1.0,
+      "passed": true,
+      "score_median_drift": 0.21216532154796286,
+      "selected_feature_drifts": {
+        "stalls.stalls_l1d_miss": {
+          "calibration_center": 0.0,
+          "standardized_drift": 0.0,
+          "threshold_center": 0.0
+        },
+        "stalls.stalls_mem_any": {
+          "calibration_center": 90.0,
+          "standardized_drift": 0.18631241133226747,
+          "threshold_center": 88.0
+        }
+      },
+      "status": "VALID",
+      "threshold_alarm_rate": 0.0896
+    },
+    "decision_rule": "Fit centers/scales on profile A; reject features that drift on profile B; learn directions from matched baseline/attack pairs; remove highly correlated features; freeze the threshold on an independent baseline set; report FPR/TPR only after a separate fault-free calibration-drift check passes.",
+    "detector": "stable_paired_directional_robust_score",
+    "diagnostic_only_features": [
+      "cache.l1i_read_misses"
+    ],
+    "feature_selection_audit": {
+      "correlation_removed": [],
+      "eligible_before_correlation": [
+        "stalls.stalls_mem_any",
+        "stalls.stalls_l1d_miss"
+      ],
+      "rejection_reasons": {
+        "cache-detail.cache_misses": "paired effect 0.000000 below required 0.100000",
+        "cache-detail.cache_references": "paired effect 0.003000 below required 0.100000",
+        "cache-detail.l1d_replacements": "paired effect 0.066100 below required 0.100000",
+        "cache-detail.l2_request_misses": "paired effect 0.003000 below required 0.100000",
+        "cache.dtlb_read_misses": "paired effect 0.000000 below required 0.100000",
+        "cache.l1d_read_misses": "paired effect 0.037000 below required 0.100000",
+        "cache.l1i_read_misses": "diagnostic-only feature",
+        "cache.llc_read_misses": "paired effect 0.000000 below required 0.100000",
+        "recovery.machine_clears": "paired effect 0.000000 below required 0.100000",
+        "recovery.memory_ordering_clears": "paired effect 0.000000 below required 0.100000",
+        "recovery.recovery_cycles": "paired effect 0.017200 below required 0.100000",
+        "structural.branch_misses": "paired effect 0.003000 below required 0.100000",
+        "structural.branches": "paired effect 0.000000 below required 0.100000",
+        "structural.cycles": "paired effect 0.059655 below required 0.449661",
+        "structural.instructions": "paired effect 0.000000 below required 0.100000",
+        "structural.retired_loads": "paired effect 0.000000 below required 0.100000",
+        "structural.retired_stores": "paired effect 0.000000 below required 0.100000"
+      }
+    },
+    "measurement_window": "The stuck-at-1 value is established before the identical measure_target wrapper. L1I misses remain diagnostic only and are never used by the detector.",
+    "message_domain": 1129924145,
+    "paired_attack_development_effects": {
+      "cache-detail.cache_misses": {
+        "absolute_effect": 0.0,
+        "effect": 0.0,
+        "paired_mean_delta_z": 0.0,
+        "paired_median_delta_z": 0.0
+      },
+      "cache-detail.cache_references": {
+        "absolute_effect": 0.003,
+        "effect": 0.003,
+        "paired_mean_delta_z": 0.003,
+        "paired_median_delta_z": 0.0
+      },
+      "cache-detail.l1d_replacements": {
+        "absolute_effect": 0.06610009442870633,
+        "effect": 0.06610009442870633,
+        "paired_mean_delta_z": 0.06610009442870633,
+        "paired_median_delta_z": 0.0
+      },
+      "cache-detail.l2_request_misses": {
+        "absolute_effect": 0.003,
+        "effect": 0.003,
+        "paired_mean_delta_z": 0.003,
+        "paired_median_delta_z": 0.0
+      },
+      "cache.dtlb_read_misses": {
+        "absolute_effect": 0.0,
+        "effect": 0.0,
+        "paired_mean_delta_z": 0.0,
+        "paired_median_delta_z": 0.0
+      },
+      "cache.l1d_read_misses": {
+        "absolute_effect": 0.037,
+        "effect": -0.037,
+        "paired_mean_delta_z": -0.037,
+        "paired_median_delta_z": 0.0
+      },
+      "cache.l1i_read_misses": {
+        "absolute_effect": 0.12657943252844103,
+        "effect": -0.12657943252844103,
+        "paired_mean_delta_z": -0.12657943252844103,
+        "paired_median_delta_z": 0.0
+      },
+      "cache.llc_read_misses": {
+        "absolute_effect": 0.0,
+        "effect": 0.0,
+        "paired_mean_delta_z": 0.0,
+        "paired_median_delta_z": 0.0
+      },
+      "recovery.machine_clears": {
+        "absolute_effect": 0.0,
+        "effect": 0.0,
+        "paired_mean_delta_z": 0.0,
+        "paired_median_delta_z": 0.0
+      },
+      "recovery.memory_ordering_clears": {
+        "absolute_effect": 0.0,
+        "effect": 0.0,
+        "paired_mean_delta_z": 0.0,
+        "paired_median_delta_z": 0.0
+      },
+      "recovery.recovery_cycles": {
+        "absolute_effect": 0.01719951436665318,
+        "effect": -0.01719951436665318,
+        "paired_mean_delta_z": -0.01719951436665318,
+        "paired_median_delta_z": 0.0
+      },
+      "stalls.stalls_l1d_miss": {
+        "absolute_effect": 0.1416054575575176,
+        "effect": -0.1416054575575176,
+        "paired_mean_delta_z": -0.1416054575575176,
+        "paired_median_delta_z": 0.0
+      },
+      "stalls.stalls_mem_any": {
+        "absolute_effect": 1.2110306736597387,
+        "effect": 1.2110306736597387,
+        "paired_mean_delta_z": 1.0234140754481453,
+        "paired_median_delta_z": 1.2110306736597387
+      },
+      "structural.branch_misses": {
+        "absolute_effect": 0.003,
+        "effect": 0.003,
+        "paired_mean_delta_z": 0.003,
+        "paired_median_delta_z": 0.0
+      },
+      "structural.branches": {
+        "absolute_effect": 0.0,
+        "effect": 0.0,
+        "paired_mean_delta_z": 0.0,
+        "paired_median_delta_z": 0.0
+      },
+      "structural.cycles": {
+        "absolute_effect": 0.05965496050481887,
+        "effect": -0.05965496050481887,
+        "paired_mean_delta_z": -0.05965496050481887,
+        "paired_median_delta_z": 0.0
+      },
+      "structural.instructions": {
+        "absolute_effect": 0.0,
+        "effect": 0.0,
+        "paired_mean_delta_z": 0.0,
+        "paired_median_delta_z": 0.0
+      },
+      "structural.retired_loads": {
+        "absolute_effect": 0.0,
+        "effect": 0.0,
+        "paired_mean_delta_z": 0.0,
+        "paired_median_delta_z": 0.0
+      },
+      "structural.retired_stores": {
+        "absolute_effect": 0.0,
+        "effect": 0.0,
+        "paired_mean_delta_z": 0.0,
+        "paired_median_delta_z": 0.0
+      }
+    },
+    "passes": [
+      "structural",
+      "cache",
+      "cache-detail",
+      "load-hits",
+      "load-misses-latency",
+      "stalls",
+      "recovery"
+    ],
+    "profile_a_to_profile_b_stability": {
+      "cache-detail.cache_misses": {
+        "profile_a_center": 0.0,
+        "profile_b_center": 0.0,
+        "standardized_drift": 0.0
+      },
+      "cache-detail.cache_references": {
+        "profile_a_center": 0.0,
+        "profile_b_center": 0.0,
+        "standardized_drift": 0.0
+      },
+      "cache-detail.l1d_replacements": {
+        "profile_a_center": 1.0,
+        "profile_b_center": 1.0,
+        "standardized_drift": 0.0
+      },
+      "cache-detail.l2_request_misses": {
+        "profile_a_center": 0.0,
+        "profile_b_center": 0.0,
+        "standardized_drift": 0.0
+      },
+      "cache.dtlb_read_misses": {
+        "profile_a_center": 0.0,
+        "profile_b_center": 0.0,
+        "standardized_drift": 0.0
+      },
+      "cache.l1d_read_misses": {
+        "profile_a_center": 0.0,
+        "profile_b_center": 0.0,
+        "standardized_drift": 0.0
+      },
+      "cache.l1i_read_misses": {
+        "profile_a_center": 12.0,
+        "profile_b_center": 11.0,
+        "standardized_drift": 0.22483025315886507
+      },
+      "cache.llc_read_misses": {
+        "profile_a_center": 0.0,
+        "profile_b_center": 0.0,
+        "standardized_drift": 0.0
+      },
+      "recovery.machine_clears": {
+        "profile_a_center": 0.0,
+        "profile_b_center": 0.0,
+        "standardized_drift": 0.0
+      },
+      "recovery.memory_ordering_clears": {
+        "profile_a_center": 0.0,
+        "profile_b_center": 0.0,
+        "standardized_drift": 0.0
+      },
+      "recovery.recovery_cycles": {
+        "profile_a_center": 10.0,
+        "profile_b_center": 10.0,
+        "standardized_drift": 0.0
+      },
+      "stalls.stalls_l1d_miss": {
+        "profile_a_center": 0.0,
+        "profile_b_center": 0.0,
+        "standardized_drift": 0.0
+      },
+      "stalls.stalls_mem_any": {
+        "profile_a_center": 88.0,
+        "profile_b_center": 88.0,
+        "standardized_drift": 0.0
+      },
+      "structural.branch_misses": {
+        "profile_a_center": 1.0,
+        "profile_b_center": 1.0,
+        "standardized_drift": 0.0
+      },
+      "structural.branches": {
+        "profile_a_center": 9.0,
+        "profile_b_center": 9.0,
+        "standardized_drift": 0.0
+      },
+      "structural.cycles": {
+        "profile_a_center": 153.0,
+        "profile_b_center": 151.0,
+        "standardized_drift": 0.1498868354392434
+      },
+      "structural.instructions": {
+        "profile_a_center": 68.0,
+        "profile_b_center": 68.0,
+        "standardized_drift": 0.0
+      },
+      "structural.retired_loads": {
+        "profile_a_center": 14.0,
+        "profile_b_center": 14.0,
+        "standardized_drift": 0.0
+      },
+      "structural.retired_stores": {
+        "profile_a_center": 10.0,
+        "profile_b_center": 10.0,
+        "standardized_drift": 0.0
+      }
+    },
+    "reportable": true,
+    "score_threshold": 1.3344611447209447,
+    "selected_features": [
+      {
+        "absolute_effect": 1.2110306736597387,
+        "direction": 1,
+        "effect": 1.2110306736597387,
+        "feature": "stalls.stalls_mem_any",
+        "paired_mean_delta_z": 1.0234140754481453,
+        "paired_median_delta_z": 1.2110306736597387,
+        "profile_drift": 0.0,
+        "weight": 0.8953114926553937
+      },
+      {
+        "absolute_effect": 0.1416054575575176,
+        "direction": -1,
+        "effect": -0.1416054575575176,
+        "feature": "stalls.stalls_l1d_miss",
+        "paired_mean_delta_z": -0.1416054575575176,
+        "paired_median_delta_z": 0.0,
+        "profile_drift": 0.0,
+        "weight": 0.10468850734460632
+      }
+    ],
+    "status": "VALID",
+    "target_fpr": 0.1,
+    "unavailable_features": [
+      "load-hits.load_l1_hit",
+      "load-hits.load_l2_hit",
+      "load-hits.load_l3_hit",
+      "load-hits.load_l3_miss",
+      "load-misses-latency.load_l1_miss",
+      "load-misses-latency.load_l2_miss",
+      "load-misses-latency.load_l3_miss",
+      "load-misses-latency.long_latency_loads",
+      "stalls.stalled_frontend_cycles",
+      "stalls.stalled_backend_cycles",
+      "recovery.recovery_cycles_any"
+    ]
+  },
+  "paired_test_baseline_attack_auc": 0.397711,
+  "reportable": true,
+  "score_statistics": {
+    "attack_development": {
+      "maximum": 12.427169410213796,
+      "mean": 1.298097078527299,
+      "median": 1.5012687878110629,
+      "minimum": 0.0,
+      "sample_stdev": 0.9115291736185087
+    },
+    "attack_test": {
+      "maximum": 12.093554124033561,
+      "mean": 0.31243071550779117,
+      "median": 0.0,
+      "minimum": 0.0,
+      "sample_stdev": 0.74995916024458
+    },
+    "calibration": {
+      "maximum": 17.906229853107874,
+      "mean": 0.5073236473384691,
+      "median": 0.16680764309011809,
+      "minimum": 0.0,
+      "sample_stdev": 0.8135364118975068
+    },
+    "development_baseline": {
+      "maximum": 8.423785976050963,
+      "mean": 0.471815418480399,
+      "median": 0.08340382154505904,
+      "minimum": 0.0,
+      "sample_stdev": 0.8167838752388852
+    },
+    "test_baseline": {
+      "maximum": 13.8450343764798,
+      "mean": 0.6262792959818484,
+      "median": 0.16680764309011809,
+      "minimum": 0.0,
+      "sample_stdev": 0.962565069452086
+    },
+    "threshold": {
+      "maximum": 12.927592339484152,
+      "mean": 0.42240699459710607,
+      "median": 0.0,
+      "minimum": 0.0,
+      "sample_stdev": 0.7862153997320855
+    },
+    "validation": {
+      "maximum": 17.906229853107874,
+      "mean": 0.5602626120510261,
+      "median": 0.2502114646351771,
+      "minimum": 0.0,
+      "sample_stdev": 0.8091208124843101
+    }
+  },
+  "semantic_metrics": {
+    "full_stuck_at_carry_oracle_successes": 1000,
+    "success_rate": 1.0,
+    "valid_attack_test_samples": 1000
+  },
+  "status": "VALID",
+  "threshold_calibration": {
+    "detected": 448,
+    "empirical_alarm_rate": 0.0896,
+    "requested_target_fpr": 0.1,
+    "samples": 5000,
+    "score_threshold": 1.3344611447209447
+  }
+}

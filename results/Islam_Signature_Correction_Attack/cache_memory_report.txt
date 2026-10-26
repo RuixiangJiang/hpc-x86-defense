@@ -1,0 +1,46 @@
+=== Islam Signature Correction: raw cache/memory behavior ===
+PMU window: polyvecl_ntt(s1) only
+
+event                        baseline mode  attack mode  mode delta     baseline median [p05,p95]     attack median [p05,p95]
+cache_references                         0            0          +0                       0 [0,0]                     0 [0,0]
+cache_misses                             0            0          +0                       0 [0,0]                     0 [0,0]
+l1d_read_accesses                    24669        24669          +0           24669 [24669,24669]         24669 [24669,24669]
+l1d_read_misses                         16           13          -3                    16 [12,19]                  13 [10,17]
+llc_read_accesses                        0            0          +0                       0 [0,0]                     0 [0,0]
+llc_read_misses                          0            0          +0                       0 [0,0]                     0 [0,0]
+dtlb_read_accesses                   24669        24669          +0           24669 [24669,24669]         24669 [24669,24669]
+dtlb_read_misses                         0            0          +0                       0 [0,0]                     0 [0,0]
+
+[means and ranges]
+cache_references:
+  baseline n=500 mean=0.030 range=[0,5]
+  attack   n=500 mean=0.022 range=[0,3]
+  mean delta=-0.008
+cache_misses:
+  baseline n=500 mean=0.000 range=[0,0]
+  attack   n=500 mean=0.012 range=[0,2]
+  mean delta=+0.012
+l1d_read_accesses:
+  baseline n=500 mean=24669.004 range=[24669,24670]
+  attack   n=500 mean=24669.004 range=[24669,24670]
+  mean delta=+0.000
+l1d_read_misses:
+  baseline n=500 mean=15.670 range=[11,23]
+  attack   n=500 mean=13.304 range=[8,21]
+  mean delta=-2.366
+llc_read_accesses:
+  baseline n=500 mean=0.000 range=[0,0]
+  attack   n=500 mean=0.000 range=[0,0]
+  mean delta=+0.000
+llc_read_misses:
+  baseline n=500 mean=0.000 range=[0,0]
+  attack   n=500 mean=0.000 range=[0,0]
+  mean delta=+0.000
+dtlb_read_accesses:
+  baseline n=500 mean=24669.006 range=[24669,24670]
+  attack   n=500 mean=24669.002 range=[24669,24670]
+  mean delta=-0.004
+dtlb_read_misses:
+  baseline n=500 mean=0.000 range=[0,0]
+  attack   n=500 mean=0.000 range=[0,0]
+  mean delta=+0.000

@@ -1,0 +1,27 @@
+=== Kundu Carry Your Fault Exact Modal-Vector Detector ===
+Detector events: instructions, branches, retired_loads, retired_stores
+Frozen baseline modal vector: instructions=68, branches=9, retired_loads=14, retired_stores=10
+Calibration baseline: 500 valid / 500 collected
+Validation baseline: 5000; false positives: 0; FPR: 0.000000000
+One-sided 95% FPR upper bound: 0.000598967
+Attack samples: 500; detected: 0; TPR: 0.000000000
+One-sided 95% TPR lower bound: 0.000000000
+Full stuck-at/carry-propagation oracle success: 500/500
+
+Modal attack-minus-baseline deltas:
+  cycles             -8
+  instructions       +0
+  branches           +0
+  branch_misses      +0
+  retired_loads      +0
+  retired_stores     +0
+
+Mean attack-minus-baseline deltas:
+  cycles             -1.174000
+  instructions       +0.000000
+  branches           +0.000000
+  branch_misses      +0.004000
+  retired_loads      +0.000000
+  retired_stores     +0.000000
+
+[important] The exact structural detector shows no positive separation: TPR is not greater than FPR.  This is the expected outcome for a data-only stuck-at fault when the original A2B control flow is preserved.

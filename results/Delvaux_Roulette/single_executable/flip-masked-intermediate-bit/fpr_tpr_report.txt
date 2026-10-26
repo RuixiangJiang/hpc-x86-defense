@@ -1,0 +1,66 @@
+=== Delvaux Roulette: flip-masked-intermediate-bit baseline=single threshold=worst-session ===
+Available candidate features: 13; development-selected features: 8
+  stalls-mem-any.stalls_mem_any                              direction=+ dev_auc=0.532612 effect=0.164 session_consistency=0.750 weight=0.4743
+  execution-bound-loads.execution_bound_on_loads             direction=+ dev_auc=0.504414 effect=0.036 session_consistency=0.500 weight=0.0196
+  cache-l1d.l1d_read_misses                                  direction=- dev_auc=0.557710 effect=0.000 session_consistency=0.000 weight=0.2566
+  cache-l1d-replacements.l1d_replacements                    direction=+ dev_auc=0.547149 effect=0.000 session_consistency=0.250 weight=0.2097
+  stalls-l1d-miss.stalls_l1d_miss                            direction=- dev_auc=0.506950 effect=0.000 session_consistency=0.000 weight=0.0309
+  cache-l2-request-misses.l2_request_misses                  direction=+ dev_auc=0.501245 effect=0.000 session_consistency=0.000 weight=0.0055
+  cache-references.cache_references                          direction=+ dev_auc=0.500501 effect=0.000 session_consistency=0.000 weight=0.0022
+  structural-loads.retired_loads                             direction=+ dev_auc=0.500250 effect=0.000 session_consistency=0.000 weight=0.0011
+
+Primary sparse directional detector:
+  Single threshold: FP=117/20000 upper=0.006818; threshold=1.986708
+  Validation: FP=43/6000 FPR=0.007166667; attack TP=5/1000 TPR=0.005000000; AUC=0.477450
+  Batch-10 metric=median-directional-score direction=+
+  Batch threshold: FP=1/2000 upper=0.002370; threshold=0.975554
+  Batch validation: FP=1/600 FPR=0.001666667; attack TP=1/100 TPR=0.010000000; AUC=0.475250
+  Cross-session single validation FPR:
+    s00: 22/2000 (0.011000); first=0.013000 second=0.009000
+    s01: 6/2000 (0.003000); first=0.005000 second=0.001000
+    s02: 15/2000 (0.007500); first=0.010000 second=0.005000
+  Worst-session single FPR=0.011000
+  Cross-session batch validation FPR:
+    s00: 1/200 (0.005000)
+    s01: 0/200 (0.000000)
+    s02: 0/200 (0.000000)
+  Cross-session batch attack TPR:
+    s00: 0/50 (0.000000)
+    s01: 1/50 (0.020000)
+  Worst-session batch FPR=0.005000
+
+Structural-only comparison detector:
+  Single threshold: FP=39/20000 upper=0.002546; threshold=0.000000
+  Validation: FP=10/6000 FPR=0.001666667; attack TP=3/1000 TPR=0.003000000; AUC=0.500667
+  Batch-10 metric=mean-directional-score direction=+
+  Batch threshold: FP=0/2000 upper=0.001497; threshold=0.050000
+  Batch validation: FP=0/600 FPR=0.000000000; attack TP=0/100 TPR=0.000000000; AUC=0.506667
+  Cross-session single validation FPR:
+    s00: 3/2000 (0.001500); first=0.000000 second=0.003000
+    s01: 1/2000 (0.000500); first=0.000000 second=0.001000
+    s02: 6/2000 (0.003000); first=0.004000 second=0.002000
+  Worst-session single FPR=0.003000
+  Cross-session batch validation FPR:
+    s00: 0/200 (0.000000)
+    s01: 0/200 (0.000000)
+    s02: 0/200 (0.000000)
+  Cross-session batch attack TPR:
+    s00: 0/50 (0.000000)
+    s01: 0/50 (0.000000)
+  Worst-session batch FPR=0.000000
+
+Fault semantic success: 1000/1000
+Largest normalized median shifts on final attack sessions:
+  execution-bound-loads.execution_bound_on_loads             session_z_delta=+0.222
+  stalls-mem-any.stalls_mem_any                              session_z_delta=-0.073
+  structural-loads.retired_loads                             session_z_delta=+0.000
+  structural-stores.retired_stores                           session_z_delta=+0.000
+  cache-l1d.l1d_read_misses                                  session_z_delta=+0.000
+  cache-llc.llc_read_misses                                  session_z_delta=+0.000
+  cache-dtlb.dtlb_read_misses                                session_z_delta=+0.000
+  cache-references.cache_references                          session_z_delta=+0.000
+  cache-misses.cache_misses                                  session_z_delta=+0.000
+  cache-l1d-replacements.l1d_replacements                    session_z_delta=+0.000
+  cache-l2-request-misses.l2_request_misses                  session_z_delta=+0.000
+  stalls-l1d-miss.stalls_l1d_miss                            session_z_delta=+0.000
+  resource-stalls-store-buffer.resource_stalls_store_buffer  session_z_delta=+0.000

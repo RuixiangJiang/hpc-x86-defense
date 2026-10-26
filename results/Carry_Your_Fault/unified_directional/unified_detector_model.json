@@ -1,0 +1,445 @@
+{
+  "available_features": [
+    "structural.cycles",
+    "structural.instructions",
+    "structural.branches",
+    "structural.branch_misses",
+    "structural.retired_loads",
+    "structural.retired_stores",
+    "cache.l1d_read_misses",
+    "cache.l1i_read_misses",
+    "cache.llc_read_misses",
+    "cache.dtlb_read_misses",
+    "cache-detail.cache_references",
+    "cache-detail.cache_misses",
+    "cache-detail.l1d_replacements",
+    "cache-detail.l2_request_misses",
+    "stalls.stalls_l1d_miss",
+    "stalls.stalls_mem_any",
+    "recovery.machine_clears",
+    "recovery.memory_ordering_clears",
+    "recovery.recovery_cycles"
+  ],
+  "baseline_feature_models": {
+    "cache-detail.cache_misses": {
+      "center": 0.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 0.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "sample_stdev": 0.0,
+      "scale": 1.0
+    },
+    "cache-detail.cache_references": {
+      "center": 0.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 11.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "sample_stdev": 0.30471367742949496,
+      "scale": 1.0
+    },
+    "cache-detail.l1d_replacements": {
+      "center": 1.0,
+      "iqr": 1.0,
+      "mad": 1.0,
+      "maximum": 14.0,
+      "minimum": 0.0,
+      "q1": 1.0,
+      "q3": 2.0,
+      "sample_stdev": 1.1794636778144725,
+      "scale": 1.4826
+    },
+    "cache-detail.l2_request_misses": {
+      "center": 0.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 16.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "sample_stdev": 0.5034923060495816,
+      "scale": 1.0
+    },
+    "cache.dtlb_read_misses": {
+      "center": 0.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 0.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "sample_stdev": 0.0,
+      "scale": 1.0
+    },
+    "cache.l1d_read_misses": {
+      "center": 0.0,
+      "iqr": 1.0,
+      "mad": 0.0,
+      "maximum": 8.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 1.0,
+      "sample_stdev": 0.9003527461688373,
+      "scale": 1.0
+    },
+    "cache.l1i_read_misses": {
+      "center": 13.0,
+      "iqr": 1.0,
+      "mad": 1.0,
+      "maximum": 29.0,
+      "minimum": 10.0,
+      "q1": 13.0,
+      "q3": 14.0,
+      "sample_stdev": 1.2236488091785576,
+      "scale": 1.4826
+    },
+    "cache.llc_read_misses": {
+      "center": 0.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 0.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "sample_stdev": 0.0,
+      "scale": 1.0
+    },
+    "recovery.machine_clears": {
+      "center": 0.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 0.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "sample_stdev": 0.0,
+      "scale": 1.0
+    },
+    "recovery.memory_ordering_clears": {
+      "center": 0.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 0.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "sample_stdev": 0.0,
+      "scale": 1.0
+    },
+    "recovery.recovery_cycles": {
+      "center": 10.0,
+      "iqr": 4.0,
+      "mad": 2.0,
+      "maximum": 17.0,
+      "minimum": 1.0,
+      "q1": 8.0,
+      "q3": 12.0,
+      "sample_stdev": 2.6216993828101103,
+      "scale": 2.9652
+    },
+    "stalls.stalls_l1d_miss": {
+      "center": 0.0,
+      "iqr": 1.0,
+      "mad": 0.0,
+      "maximum": 96.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 1.0,
+      "sample_stdev": 4.351554407666465,
+      "scale": 4.351554407666465
+    },
+    "stalls.stalls_mem_any": {
+      "center": 100.0,
+      "iqr": 9.0,
+      "mad": 4.0,
+      "maximum": 322.0,
+      "minimum": 96.0,
+      "q1": 97.0,
+      "q3": 106.0,
+      "sample_stdev": 10.54854082832329,
+      "scale": 10.54854082832329
+    },
+    "structural.branch_misses": {
+      "center": 1.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 2.0,
+      "minimum": 0.0,
+      "q1": 1.0,
+      "q3": 1.0,
+      "sample_stdev": 0.049989993996297645,
+      "scale": 1.0
+    },
+    "structural.branches": {
+      "center": 9.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 9.0,
+      "minimum": 9.0,
+      "q1": 9.0,
+      "q3": 9.0,
+      "sample_stdev": 0.0,
+      "scale": 1.0
+    },
+    "structural.cycles": {
+      "center": 165.0,
+      "iqr": 12.0,
+      "mad": 6.0,
+      "maximum": 268.0,
+      "minimum": 154.0,
+      "q1": 159.0,
+      "q3": 171.0,
+      "sample_stdev": 9.720602916513474,
+      "scale": 9.720602916513474
+    },
+    "structural.instructions": {
+      "center": 68.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 68.0,
+      "minimum": 68.0,
+      "q1": 68.0,
+      "q3": 68.0,
+      "sample_stdev": 0.0,
+      "scale": 1.0
+    },
+    "structural.retired_loads": {
+      "center": 14.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 14.0,
+      "minimum": 14.0,
+      "q1": 14.0,
+      "q3": 14.0,
+      "sample_stdev": 0.0,
+      "scale": 1.0
+    },
+    "structural.retired_stores": {
+      "center": 10.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 10.0,
+      "minimum": 10.0,
+      "q1": 10.0,
+      "q3": 10.0,
+      "sample_stdev": 0.0,
+      "scale": 1.0
+    }
+  },
+  "clip_z": 20.0,
+  "data_separation": "Baseline profile fits center/scale. Attack-development selects feature directions and weights. Fault-free threshold freezes the operating threshold. Independent validation and attack-test datasets report final FPR and TPR.",
+  "decision_rule": "Compute robust z-scores for all selected PMU features, keep only deviation in the attack-development direction, combine them using normalized effect-size weights, and alarm when the single unified score exceeds the threshold frozen from an independent fault-free threshold dataset.",
+  "detector": "unified_directional_robust_score",
+  "feature_effects_from_attack_development": {
+    "cache-detail.cache_misses": {
+      "absolute_effect": 0.0,
+      "effect": 0.0,
+      "mean_attack_z": 0.0,
+      "median_attack_z": 0.0
+    },
+    "cache-detail.cache_references": {
+      "absolute_effect": 0.033,
+      "effect": 0.033,
+      "mean_attack_z": 0.033,
+      "median_attack_z": 0.0
+    },
+    "cache-detail.l1d_replacements": {
+      "absolute_effect": 0.13287467961688923,
+      "effect": -0.13287467961688923,
+      "mean_attack_z": -0.13287467961688923,
+      "median_attack_z": 0.0
+    },
+    "cache-detail.l2_request_misses": {
+      "absolute_effect": 0.034,
+      "effect": 0.034,
+      "mean_attack_z": 0.034,
+      "median_attack_z": 0.0
+    },
+    "cache.dtlb_read_misses": {
+      "absolute_effect": 0.0,
+      "effect": 0.0,
+      "mean_attack_z": 0.0,
+      "median_attack_z": 0.0
+    },
+    "cache.l1d_read_misses": {
+      "absolute_effect": 0.465,
+      "effect": 0.465,
+      "mean_attack_z": 0.465,
+      "median_attack_z": 0.0
+    },
+    "cache.l1i_read_misses": {
+      "absolute_effect": 4.721435316336167,
+      "effect": -4.721435316336167,
+      "mean_attack_z": -3.6476460272494267,
+      "median_attack_z": -4.721435316336167
+    },
+    "cache.llc_read_misses": {
+      "absolute_effect": 0.0,
+      "effect": 0.0,
+      "mean_attack_z": 0.0,
+      "median_attack_z": 0.0
+    },
+    "recovery.machine_clears": {
+      "absolute_effect": 0.0,
+      "effect": 0.0,
+      "mean_attack_z": 0.0,
+      "median_attack_z": 0.0
+    },
+    "recovery.memory_ordering_clears": {
+      "absolute_effect": 0.0,
+      "effect": 0.0,
+      "mean_attack_z": 0.0,
+      "median_attack_z": 0.0
+    },
+    "recovery.recovery_cycles": {
+      "absolute_effect": 0.03203831107513828,
+      "effect": -0.03203831107513828,
+      "mean_attack_z": -0.03203831107513828,
+      "median_attack_z": 0.0
+    },
+    "stalls.stalls_l1d_miss": {
+      "absolute_effect": 0.3205751024374927,
+      "effect": 0.3205751024374927,
+      "mean_attack_z": 0.3205751024374927,
+      "median_attack_z": 0.0
+    },
+    "stalls.stalls_mem_any": {
+      "absolute_effect": 0.09479984163449001,
+      "effect": -0.09479984163449001,
+      "mean_attack_z": 0.23510360725353524,
+      "median_attack_z": -0.09479984163449001
+    },
+    "structural.branch_misses": {
+      "absolute_effect": 0.001,
+      "effect": 0.001,
+      "mean_attack_z": 0.001,
+      "median_attack_z": 0.0
+    },
+    "structural.branches": {
+      "absolute_effect": 0.0,
+      "effect": 0.0,
+      "mean_attack_z": 0.0,
+      "median_attack_z": 0.0
+    },
+    "structural.cycles": {
+      "absolute_effect": 0.3086228319133955,
+      "effect": -0.3086228319133955,
+      "mean_attack_z": 0.09485008367471688,
+      "median_attack_z": -0.3086228319133955
+    },
+    "structural.instructions": {
+      "absolute_effect": 0.0,
+      "effect": 0.0,
+      "mean_attack_z": 0.0,
+      "median_attack_z": 0.0
+    },
+    "structural.retired_loads": {
+      "absolute_effect": 0.0,
+      "effect": 0.0,
+      "mean_attack_z": 0.0,
+      "median_attack_z": 0.0
+    },
+    "structural.retired_stores": {
+      "absolute_effect": 0.0,
+      "effect": 0.0,
+      "mean_attack_z": 0.0,
+      "median_attack_z": 0.0
+    }
+  },
+  "measurement_window": "The stuck-at-1 value is established before the identical measure_target wrapper. All PMU passes execute the unchanged A2B carry-chain consumer.",
+  "minimum_effect": 0.05,
+  "minimum_running_percent": 95.0,
+  "minimum_scale": 1.0,
+  "passes": [
+    "structural",
+    "cache",
+    "cache-detail",
+    "load-hits",
+    "load-misses-latency",
+    "stalls",
+    "recovery"
+  ],
+  "sample_fusion": "Rows with the same sample index are fused across PMU passes. The passes are repeated deterministic software-fault executions, not simultaneous counters from one physical fault.",
+  "score_threshold": 4.803935213370481,
+  "selected_features": [
+    {
+      "absolute_effect": 4.721435316336167,
+      "direction": -1,
+      "effect": -4.721435316336167,
+      "feature": "cache.l1i_read_misses",
+      "mean_attack_z": -3.6476460272494267,
+      "median_attack_z": -4.721435316336167,
+      "weight": 0.7812667324771599
+    },
+    {
+      "absolute_effect": 0.465,
+      "direction": 1,
+      "effect": 0.465,
+      "feature": "cache.l1d_read_misses",
+      "mean_attack_z": 0.465,
+      "median_attack_z": 0.0,
+      "weight": 0.07694461668147805
+    },
+    {
+      "absolute_effect": 0.3205751024374927,
+      "direction": 1,
+      "effect": 0.3205751024374927,
+      "feature": "stalls.stalls_l1d_miss",
+      "mean_attack_z": 0.3205751024374927,
+      "median_attack_z": 0.0,
+      "weight": 0.053046297579953626
+    },
+    {
+      "absolute_effect": 0.3086228319133955,
+      "direction": -1,
+      "effect": -0.3086228319133955,
+      "feature": "structural.cycles",
+      "mean_attack_z": 0.09485008367471688,
+      "median_attack_z": -0.3086228319133955,
+      "weight": 0.0510685279585558
+    },
+    {
+      "absolute_effect": 0.13287467961688923,
+      "direction": -1,
+      "effect": -0.13287467961688923,
+      "feature": "cache-detail.l1d_replacements",
+      "mean_attack_z": -0.13287467961688923,
+      "median_attack_z": 0.0,
+      "weight": 0.0219870780425715
+    },
+    {
+      "absolute_effect": 0.09479984163449001,
+      "direction": -1,
+      "effect": -0.09479984163449001,
+      "feature": "stalls.stalls_mem_any",
+      "mean_attack_z": 0.23510360725353524,
+      "median_attack_z": -0.09479984163449001,
+      "weight": 0.015686747260280985
+    }
+  ],
+  "target": [
+    17,
+    11
+  ],
+  "target_fpr": 0.2,
+  "top_k": 12,
+  "unavailable_features": [
+    "load-hits.load_l1_hit",
+    "load-hits.load_l2_hit",
+    "load-hits.load_l3_hit",
+    "load-hits.load_l3_miss",
+    "load-misses-latency.load_l1_miss",
+    "load-misses-latency.load_l2_miss",
+    "load-misses-latency.load_l3_miss",
+    "load-misses-latency.long_latency_loads",
+    "stalls.stalled_frontend_cycles",
+    "stalls.stalled_backend_cycles",
+    "recovery.recovery_cycles_any"
+  ],
+  "weight_power": 1.0
+}

@@ -1,0 +1,1188 @@
+{
+  "attack_family": "skip-or-operation",
+  "baseline_policy": "single",
+  "candidate_features": [
+    "structural-instructions.cycles",
+    "structural-instructions.instructions",
+    "structural-branches.branches",
+    "structural-branch-misses.branch_misses",
+    "structural-loads.retired_loads",
+    "structural-stores.retired_stores",
+    "cache-l1d.l1d_read_misses",
+    "cache-l1i.l1i_read_misses",
+    "cache-llc.llc_read_misses",
+    "cache-dtlb.dtlb_read_misses",
+    "cache-references.cache_references",
+    "cache-misses.cache_misses",
+    "cache-l1d-replacements.l1d_replacements",
+    "cache-l2-request-misses.l2_request_misses",
+    "stalls-l1d-miss.stalls_l1d_miss",
+    "stalls-mem-any.stalls_mem_any",
+    "recovery-machine-clears.machine_clears",
+    "recovery-memory-ordering.memory_ordering_clears",
+    "recovery-cycles.recovery_cycles",
+    "recovery-cycles-any.recovery_cycles_any",
+    "uops-retired.uops_retired_slots",
+    "uops-issued.uops_issued_any",
+    "uops-executed.uops_executed_thread",
+    "frontend-uops-undelivered.idq_uops_not_delivered",
+    "frontend-mite-uops.mite_uops",
+    "frontend-dsb-uops.dsb_uops",
+    "frontend-ms-uops.microcode_uops",
+    "branch-conditional.conditional_branches",
+    "branch-conditional-taken.conditional_branches_taken",
+    "branch-conditional-not-taken.conditional_branches_not_taken",
+    "branch-mispred-conditional.conditional_branch_mispredicts",
+    "resource-stalls-scoreboard.resource_stalls_scoreboard",
+    "resource-stalls-store-buffer.resource_stalls_store_buffer",
+    "execution-bound-loads.execution_bound_on_loads"
+  ],
+  "primary_detector": {
+    "available": true,
+    "batch": {
+      "auc": {
+        "bootstrap_ci95": [
+          0.9190479166666667,
+          0.95565625
+        ],
+        "iterations": 1000,
+        "value": 0.9376166666666667
+      },
+      "batch_size": 10,
+      "development_candidates": [
+        {
+          "attack_median": 1.0916272912220133,
+          "baseline_median": 0.13482774268780906,
+          "direction": 1,
+          "metric": "mean-directional-score",
+          "oriented_auc": 0.997175,
+          "raw_auc": 0.997175,
+          "session_direction_consistency": 1.0
+        },
+        {
+          "attack_median": 0.9842225774864634,
+          "baseline_median": -0.004402038556635514,
+          "direction": 1,
+          "metric": "median-directional-score",
+          "oriented_auc": 0.996975,
+          "raw_auc": 0.996975,
+          "session_direction_consistency": 1.0
+        }
+      ],
+      "direction": 1,
+      "fpr": {
+        "by_session": {
+          "s00": {
+            "ci95": [
+              0.0,
+              0.018275340355136248
+            ],
+            "first_half": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 100
+            },
+            "one_sided_95_upper": 0.014867039231272059,
+            "positives": 0,
+            "rate": 0.0,
+            "second_half": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 100
+            },
+            "trials": 200
+          },
+          "s01": {
+            "ci95": [
+              0.0,
+              0.018275340355136248
+            ],
+            "first_half": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 100
+            },
+            "one_sided_95_upper": 0.014867039231272059,
+            "positives": 0,
+            "rate": 0.0,
+            "second_half": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 100
+            },
+            "trials": 200
+          },
+          "s02": {
+            "ci95": [
+              0.0,
+              0.018275340355136248
+            ],
+            "first_half": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 100
+            },
+            "one_sided_95_upper": 0.014867039231272059,
+            "positives": 0,
+            "rate": 0.0,
+            "second_half": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 100
+            },
+            "trials": 200
+          }
+        },
+        "ci95": [
+          0.0,
+          0.00612927133066926
+        ],
+        "false_positives": 0,
+        "one_sided_95_upper": 0.004980443380361349,
+        "rate": 0.0,
+        "trials": 600
+      },
+      "metric_scope": "predeclared-primary",
+      "selected_metric": "mean-directional-score",
+      "threshold": {
+        "confidence": 0.95,
+        "confidence_guarded_upper": 0.0023697133676560643,
+        "confidence_target_met": true,
+        "false_positives": 1,
+        "per_session_at_frozen_threshold": {
+          "s00": {
+            "false_positives": 1,
+            "one_sided_upper": 0.009452282208075004,
+            "rate": 0.002,
+            "trials": 500
+          },
+          "s01": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          },
+          "s02": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          },
+          "s03": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          }
+        },
+        "per_session_candidates": {
+          "s00": {
+            "allowed_false_positives": 1,
+            "confidence_guarded_upper": 0.009452282208075004,
+            "confidence_target_met": true,
+            "false_positives": 1,
+            "rate": 0.002,
+            "trials": 500,
+            "value": 1.1267667259353895
+          },
+          "s01": {
+            "allowed_false_positives": 1,
+            "confidence_guarded_upper": 0.009452282208075004,
+            "confidence_target_met": true,
+            "false_positives": 1,
+            "rate": 0.002,
+            "trials": 500,
+            "value": 1.065397355107195
+          },
+          "s02": {
+            "allowed_false_positives": 1,
+            "confidence_guarded_upper": 0.009452282208075004,
+            "confidence_target_met": true,
+            "false_positives": 1,
+            "rate": 0.002,
+            "trials": 500,
+            "value": 0.8709460415488636
+          },
+          "s03": {
+            "allowed_false_positives": 1,
+            "confidence_guarded_upper": 0.009452282208075004,
+            "confidence_target_met": true,
+            "false_positives": 1,
+            "rate": 0.002,
+            "trials": 500,
+            "value": 0.8936215886530601
+          }
+        },
+        "rate": 0.0005,
+        "selection": "maximum of per-session confidence-guarded thresholds",
+        "target_fpr": 0.01,
+        "trials": 2000,
+        "value": 1.1267667259353895,
+        "worst_session_empirical_fpr": 0.002,
+        "worst_session_upper": 0.009452282208075004
+      },
+      "tpr": {
+        "by_session": {
+          "s00": {
+            "ci95": [
+              0.0,
+              0.07112173646419767
+            ],
+            "first_half": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 25
+            },
+            "one_sided_95_upper": 0.058155079116972264,
+            "positives": 0,
+            "rate": 0.0,
+            "second_half": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 25
+            },
+            "trials": 50
+          },
+          "s01": {
+            "ci95": [
+              0.4320604350655881,
+              0.718117758876303
+            ],
+            "first_half": {
+              "positives": 16,
+              "rate": 0.64,
+              "trials": 25
+            },
+            "one_sided_95_upper": 0.6986156229802079,
+            "positives": 29,
+            "rate": 0.58,
+            "second_half": {
+              "positives": 13,
+              "rate": 0.52,
+              "trials": 25
+            },
+            "trials": 50
+          }
+        },
+        "ci95": [
+          0.20357418925072013,
+          0.38926595890744775
+        ],
+        "one_sided_95_lower": 0.21587965718929825,
+        "rate": 0.29,
+        "trials": 100,
+        "true_positives": 29
+      }
+    },
+    "name": "sparse-directional",
+    "selected_feature_count": 7,
+    "selected_features": [
+      {
+        "attack_median_z": -1.0,
+        "baseline_median_z": 0.0,
+        "development_session_effects": {
+          "s00": 1.0,
+          "s01": 1.0,
+          "s02": 1.0,
+          "s03": 1.0
+        },
+        "direction": -1,
+        "direction_consistency": 1.0,
+        "event": "instructions",
+        "feature": "structural-instructions.instructions",
+        "oriented_auc": 0.998256125,
+        "oriented_median_effect": 1.0,
+        "rank": 0.9965122500000001,
+        "raw_auc": 0.001743875,
+        "weight": 0.3517969367350943
+      },
+      {
+        "attack_median_z": 1.0,
+        "baseline_median_z": 0.0,
+        "development_session_effects": {
+          "s00": 1.0,
+          "s01": 1.0,
+          "s02": 1.0,
+          "s03": 0.0
+        },
+        "direction": 1,
+        "direction_consistency": 0.75,
+        "event": "conditional_branch_mispredicts",
+        "feature": "branch-mispred-conditional.conditional_branch_mispredicts",
+        "oriented_auc": 0.8240085,
+        "oriented_median_effect": 1.0,
+        "rank": 0.567014875,
+        "raw_auc": 0.8240085,
+        "weight": 0.22876828212825848
+      },
+      {
+        "attack_median_z": 1.01175,
+        "baseline_median_z": -0.22483333333333333,
+        "development_session_effects": {
+          "s00": 0.6745000000000001,
+          "s01": 2.2858055555555556,
+          "s02": 1.9660688095381604,
+          "s03": 1.5942508860355886
+        },
+        "direction": 1,
+        "direction_consistency": 1.0,
+        "event": "uops_executed_thread",
+        "feature": "uops-executed.uops_executed_thread",
+        "oriented_auc": 0.677306125,
+        "oriented_median_effect": 1.2365833333333334,
+        "rank": 0.4385075981458333,
+        "raw_auc": 0.677306125,
+        "weight": 0.15480555282964947
+      },
+      {
+        "attack_median_z": 0.34974074074074074,
+        "baseline_median_z": -0.6495185185185185,
+        "development_session_effects": {
+          "s00": 1.398962962962963,
+          "s01": 2.0235,
+          "s02": 0.5995473417569737,
+          "s03": 0.0
+        },
+        "direction": 1,
+        "direction_consistency": 0.75,
+        "event": "stalls_mem_any",
+        "feature": "stalls-mem-any.stalls_mem_any",
+        "oriented_auc": 0.680956,
+        "oriented_median_effect": 0.9992592592592593,
+        "rank": 0.31643842740740746,
+        "raw_auc": 0.680956,
+        "weight": 0.1276705050063461
+      },
+      {
+        "attack_median_z": 0.5058680696074465,
+        "baseline_median_z": -0.09635582278237075,
+        "development_session_effects": {
+          "s00": 0.6744907594765952,
+          "s01": 0.6744907594765952,
+          "s02": 0.9635582278237075,
+          "s03": 0.6744907594765952
+        },
+        "direction": 1,
+        "direction_consistency": 1.0,
+        "event": "recovery_cycles_any",
+        "feature": "recovery-cycles-any.recovery_cycles_any",
+        "oriented_auc": 0.701271125,
+        "oriented_median_effect": 0.6022238923898172,
+        "rank": 0.2424205606463549,
+        "raw_auc": 0.701271125,
+        "weight": 0.08558129680492318
+      },
+      {
+        "attack_median_z": -0.4496666666666666,
+        "baseline_median_z": 0.0,
+        "development_session_effects": {
+          "s00": 0.4496666666666666,
+          "s01": 0.4496666666666666,
+          "s02": 0.19985185185185184,
+          "s03": -0.2997777777777778
+        },
+        "direction": -1,
+        "direction_consistency": 0.75,
+        "event": "uops_retired_slots",
+        "feature": "uops-retired.uops_retired_slots",
+        "oriented_auc": 0.608309125,
+        "oriented_median_effect": 0.4496666666666666,
+        "rank": 0.08523025561458333,
+        "raw_auc": 0.391690875,
+        "weight": 0.03438706817400616
+      },
+      {
+        "attack_median_z": 0.68293125,
+        "baseline_median_z": 0.39626874999999995,
+        "development_session_effects": {
+          "s00": 0.37940625,
+          "s01": 0.10045744680851054,
+          "s02": 0.23201474201474193,
+          "s03": 1.5429456869009583
+        },
+        "direction": 1,
+        "direction_consistency": 1.0,
+        "event": "uops_issued_any",
+        "feature": "uops-issued.uops_issued_any",
+        "oriented_auc": 0.5839445,
+        "oriented_median_effect": 0.28666250000000004,
+        "rank": 0.0481274804625,
+        "raw_auc": 0.5839445,
+        "weight": 0.016990358321722184
+      }
+    ],
+    "single_trace": {
+      "auc": {
+        "bootstrap_ci95": [
+          0.8321443500000001,
+          0.8532208833333335
+        ],
+        "iterations": 1000,
+        "value": 0.8431341666666666
+      },
+      "fpr": {
+        "by_session": {
+          "s00": {
+            "ci95": [
+              1.2658823868557872e-05,
+              0.002782639834658168
+            ],
+            "first_half": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 1000
+            },
+            "one_sided_95_upper": 0.0023697133676560643,
+            "positives": 1,
+            "rate": 0.0005,
+            "second_half": {
+              "positives": 1,
+              "rate": 0.001,
+              "trials": 1000
+            },
+            "trials": 2000
+          },
+          "s01": {
+            "ci95": [
+              0.0017284495734654712,
+              0.007866303828536945
+            ],
+            "first_half": {
+              "positives": 2,
+              "rate": 0.002,
+              "trials": 1000
+            },
+            "one_sided_95_upper": 0.007205716652398256,
+            "positives": 8,
+            "rate": 0.004,
+            "second_half": {
+              "positives": 6,
+              "rate": 0.006,
+              "trials": 1000
+            },
+            "trials": 2000
+          },
+          "s02": {
+            "ci95": [
+              0.0,
+              0.0018427397934059368
+            ],
+            "first_half": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 1000
+            },
+            "one_sided_95_upper": 0.0014967448951882841,
+            "positives": 0,
+            "rate": 0.0,
+            "second_half": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 1000
+            },
+            "trials": 2000
+          }
+        },
+        "ci95": [
+          0.0006861176882990651,
+          0.002845549008851974
+        ],
+        "false_positives": 9,
+        "one_sided_95_upper": 0.0026160735255816407,
+        "rate": 0.0015,
+        "trials": 6000
+      },
+      "threshold": {
+        "confidence": 0.95,
+        "confidence_guarded_upper": 0.003828549043228954,
+        "confidence_target_met": true,
+        "false_positives": 62,
+        "per_session_at_frozen_threshold": {
+          "s00": {
+            "false_positives": 38,
+            "one_sided_upper": 0.009949917622170821,
+            "rate": 0.0076,
+            "trials": 5000
+          },
+          "s01": {
+            "false_positives": 12,
+            "one_sided_upper": 0.0038856196666939386,
+            "rate": 0.0024,
+            "trials": 5000
+          },
+          "s02": {
+            "false_positives": 3,
+            "one_sided_upper": 0.0015499942797071952,
+            "rate": 0.0006,
+            "trials": 5000
+          },
+          "s03": {
+            "false_positives": 9,
+            "one_sided_upper": 0.0031389372345019956,
+            "rate": 0.0018,
+            "trials": 5000
+          }
+        },
+        "per_session_candidates": {
+          "s00": {
+            "allowed_false_positives": 38,
+            "confidence_guarded_upper": 0.009949917622170821,
+            "confidence_target_met": true,
+            "false_positives": 38,
+            "rate": 0.0076,
+            "trials": 5000,
+            "value": 1.6475702868576176
+          },
+          "s01": {
+            "allowed_false_positives": 38,
+            "confidence_guarded_upper": 0.009949917622170821,
+            "confidence_target_met": true,
+            "false_positives": 38,
+            "rate": 0.0076,
+            "trials": 5000,
+            "value": 1.5383604221763958
+          },
+          "s02": {
+            "allowed_false_positives": 38,
+            "confidence_guarded_upper": 0.009949917622170821,
+            "confidence_target_met": true,
+            "false_positives": 38,
+            "rate": 0.0076,
+            "trials": 5000,
+            "value": 1.225289497046628
+          },
+          "s03": {
+            "allowed_false_positives": 38,
+            "confidence_guarded_upper": 0.009949917622170821,
+            "confidence_target_met": true,
+            "false_positives": 38,
+            "rate": 0.0076,
+            "trials": 5000,
+            "value": 1.4772908142128016
+          }
+        },
+        "rate": 0.0031,
+        "selection": "maximum of per-session confidence-guarded thresholds",
+        "target_fpr": 0.01,
+        "trials": 20000,
+        "value": 1.6475702868576176,
+        "worst_session_empirical_fpr": 0.0076,
+        "worst_session_upper": 0.009949917622170821
+      },
+      "tpr": {
+        "by_session": {
+          "s00": {
+            "ci95": [
+              0.004416172285795597,
+              0.025934927265336423
+            ],
+            "first_half": {
+              "positives": 3,
+              "rate": 0.012,
+              "trials": 250
+            },
+            "one_sided_95_upper": 0.02354658548397076,
+            "positives": 6,
+            "rate": 0.012,
+            "second_half": {
+              "positives": 3,
+              "rate": 0.012,
+              "trials": 250
+            },
+            "trials": 500
+          },
+          "s01": {
+            "ci95": [
+              0.17323915989010924,
+              0.24625523265458754
+            ],
+            "first_half": {
+              "positives": 55,
+              "rate": 0.22,
+              "trials": 250
+            },
+            "one_sided_95_upper": 0.24011032078575423,
+            "positives": 104,
+            "rate": 0.208,
+            "second_half": {
+              "positives": 49,
+              "rate": 0.196,
+              "trials": 250
+            },
+            "trials": 500
+          }
+        },
+        "ci95": [
+          0.09127777445940577,
+          0.13105246363748524
+        ],
+        "one_sided_95_lower": 0.09409263973901699,
+        "rate": 0.11,
+        "trials": 1000,
+        "true_positives": 110
+      }
+    },
+    "z_clip": 8.0
+  },
+  "session_scale_floor": 0.5,
+  "structural_baseline_detector": {
+    "available": true,
+    "batch": {
+      "auc": {
+        "bootstrap_ci95": [
+          1.0,
+          1.0
+        ],
+        "iterations": 1000,
+        "value": 1.0
+      },
+      "batch_size": 10,
+      "development_candidates": [
+        {
+          "attack_median": 0.25,
+          "baseline_median": 0.0,
+          "direction": 1,
+          "metric": "mean-directional-score",
+          "oriented_auc": 1.0,
+          "raw_auc": 1.0,
+          "session_direction_consistency": 1.0
+        },
+        {
+          "attack_median": 0.25,
+          "baseline_median": 0.0,
+          "direction": 1,
+          "metric": "median-directional-score",
+          "oriented_auc": 1.0,
+          "raw_auc": 1.0,
+          "session_direction_consistency": 1.0
+        },
+        {
+          "attack_median": 0.0,
+          "baseline_median": 0.0,
+          "direction": 1,
+          "metric": "directional-score-stdev",
+          "oriented_auc": 0.5023375,
+          "raw_auc": 0.5023375,
+          "session_direction_consistency": 0.0
+        },
+        {
+          "attack_median": 0.0,
+          "baseline_median": 0.0,
+          "direction": 1,
+          "metric": "feature-vector-dispersion",
+          "oriented_auc": 0.5023375,
+          "raw_auc": 0.5023375,
+          "session_direction_consistency": 0.0
+        },
+        {
+          "attack_median": 0.0,
+          "baseline_median": 0.0,
+          "direction": 1,
+          "metric": "feature-vector-range",
+          "oriented_auc": 0.5023375,
+          "raw_auc": 0.5023375,
+          "session_direction_consistency": 0.0
+        }
+      ],
+      "direction": 1,
+      "fpr": {
+        "by_session": {
+          "s00": {
+            "ci95": [
+              0.0,
+              0.018275340355136248
+            ],
+            "first_half": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 100
+            },
+            "one_sided_95_upper": 0.014867039231272059,
+            "positives": 0,
+            "rate": 0.0,
+            "second_half": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 100
+            },
+            "trials": 200
+          },
+          "s01": {
+            "ci95": [
+              0.0,
+              0.018275340355136248
+            ],
+            "first_half": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 100
+            },
+            "one_sided_95_upper": 0.014867039231272059,
+            "positives": 0,
+            "rate": 0.0,
+            "second_half": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 100
+            },
+            "trials": 200
+          },
+          "s02": {
+            "ci95": [
+              0.0,
+              0.018275340355136248
+            ],
+            "first_half": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 100
+            },
+            "one_sided_95_upper": 0.014867039231272059,
+            "positives": 0,
+            "rate": 0.0,
+            "second_half": {
+              "positives": 0,
+              "rate": 0.0,
+              "trials": 100
+            },
+            "trials": 200
+          }
+        },
+        "ci95": [
+          0.0,
+          0.00612927133066926
+        ],
+        "false_positives": 0,
+        "one_sided_95_upper": 0.004980443380361349,
+        "rate": 0.0,
+        "trials": 600
+      },
+      "metric_scope": "exploratory-ablation",
+      "selected_metric": "mean-directional-score",
+      "threshold": {
+        "confidence": 0.95,
+        "confidence_guarded_upper": 0.0014967448951882837,
+        "confidence_target_met": true,
+        "false_positives": 0,
+        "per_session_at_frozen_threshold": {
+          "s00": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          },
+          "s01": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          },
+          "s02": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          },
+          "s03": {
+            "false_positives": 0,
+            "one_sided_upper": 0.005973551516349557,
+            "rate": 0.0,
+            "trials": 500
+          }
+        },
+        "per_session_candidates": {
+          "s00": {
+            "allowed_false_positives": 1,
+            "confidence_guarded_upper": 0.005973551516349557,
+            "confidence_target_met": true,
+            "false_positives": 0,
+            "rate": 0.0,
+            "trials": 500,
+            "value": 0.025
+          },
+          "s01": {
+            "allowed_false_positives": 1,
+            "confidence_guarded_upper": 0.005973551516349557,
+            "confidence_target_met": true,
+            "false_positives": 0,
+            "rate": 0.0,
+            "trials": 500,
+            "value": 0.025
+          },
+          "s02": {
+            "allowed_false_positives": 1,
+            "confidence_guarded_upper": 0.005973551516349557,
+            "confidence_target_met": true,
+            "false_positives": 0,
+            "rate": 0.0,
+            "trials": 500,
+            "value": 0.025
+          },
+          "s03": {
+            "allowed_false_positives": 1,
+            "confidence_guarded_upper": 0.005973551516349557,
+            "confidence_target_met": true,
+            "false_positives": 0,
+            "rate": 0.0,
+            "trials": 500,
+            "value": 0.025
+          }
+        },
+        "rate": 0.0,
+        "selection": "maximum of per-session confidence-guarded thresholds",
+        "target_fpr": 0.01,
+        "trials": 2000,
+        "value": 0.025,
+        "worst_session_empirical_fpr": 0.0,
+        "worst_session_upper": 0.005973551516349557
+      },
+      "tpr": {
+        "by_session": {
+          "s00": {
+            "ci95": [
+              0.9288782635358153,
+              1.0
+            ],
+            "first_half": {
+              "positives": 25,
+              "rate": 1.0,
+              "trials": 25
+            },
+            "one_sided_95_upper": 1.0,
+            "positives": 50,
+            "rate": 1.0,
+            "second_half": {
+              "positives": 25,
+              "rate": 1.0,
+              "trials": 25
+            },
+            "trials": 50
+          },
+          "s01": {
+            "ci95": [
+              0.9288782635358153,
+              1.0
+            ],
+            "first_half": {
+              "positives": 25,
+              "rate": 1.0,
+              "trials": 25
+            },
+            "one_sided_95_upper": 1.0,
+            "positives": 50,
+            "rate": 1.0,
+            "second_half": {
+              "positives": 25,
+              "rate": 1.0,
+              "trials": 25
+            },
+            "trials": 50
+          }
+        },
+        "ci95": [
+          0.9637833073548128,
+          1.0
+        ],
+        "one_sided_95_lower": 0.9704869503929543,
+        "rate": 1.0,
+        "trials": 100,
+        "true_positives": 100
+      }
+    },
+    "name": "structural-only-equal-weight",
+    "selected_feature_count": 4,
+    "selected_features": [
+      {
+        "attack_median_z": -1.0,
+        "baseline_median_z": 0.0,
+        "development_session_effects": {
+          "s00": 1.0,
+          "s01": 1.0,
+          "s02": 1.0,
+          "s03": 1.0
+        },
+        "direction": -1,
+        "direction_consistency": 1.0,
+        "event": "instructions",
+        "feature": "structural-instructions.instructions",
+        "oriented_auc": 0.998256125,
+        "oriented_median_effect": 1.0,
+        "rank": 0.9965122500000001,
+        "raw_auc": 0.001743875,
+        "weight": 0.25
+      },
+      {
+        "attack_median_z": 0.0,
+        "baseline_median_z": 0.0,
+        "development_session_effects": {
+          "s00": 0.0,
+          "s01": 0.0,
+          "s02": 0.0,
+          "s03": 0.0
+        },
+        "direction": 1,
+        "direction_consistency": 0.0,
+        "event": "branches",
+        "feature": "structural-branches.branches",
+        "oriented_auc": 0.5,
+        "oriented_median_effect": 0.0,
+        "rank": 0.0,
+        "raw_auc": 0.5,
+        "weight": 0.25
+      },
+      {
+        "attack_median_z": 0.0,
+        "baseline_median_z": 0.0,
+        "development_session_effects": {
+          "s00": 0.0,
+          "s01": 0.0,
+          "s02": 0.0,
+          "s03": 0.0
+        },
+        "direction": 1,
+        "direction_consistency": 0.0,
+        "event": "retired_loads",
+        "feature": "structural-loads.retired_loads",
+        "oriented_auc": 0.5,
+        "oriented_median_effect": 0.0,
+        "rank": 0.0,
+        "raw_auc": 0.5,
+        "weight": 0.25
+      },
+      {
+        "attack_median_z": 0.0,
+        "baseline_median_z": 0.0,
+        "development_session_effects": {
+          "s00": 0.0,
+          "s01": 0.0,
+          "s02": 0.0,
+          "s03": 0.0
+        },
+        "direction": 1,
+        "direction_consistency": 0.0,
+        "event": "retired_stores",
+        "feature": "structural-stores.retired_stores",
+        "oriented_auc": 0.5,
+        "oriented_median_effect": 0.0,
+        "rank": 0.0,
+        "raw_auc": 0.5,
+        "weight": 0.25
+      }
+    ],
+    "single_trace": {
+      "auc": {
+        "bootstrap_ci95": [
+          0.9954267479166667,
+          0.9984245833333333
+        ],
+        "iterations": 1000,
+        "value": 0.9970925
+      },
+      "fpr": {
+        "by_session": {
+          "s00": {
+            "ci95": [
+              0.0017284495734654712,
+              0.007866303828536945
+            ],
+            "first_half": {
+              "positives": 5,
+              "rate": 0.005,
+              "trials": 1000
+            },
+            "one_sided_95_upper": 0.007205716652398256,
+            "positives": 8,
+            "rate": 0.004,
+            "second_half": {
+              "positives": 3,
+              "rate": 0.003,
+              "trials": 1000
+            },
+            "trials": 2000
+          },
+          "s01": {
+            "ci95": [
+              0.0008122259751844523,
+              0.0058244453345183776
+            ],
+            "first_half": {
+              "positives": 2,
+              "rate": 0.002,
+              "trials": 1000
+            },
+            "one_sided_95_upper": 0.005249275286933279,
+            "positives": 5,
+            "rate": 0.0025,
+            "second_half": {
+              "positives": 3,
+              "rate": 0.003,
+              "trials": 1000
+            },
+            "trials": 2000
+          },
+          "s02": {
+            "ci95": [
+              0.0024002197556586705,
+              0.0091758950700189
+            ],
+            "first_half": {
+              "positives": 5,
+              "rate": 0.005,
+              "trials": 1000
+            },
+            "one_sided_95_upper": 0.008466348205517577,
+            "positives": 10,
+            "rate": 0.005,
+            "second_half": {
+              "positives": 5,
+              "rate": 0.005,
+              "trials": 1000
+            },
+            "trials": 2000
+          }
+        },
+        "ci95": [
+          0.00243150917815516,
+          0.005746363057835669
+        ],
+        "false_positives": 23,
+        "one_sided_95_upper": 0.005426557742877213,
+        "rate": 0.003833333333333333,
+        "trials": 6000
+      },
+      "threshold": {
+        "confidence": 0.95,
+        "confidence_guarded_upper": 0.004433002613651723,
+        "confidence_target_met": true,
+        "false_positives": 73,
+        "per_session_at_frozen_threshold": {
+          "s00": {
+            "false_positives": 18,
+            "one_sided_upper": 0.005333712916693243,
+            "rate": 0.0036,
+            "trials": 5000
+          },
+          "s01": {
+            "false_positives": 17,
+            "one_sided_upper": 0.005095510597634377,
+            "rate": 0.0034,
+            "trials": 5000
+          },
+          "s02": {
+            "false_positives": 21,
+            "one_sided_upper": 0.006042497947648464,
+            "rate": 0.0042,
+            "trials": 5000
+          },
+          "s03": {
+            "false_positives": 17,
+            "one_sided_upper": 0.005095510597634377,
+            "rate": 0.0034,
+            "trials": 5000
+          }
+        },
+        "per_session_candidates": {
+          "s00": {
+            "allowed_false_positives": 38,
+            "confidence_guarded_upper": 0.005333712916693243,
+            "confidence_target_met": true,
+            "false_positives": 18,
+            "rate": 0.0036,
+            "trials": 5000,
+            "value": 0.0
+          },
+          "s01": {
+            "allowed_false_positives": 38,
+            "confidence_guarded_upper": 0.005095510597634377,
+            "confidence_target_met": true,
+            "false_positives": 17,
+            "rate": 0.0034,
+            "trials": 5000,
+            "value": 0.0
+          },
+          "s02": {
+            "allowed_false_positives": 38,
+            "confidence_guarded_upper": 0.006042497947648464,
+            "confidence_target_met": true,
+            "false_positives": 21,
+            "rate": 0.0042,
+            "trials": 5000,
+            "value": 0.0
+          },
+          "s03": {
+            "allowed_false_positives": 38,
+            "confidence_guarded_upper": 0.005095510597634377,
+            "confidence_target_met": true,
+            "false_positives": 17,
+            "rate": 0.0034,
+            "trials": 5000,
+            "value": 0.0
+          }
+        },
+        "rate": 0.00365,
+        "selection": "maximum of per-session confidence-guarded thresholds",
+        "target_fpr": 0.01,
+        "trials": 20000,
+        "value": 0.0,
+        "worst_session_empirical_fpr": 0.0042,
+        "worst_session_upper": 0.006042497947648464
+      },
+      "tpr": {
+        "by_session": {
+          "s00": {
+            "ci95": [
+              0.9856259214377774,
+              0.99951521382371
+            ],
+            "first_half": {
+              "positives": 250,
+              "rate": 1.0,
+              "trials": 250
+            },
+            "one_sided_95_upper": 0.9992888181552688,
+            "positives": 498,
+            "rate": 0.996,
+            "second_half": {
+              "positives": 248,
+              "rate": 0.992,
+              "trials": 250
+            },
+            "trials": 500
+          },
+          "s01": {
+            "ci95": [
+              0.9926493899480806,
+              1.0
+            ],
+            "first_half": {
+              "positives": 250,
+              "rate": 1.0,
+              "trials": 250
+            },
+            "one_sided_95_upper": 1.0,
+            "positives": 500,
+            "rate": 1.0,
+            "second_half": {
+              "positives": 250,
+              "rate": 1.0,
+              "trials": 250
+            },
+            "trials": 500
+          }
+        },
+        "ci95": [
+          0.9927941610885278,
+          0.9997576988831227
+        ],
+        "one_sided_95_lower": 0.9937177154532684,
+        "rate": 0.998,
+        "trials": 1000,
+        "true_positives": 998
+      }
+    },
+    "z_clip": 8.0
+  },
+  "target_fpr": 0.01,
+  "threshold_confidence": 0.95,
+  "threshold_policy": "worst-session"
+}

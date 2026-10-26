@@ -1,0 +1,2144 @@
+{
+  "available_features": [
+    "structural.cycles",
+    "structural.instructions",
+    "structural.branches",
+    "structural.branch_misses",
+    "structural.retired_loads",
+    "structural.retired_stores",
+    "cache.l1d_read_misses",
+    "cache.l1i_read_misses",
+    "cache.llc_read_misses",
+    "cache.dtlb_read_misses",
+    "cache-detail.cache_references",
+    "cache-detail.cache_misses",
+    "cache-detail.l1d_replacements",
+    "cache-detail.l2_request_misses",
+    "stalls.stalls_l1d_miss",
+    "stalls.stalls_mem_any",
+    "recovery.machine_clears",
+    "recovery.memory_ordering_clears",
+    "recovery.recovery_cycles"
+  ],
+  "baseline_feature_models_from_profile_a": {
+    "cache-detail.cache_misses": {
+      "center": 0.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 3.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "sample_stdev": 0.0670820393249937,
+      "scale": 1.0
+    },
+    "cache-detail.cache_references": {
+      "center": 0.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 4.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "sample_stdev": 0.15142808600988228,
+      "scale": 1.0
+    },
+    "cache-detail.l1d_replacements": {
+      "center": 1.0,
+      "iqr": 2.0,
+      "mad": 1.0,
+      "maximum": 15.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 2.0,
+      "sample_stdev": 1.3430978020430704,
+      "scale": 1.4826
+    },
+    "cache-detail.l2_request_misses": {
+      "center": 0.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 8.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "sample_stdev": 0.32417633341682084,
+      "scale": 1.0
+    },
+    "cache.dtlb_read_misses": {
+      "center": 0.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "sample_stdev": 0.022360679774997897,
+      "scale": 1.0
+    },
+    "cache.l1d_read_misses": {
+      "center": 0.0,
+      "iqr": 1.0,
+      "mad": 0.0,
+      "maximum": 12.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 1.0,
+      "sample_stdev": 1.0624745531484714,
+      "scale": 1.0624745531484714
+    },
+    "cache.l1i_read_misses": {
+      "center": 11.0,
+      "iqr": 5.0,
+      "mad": 2.0,
+      "maximum": 36.0,
+      "minimum": 3.0,
+      "q1": 8.0,
+      "q3": 13.0,
+      "sample_stdev": 4.056367193364489,
+      "scale": 4.056367193364489
+    },
+    "cache.llc_read_misses": {
+      "center": 0.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 0.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "sample_stdev": 0.0,
+      "scale": 1.0
+    },
+    "recovery.machine_clears": {
+      "center": 0.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 0.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "sample_stdev": 0.0,
+      "scale": 1.0
+    },
+    "recovery.memory_ordering_clears": {
+      "center": 0.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 0.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "sample_stdev": 0.0,
+      "scale": 1.0
+    },
+    "recovery.recovery_cycles": {
+      "center": 10.0,
+      "iqr": 4.0,
+      "mad": 2.0,
+      "maximum": 23.0,
+      "minimum": 1.0,
+      "q1": 8.0,
+      "q3": 12.0,
+      "sample_stdev": 2.7737683113992526,
+      "scale": 2.9652
+    },
+    "stalls.stalls_l1d_miss": {
+      "center": 0.0,
+      "iqr": 1.0,
+      "mad": 0.0,
+      "maximum": 79.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 1.0,
+      "sample_stdev": 4.338885105874663,
+      "scale": 4.338885105874663
+    },
+    "stalls.stalls_mem_any": {
+      "center": 93.0,
+      "iqr": 16.0,
+      "mad": 8.0,
+      "maximum": 251.0,
+      "minimum": 80.0,
+      "q1": 85.0,
+      "q3": 101.0,
+      "sample_stdev": 12.298616496739255,
+      "scale": 12.298616496739255
+    },
+    "structural.branch_misses": {
+      "center": 1.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 2.0,
+      "minimum": 0.0,
+      "q1": 1.0,
+      "q3": 1.0,
+      "sample_stdev": 0.1500908512595485,
+      "scale": 1.0
+    },
+    "structural.branches": {
+      "center": 9.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 10.0,
+      "minimum": 9.0,
+      "q1": 9.0,
+      "q3": 9.0,
+      "sample_stdev": 0.022360679774997897,
+      "scale": 1.0
+    },
+    "structural.cycles": {
+      "center": 154.0,
+      "iqr": 18.0,
+      "mad": 10.0,
+      "maximum": 573.0,
+      "minimum": 142.0,
+      "q1": 144.0,
+      "q3": 162.0,
+      "sample_stdev": 20.095115191938778,
+      "scale": 20.095115191938778
+    },
+    "structural.instructions": {
+      "center": 68.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 69.0,
+      "minimum": 68.0,
+      "q1": 68.0,
+      "q3": 68.0,
+      "sample_stdev": 0.022360679774997897,
+      "scale": 1.0
+    },
+    "structural.retired_loads": {
+      "center": 14.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 15.0,
+      "minimum": 14.0,
+      "q1": 14.0,
+      "q3": 14.0,
+      "sample_stdev": 0.022360679774997897,
+      "scale": 1.0
+    },
+    "structural.retired_stores": {
+      "center": 10.0,
+      "iqr": 0.0,
+      "mad": 0.0,
+      "maximum": 10.0,
+      "minimum": 10.0,
+      "q1": 10.0,
+      "q3": 10.0,
+      "sample_stdev": 0.0,
+      "scale": 1.0
+    }
+  },
+  "block_aware_paired_attack_development_effects": {
+    "cache-detail.cache_misses": {
+      "absolute_effect": 0.0,
+      "block_count": 10,
+      "block_direction_consistency": 0.0,
+      "block_effect_mean": 0.0,
+      "block_effect_median": 0.0,
+      "block_effects": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0,
+        "7": 0.0,
+        "8": 0.0,
+        "9": 0.0
+      },
+      "bootstrap_ci_95": [
+        0.0,
+        0.0
+      ],
+      "bootstrap_ci_excludes_zero": false,
+      "effect": 0.0,
+      "maximum_block_contribution": 1.0,
+      "paired_mean_delta_z": 0.0,
+      "paired_median_delta_z": 0.0
+    },
+    "cache-detail.cache_references": {
+      "absolute_effect": 0.013000000000000001,
+      "block_count": 10,
+      "block_direction_consistency": 1.0,
+      "block_effect_mean": 0.013000000000000001,
+      "block_effect_median": 0.0,
+      "block_effects": {
+        "0": 0.01,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.02,
+        "4": 0.03,
+        "5": 0.0,
+        "6": 0.07,
+        "7": 0.0,
+        "8": 0.0,
+        "9": 0.0
+      },
+      "bootstrap_ci_95": [
+        0.002,
+        0.029
+      ],
+      "bootstrap_ci_excludes_zero": true,
+      "effect": 0.013000000000000001,
+      "maximum_block_contribution": 0.5384615384615385,
+      "paired_mean_delta_z": 0.013,
+      "paired_median_delta_z": 0.0
+    },
+    "cache-detail.l1d_replacements": {
+      "absolute_effect": 0.013489815189531908,
+      "block_count": 10,
+      "block_direction_consistency": 0.6,
+      "block_effect_mean": -0.00472143531633617,
+      "block_effect_median": 0.013489815189531908,
+      "block_effects": {
+        "0": -0.30352084176446786,
+        "1": -0.04721435316336167,
+        "2": 0.2225819506272764,
+        "3": 0.6744907594765952,
+        "4": 0.02697963037906381,
+        "5": -0.14838796708485094,
+        "6": 6.661338147750939e-18,
+        "7": -0.6744907594765952,
+        "8": 0.17536759746391475,
+        "9": 0.026979630379063813
+      },
+      "bootstrap_ci_95": [
+        -0.1929380817482801,
+        0.12547214353163355
+      ],
+      "bootstrap_ci_excludes_zero": false,
+      "effect": 0.013489815189531908,
+      "maximum_block_contribution": 0.2932551319648094,
+      "paired_mean_delta_z": -0.021583704303251048,
+      "paired_median_delta_z": 0.0
+    },
+    "cache-detail.l2_request_misses": {
+      "absolute_effect": 0.005,
+      "block_count": 10,
+      "block_direction_consistency": 0.625,
+      "block_effect_mean": 0.004000000000000001,
+      "block_effect_median": 0.005,
+      "block_effects": {
+        "0": 0.01,
+        "1": -0.02,
+        "2": 0.0,
+        "3": 0.02,
+        "4": 0.05,
+        "5": 0.02,
+        "6": 0.07,
+        "7": -0.05,
+        "8": 0.0,
+        "9": -0.06
+      },
+      "bootstrap_ci_95": [
+        -0.019,
+        0.028
+      ],
+      "bootstrap_ci_excludes_zero": false,
+      "effect": 0.005,
+      "maximum_block_contribution": 0.23333333333333336,
+      "paired_mean_delta_z": 0.004,
+      "paired_median_delta_z": 0.0
+    },
+    "cache.dtlb_read_misses": {
+      "absolute_effect": 0.0,
+      "block_count": 10,
+      "block_direction_consistency": 0.0,
+      "block_effect_mean": 0.0,
+      "block_effect_median": 0.0,
+      "block_effects": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0,
+        "7": 0.0,
+        "8": 0.0,
+        "9": 0.0
+      },
+      "bootstrap_ci_95": [
+        0.0,
+        0.0
+      ],
+      "bootstrap_ci_excludes_zero": false,
+      "effect": 0.0,
+      "maximum_block_contribution": 1.0,
+      "paired_mean_delta_z": 0.0,
+      "paired_median_delta_z": 0.0
+    },
+    "cache.l1d_read_misses": {
+      "absolute_effect": 0.08000191604412196,
+      "block_count": 10,
+      "block_direction_consistency": 0.6,
+      "block_effect_mean": -0.05082474666332454,
+      "block_effect_median": -0.08000191604412196,
+      "block_effects": {
+        "0": 0.03764796049135151,
+        "1": 0.18823980245675756,
+        "2": -0.11294388147405453,
+        "3": 0.028235970368513632,
+        "4": -0.056471940737027264,
+        "5": -0.12235587159689242,
+        "6": -0.36706761479067723,
+        "7": -0.10353189135121665,
+        "8": -0.12235587159689242,
+        "9": 0.1223558715968924
+      },
+      "bootstrap_ci_95": [
+        -0.1440269788547266,
+        0.038612689478942266
+      ],
+      "bootstrap_ci_excludes_zero": false,
+      "effect": -0.08000191604412196,
+      "maximum_block_contribution": 0.291044776119403,
+      "paired_mean_delta_z": -0.05082474666332454,
+      "paired_median_delta_z": 0.0
+    },
+    "cache.l1i_read_misses": {
+      "absolute_effect": 0.24652600524819995,
+      "block_count": 10,
+      "block_direction_consistency": 0.7,
+      "block_effect_mean": -0.09639166805204619,
+      "block_effect_median": -0.24652600524819995,
+      "block_effects": {
+        "0": -0.24652600524819995,
+        "1": -0.4930520104963999,
+        "2": -0.4930520104963999,
+        "3": -0.06163150131204999,
+        "4": 0.7395780157445998,
+        "5": 0.08381884178438798,
+        "6": -0.24652600524819995,
+        "7": 0.9861040209927998,
+        "8": -0.4930520104963999,
+        "9": -0.7395780157445998
+      },
+      "bootstrap_ci_95": [
+        -0.4930520104963999,
+        0.4930520104963999
+      ],
+      "bootstrap_ci_excludes_zero": false,
+      "effect": -0.24652600524819995,
+      "maximum_block_contribution": 0.21516944593867673,
+      "paired_mean_delta_z": -0.06656202141701398,
+      "paired_median_delta_z": -0.24652600524819995
+    },
+    "cache.llc_read_misses": {
+      "absolute_effect": 0.0,
+      "block_count": 10,
+      "block_direction_consistency": 0.0,
+      "block_effect_mean": 0.0,
+      "block_effect_median": 0.0,
+      "block_effects": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0,
+        "7": 0.0,
+        "8": 0.0,
+        "9": 0.0
+      },
+      "bootstrap_ci_95": [
+        0.0,
+        0.0
+      ],
+      "bootstrap_ci_excludes_zero": false,
+      "effect": 0.0,
+      "maximum_block_contribution": 1.0,
+      "paired_mean_delta_z": 0.0,
+      "paired_median_delta_z": 0.0
+    },
+    "recovery.machine_clears": {
+      "absolute_effect": 0.0,
+      "block_count": 10,
+      "block_direction_consistency": 0.0,
+      "block_effect_mean": 0.0,
+      "block_effect_median": 0.0,
+      "block_effects": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0,
+        "7": 0.0,
+        "8": 0.0,
+        "9": 0.0
+      },
+      "bootstrap_ci_95": [
+        0.0,
+        0.0
+      ],
+      "bootstrap_ci_excludes_zero": false,
+      "effect": 0.0,
+      "maximum_block_contribution": 1.0,
+      "paired_mean_delta_z": 0.0,
+      "paired_median_delta_z": 0.0
+    },
+    "recovery.memory_ordering_clears": {
+      "absolute_effect": 0.0,
+      "block_count": 10,
+      "block_direction_consistency": 0.0,
+      "block_effect_mean": 0.0,
+      "block_effect_median": 0.0,
+      "block_effects": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0,
+        "7": 0.0,
+        "8": 0.0,
+        "9": 0.0
+      },
+      "bootstrap_ci_95": [
+        0.0,
+        0.0
+      ],
+      "bootstrap_ci_excludes_zero": false,
+      "effect": 0.0,
+      "maximum_block_contribution": 1.0,
+      "paired_mean_delta_z": 0.0,
+      "paired_median_delta_z": 0.0
+    },
+    "recovery.recovery_cycles": {
+      "absolute_effect": 0.018548495885606368,
+      "block_count": 10,
+      "block_direction_consistency": 0.6,
+      "block_effect_mean": -0.026979630379063813,
+      "block_effect_median": -0.018548495885606368,
+      "block_effects": {
+        "0": 0.0843113449345744,
+        "1": 0.03372453797382977,
+        "2": 0.023607176581680826,
+        "3": -0.03709699177121273,
+        "4": -0.10791852151625524,
+        "5": -0.10791852151625525,
+        "6": -0.09442870632672332,
+        "7": 0.006744907594765946,
+        "8": -0.07082152974504251,
+        "9": -7.771561172376097e-18
+      },
+      "bootstrap_ci_95": [
+        -0.06678301632267639,
+        0.010117361392148928
+      ],
+      "bootstrap_ci_excludes_zero": false,
+      "effect": -0.018548495885606368,
+      "maximum_block_contribution": 0.19047619047619052,
+      "paired_mean_delta_z": -0.02697963037906381,
+      "paired_median_delta_z": 0.0
+    },
+    "stalls.stalls_l1d_miss": {
+      "absolute_effect": 0.07490403457790668,
+      "block_count": 10,
+      "block_direction_consistency": 0.7,
+      "block_effect_mean": -0.10117806516831085,
+      "block_effect_median": -0.07490403457790668,
+      "block_effects": {
+        "0": -0.13597963200296903,
+        "1": -0.41485311458532925,
+        "2": -0.009218958101896203,
+        "3": 0.01613317667831836,
+        "4": -0.06683744623874749,
+        "5": -0.2742640035314121,
+        "6": -0.42176733316175136,
+        "7": 0.10832275769728042,
+        "8": 0.269654524480464,
+        "9": -0.08297062291706585
+      },
+      "bootstrap_ci_95": [
+        -0.22863592277583958,
+        0.02328939290491523
+      ],
+      "bootstrap_ci_excludes_zero": false,
+      "effect": -0.07490403457790668,
+      "maximum_block_contribution": 0.23431498079385402,
+      "paired_mean_delta_z": -0.10117806516831085,
+      "paired_median_delta_z": 0.0
+    },
+    "stalls.stalls_mem_any": {
+      "absolute_effect": 0.0813099587474031,
+      "block_count": 10,
+      "block_direction_consistency": 0.7,
+      "block_effect_mean": 0.08025292928368685,
+      "block_effect_median": 0.0813099587474031,
+      "block_effects": {
+        "0": 0.0813099587474031,
+        "1": -0.0813099587474031,
+        "2": 0.009757195049688366,
+        "3": 0.0813099587474031,
+        "4": 0.4878597524844186,
+        "5": -0.8944095462214341,
+        "6": 0.4878597524844186,
+        "7": 0.0813099587474031,
+        "8": 0.5691697112318217,
+        "9": -0.02032748968685078
+      },
+      "bootstrap_ci_95": [
+        -0.09594981681987302,
+        0.2439298762422093
+      ],
+      "bootstrap_ci_excludes_zero": false,
+      "effect": 0.0813099587474031,
+      "maximum_block_contribution": 0.3200465522257783,
+      "paired_mean_delta_z": 0.08269222804610896,
+      "paired_median_delta_z": 0.0813099587474031
+    },
+    "structural.branch_misses": {
+      "absolute_effect": 0.001,
+      "block_count": 10,
+      "block_direction_consistency": 0.6666666666666666,
+      "block_effect_mean": 0.001,
+      "block_effect_median": 0.0,
+      "block_effects": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.01,
+        "3": 0.0,
+        "4": 0.01,
+        "5": -0.01,
+        "6": 0.0,
+        "7": 0.0,
+        "8": 0.0,
+        "9": 0.0
+      },
+      "bootstrap_ci_95": [
+        -0.002,
+        0.004
+      ],
+      "bootstrap_ci_excludes_zero": false,
+      "effect": 0.001,
+      "maximum_block_contribution": 0.33333333333333337,
+      "paired_mean_delta_z": 0.001,
+      "paired_median_delta_z": 0.0
+    },
+    "structural.branches": {
+      "absolute_effect": 0.0,
+      "block_count": 10,
+      "block_direction_consistency": 0.0,
+      "block_effect_mean": 0.0,
+      "block_effect_median": 0.0,
+      "block_effects": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0,
+        "7": 0.0,
+        "8": 0.0,
+        "9": 0.0
+      },
+      "bootstrap_ci_95": [
+        0.0,
+        0.0
+      ],
+      "bootstrap_ci_excludes_zero": false,
+      "effect": 0.0,
+      "maximum_block_contribution": 1.0,
+      "paired_mean_delta_z": 0.0,
+      "paired_median_delta_z": 0.0
+    },
+    "structural.cycles": {
+      "absolute_effect": 0.0002488166876498249,
+      "block_count": 10,
+      "block_direction_consistency": 0.5,
+      "block_effect_mean": -0.034784572933446334,
+      "block_effect_median": 0.0002488166876498249,
+      "block_effects": {
+        "0": -0.5473967128296277,
+        "1": -0.6966867254195261,
+        "2": -0.04976333752996615,
+        "3": -0.0492657041546665,
+        "4": 0.3981067002397292,
+        "5": 0.04976333752996615,
+        "6": 0.7464500629494923,
+        "7": -0.6966867254195261,
+        "8": 0.0995266750599323,
+        "9": 0.3981067002397292
+      },
+      "bootstrap_ci_95": [
+        -0.2985800251797969,
+        0.2985800251797969
+      ],
+      "bootstrap_ci_excludes_zero": false,
+      "effect": 0.0002488166876498249,
+      "maximum_block_contribution": 0.20002667022269635,
+      "paired_mean_delta_z": 0.020353205049756157,
+      "paired_median_delta_z": 0.0
+    },
+    "structural.instructions": {
+      "absolute_effect": 0.0,
+      "block_count": 10,
+      "block_direction_consistency": 0.0,
+      "block_effect_mean": 0.0,
+      "block_effect_median": 0.0,
+      "block_effects": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0,
+        "7": 0.0,
+        "8": 0.0,
+        "9": 0.0
+      },
+      "bootstrap_ci_95": [
+        0.0,
+        0.0
+      ],
+      "bootstrap_ci_excludes_zero": false,
+      "effect": 0.0,
+      "maximum_block_contribution": 1.0,
+      "paired_mean_delta_z": 0.0,
+      "paired_median_delta_z": 0.0
+    },
+    "structural.retired_loads": {
+      "absolute_effect": 0.0,
+      "block_count": 10,
+      "block_direction_consistency": 0.0,
+      "block_effect_mean": 0.0,
+      "block_effect_median": 0.0,
+      "block_effects": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0,
+        "7": 0.0,
+        "8": 0.0,
+        "9": 0.0
+      },
+      "bootstrap_ci_95": [
+        0.0,
+        0.0
+      ],
+      "bootstrap_ci_excludes_zero": false,
+      "effect": 0.0,
+      "maximum_block_contribution": 1.0,
+      "paired_mean_delta_z": 0.0,
+      "paired_median_delta_z": 0.0
+    },
+    "structural.retired_stores": {
+      "absolute_effect": 0.0,
+      "block_count": 10,
+      "block_direction_consistency": 0.0,
+      "block_effect_mean": 0.0,
+      "block_effect_median": 0.0,
+      "block_effects": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0,
+        "7": 0.0,
+        "8": 0.0,
+        "9": 0.0
+      },
+      "bootstrap_ci_95": [
+        0.0,
+        0.0
+      ],
+      "bootstrap_ci_excludes_zero": false,
+      "effect": 0.0,
+      "maximum_block_contribution": 1.0,
+      "paired_mean_delta_z": 0.0,
+      "paired_median_delta_z": 0.0
+    }
+  },
+  "calibration_check": {
+    "passed": false,
+    "status": "NOT_RUN"
+  },
+  "collection_order_audit": {
+    "development": {
+      "attack_kind": "attack_development",
+      "baseline_kind": "development_baseline",
+      "blocks": [
+        {
+          "attack_order": 2,
+          "baseline_first": true,
+          "baseline_order": 1,
+          "block": 0
+        },
+        {
+          "attack_order": 10,
+          "baseline_first": false,
+          "baseline_order": 11,
+          "block": 1
+        },
+        {
+          "attack_order": 20,
+          "baseline_first": true,
+          "baseline_order": 19,
+          "block": 2
+        },
+        {
+          "attack_order": 28,
+          "baseline_first": false,
+          "baseline_order": 29,
+          "block": 3
+        },
+        {
+          "attack_order": 38,
+          "baseline_first": true,
+          "baseline_order": 37,
+          "block": 4
+        },
+        {
+          "attack_order": 46,
+          "baseline_first": false,
+          "baseline_order": 47,
+          "block": 5
+        },
+        {
+          "attack_order": 56,
+          "baseline_first": true,
+          "baseline_order": 55,
+          "block": 6
+        },
+        {
+          "attack_order": 64,
+          "baseline_first": false,
+          "baseline_order": 65,
+          "block": 7
+        },
+        {
+          "attack_order": 74,
+          "baseline_first": true,
+          "baseline_order": 73,
+          "block": 8
+        },
+        {
+          "attack_order": 82,
+          "baseline_first": false,
+          "baseline_order": 83,
+          "block": 9
+        }
+      ],
+      "sequence": "BAAB"
+    },
+    "test": {
+      "attack_kind": "attack_test",
+      "baseline_kind": "test_baseline",
+      "blocks": [
+        {
+          "attack_order": 4,
+          "baseline_first": false,
+          "baseline_order": 5,
+          "block": 0
+        },
+        {
+          "attack_order": 14,
+          "baseline_first": true,
+          "baseline_order": 13,
+          "block": 1
+        },
+        {
+          "attack_order": 22,
+          "baseline_first": false,
+          "baseline_order": 23,
+          "block": 2
+        },
+        {
+          "attack_order": 32,
+          "baseline_first": true,
+          "baseline_order": 31,
+          "block": 3
+        },
+        {
+          "attack_order": 40,
+          "baseline_first": false,
+          "baseline_order": 41,
+          "block": 4
+        },
+        {
+          "attack_order": 50,
+          "baseline_first": true,
+          "baseline_order": 49,
+          "block": 5
+        },
+        {
+          "attack_order": 58,
+          "baseline_first": false,
+          "baseline_order": 59,
+          "block": 6
+        },
+        {
+          "attack_order": 68,
+          "baseline_first": true,
+          "baseline_order": 67,
+          "block": 7
+        },
+        {
+          "attack_order": 76,
+          "baseline_first": false,
+          "baseline_order": 77,
+          "block": 8
+        },
+        {
+          "attack_order": 86,
+          "baseline_first": true,
+          "baseline_order": 85,
+          "block": 9
+        }
+      ],
+      "sequence": "ABBA"
+    }
+  },
+  "detector": "block_cross_fitted_directional_robust_score",
+  "detector_generalization": {
+    "development_cross_fit": {
+      "actual_folds": 5,
+      "failure_reasons": [
+        "median cross-fit AUC 0.000000 below 0.600000",
+        "minimum cross-fit AUC 0.000000 below 0.520000"
+      ],
+      "folds": [
+        {
+          "auc": 0.0,
+          "fold": 0,
+          "held_blocks": [
+            1,
+            6
+          ],
+          "held_samples": 200,
+          "selected_features": [],
+          "selection_audit": {
+            "correlation_removed": [],
+            "eligible_before_correlation": [],
+            "maximum_feature_weight": 0.5,
+            "minimum_selected_features": 3,
+            "rejection_reasons": {
+              "cache-detail.cache_misses": "paired effect 0.000000 below required 0.150000",
+              "cache-detail.cache_references": "paired effect 0.007500 below required 0.150000",
+              "cache-detail.l1d_replacements": "profile zero-rate drift exceeds limit",
+              "cache-detail.l2_request_misses": "paired effect 0.005000 below required 0.150000",
+              "cache.dtlb_read_misses": "paired effect 0.000000 below required 0.150000",
+              "cache.l1d_read_misses": "paired effect 0.080002 below required 0.150000",
+              "cache.l1i_read_misses": "diagnostic-only feature",
+              "cache.llc_read_misses": "paired effect 0.000000 below required 0.150000",
+              "recovery.machine_clears": "paired effect 0.000000 below required 0.150000",
+              "recovery.memory_ordering_clears": "paired effect 0.000000 below required 0.150000",
+              "recovery.recovery_cycles": "paired effect 0.018548 below required 1.011736",
+              "stalls.stalls_l1d_miss": "paired effect 0.038028 below required 2.074266",
+              "stalls.stalls_mem_any": "paired effect 0.081310 below required 0.487860",
+              "structural.branch_misses": "paired effect 0.001250 below required 0.150000",
+              "structural.branches": "paired effect 0.000000 below required 0.150000",
+              "structural.cycles": "paired effect 0.000249 below required 0.744957",
+              "structural.instructions": "paired effect 0.000000 below required 0.150000",
+              "structural.retired_loads": "paired effect 0.000000 below required 0.150000",
+              "structural.retired_stores": "paired effect 0.000000 below required 0.150000"
+            },
+            "selected_before_minimum_gate": [],
+            "status": "NO_STABLE_DIRECTIONAL_FEATURES"
+          },
+          "status": "NO_STABLE_DIRECTIONAL_FEATURES",
+          "train_blocks": [
+            0,
+            2,
+            3,
+            4,
+            5,
+            7,
+            8,
+            9
+          ]
+        },
+        {
+          "auc": 0.0,
+          "fold": 1,
+          "held_blocks": [
+            4,
+            8
+          ],
+          "held_samples": 200,
+          "selected_features": [],
+          "selection_audit": {
+            "correlation_removed": [],
+            "eligible_before_correlation": [],
+            "maximum_feature_weight": 0.5,
+            "minimum_selected_features": 3,
+            "rejection_reasons": {
+              "cache-detail.cache_misses": "paired effect 0.000000 below required 0.150000",
+              "cache-detail.cache_references": "paired effect 0.012500 below required 0.150000",
+              "cache-detail.l1d_replacements": "profile zero-rate drift exceeds limit",
+              "cache-detail.l2_request_misses": "paired effect 0.005000 below required 0.150000",
+              "cache.dtlb_read_misses": "paired effect 0.000000 below required 0.150000",
+              "cache.l1d_read_misses": "paired effect 0.037648 below required 0.150000",
+              "cache.l1i_read_misses": "diagnostic-only feature",
+              "cache.llc_read_misses": "paired effect 0.000000 below required 0.150000",
+              "recovery.machine_clears": "paired effect 0.000000 below required 0.150000",
+              "recovery.memory_ordering_clears": "paired effect 0.000000 below required 0.150000",
+              "recovery.recovery_cycles": "paired effect 0.003372 below required 1.011736",
+              "stalls.stalls_l1d_miss": "paired effect 0.109475 below required 2.074266",
+              "stalls.stalls_mem_any": "paired effect 0.045534 below required 0.487860",
+              "structural.branch_misses": "paired effect 0.000000 below required 0.150000",
+              "structural.branches": "paired effect 0.000000 below required 0.150000",
+              "structural.cycles": "paired effect 0.049515 below required 0.744957",
+              "structural.instructions": "paired effect 0.000000 below required 0.150000",
+              "structural.retired_loads": "paired effect 0.000000 below required 0.150000",
+              "structural.retired_stores": "paired effect 0.000000 below required 0.150000"
+            },
+            "selected_before_minimum_gate": [],
+            "status": "NO_STABLE_DIRECTIONAL_FEATURES"
+          },
+          "status": "NO_STABLE_DIRECTIONAL_FEATURES",
+          "train_blocks": [
+            0,
+            1,
+            2,
+            3,
+            5,
+            6,
+            7,
+            9
+          ]
+        },
+        {
+          "auc": 0.0,
+          "fold": 2,
+          "held_blocks": [
+            0,
+            2
+          ],
+          "held_samples": 200,
+          "selected_features": [],
+          "selection_audit": {
+            "correlation_removed": [],
+            "eligible_before_correlation": [],
+            "maximum_feature_weight": 0.5,
+            "minimum_selected_features": 3,
+            "rejection_reasons": {
+              "cache-detail.cache_misses": "paired effect 0.000000 below required 0.150000",
+              "cache-detail.cache_references": "paired effect 0.015000 below required 0.150000",
+              "cache-detail.l1d_replacements": "profile zero-rate drift exceeds limit",
+              "cache-detail.l2_request_misses": "paired effect 0.010000 below required 0.150000",
+              "cache.dtlb_read_misses": "paired effect 0.000000 below required 0.150000",
+              "cache.l1d_read_misses": "paired effect 0.080002 below required 0.150000",
+              "cache.l1i_read_misses": "diagnostic-only feature",
+              "cache.llc_read_misses": "paired effect 0.000000 below required 0.150000",
+              "recovery.machine_clears": "paired effect 0.000000 below required 0.150000",
+              "recovery.memory_ordering_clears": "paired effect 0.000000 below required 0.150000",
+              "recovery.recovery_cycles": "paired effect 0.053959 below required 1.011736",
+              "stalls.stalls_l1d_miss": "paired effect 0.074904 below required 2.074266",
+              "stalls.stalls_mem_any": "paired effect 0.081310 below required 0.487860",
+              "structural.branch_misses": "paired effect 0.000000 below required 0.150000",
+              "structural.branches": "paired effect 0.000000 below required 0.150000",
+              "structural.cycles": "paired effect 0.074645 below required 0.744957",
+              "structural.instructions": "paired effect 0.000000 below required 0.150000",
+              "structural.retired_loads": "paired effect 0.000000 below required 0.150000",
+              "structural.retired_stores": "paired effect 0.000000 below required 0.150000"
+            },
+            "selected_before_minimum_gate": [],
+            "status": "NO_STABLE_DIRECTIONAL_FEATURES"
+          },
+          "status": "NO_STABLE_DIRECTIONAL_FEATURES",
+          "train_blocks": [
+            1,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ]
+        },
+        {
+          "auc": 0.0,
+          "fold": 3,
+          "held_blocks": [
+            3,
+            7
+          ],
+          "held_samples": 200,
+          "selected_features": [],
+          "selection_audit": {
+            "correlation_removed": [],
+            "eligible_before_correlation": [],
+            "maximum_feature_weight": 0.5,
+            "minimum_selected_features": 3,
+            "rejection_reasons": {
+              "cache-detail.cache_misses": "paired effect 0.000000 below required 0.150000",
+              "cache-detail.cache_references": "paired effect 0.013750 below required 0.150000",
+              "cache-detail.l1d_replacements": "profile zero-rate drift exceeds limit",
+              "cache-detail.l2_request_misses": "paired effect 0.005000 below required 0.150000",
+              "cache.dtlb_read_misses": "paired effect 0.000000 below required 0.150000",
+              "cache.l1d_read_misses": "paired effect 0.084708 below required 0.150000",
+              "cache.l1i_read_misses": "diagnostic-only feature",
+              "cache.llc_read_misses": "paired effect 0.000000 below required 0.150000",
+              "recovery.machine_clears": "paired effect 0.000000 below required 0.150000",
+              "recovery.memory_ordering_clears": "paired effect 0.000000 below required 0.150000",
+              "recovery.recovery_cycles": "paired effect 0.035411 below required 1.011736",
+              "stalls.stalls_l1d_miss": "paired effect 0.109475 below required 2.074266",
+              "stalls.stalls_mem_any": "paired effect 0.045534 below required 0.487860",
+              "structural.branch_misses": "paired effect 0.001250 below required 0.150000",
+              "structural.branches": "paired effect 0.000000 below required 0.150000",
+              "structural.cycles": "paired effect 0.074645 below required 0.744957",
+              "structural.instructions": "paired effect 0.000000 below required 0.150000",
+              "structural.retired_loads": "paired effect 0.000000 below required 0.150000",
+              "structural.retired_stores": "paired effect 0.000000 below required 0.150000"
+            },
+            "selected_before_minimum_gate": [],
+            "status": "NO_STABLE_DIRECTIONAL_FEATURES"
+          },
+          "status": "NO_STABLE_DIRECTIONAL_FEATURES",
+          "train_blocks": [
+            0,
+            1,
+            2,
+            4,
+            5,
+            6,
+            8,
+            9
+          ]
+        },
+        {
+          "auc": 0.0,
+          "fold": 4,
+          "held_blocks": [
+            5,
+            9
+          ],
+          "held_samples": 200,
+          "selected_features": [],
+          "selection_audit": {
+            "correlation_removed": [],
+            "eligible_before_correlation": [],
+            "maximum_feature_weight": 0.5,
+            "minimum_selected_features": 3,
+            "rejection_reasons": {
+              "cache-detail.cache_misses": "paired effect 0.000000 below required 0.150000",
+              "cache-detail.cache_references": "paired effect 0.005000 below required 0.150000",
+              "cache-detail.l1d_replacements": "profile zero-rate drift exceeds limit",
+              "cache-detail.l2_request_misses": "paired effect 0.005000 below required 0.150000",
+              "cache.dtlb_read_misses": "paired effect 0.000000 below required 0.150000",
+              "cache.l1d_read_misses": "paired effect 0.080002 below required 0.150000",
+              "cache.l1i_read_misses": "diagnostic-only feature",
+              "cache.llc_read_misses": "paired effect 0.000000 below required 0.150000",
+              "recovery.machine_clears": "paired effect 0.000000 below required 0.150000",
+              "recovery.memory_ordering_clears": "paired effect 0.000000 below required 0.150000",
+              "recovery.recovery_cycles": "paired effect 0.015176 below required 1.011736",
+              "stalls.stalls_l1d_miss": "paired effect 0.038028 below required 2.074266",
+              "stalls.stalls_mem_any": "paired effect 0.081310 below required 0.487860",
+              "structural.branch_misses": "paired effect 0.002500 below required 0.150000",
+              "structural.branches": "paired effect 0.000000 below required 0.150000",
+              "structural.cycles": "paired effect 0.049515 below required 0.744957",
+              "structural.instructions": "paired effect 0.000000 below required 0.150000",
+              "structural.retired_loads": "paired effect 0.000000 below required 0.150000",
+              "structural.retired_stores": "paired effect 0.000000 below required 0.150000"
+            },
+            "selected_before_minimum_gate": [],
+            "status": "NO_STABLE_DIRECTIONAL_FEATURES"
+          },
+          "status": "NO_STABLE_DIRECTIONAL_FEATURES",
+          "train_blocks": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            6,
+            7,
+            8
+          ]
+        }
+      ],
+      "median_auc": 0.0,
+      "minimum_auc": 0.0,
+      "minimum_required_fold_auc": 0.52,
+      "minimum_required_median_auc": 0.6,
+      "passed": false,
+      "requested_folds": 5,
+      "status": "DEVELOPMENT_CROSS_FIT_FAILURE"
+    },
+    "failure_reasons": [
+      "NO_STABLE_DIRECTIONAL_FEATURES"
+    ],
+    "passed": false,
+    "status": "NO_STABLE_DIRECTIONAL_FEATURES"
+  },
+  "development_cross_fit": {
+    "actual_folds": 5,
+    "failure_reasons": [
+      "median cross-fit AUC 0.000000 below 0.600000",
+      "minimum cross-fit AUC 0.000000 below 0.520000"
+    ],
+    "folds": [
+      {
+        "auc": 0.0,
+        "fold": 0,
+        "held_blocks": [
+          1,
+          6
+        ],
+        "held_samples": 200,
+        "selected_features": [],
+        "selection_audit": {
+          "correlation_removed": [],
+          "eligible_before_correlation": [],
+          "maximum_feature_weight": 0.5,
+          "minimum_selected_features": 3,
+          "rejection_reasons": {
+            "cache-detail.cache_misses": "paired effect 0.000000 below required 0.150000",
+            "cache-detail.cache_references": "paired effect 0.007500 below required 0.150000",
+            "cache-detail.l1d_replacements": "profile zero-rate drift exceeds limit",
+            "cache-detail.l2_request_misses": "paired effect 0.005000 below required 0.150000",
+            "cache.dtlb_read_misses": "paired effect 0.000000 below required 0.150000",
+            "cache.l1d_read_misses": "paired effect 0.080002 below required 0.150000",
+            "cache.l1i_read_misses": "diagnostic-only feature",
+            "cache.llc_read_misses": "paired effect 0.000000 below required 0.150000",
+            "recovery.machine_clears": "paired effect 0.000000 below required 0.150000",
+            "recovery.memory_ordering_clears": "paired effect 0.000000 below required 0.150000",
+            "recovery.recovery_cycles": "paired effect 0.018548 below required 1.011736",
+            "stalls.stalls_l1d_miss": "paired effect 0.038028 below required 2.074266",
+            "stalls.stalls_mem_any": "paired effect 0.081310 below required 0.487860",
+            "structural.branch_misses": "paired effect 0.001250 below required 0.150000",
+            "structural.branches": "paired effect 0.000000 below required 0.150000",
+            "structural.cycles": "paired effect 0.000249 below required 0.744957",
+            "structural.instructions": "paired effect 0.000000 below required 0.150000",
+            "structural.retired_loads": "paired effect 0.000000 below required 0.150000",
+            "structural.retired_stores": "paired effect 0.000000 below required 0.150000"
+          },
+          "selected_before_minimum_gate": [],
+          "status": "NO_STABLE_DIRECTIONAL_FEATURES"
+        },
+        "status": "NO_STABLE_DIRECTIONAL_FEATURES",
+        "train_blocks": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          7,
+          8,
+          9
+        ]
+      },
+      {
+        "auc": 0.0,
+        "fold": 1,
+        "held_blocks": [
+          4,
+          8
+        ],
+        "held_samples": 200,
+        "selected_features": [],
+        "selection_audit": {
+          "correlation_removed": [],
+          "eligible_before_correlation": [],
+          "maximum_feature_weight": 0.5,
+          "minimum_selected_features": 3,
+          "rejection_reasons": {
+            "cache-detail.cache_misses": "paired effect 0.000000 below required 0.150000",
+            "cache-detail.cache_references": "paired effect 0.012500 below required 0.150000",
+            "cache-detail.l1d_replacements": "profile zero-rate drift exceeds limit",
+            "cache-detail.l2_request_misses": "paired effect 0.005000 below required 0.150000",
+            "cache.dtlb_read_misses": "paired effect 0.000000 below required 0.150000",
+            "cache.l1d_read_misses": "paired effect 0.037648 below required 0.150000",
+            "cache.l1i_read_misses": "diagnostic-only feature",
+            "cache.llc_read_misses": "paired effect 0.000000 below required 0.150000",
+            "recovery.machine_clears": "paired effect 0.000000 below required 0.150000",
+            "recovery.memory_ordering_clears": "paired effect 0.000000 below required 0.150000",
+            "recovery.recovery_cycles": "paired effect 0.003372 below required 1.011736",
+            "stalls.stalls_l1d_miss": "paired effect 0.109475 below required 2.074266",
+            "stalls.stalls_mem_any": "paired effect 0.045534 below required 0.487860",
+            "structural.branch_misses": "paired effect 0.000000 below required 0.150000",
+            "structural.branches": "paired effect 0.000000 below required 0.150000",
+            "structural.cycles": "paired effect 0.049515 below required 0.744957",
+            "structural.instructions": "paired effect 0.000000 below required 0.150000",
+            "structural.retired_loads": "paired effect 0.000000 below required 0.150000",
+            "structural.retired_stores": "paired effect 0.000000 below required 0.150000"
+          },
+          "selected_before_minimum_gate": [],
+          "status": "NO_STABLE_DIRECTIONAL_FEATURES"
+        },
+        "status": "NO_STABLE_DIRECTIONAL_FEATURES",
+        "train_blocks": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          9
+        ]
+      },
+      {
+        "auc": 0.0,
+        "fold": 2,
+        "held_blocks": [
+          0,
+          2
+        ],
+        "held_samples": 200,
+        "selected_features": [],
+        "selection_audit": {
+          "correlation_removed": [],
+          "eligible_before_correlation": [],
+          "maximum_feature_weight": 0.5,
+          "minimum_selected_features": 3,
+          "rejection_reasons": {
+            "cache-detail.cache_misses": "paired effect 0.000000 below required 0.150000",
+            "cache-detail.cache_references": "paired effect 0.015000 below required 0.150000",
+            "cache-detail.l1d_replacements": "profile zero-rate drift exceeds limit",
+            "cache-detail.l2_request_misses": "paired effect 0.010000 below required 0.150000",
+            "cache.dtlb_read_misses": "paired effect 0.000000 below required 0.150000",
+            "cache.l1d_read_misses": "paired effect 0.080002 below required 0.150000",
+            "cache.l1i_read_misses": "diagnostic-only feature",
+            "cache.llc_read_misses": "paired effect 0.000000 below required 0.150000",
+            "recovery.machine_clears": "paired effect 0.000000 below required 0.150000",
+            "recovery.memory_ordering_clears": "paired effect 0.000000 below required 0.150000",
+            "recovery.recovery_cycles": "paired effect 0.053959 below required 1.011736",
+            "stalls.stalls_l1d_miss": "paired effect 0.074904 below required 2.074266",
+            "stalls.stalls_mem_any": "paired effect 0.081310 below required 0.487860",
+            "structural.branch_misses": "paired effect 0.000000 below required 0.150000",
+            "structural.branches": "paired effect 0.000000 below required 0.150000",
+            "structural.cycles": "paired effect 0.074645 below required 0.744957",
+            "structural.instructions": "paired effect 0.000000 below required 0.150000",
+            "structural.retired_loads": "paired effect 0.000000 below required 0.150000",
+            "structural.retired_stores": "paired effect 0.000000 below required 0.150000"
+          },
+          "selected_before_minimum_gate": [],
+          "status": "NO_STABLE_DIRECTIONAL_FEATURES"
+        },
+        "status": "NO_STABLE_DIRECTIONAL_FEATURES",
+        "train_blocks": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      {
+        "auc": 0.0,
+        "fold": 3,
+        "held_blocks": [
+          3,
+          7
+        ],
+        "held_samples": 200,
+        "selected_features": [],
+        "selection_audit": {
+          "correlation_removed": [],
+          "eligible_before_correlation": [],
+          "maximum_feature_weight": 0.5,
+          "minimum_selected_features": 3,
+          "rejection_reasons": {
+            "cache-detail.cache_misses": "paired effect 0.000000 below required 0.150000",
+            "cache-detail.cache_references": "paired effect 0.013750 below required 0.150000",
+            "cache-detail.l1d_replacements": "profile zero-rate drift exceeds limit",
+            "cache-detail.l2_request_misses": "paired effect 0.005000 below required 0.150000",
+            "cache.dtlb_read_misses": "paired effect 0.000000 below required 0.150000",
+            "cache.l1d_read_misses": "paired effect 0.084708 below required 0.150000",
+            "cache.l1i_read_misses": "diagnostic-only feature",
+            "cache.llc_read_misses": "paired effect 0.000000 below required 0.150000",
+            "recovery.machine_clears": "paired effect 0.000000 below required 0.150000",
+            "recovery.memory_ordering_clears": "paired effect 0.000000 below required 0.150000",
+            "recovery.recovery_cycles": "paired effect 0.035411 below required 1.011736",
+            "stalls.stalls_l1d_miss": "paired effect 0.109475 below required 2.074266",
+            "stalls.stalls_mem_any": "paired effect 0.045534 below required 0.487860",
+            "structural.branch_misses": "paired effect 0.001250 below required 0.150000",
+            "structural.branches": "paired effect 0.000000 below required 0.150000",
+            "structural.cycles": "paired effect 0.074645 below required 0.744957",
+            "structural.instructions": "paired effect 0.000000 below required 0.150000",
+            "structural.retired_loads": "paired effect 0.000000 below required 0.150000",
+            "structural.retired_stores": "paired effect 0.000000 below required 0.150000"
+          },
+          "selected_before_minimum_gate": [],
+          "status": "NO_STABLE_DIRECTIONAL_FEATURES"
+        },
+        "status": "NO_STABLE_DIRECTIONAL_FEATURES",
+        "train_blocks": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          6,
+          8,
+          9
+        ]
+      },
+      {
+        "auc": 0.0,
+        "fold": 4,
+        "held_blocks": [
+          5,
+          9
+        ],
+        "held_samples": 200,
+        "selected_features": [],
+        "selection_audit": {
+          "correlation_removed": [],
+          "eligible_before_correlation": [],
+          "maximum_feature_weight": 0.5,
+          "minimum_selected_features": 3,
+          "rejection_reasons": {
+            "cache-detail.cache_misses": "paired effect 0.000000 below required 0.150000",
+            "cache-detail.cache_references": "paired effect 0.005000 below required 0.150000",
+            "cache-detail.l1d_replacements": "profile zero-rate drift exceeds limit",
+            "cache-detail.l2_request_misses": "paired effect 0.005000 below required 0.150000",
+            "cache.dtlb_read_misses": "paired effect 0.000000 below required 0.150000",
+            "cache.l1d_read_misses": "paired effect 0.080002 below required 0.150000",
+            "cache.l1i_read_misses": "diagnostic-only feature",
+            "cache.llc_read_misses": "paired effect 0.000000 below required 0.150000",
+            "recovery.machine_clears": "paired effect 0.000000 below required 0.150000",
+            "recovery.memory_ordering_clears": "paired effect 0.000000 below required 0.150000",
+            "recovery.recovery_cycles": "paired effect 0.015176 below required 1.011736",
+            "stalls.stalls_l1d_miss": "paired effect 0.038028 below required 2.074266",
+            "stalls.stalls_mem_any": "paired effect 0.081310 below required 0.487860",
+            "structural.branch_misses": "paired effect 0.002500 below required 0.150000",
+            "structural.branches": "paired effect 0.000000 below required 0.150000",
+            "structural.cycles": "paired effect 0.049515 below required 0.744957",
+            "structural.instructions": "paired effect 0.000000 below required 0.150000",
+            "structural.retired_loads": "paired effect 0.000000 below required 0.150000",
+            "structural.retired_stores": "paired effect 0.000000 below required 0.150000"
+          },
+          "selected_before_minimum_gate": [],
+          "status": "NO_STABLE_DIRECTIONAL_FEATURES"
+        },
+        "status": "NO_STABLE_DIRECTIONAL_FEATURES",
+        "train_blocks": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          6,
+          7,
+          8
+        ]
+      }
+    ],
+    "median_auc": 0.0,
+    "minimum_auc": 0.0,
+    "minimum_required_fold_auc": 0.52,
+    "minimum_required_median_auc": 0.6,
+    "passed": false,
+    "requested_folds": 5,
+    "status": "DEVELOPMENT_CROSS_FIT_FAILURE"
+  },
+  "diagnostic_only_features": [
+    "cache.l1i_read_misses"
+  ],
+  "feature_selection_audit": {
+    "correlation_removed": [],
+    "eligible_before_correlation": [],
+    "maximum_feature_weight": 0.5,
+    "minimum_selected_features": 3,
+    "rejection_reasons": {
+      "cache-detail.cache_misses": "paired effect 0.000000 below required 0.150000",
+      "cache-detail.cache_references": "paired effect 0.013000 below required 0.150000",
+      "cache-detail.l1d_replacements": "profile zero-rate drift exceeds limit",
+      "cache-detail.l2_request_misses": "paired effect 0.005000 below required 0.150000",
+      "cache.dtlb_read_misses": "paired effect 0.000000 below required 0.150000",
+      "cache.l1d_read_misses": "paired effect 0.080002 below required 0.150000",
+      "cache.l1i_read_misses": "diagnostic-only feature",
+      "cache.llc_read_misses": "paired effect 0.000000 below required 0.150000",
+      "recovery.machine_clears": "paired effect 0.000000 below required 0.150000",
+      "recovery.memory_ordering_clears": "paired effect 0.000000 below required 0.150000",
+      "recovery.recovery_cycles": "paired effect 0.018548 below required 1.011736",
+      "stalls.stalls_l1d_miss": "paired effect 0.074904 below required 2.074266",
+      "stalls.stalls_mem_any": "paired effect 0.081310 below required 0.487860",
+      "structural.branch_misses": "paired effect 0.001000 below required 0.150000",
+      "structural.branches": "paired effect 0.000000 below required 0.150000",
+      "structural.cycles": "paired effect 0.000249 below required 0.744957",
+      "structural.instructions": "paired effect 0.000000 below required 0.150000",
+      "structural.retired_loads": "paired effect 0.000000 below required 0.150000",
+      "structural.retired_stores": "paired effect 0.000000 below required 0.150000"
+    },
+    "selected_before_minimum_gate": [],
+    "status": "NO_STABLE_DIRECTIONAL_FEATURES"
+  },
+  "measurement_window": "The stuck-at-1 value and all collection metadata are established before the identical measure_target wrapper. The measured A2B instruction stream contains neither a runtime attack branch nor fault assignment.",
+  "message_domain": 1129924145,
+  "parameters": {
+    "bootstrap_iterations": 2000,
+    "bootstrap_seed": 12648430,
+    "calibration_alarm_ratio": 0.5,
+    "calibration_alarm_tolerance": 0.02,
+    "clip_z": 20.0,
+    "correlation_threshold": 0.95,
+    "cv_folds": 5,
+    "drift_multiplier": 3.0,
+    "maximum_baseline_drift": 0.5,
+    "maximum_block_contribution": 0.5,
+    "maximum_calibration_feature_drift": 1.0,
+    "maximum_feature_weight": 0.5,
+    "maximum_iqr_ratio": 2.0,
+    "maximum_ks_distance": 0.1,
+    "maximum_quantile_drift": 1.0,
+    "maximum_score_median_drift": 1.0,
+    "maximum_zero_rate_drift": 0.05,
+    "minimum_block_direction_consistency": 0.8,
+    "minimum_cv_fold_auc": 0.52,
+    "minimum_cv_median_auc": 0.6,
+    "minimum_effect": 0.15,
+    "minimum_iqr_ratio": 0.5,
+    "minimum_running": 95.0,
+    "minimum_scale": 1.0,
+    "minimum_selected_features": 3,
+    "minimum_test_auc": 0.5,
+    "model_output": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/generalization_guarded/generalization_detector_model.json",
+    "passes": [
+      "structural",
+      "cache",
+      "cache-detail",
+      "load-hits",
+      "load-misses-latency",
+      "stalls",
+      "recovery"
+    ],
+    "report_output": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/generalization_guarded/generalization_fpr_tpr_report.json",
+    "require_positive_bootstrap_gap": 1,
+    "require_tpr_greater_than_fpr": 1,
+    "root": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/generalization_guarded",
+    "target_fpr": 0.1,
+    "top_k": 8,
+    "weight_power": 1.0
+  },
+  "passes": [
+    "structural",
+    "cache",
+    "cache-detail",
+    "load-hits",
+    "load-misses-latency",
+    "stalls",
+    "recovery"
+  ],
+  "profile_distribution_stability": {
+    "cache-detail.cache_misses": {
+      "iqr_ratio": 1.0,
+      "ks_distance": 0.0020000000000000018,
+      "maximum_location_drift": 0.0,
+      "maximum_quantile_drift": 0.0,
+      "profile_a_center": 0.0,
+      "profile_a_iqr": 0.0,
+      "profile_b_center": 0.0,
+      "profile_b_iqr": 0.0,
+      "quantiles": {
+        "q90": {
+          "profile_a": 0.0,
+          "profile_b": 0.0,
+          "standardized_drift": 0.0
+        },
+        "q95": {
+          "profile_a": 0.0,
+          "profile_b": 0.0,
+          "standardized_drift": 0.0
+        },
+        "q99": {
+          "profile_a": 0.0,
+          "profile_b": 0.0,
+          "standardized_drift": 0.0
+        }
+      },
+      "standardized_drift": 0.0,
+      "zero_rate_drift": 0.0020000000000000018,
+      "zero_rate_profile_a": 0.9995,
+      "zero_rate_profile_b": 0.9975
+    },
+    "cache-detail.cache_references": {
+      "iqr_ratio": 1.0,
+      "ks_distance": 0.0020000000000000018,
+      "maximum_location_drift": 0.0,
+      "maximum_quantile_drift": 0.0,
+      "profile_a_center": 0.0,
+      "profile_a_iqr": 0.0,
+      "profile_b_center": 0.0,
+      "profile_b_iqr": 0.0,
+      "quantiles": {
+        "q90": {
+          "profile_a": 0.0,
+          "profile_b": 0.0,
+          "standardized_drift": 0.0
+        },
+        "q95": {
+          "profile_a": 0.0,
+          "profile_b": 0.0,
+          "standardized_drift": 0.0
+        },
+        "q99": {
+          "profile_a": 0.0,
+          "profile_b": 0.0,
+          "standardized_drift": 0.0
+        }
+      },
+      "standardized_drift": 0.0,
+      "zero_rate_drift": 0.0004999999999999449,
+      "zero_rate_profile_a": 0.996,
+      "zero_rate_profile_b": 0.9955
+    },
+    "cache-detail.l1d_replacements": {
+      "iqr_ratio": 1.0,
+      "ks_distance": 0.07600000000000001,
+      "maximum_location_drift": 0.6744907594765952,
+      "maximum_quantile_drift": 0.6744907594765952,
+      "profile_a_center": 1.0,
+      "profile_a_iqr": 2.0,
+      "profile_b_center": 1.0,
+      "profile_b_iqr": 2.0,
+      "quantiles": {
+        "q90": {
+          "profile_a": 3.0,
+          "profile_b": 2.0,
+          "standardized_drift": 0.6744907594765952
+        },
+        "q95": {
+          "profile_a": 3.0,
+          "profile_b": 3.0,
+          "standardized_drift": 0.0
+        },
+        "q99": {
+          "profile_a": 6.0,
+          "profile_b": 6.0,
+          "standardized_drift": 0.0
+        }
+      },
+      "standardized_drift": 0.0,
+      "zero_rate_drift": 0.07600000000000001,
+      "zero_rate_profile_a": 0.2865,
+      "zero_rate_profile_b": 0.3625
+    },
+    "cache-detail.l2_request_misses": {
+      "iqr_ratio": 1.0,
+      "ks_distance": 0.0025000000000000577,
+      "maximum_location_drift": 0.0,
+      "maximum_quantile_drift": 0.0,
+      "profile_a_center": 0.0,
+      "profile_a_iqr": 0.0,
+      "profile_b_center": 0.0,
+      "profile_b_iqr": 0.0,
+      "quantiles": {
+        "q90": {
+          "profile_a": 0.0,
+          "profile_b": 0.0,
+          "standardized_drift": 0.0
+        },
+        "q95": {
+          "profile_a": 0.0,
+          "profile_b": 0.0,
+          "standardized_drift": 0.0
+        },
+        "q99": {
+          "profile_a": 0.0,
+          "profile_b": 0.0,
+          "standardized_drift": 0.0
+        }
+      },
+      "standardized_drift": 0.0,
+      "zero_rate_drift": 0.0014999999999999458,
+      "zero_rate_profile_a": 0.994,
+      "zero_rate_profile_b": 0.9925
+    },
+    "cache.dtlb_read_misses": {
+      "iqr_ratio": 1.0,
+      "ks_distance": 0.0004999999999999449,
+      "maximum_location_drift": 0.0,
+      "maximum_quantile_drift": 0.0,
+      "profile_a_center": 0.0,
+      "profile_a_iqr": 0.0,
+      "profile_b_center": 0.0,
+      "profile_b_iqr": 0.0,
+      "quantiles": {
+        "q90": {
+          "profile_a": 0.0,
+          "profile_b": 0.0,
+          "standardized_drift": 0.0
+        },
+        "q95": {
+          "profile_a": 0.0,
+          "profile_b": 0.0,
+          "standardized_drift": 0.0
+        },
+        "q99": {
+          "profile_a": 0.0,
+          "profile_b": 0.0,
+          "standardized_drift": 0.0
+        }
+      },
+      "standardized_drift": 0.0,
+      "zero_rate_drift": 0.0004999999999999449,
+      "zero_rate_profile_a": 0.9995,
+      "zero_rate_profile_b": 1.0
+    },
+    "cache.l1d_read_misses": {
+      "iqr_ratio": 1.0,
+      "ks_distance": 0.022500000000000075,
+      "maximum_location_drift": 0.009411990122829316,
+      "maximum_quantile_drift": 0.009411990122829316,
+      "profile_a_center": 0.0,
+      "profile_a_iqr": 1.0,
+      "profile_b_center": 0.0,
+      "profile_b_iqr": 1.0,
+      "quantiles": {
+        "q90": {
+          "profile_a": 2.0,
+          "profile_b": 2.0,
+          "standardized_drift": 0.0
+        },
+        "q95": {
+          "profile_a": 2.0,
+          "profile_b": 2.0,
+          "standardized_drift": 0.0
+        },
+        "q99": {
+          "profile_a": 3.009999999999991,
+          "profile_b": 3.0,
+          "standardized_drift": 0.009411990122829316
+        }
+      },
+      "standardized_drift": 0.0,
+      "zero_rate_drift": 0.022500000000000075,
+      "zero_rate_profile_a": 0.6035,
+      "zero_rate_profile_b": 0.581
+    },
+    "cache.l1i_read_misses": {
+      "iqr_ratio": 0.6,
+      "ks_distance": 0.13449999999999998,
+      "maximum_location_drift": 0.4930520104963999,
+      "maximum_quantile_drift": 0.4930520104963999,
+      "profile_a_center": 11.0,
+      "profile_a_iqr": 5.0,
+      "profile_b_center": 10.0,
+      "profile_b_iqr": 3.0,
+      "quantiles": {
+        "q90": {
+          "profile_a": 16.0,
+          "profile_b": 15.0,
+          "standardized_drift": 0.24652600524819995
+        },
+        "q95": {
+          "profile_a": 17.0,
+          "profile_b": 15.0,
+          "standardized_drift": 0.4930520104963999
+        },
+        "q99": {
+          "profile_a": 22.0,
+          "profile_b": 20.0,
+          "standardized_drift": 0.4930520104963999
+        }
+      },
+      "standardized_drift": 0.24652600524819995,
+      "zero_rate_drift": 0.0,
+      "zero_rate_profile_a": 0.0,
+      "zero_rate_profile_b": 0.0
+    },
+    "cache.llc_read_misses": {
+      "iqr_ratio": 1.0,
+      "ks_distance": 0.0,
+      "maximum_location_drift": 0.0,
+      "maximum_quantile_drift": 0.0,
+      "profile_a_center": 0.0,
+      "profile_a_iqr": 0.0,
+      "profile_b_center": 0.0,
+      "profile_b_iqr": 0.0,
+      "quantiles": {
+        "q90": {
+          "profile_a": 0.0,
+          "profile_b": 0.0,
+          "standardized_drift": 0.0
+        },
+        "q95": {
+          "profile_a": 0.0,
+          "profile_b": 0.0,
+          "standardized_drift": 0.0
+        },
+        "q99": {
+          "profile_a": 0.0,
+          "profile_b": 0.0,
+          "standardized_drift": 0.0
+        }
+      },
+      "standardized_drift": 0.0,
+      "zero_rate_drift": 0.0,
+      "zero_rate_profile_a": 1.0,
+      "zero_rate_profile_b": 1.0
+    },
+    "recovery.machine_clears": {
+      "iqr_ratio": 1.0,
+      "ks_distance": 0.0,
+      "maximum_location_drift": 0.0,
+      "maximum_quantile_drift": 0.0,
+      "profile_a_center": 0.0,
+      "profile_a_iqr": 0.0,
+      "profile_b_center": 0.0,
+      "profile_b_iqr": 0.0,
+      "quantiles": {
+        "q90": {
+          "profile_a": 0.0,
+          "profile_b": 0.0,
+          "standardized_drift": 0.0
+        },
+        "q95": {
+          "profile_a": 0.0,
+          "profile_b": 0.0,
+          "standardized_drift": 0.0
+        },
+        "q99": {
+          "profile_a": 0.0,
+          "profile_b": 0.0,
+          "standardized_drift": 0.0
+        }
+      },
+      "standardized_drift": 0.0,
+      "zero_rate_drift": 0.0,
+      "zero_rate_profile_a": 1.0,
+      "zero_rate_profile_b": 1.0
+    },
+    "recovery.memory_ordering_clears": {
+      "iqr_ratio": 1.0,
+      "ks_distance": 0.0,
+      "maximum_location_drift": 0.0,
+      "maximum_quantile_drift": 0.0,
+      "profile_a_center": 0.0,
+      "profile_a_iqr": 0.0,
+      "profile_b_center": 0.0,
+      "profile_b_iqr": 0.0,
+      "quantiles": {
+        "q90": {
+          "profile_a": 0.0,
+          "profile_b": 0.0,
+          "standardized_drift": 0.0
+        },
+        "q95": {
+          "profile_a": 0.0,
+          "profile_b": 0.0,
+          "standardized_drift": 0.0
+        },
+        "q99": {
+          "profile_a": 0.0,
+          "profile_b": 0.0,
+          "standardized_drift": 0.0
+        }
+      },
+      "standardized_drift": 0.0,
+      "zero_rate_drift": 0.0,
+      "zero_rate_profile_a": 1.0,
+      "zero_rate_profile_b": 1.0
+    },
+    "recovery.recovery_cycles": {
+      "iqr_ratio": 1.0,
+      "ks_distance": 0.015499999999999958,
+      "maximum_location_drift": 0.3372453797382976,
+      "maximum_quantile_drift": 0.3372453797382976,
+      "profile_a_center": 10.0,
+      "profile_a_iqr": 4.0,
+      "profile_b_center": 10.0,
+      "profile_b_iqr": 4.0,
+      "quantiles": {
+        "q90": {
+          "profile_a": 14.0,
+          "profile_b": 13.0,
+          "standardized_drift": 0.3372453797382976
+        },
+        "q95": {
+          "profile_a": 14.0,
+          "profile_b": 15.0,
+          "standardized_drift": 0.3372453797382976
+        },
+        "q99": {
+          "profile_a": 15.0,
+          "profile_b": 15.0,
+          "standardized_drift": 0.0
+        }
+      },
+      "standardized_drift": 0.0,
+      "zero_rate_drift": 0.0,
+      "zero_rate_profile_a": 0.0,
+      "zero_rate_profile_b": 0.0
+    },
+    "stalls.stalls_l1d_miss": {
+      "iqr_ratio": 1.0,
+      "ks_distance": 0.029000000000000026,
+      "maximum_location_drift": 0.6914218576422154,
+      "maximum_quantile_drift": 0.6914218576422154,
+      "profile_a_center": 0.0,
+      "profile_a_iqr": 1.0,
+      "profile_b_center": 0.0,
+      "profile_b_iqr": 1.0,
+      "quantiles": {
+        "q90": {
+          "profile_a": 7.0,
+          "profile_b": 7.0,
+          "standardized_drift": 0.0
+        },
+        "q95": {
+          "profile_a": 11.0,
+          "profile_b": 11.0,
+          "standardized_drift": 0.0
+        },
+        "q99": {
+          "profile_a": 15.0,
+          "profile_b": 18.0,
+          "standardized_drift": 0.6914218576422154
+        }
+      },
+      "standardized_drift": 0.0,
+      "zero_rate_drift": 0.000500000000000056,
+      "zero_rate_profile_a": 0.6905,
+      "zero_rate_profile_b": 0.69
+    },
+    "stalls.stalls_mem_any": {
+      "iqr_ratio": 0.890625,
+      "ks_distance": 0.09050000000000002,
+      "maximum_location_drift": 0.1626199174948062,
+      "maximum_quantile_drift": 0.1626199174948062,
+      "profile_a_center": 93.0,
+      "profile_a_iqr": 16.0,
+      "profile_b_center": 91.0,
+      "profile_b_iqr": 14.25,
+      "quantiles": {
+        "q90": {
+          "profile_a": 110.0,
+          "profile_b": 108.0,
+          "standardized_drift": 0.1626199174948062
+        },
+        "q95": {
+          "profile_a": 115.0,
+          "profile_b": 114.0,
+          "standardized_drift": 0.0813099587474031
+        },
+        "q99": {
+          "profile_a": 132.0,
+          "profile_b": 132.0,
+          "standardized_drift": 0.0
+        }
+      },
+      "standardized_drift": 0.1626199174948062,
+      "zero_rate_drift": 0.0,
+      "zero_rate_profile_a": 0.0,
+      "zero_rate_profile_b": 0.0
+    },
+    "structural.branch_misses": {
+      "iqr_ratio": 1.0,
+      "ks_distance": 0.0020000000000000018,
+      "maximum_location_drift": 0.0,
+      "maximum_quantile_drift": 0.0,
+      "profile_a_center": 1.0,
+      "profile_a_iqr": 0.0,
+      "profile_b_center": 1.0,
+      "profile_b_iqr": 0.0,
+      "quantiles": {
+        "q90": {
+          "profile_a": 1.0,
+          "profile_b": 1.0,
+          "standardized_drift": 0.0
+        },
+        "q95": {
+          "profile_a": 1.0,
+          "profile_b": 1.0,
+          "standardized_drift": 0.0
+        },
+        "q99": {
+          "profile_a": 2.0,
+          "profile_b": 2.0,
+          "standardized_drift": 0.0
+        }
+      },
+      "standardized_drift": 0.0,
+      "zero_rate_drift": 0.002,
+      "zero_rate_profile_a": 0.0005,
+      "zero_rate_profile_b": 0.0025
+    },
+    "structural.branches": {
+      "iqr_ratio": 1.0,
+      "ks_distance": 0.0004999999999999449,
+      "maximum_location_drift": 0.0,
+      "maximum_quantile_drift": 0.0,
+      "profile_a_center": 9.0,
+      "profile_a_iqr": 0.0,
+      "profile_b_center": 9.0,
+      "profile_b_iqr": 0.0,
+      "quantiles": {
+        "q90": {
+          "profile_a": 9.0,
+          "profile_b": 9.0,
+          "standardized_drift": 0.0
+        },
+        "q95": {
+          "profile_a": 9.0,
+          "profile_b": 9.0,
+          "standardized_drift": 0.0
+        },
+        "q99": {
+          "profile_a": 9.0,
+          "profile_b": 9.0,
+          "standardized_drift": 0.0
+        }
+      },
+      "standardized_drift": 0.0,
+      "zero_rate_drift": 0.0,
+      "zero_rate_profile_a": 0.0,
+      "zero_rate_profile_b": 0.0
+    },
+    "structural.cycles": {
+      "iqr_ratio": 1.0,
+      "ks_distance": 0.04300000000000004,
+      "maximum_location_drift": 0.24831905427453158,
+      "maximum_quantile_drift": 0.24831905427453158,
+      "profile_a_center": 154.0,
+      "profile_a_iqr": 18.0,
+      "profile_b_center": 153.0,
+      "profile_b_iqr": 18.0,
+      "quantiles": {
+        "q90": {
+          "profile_a": 172.0,
+          "profile_b": 172.0,
+          "standardized_drift": 0.0
+        },
+        "q95": {
+          "profile_a": 178.0,
+          "profile_b": 179.0,
+          "standardized_drift": 0.04976333752996615
+        },
+        "q99": {
+          "profile_a": 213.01999999999998,
+          "profile_b": 208.02999999999997,
+          "standardized_drift": 0.24831905427453158
+        }
+      },
+      "standardized_drift": 0.04976333752996615,
+      "zero_rate_drift": 0.0,
+      "zero_rate_profile_a": 0.0,
+      "zero_rate_profile_b": 0.0
+    },
+    "structural.instructions": {
+      "iqr_ratio": 1.0,
+      "ks_distance": 0.0004999999999999449,
+      "maximum_location_drift": 0.0,
+      "maximum_quantile_drift": 0.0,
+      "profile_a_center": 68.0,
+      "profile_a_iqr": 0.0,
+      "profile_b_center": 68.0,
+      "profile_b_iqr": 0.0,
+      "quantiles": {
+        "q90": {
+          "profile_a": 68.0,
+          "profile_b": 68.0,
+          "standardized_drift": 0.0
+        },
+        "q95": {
+          "profile_a": 68.0,
+          "profile_b": 68.0,
+          "standardized_drift": 0.0
+        },
+        "q99": {
+          "profile_a": 68.0,
+          "profile_b": 68.0,
+          "standardized_drift": 0.0
+        }
+      },
+      "standardized_drift": 0.0,
+      "zero_rate_drift": 0.0,
+      "zero_rate_profile_a": 0.0,
+      "zero_rate_profile_b": 0.0
+    },
+    "structural.retired_loads": {
+      "iqr_ratio": 1.0,
+      "ks_distance": 0.0004999999999999449,
+      "maximum_location_drift": 0.0,
+      "maximum_quantile_drift": 0.0,
+      "profile_a_center": 14.0,
+      "profile_a_iqr": 0.0,
+      "profile_b_center": 14.0,
+      "profile_b_iqr": 0.0,
+      "quantiles": {
+        "q90": {
+          "profile_a": 14.0,
+          "profile_b": 14.0,
+          "standardized_drift": 0.0
+        },
+        "q95": {
+          "profile_a": 14.0,
+          "profile_b": 14.0,
+          "standardized_drift": 0.0
+        },
+        "q99": {
+          "profile_a": 14.0,
+          "profile_b": 14.0,
+          "standardized_drift": 0.0
+        }
+      },
+      "standardized_drift": 0.0,
+      "zero_rate_drift": 0.0,
+      "zero_rate_profile_a": 0.0,
+      "zero_rate_profile_b": 0.0
+    },
+    "structural.retired_stores": {
+      "iqr_ratio": 1.0,
+      "ks_distance": 0.0,
+      "maximum_location_drift": 0.0,
+      "maximum_quantile_drift": 0.0,
+      "profile_a_center": 10.0,
+      "profile_a_iqr": 0.0,
+      "profile_b_center": 10.0,
+      "profile_b_iqr": 0.0,
+      "quantiles": {
+        "q90": {
+          "profile_a": 10.0,
+          "profile_b": 10.0,
+          "standardized_drift": 0.0
+        },
+        "q95": {
+          "profile_a": 10.0,
+          "profile_b": 10.0,
+          "standardized_drift": 0.0
+        },
+        "q99": {
+          "profile_a": 10.0,
+          "profile_b": 10.0,
+          "standardized_drift": 0.0
+        }
+      },
+      "standardized_drift": 0.0,
+      "zero_rate_drift": 0.0,
+      "zero_rate_profile_a": 0.0,
+      "zero_rate_profile_b": 0.0
+    }
+  },
+  "reportable": false,
+  "score_threshold": null,
+  "selected_features": [],
+  "status": "NO_STABLE_DIRECTIONAL_FEATURES",
+  "unavailable_features": [
+    "load-hits.load_l1_hit",
+    "load-hits.load_l2_hit",
+    "load-hits.load_l3_hit",
+    "load-hits.load_l3_miss",
+    "load-misses-latency.load_l1_miss",
+    "load-misses-latency.load_l2_miss",
+    "load-misses-latency.load_l3_miss",
+    "load-misses-latency.long_latency_loads",
+    "stalls.stalled_frontend_cycles",
+    "stalls.stalled_backend_cycles",
+    "recovery.recovery_cycles_any"
+  ]
+}

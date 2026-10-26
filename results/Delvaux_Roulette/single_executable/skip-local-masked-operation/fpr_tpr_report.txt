@@ -1,0 +1,47 @@
+=== Delvaux Roulette: skip-local-masked-operation baseline=single threshold=worst-session ===
+Available candidate features: 1; development-selected features: 1
+  structural-instructions.instructions                       direction=- dev_auc=1.000000 effect=1.000 session_consistency=1.000 weight=1.0000
+
+Primary sparse directional detector:
+  Single threshold: FP=0/20000 upper=0.000150; threshold=0.000000
+  Validation: FP=0/6000 FPR=0.000000000; attack TP=1000/1000 TPR=1.000000000; AUC=1.000000
+  Batch-10 metric=mean-directional-score direction=+
+  Batch threshold: FP=0/2000 upper=0.001497; threshold=0.000000
+  Batch validation: FP=0/600 FPR=0.000000000; attack TP=100/100 TPR=1.000000000; AUC=1.000000
+  Cross-session single validation FPR:
+    s00: 0/2000 (0.000000); first=0.000000 second=0.000000
+    s01: 0/2000 (0.000000); first=0.000000 second=0.000000
+    s02: 0/2000 (0.000000); first=0.000000 second=0.000000
+  Worst-session single FPR=0.000000
+  Cross-session batch validation FPR:
+    s00: 0/200 (0.000000)
+    s01: 0/200 (0.000000)
+    s02: 0/200 (0.000000)
+  Cross-session batch attack TPR:
+    s00: 50/50 (1.000000)
+    s01: 50/50 (1.000000)
+  Worst-session batch FPR=0.000000
+
+Structural-only comparison detector:
+  Single threshold: FP=0/20000 upper=0.000150; threshold=0.000000
+  Validation: FP=0/6000 FPR=0.000000000; attack TP=1000/1000 TPR=1.000000000; AUC=1.000000
+  Batch-10 metric=mean-directional-score direction=+
+  Batch threshold: FP=0/2000 upper=0.001497; threshold=0.000000
+  Batch validation: FP=0/600 FPR=0.000000000; attack TP=100/100 TPR=1.000000000; AUC=1.000000
+  Cross-session single validation FPR:
+    s00: 0/2000 (0.000000); first=0.000000 second=0.000000
+    s01: 0/2000 (0.000000); first=0.000000 second=0.000000
+    s02: 0/2000 (0.000000); first=0.000000 second=0.000000
+  Worst-session single FPR=0.000000
+  Cross-session batch validation FPR:
+    s00: 0/200 (0.000000)
+    s01: 0/200 (0.000000)
+    s02: 0/200 (0.000000)
+  Cross-session batch attack TPR:
+    s00: 50/50 (1.000000)
+    s01: 50/50 (1.000000)
+  Worst-session batch FPR=0.000000
+
+Fault semantic success: 1000/1000
+Largest normalized median shifts on final attack sessions:
+  structural-instructions.instructions                       session_z_delta=-1.000

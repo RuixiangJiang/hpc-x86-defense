@@ -1,0 +1,295 @@
+{
+  "datasets": {
+    "attack": {
+      "collected": 500,
+      "excluded": {},
+      "valid": 500
+    },
+    "calibration": {
+      "collected": 500,
+      "excluded": {},
+      "valid": 500
+    },
+    "validation": {
+      "collected": 5000,
+      "excluded": {},
+      "valid": 5000
+    }
+  },
+  "event_signatures": {
+    "branch_misses": {
+      "attack": {
+        "maximum": 3,
+        "mean": 1.014,
+        "median": 1.0,
+        "minimum": 0,
+        "mode": 1,
+        "mode_count": 492,
+        "mode_rate": 0.984,
+        "sample_stdev": 0.1478096593284132
+      },
+      "attack_mean_delta": -0.0020000000000000018,
+      "attack_mode_delta": 0,
+      "calibration": {
+        "maximum": 4,
+        "mean": 1.016,
+        "median": 1.0,
+        "minimum": 0,
+        "mode": 1,
+        "mode_count": 493,
+        "mode_rate": 0.986,
+        "sample_stdev": 0.189250181671049
+      },
+      "validation": {
+        "maximum": 4,
+        "mean": 1.0064,
+        "median": 1.0,
+        "minimum": 0,
+        "mode": 1,
+        "mode_count": 4955,
+        "mode_rate": 0.991,
+        "sample_stdev": 0.10564692259810926
+      }
+    },
+    "branches": {
+      "attack": {
+        "maximum": 9,
+        "mean": 9.0,
+        "median": 9.0,
+        "minimum": 9,
+        "mode": 9,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "attack_mean_delta": -36.0,
+      "attack_mode_delta": -36,
+      "calibration": {
+        "maximum": 45,
+        "mean": 45.0,
+        "median": 45.0,
+        "minimum": 45,
+        "mode": 45,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "validation": {
+        "maximum": 45,
+        "mean": 45.0,
+        "median": 45.0,
+        "minimum": 45,
+        "mode": 45,
+        "mode_count": 5000,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      }
+    },
+    "cycles": {
+      "attack": {
+        "maximum": 289,
+        "mean": 148.47,
+        "median": 146.0,
+        "minimum": 143,
+        "mode": 145,
+        "mode_count": 107,
+        "mode_rate": 0.214,
+        "sample_stdev": 9.587331947300848
+      },
+      "attack_mean_delta": -143.84599999999998,
+      "attack_mode_delta": -140,
+      "calibration": {
+        "maximum": 429,
+        "mean": 292.316,
+        "median": 291.0,
+        "minimum": 277,
+        "mode": 285,
+        "mode_count": 45,
+        "mode_rate": 0.09,
+        "sample_stdev": 11.266677417947145
+      },
+      "validation": {
+        "maximum": 586,
+        "mean": 291.562,
+        "median": 290.0,
+        "minimum": 273,
+        "mode": 290,
+        "mode_count": 537,
+        "mode_rate": 0.1074,
+        "sample_stdev": 13.683830072062728
+      }
+    },
+    "instructions": {
+      "attack": {
+        "maximum": 40,
+        "mean": 40.0,
+        "median": 40.0,
+        "minimum": 40,
+        "mode": 40,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "attack_mean_delta": -415.0,
+      "attack_mode_delta": -415,
+      "calibration": {
+        "maximum": 455,
+        "mean": 455.0,
+        "median": 455.0,
+        "minimum": 455,
+        "mode": 455,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "validation": {
+        "maximum": 455,
+        "mean": 455.0,
+        "median": 455.0,
+        "minimum": 455,
+        "mode": 455,
+        "mode_count": 5000,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      }
+    },
+    "retired_loads": {
+      "attack": {
+        "maximum": 9,
+        "mean": 9.0,
+        "median": 9.0,
+        "minimum": 9,
+        "mode": 9,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "attack_mean_delta": -103.0,
+      "attack_mode_delta": -103,
+      "calibration": {
+        "maximum": 112,
+        "mean": 112.0,
+        "median": 112.0,
+        "minimum": 112,
+        "mode": 112,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "validation": {
+        "maximum": 112,
+        "mean": 112.0,
+        "median": 112.0,
+        "minimum": 112,
+        "mode": 112,
+        "mode_count": 5000,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      }
+    },
+    "retired_stores": {
+      "attack": {
+        "maximum": 9,
+        "mean": 9.0,
+        "median": 9.0,
+        "minimum": 9,
+        "mode": 9,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "attack_mean_delta": -38.0,
+      "attack_mode_delta": -38,
+      "calibration": {
+        "maximum": 47,
+        "mean": 47.0,
+        "median": 47.0,
+        "minimum": 47,
+        "mode": 47,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "validation": {
+        "maximum": 47,
+        "mean": 47.0,
+        "median": 47.0,
+        "minimum": 47,
+        "mode": 47,
+        "mode_count": 5000,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      }
+    }
+  },
+  "false_positive_metrics": {
+    "false_positive_rate": 0.0,
+    "false_positives": 0,
+    "fpr_one_sided_95_percent_upper_bound": 0.0005989670023149134,
+    "samples": 5000
+  },
+  "model": {
+    "calibration_consistency": {
+      "branches": {
+        "expected": 45,
+        "matching_rate": 1.0,
+        "matching_samples": 500,
+        "maximum": 45,
+        "minimum": 45,
+        "valid_samples": 500
+      },
+      "instructions": {
+        "expected": 455,
+        "matching_rate": 1.0,
+        "matching_samples": 500,
+        "maximum": 455,
+        "minimum": 455,
+        "valid_samples": 500
+      },
+      "retired_loads": {
+        "expected": 112,
+        "matching_rate": 1.0,
+        "matching_samples": 500,
+        "maximum": 112,
+        "minimum": 112,
+        "valid_samples": 500
+      },
+      "retired_stores": {
+        "expected": 47,
+        "matching_rate": 1.0,
+        "matching_samples": 500,
+        "maximum": 47,
+        "minimum": 47,
+        "valid_samples": 500
+      }
+    },
+    "detector": "exact_modal_equality",
+    "events": [
+      "instructions",
+      "branches",
+      "retired_loads",
+      "retired_stores"
+    ],
+    "expected": {
+      "branches": 45,
+      "instructions": 455,
+      "retired_loads": 112,
+      "retired_stores": 47
+    },
+    "fault_injection_counted": false,
+    "fault_model": "compile-time attack binary omits only the key absorb call",
+    "measurement_window": "single key absorb call in rhoprime = H(key || rnd || mu)",
+    "minimum_running_percent": 95.0
+  },
+  "semantic_metrics": {
+    "full_single_trace_oracle_success": 500,
+    "public_seed_reproduction_success": 500,
+    "z_equals_y_plus_cs1_relation_success": 500
+  },
+  "true_positive_metrics": {
+    "detected_attacks": 500,
+    "samples": 500,
+    "tpr_one_sided_95_percent_lower_bound": 0.9940264484836452,
+    "true_positive_rate": 1.0
+  }
+}

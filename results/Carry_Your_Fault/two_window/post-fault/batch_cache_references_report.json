@@ -1,0 +1,159 @@
+{
+  "any_reportable": false,
+  "bootstrap_iterations": 2000,
+  "experiment": "Carry Your Fault batch-level cache-reference analysis",
+  "feature": "cache-detail.cache_references",
+  "method": "non-overlapping batch means; direction learned from paired development data; threshold frozen from independent baseline threshold data; FPR measured on baseline validation and TPR on independent paired attack-test batches; AB/BA order is audited at collection-block granularity",
+  "minimum_batches": 5,
+  "points": [
+    {
+      "batch_size": 100,
+      "calibration": {
+        "batches": 50,
+        "false_positives": 9,
+        "fpr": 0.18,
+        "fpr_ci_95": [
+          0.08576207810967398,
+          0.3143694112856509
+        ]
+      },
+      "calibration_pass": true,
+      "counts": {
+        "calibration": 50,
+        "development_pairs": 10,
+        "test_pairs": 10,
+        "threshold": 50,
+        "validation": 100
+      },
+      "development_effect": 0.01,
+      "development_mean_effect": 0.012,
+      "direction": "increase",
+      "false_positive_metrics": {
+        "baseline_batches": 100,
+        "false_positives": 16,
+        "fpr_ci_95": [
+          0.09431028997393265,
+          0.24678759741086198
+        ],
+        "observed_fpr": 0.16
+      },
+      "observed_fpr": 0.16,
+      "observed_tpr": 0.9,
+      "order_guard": {
+        "auc_pass": true,
+        "available": true,
+        "development": {
+          "AB": {
+            "auc": 0.72,
+            "blocks": 5,
+            "direction_match": true,
+            "mean_effect": 0.024,
+            "median_effect": 0.02
+          },
+          "BA": {
+            "auc": 0.5,
+            "blocks": 5,
+            "direction_match": false,
+            "mean_effect": 0.0,
+            "median_effect": 0.0
+          }
+        },
+        "direction_pass": false,
+        "minimum_blocks_per_order": 3,
+        "pass": false,
+        "required": false,
+        "test": {
+          "AB": {
+            "auc": 0.86,
+            "blocks": 5,
+            "direction_match": true,
+            "mean_effect": 0.030000000000000006,
+            "median_effect": 0.03
+          },
+          "BA": {
+            "auc": 1.0,
+            "blocks": 5,
+            "direction_match": true,
+            "mean_effect": 0.062,
+            "median_effect": 0.04
+          }
+        }
+      },
+      "reportable": false,
+      "separation_pass": true,
+      "status": "PAIR_ORDER_GENERALIZATION_FAILURE",
+      "target_fpr": 0.1,
+      "test_auc": 0.925,
+      "test_auc_ci_95": [
+        0.795,
+        1.0
+      ],
+      "test_paired_mean_effect": 0.046,
+      "test_paired_median_effect": 0.035,
+      "test_paired_median_effect_ci_95": [
+        0.02,
+        0.06
+      ],
+      "threshold": 0.02,
+      "true_positive_metrics": {
+        "attack_batches": 10,
+        "observed_tpr": 0.9,
+        "tpr_ci_95": [
+          0.5549838829717995,
+          0.9974714214555382
+        ],
+        "true_positives": 9
+      }
+    },
+    {
+      "batch_size": 500,
+      "counts": {
+        "calibration": 10,
+        "development_pairs": 2,
+        "test_pairs": 2,
+        "threshold": 10,
+        "validation": 20
+      },
+      "reason": "requires at least 5 non-overlapping batches in every dataset",
+      "reportable": false,
+      "status": "INSUFFICIENT_BATCHES"
+    },
+    {
+      "batch_size": 1000,
+      "counts": {
+        "calibration": 5,
+        "development_pairs": 1,
+        "test_pairs": 1,
+        "threshold": 5,
+        "validation": 10
+      },
+      "reason": "requires at least 5 non-overlapping batches in every dataset",
+      "reportable": false,
+      "status": "INSUFFICIENT_BATCHES"
+    },
+    {
+      "batch_size": 5000,
+      "counts": {
+        "calibration": 1,
+        "development_pairs": 0,
+        "test_pairs": 0,
+        "threshold": 1,
+        "validation": 2
+      },
+      "reason": "requires at least 5 non-overlapping batches in every dataset",
+      "reportable": false,
+      "status": "INSUFFICIENT_BATCHES"
+    }
+  ],
+  "run": {
+    "csv_run_ids": [
+      0
+    ],
+    "csv_schedule_seeds": [
+      20260715
+    ],
+    "requested_run_id": 0,
+    "requested_schedule_seed": 20260715
+  },
+  "window": "post-fault"
+}

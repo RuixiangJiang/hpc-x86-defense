@@ -1,0 +1,115 @@
+{
+  "attack_metrics": {
+    "attack_modal_events": {
+      "branch-misses": 2,
+      "branches": 7,
+      "cycles": 168,
+      "instructions": 33,
+      "retired-loads": 7,
+      "retired-stores": 7
+    },
+    "false_negative_rate": 0.0,
+    "false_negatives": 0,
+    "fault_oracle_rate": 1.0,
+    "fault_oracle_samples": 500,
+    "first_false_negative_samples": [],
+    "observed_modal_deltas_from_calibration": {
+      "branches": -35,
+      "instructions": -300,
+      "retired-loads": -65,
+      "retired-stores": -33
+    },
+    "tpr_one_sided_95_percent_lower_bound": 0.9940264484836452,
+    "true_positive_rate": 1.0,
+    "true_positives": 500,
+    "valid_attack_samples": 500
+  },
+  "datasets": {
+    "attack": {
+      "collected": 500,
+      "excluded": 0,
+      "exclusion_rate": 0.0,
+      "exclusion_reasons": {},
+      "expected_mode": "skip-cmov",
+      "path": "/home/ruixiang/hpc-x86-defense/results/Fault-Injection_Attacks_against_NISTs_PQC_Round_3_KEM_Candidates/fpr_evaluation/attack_skip_cmov.csv",
+      "valid": 500
+    },
+    "calibration": {
+      "collected": 500,
+      "excluded": 0,
+      "exclusion_rate": 0.0,
+      "exclusion_reasons": {},
+      "expected_mode": "baseline",
+      "path": "/home/ruixiang/hpc-x86-defense/results/Fault-Injection_Attacks_against_NISTs_PQC_Round_3_KEM_Candidates/fpr_evaluation/baseline_calibration.csv",
+      "valid": 500
+    },
+    "validation": {
+      "collected": 5000,
+      "excluded": 0,
+      "exclusion_rate": 0.0,
+      "exclusion_reasons": {},
+      "expected_mode": "baseline",
+      "path": "/home/ruixiang/hpc-x86-defense/results/Fault-Injection_Attacks_against_NISTs_PQC_Round_3_KEM_Candidates/fpr_evaluation/baseline_validation.csv",
+      "valid": 5000
+    }
+  },
+  "false_positive_metrics": {
+    "false_positive_rate": 0.0,
+    "false_positives": 0,
+    "first_false_positive_samples": [],
+    "fpr_one_sided_95_percent_upper_bound": 0.0005989670023149134,
+    "specificity": 1.0,
+    "valid_validation_samples": 5000
+  },
+  "model": {
+    "calibration_consistency": {
+      "branches": {
+        "expected": 42,
+        "matching_rate": 1.0,
+        "matching_samples": 500,
+        "maximum": 42,
+        "minimum": 42,
+        "valid_samples": 500
+      },
+      "instructions": {
+        "expected": 333,
+        "matching_rate": 1.0,
+        "matching_samples": 500,
+        "maximum": 333,
+        "minimum": 333,
+        "valid_samples": 500
+      },
+      "retired-loads": {
+        "expected": 72,
+        "matching_rate": 1.0,
+        "matching_samples": 500,
+        "maximum": 72,
+        "minimum": 72,
+        "valid_samples": 500
+      },
+      "retired-stores": {
+        "expected": 40,
+        "matching_rate": 1.0,
+        "matching_samples": 500,
+        "maximum": 40,
+        "minimum": 40,
+        "valid_samples": 500
+      }
+    },
+    "detector": "exact_modal_equality",
+    "events": [
+      "instructions",
+      "branches",
+      "retired-loads",
+      "retired-stores"
+    ],
+    "expected": {
+      "branches": 42,
+      "instructions": 333,
+      "retired-loads": 72,
+      "retired-stores": 40
+    },
+    "fault_model": "skip_entire_failure_handling_cmov_call",
+    "minimum_running_percent": 95.0
+  }
+}

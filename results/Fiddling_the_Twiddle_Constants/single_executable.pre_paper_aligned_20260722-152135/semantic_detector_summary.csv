@@ -1,0 +1,3 @@
+family,hpc_identifiability,single_hpc_fpr,single_hpc_tpr,batch_hpc_fpr,batch_hpc_tpr,single_integrity_fpr,single_integrity_tpr,batch_integrity_fpr,batch_integrity_tpr,single_two_tier_fpr,single_two_tier_tpr,batch_two_tier_fpr,batch_two_tier_tpr
+corrupt-twiddle-pointer,not-identifiable-by-current-coarse-hpc-set,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0
+corrupt-loaded-twiddle-value,deterministic-instruction-and-load-deficit,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0

@@ -1,0 +1,20 @@
+=== Secret in OnePiece: operation-level session-calibrated detector ===
+Baseline, all attacks, and every PMU pass use the same sio_single executable.
+Primary thresholds use the most conservative per-session confidence-guarded threshold.
+
+Primary detector results:
+attack                       FPR        worst FPR   TPR        AUC       batch FPR   batch worst batch TPR  
+skip-bit-assignment            0.6333%    0.6500%  28.4000%  0.974800    0.0000%    0.0000%   93.0000%
+skip-or-operation              0.1500%    0.4000%  11.0000%  0.843134    0.0000%    0.0000%   29.0000%
+
+Directly calibrated operation-level unified detector:
+  single: FP=40/6000 FPR=0.6667% worst-session=0.7500%
+    skip-bit-assignment: TP=230/1000 TPR=23.0000% AUC=0.946809
+    skip-or-operation: TP=40/1000 TPR=4.0000% AUC=0.817667
+  batch-10: FP=0/600 FPR=0.0000% worst-session=0.0000%
+    skip-bit-assignment: TP=42/100 TPR=42.0000% AUC=0.990517
+    skip-or-operation: TP=29/100 TPR=29.0000% AUC=0.936550
+
+Semantic success:
+  skip-bit-assignment: 1000/1000
+  skip-or-operation: 1000/1000

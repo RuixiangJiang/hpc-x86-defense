@@ -1,0 +1,59 @@
+=== Delvaux Roulette: set-masked-intermediate-constant baseline=single threshold=worst-session ===
+Available candidate features: 13; development-selected features: 1
+  stalls-mem-any.stalls_mem_any                              direction=+ dev_auc=0.729756 effect=0.899 session_consistency=1.000 weight=1.0000
+
+Primary sparse directional detector:
+  Single threshold: FP=0/20000 upper=0.000150; threshold=8.000000
+  Validation: FP=0/6000 FPR=0.000000000; attack TP=0/1000 TPR=0.000000000; AUC=0.749385
+  Batch-10 metric=mean-directional-score direction=+
+  Batch threshold: FP=2/2000 upper=0.003145; threshold=5.440967
+  Batch validation: FP=0/600 FPR=0.000000000; attack TP=0/100 TPR=0.000000000; AUC=0.854142
+  Cross-session single validation FPR:
+    s00: 0/2000 (0.000000); first=0.000000 second=0.000000
+    s01: 0/2000 (0.000000); first=0.000000 second=0.000000
+    s02: 0/2000 (0.000000); first=0.000000 second=0.000000
+  Worst-session single FPR=0.000000
+  Cross-session batch validation FPR:
+    s00: 0/200 (0.000000)
+    s01: 0/200 (0.000000)
+    s02: 0/200 (0.000000)
+  Cross-session batch attack TPR:
+    s00: 0/50 (0.000000)
+    s01: 0/50 (0.000000)
+  Worst-session batch FPR=0.000000
+
+Structural-only comparison detector:
+  Single threshold: FP=0/20000 upper=0.000150; threshold=0.000000
+  Validation: FP=0/6000 FPR=0.000000000; attack TP=0/1000 TPR=0.000000000; AUC=0.500000
+  Batch-10 metric=mean-directional-score direction=+
+  Batch threshold: FP=0/2000 upper=0.001497; threshold=0.000000
+  Batch validation: FP=0/600 FPR=0.000000000; attack TP=0/100 TPR=0.000000000; AUC=0.500000
+  Cross-session single validation FPR:
+    s00: 0/2000 (0.000000); first=0.000000 second=0.000000
+    s01: 0/2000 (0.000000); first=0.000000 second=0.000000
+    s02: 0/2000 (0.000000); first=0.000000 second=0.000000
+  Worst-session single FPR=0.000000
+  Cross-session batch validation FPR:
+    s00: 0/200 (0.000000)
+    s01: 0/200 (0.000000)
+    s02: 0/200 (0.000000)
+  Cross-session batch attack TPR:
+    s00: 0/50 (0.000000)
+    s01: 0/50 (0.000000)
+  Worst-session batch FPR=0.000000
+
+Fault semantic success: 1000/1000
+Largest normalized median shifts on final attack sessions:
+  stalls-mem-any.stalls_mem_any                              session_z_delta=+1.124
+  structural-loads.retired_loads                             session_z_delta=+0.000
+  structural-stores.retired_stores                           session_z_delta=+0.000
+  cache-l1d.l1d_read_misses                                  session_z_delta=+0.000
+  cache-llc.llc_read_misses                                  session_z_delta=+0.000
+  cache-dtlb.dtlb_read_misses                                session_z_delta=+0.000
+  cache-references.cache_references                          session_z_delta=+0.000
+  cache-misses.cache_misses                                  session_z_delta=+0.000
+  cache-l1d-replacements.l1d_replacements                    session_z_delta=+0.000
+  cache-l2-request-misses.l2_request_misses                  session_z_delta=+0.000
+  stalls-l1d-miss.stalls_l1d_miss                            session_z_delta=+0.000
+  resource-stalls-store-buffer.resource_stalls_store_buffer  session_z_delta=+0.000
+  execution-bound-loads.execution_bound_on_loads             session_z_delta=+0.000

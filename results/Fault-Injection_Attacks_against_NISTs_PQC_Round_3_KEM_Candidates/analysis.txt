@@ -1,0 +1,26 @@
+[detector]
+  events: instructions, branches, retired-loads, retired-stores
+  instructions: expected=333 calibration_match=500/500
+  branches: expected=42 calibration_match=500/500
+  retired-loads: expected=72 calibration_match=500/500
+  retired-stores: expected=40 calibration_match=500/500
+
+[event statistics]
+event                   baseline mean  baseline sd    attack mean        delta
+cycles                        211.322       17.600        165.570      -45.752
+instructions                  333.000        0.000         33.000     -300.000
+branches                       42.000        0.000          7.000      -35.000
+branch-misses                   1.020        0.303          1.926        0.906
+retired-loads                  72.000        0.000          7.000      -65.000
+retired-stores                 40.000        0.000          7.000      -33.000
+
+[detection]
+  detected: 500/500
+  detection rate: 100.000000%
+  attack fault oracle: 500/500
+  baseline fallback applied: 500/500
+  attack prekey preserved: 500/500
+
+[excluded]
+  baseline: {}
+  attack: {}

@@ -1,0 +1,40 @@
+{
+  "calibration_consistency": {
+    "instructions": {
+      "expected": 37,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 37,
+      "minimum": 37,
+      "valid_samples": 500
+    },
+    "retired-loads": {
+      "expected": 9,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 9,
+      "minimum": 9,
+      "valid_samples": 500
+    },
+    "retired-stores": {
+      "expected": 9,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 9,
+      "minimum": 9,
+      "valid_samples": 500
+    }
+  },
+  "detector": "exact_modal_equality",
+  "events": [
+    "instructions",
+    "retired-loads",
+    "retired-stores"
+  ],
+  "expected": {
+    "instructions": 37,
+    "retired-loads": 9,
+    "retired-stores": 9
+  },
+  "minimum_running_percent": 95.0
+}

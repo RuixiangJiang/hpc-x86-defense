@@ -1,0 +1,64 @@
+=== Delvaux Roulette raw PMU behavior ===
+Scope: final attack sessions only
+Data-fault window: target operation through the end of masked INTT scaling and share recombination.
+
+skip-local-masked-operation
+---------------------------
+  Raw retired instructions:
+    baseline: n=1000 mode=49 median=49 mean=49 range=[49,49]
+    attack:   n=1000 mode=48 median=48 mean=48 range=[48,48]
+    attack-baseline: mode_delta=-1 median_delta=-1 mean_delta=-1
+    baseline histogram: {'49': 1000}
+    attack histogram:   {'48': 1000}
+
+set-masked-intermediate-constant
+--------------------------------
+  event                                    baseline median [p05,p95]       attack median [p05,p95]         median delta
+  cache_misses                                    0 [0,0]         0 [0,0]           0
+  cache_references                                0 [0,0]         0 [0,0]           0
+  dtlb_read_misses                                0 [0,0]         0 [0,0]           0
+  execution_bound_on_loads                      928 [888,973]       927 [885,967.050]          -1
+  l1d_read_misses                                 0 [0,1]         0 [0,1]           0
+  l1d_replacements                                0 [0,2]         0 [0,2]           0
+  l2_request_misses                               0 [0,0]         0 [0,0]           0
+  llc_read_misses                                 0 [0,0]         0 [0,0]           0
+  resource_stalls_store_buffer                    0 [0,0]         0 [0,0]           0
+  retired_loads                                3293 [3293,3293]      3293 [3293,3293]           0
+  retired_stores                               2551 [2551,2551]      2551 [2551,2551]           0
+  stalls_l1d_miss                                 0 [0,1]         0 [0,0]           0
+  stalls_mem_any                           1133.500 [1097,1192]      1137 [1103,1193]       3.500
+
+replace-masked-intermediate-random
+----------------------------------
+  event                                    baseline median [p05,p95]       attack median [p05,p95]         median delta
+  cache_misses                                    0 [0,0]         0 [0,0]           0
+  cache_references                                0 [0,0]         0 [0,0]           0
+  dtlb_read_misses                                0 [0,0]         0 [0,0]           0
+  execution_bound_on_loads                      923 [882.950,963]       926 [883.950,972]           3
+  l1d_read_misses                                 0 [0,2]         0 [0,1]           0
+  l1d_replacements                                0 [0,2]         0 [0,1]           0
+  l2_request_misses                               0 [0,0]         0 [0,0]           0
+  llc_read_misses                                 0 [0,0]         0 [0,0]           0
+  resource_stalls_store_buffer                    0 [0,0]         0 [0,0]           0
+  retired_loads                                3293 [3293,3293]      3293 [3293,3293]           0
+  retired_stores                               2551 [2551,2551]      2551 [2551,2551]           0
+  stalls_l1d_miss                                 0 [0,0]         0 [0,1]           0
+  stalls_mem_any                           1151.500 [1104.950,1208]      1138 [1095,1207.100]     -13.500
+
+flip-masked-intermediate-bit
+----------------------------
+  event                                    baseline median [p05,p95]       attack median [p05,p95]         median delta
+  cache_misses                                    0 [0,0]         0 [0,0]           0
+  cache_references                                0 [0,0]         0 [0,0]           0
+  dtlb_read_misses                                0 [0,0]         0 [0,0]           0
+  execution_bound_on_loads                      928 [885.950,967.050]       927 [886,973]          -1
+  l1d_read_misses                                 0 [0,1]         0 [0,1]           0
+  l1d_replacements                                0 [0,2]         0 [0,1.050]           0
+  l2_request_misses                               0 [0,0]         0 [0,0]           0
+  llc_read_misses                                 0 [0,0]         0 [0,0]           0
+  resource_stalls_store_buffer                    0 [0,0]         0 [0,0]           0
+  retired_loads                                3293 [3293,3293]      3293 [3293,3293]           0
+  retired_stores                               2551 [2551,2551]      2551 [2551,2551]           0
+  stalls_l1d_miss                                 0 [0,1]         0 [0,0]           0
+  stalls_mem_any                               1148 [1101,1209.050]      1142 [1101,1204]          -6
+

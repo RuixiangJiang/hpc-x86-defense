@@ -1,0 +1,5 @@
+=== Batch-level cache-reference analysis: post-fault ===
+run=0 schedule_seed=2026071501
+batch= 1000 status=REPORTABLE_BATCH_POINT             FP=3/300 FPR=0.010000 CI95=[0.002067,0.028945] TP=5/100 TPR=0.050000 CI95=[0.016432,0.112835] AUC=0.672150 AUC_CI95=[0.601949,0.739757] order_guard=PASS
+  order=AB blocks=50 effect=0.007499999999999999 AUC=0.7112 direction_match=True
+  order=BA blocks=50 effect=0.004999999999999999 AUC=0.6308 direction_match=True

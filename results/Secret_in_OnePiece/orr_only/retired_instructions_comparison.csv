@@ -1,0 +1,12 @@
+mode,valid_samples,minimum,median,mean,maximum,population_stdev
+baseline,1000,43709,43709.0,43709.001000,43710,0.031607
+skip-or,1000,43708,43708.0,43708.003000,43709,0.054690
+
+comparison,value
+expected_attack_minus_baseline,-1
+median_attack_minus_baseline,-1.0
+mean_attack_minus_baseline,-0.998000
+paired_common_samples,1000
+paired_median_delta,-1.0
+paired_mean_delta,-0.998000
+paired_exact_minus_one_rate,0.996000

@@ -1,0 +1,330 @@
+{
+  "collections": [
+    {
+      "domain": 1663856513,
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s00",
+      "stage": "calibration",
+      "stem": "calibration_s00_baseline"
+    },
+    {
+      "domain": 1349771707,
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s01",
+      "stage": "calibration",
+      "stem": "calibration_s01_baseline"
+    },
+    {
+      "domain": 2159403218,
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s02",
+      "stage": "calibration",
+      "stem": "calibration_s02_baseline"
+    },
+    {
+      "domain": 3931402884,
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s03",
+      "stage": "calibration",
+      "stem": "calibration_s03_baseline"
+    },
+    {
+      "domain": 2198398835,
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s00",
+      "stage": "development",
+      "stem": "development_s00_reference"
+    },
+    {
+      "domain": 4053294075,
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s00",
+      "stage": "development",
+      "stem": "development_s00_baseline"
+    },
+    {
+      "domain": 2810760388,
+      "expected_attack": true,
+      "kind": "attack",
+      "samples": 500,
+      "session": "s00",
+      "stage": "development",
+      "stem": "development_s00_attack"
+    },
+    {
+      "domain": 4054655537,
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s01",
+      "stage": "development",
+      "stem": "development_s01_reference"
+    },
+    {
+      "domain": 3001389516,
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s01",
+      "stage": "development",
+      "stem": "development_s01_baseline"
+    },
+    {
+      "domain": 3045109571,
+      "expected_attack": true,
+      "kind": "attack",
+      "samples": 500,
+      "session": "s01",
+      "stage": "development",
+      "stem": "development_s01_attack"
+    },
+    {
+      "domain": 3377190047,
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s02",
+      "stage": "development",
+      "stem": "development_s02_reference"
+    },
+    {
+      "domain": 1384333073,
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s02",
+      "stage": "development",
+      "stem": "development_s02_baseline"
+    },
+    {
+      "domain": 1297504870,
+      "expected_attack": true,
+      "kind": "attack",
+      "samples": 500,
+      "session": "s02",
+      "stage": "development",
+      "stem": "development_s02_attack"
+    },
+    {
+      "domain": 3670570204,
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s03",
+      "stage": "development",
+      "stem": "development_s03_reference"
+    },
+    {
+      "domain": 749237423,
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s03",
+      "stage": "development",
+      "stem": "development_s03_baseline"
+    },
+    {
+      "domain": 3427706564,
+      "expected_attack": true,
+      "kind": "attack",
+      "samples": 500,
+      "session": "s03",
+      "stage": "development",
+      "stem": "development_s03_attack"
+    },
+    {
+      "domain": 946738735,
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s00",
+      "stage": "threshold",
+      "stem": "threshold_s00_reference"
+    },
+    {
+      "domain": 3678731581,
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 5000,
+      "session": "s00",
+      "stage": "threshold",
+      "stem": "threshold_s00_baseline"
+    },
+    {
+      "domain": 3529740317,
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s01",
+      "stage": "threshold",
+      "stem": "threshold_s01_reference"
+    },
+    {
+      "domain": 895353223,
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 5000,
+      "session": "s01",
+      "stage": "threshold",
+      "stem": "threshold_s01_baseline"
+    },
+    {
+      "domain": 1597599008,
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s02",
+      "stage": "threshold",
+      "stem": "threshold_s02_reference"
+    },
+    {
+      "domain": 2625835947,
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 5000,
+      "session": "s02",
+      "stage": "threshold",
+      "stem": "threshold_s02_baseline"
+    },
+    {
+      "domain": 1242866919,
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s03",
+      "stage": "threshold",
+      "stem": "threshold_s03_reference"
+    },
+    {
+      "domain": 3322419882,
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 5000,
+      "session": "s03",
+      "stage": "threshold",
+      "stem": "threshold_s03_baseline"
+    },
+    {
+      "domain": 757571123,
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s00",
+      "stage": "validation",
+      "stem": "validation_s00_reference"
+    },
+    {
+      "domain": 625192804,
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 2000,
+      "session": "s00",
+      "stage": "validation",
+      "stem": "validation_s00_baseline"
+    },
+    {
+      "domain": 2248260623,
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s01",
+      "stage": "validation",
+      "stem": "validation_s01_reference"
+    },
+    {
+      "domain": 2782380159,
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 2000,
+      "session": "s01",
+      "stage": "validation",
+      "stem": "validation_s01_baseline"
+    },
+    {
+      "domain": 301707732,
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s02",
+      "stage": "validation",
+      "stem": "validation_s02_reference"
+    },
+    {
+      "domain": 1522905211,
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 2000,
+      "session": "s02",
+      "stage": "validation",
+      "stem": "validation_s02_baseline"
+    },
+    {
+      "domain": 3095482333,
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s00",
+      "stage": "attack",
+      "stem": "attack_s00_reference"
+    },
+    {
+      "domain": 4101864250,
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s00",
+      "stage": "attack",
+      "stem": "attack_s00_baseline"
+    },
+    {
+      "domain": 2550681848,
+      "expected_attack": true,
+      "kind": "attack",
+      "samples": 500,
+      "session": "s00",
+      "stage": "attack",
+      "stem": "attack_s00_attack"
+    },
+    {
+      "domain": 1252915036,
+      "expected_attack": false,
+      "kind": "reference",
+      "samples": 200,
+      "session": "s01",
+      "stage": "attack",
+      "stem": "attack_s01_reference"
+    },
+    {
+      "domain": 299368510,
+      "expected_attack": false,
+      "kind": "baseline",
+      "samples": 500,
+      "session": "s01",
+      "stage": "attack",
+      "stem": "attack_s01_baseline"
+    },
+    {
+      "domain": 3513892401,
+      "expected_attack": true,
+      "kind": "attack",
+      "samples": 500,
+      "session": "s01",
+      "stage": "attack",
+      "stem": "attack_s01_attack"
+    }
+  ],
+  "description": "two-family single-ELF Fiddling the Twiddle Constants multi-session experiment",
+  "version": 2
+}

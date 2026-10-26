@@ -1,0 +1,327 @@
+{
+  "datasets": {
+    "attack": {
+      "collected": 500,
+      "excluded": 0,
+      "exclusion_rate": 0.0,
+      "exclusion_reasons": {},
+      "mode": "stuck-at-1",
+      "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/fpr_evaluation/attack_stuck_at_1.csv",
+      "target": [
+        17,
+        11
+      ],
+      "valid": 500
+    },
+    "calibration": {
+      "collected": 500,
+      "excluded": 0,
+      "exclusion_rate": 0.0,
+      "exclusion_reasons": {},
+      "mode": "baseline",
+      "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/fpr_evaluation/baseline_calibration.csv",
+      "target": [
+        17,
+        11
+      ],
+      "valid": 500
+    },
+    "validation": {
+      "collected": 5000,
+      "excluded": 0,
+      "exclusion_rate": 0.0,
+      "exclusion_reasons": {},
+      "mode": "baseline",
+      "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/fpr_evaluation/baseline_validation.csv",
+      "target": [
+        17,
+        11
+      ],
+      "valid": 5000
+    }
+  },
+  "event_signatures": {
+    "branch_misses": {
+      "attack": {
+        "maximum": 2,
+        "mean": 1.004,
+        "median": 1.0,
+        "minimum": 1,
+        "mode": 1,
+        "mode_count": 498,
+        "mode_rate": 0.996,
+        "sample_stdev": 0.06318214912406725
+      },
+      "attack_mean_delta": 0.0040000000000000036,
+      "attack_mode_delta": 0,
+      "calibration": {
+        "maximum": 2,
+        "mean": 1.0,
+        "median": 1.0,
+        "minimum": 0,
+        "mode": 1,
+        "mode_count": 498,
+        "mode_rate": 0.996,
+        "sample_stdev": 0.06330889378329184
+      },
+      "validation": {
+        "maximum": 2,
+        "mean": 0.998,
+        "median": 1.0,
+        "minimum": 0,
+        "mode": 1,
+        "mode_count": 4986,
+        "mode_rate": 0.9972,
+        "sample_stdev": 0.05288250478052616
+      }
+    },
+    "branches": {
+      "attack": {
+        "maximum": 9,
+        "mean": 9.0,
+        "median": 9.0,
+        "minimum": 9,
+        "mode": 9,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "attack_mean_delta": 0.0,
+      "attack_mode_delta": 0,
+      "calibration": {
+        "maximum": 9,
+        "mean": 9.0,
+        "median": 9.0,
+        "minimum": 9,
+        "mode": 9,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "validation": {
+        "maximum": 9,
+        "mean": 9.0,
+        "median": 9.0,
+        "minimum": 9,
+        "mode": 9,
+        "mode_count": 5000,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      }
+    },
+    "cycles": {
+      "attack": {
+        "maximum": 255,
+        "mean": 165.154,
+        "median": 161.0,
+        "minimum": 149,
+        "mode": 152,
+        "mode_count": 37,
+        "mode_rate": 0.074,
+        "sample_stdev": 13.227252337837124
+      },
+      "attack_mean_delta": -1.1740000000000066,
+      "attack_mode_delta": -8,
+      "calibration": {
+        "maximum": 392,
+        "mean": 166.328,
+        "median": 163.0,
+        "minimum": 144,
+        "mode": 160,
+        "mode_count": 35,
+        "mode_rate": 0.07,
+        "sample_stdev": 16.922208433787628
+      },
+      "validation": {
+        "maximum": 427,
+        "mean": 161.7852,
+        "median": 161.0,
+        "minimum": 149,
+        "mode": 152,
+        "mode_count": 537,
+        "mode_rate": 0.1074,
+        "sample_stdev": 11.355828984727891
+      }
+    },
+    "instructions": {
+      "attack": {
+        "maximum": 68,
+        "mean": 68.0,
+        "median": 68.0,
+        "minimum": 68,
+        "mode": 68,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "attack_mean_delta": 0.0,
+      "attack_mode_delta": 0,
+      "calibration": {
+        "maximum": 68,
+        "mean": 68.0,
+        "median": 68.0,
+        "minimum": 68,
+        "mode": 68,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "validation": {
+        "maximum": 68,
+        "mean": 68.0,
+        "median": 68.0,
+        "minimum": 68,
+        "mode": 68,
+        "mode_count": 5000,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      }
+    },
+    "retired_loads": {
+      "attack": {
+        "maximum": 14,
+        "mean": 14.0,
+        "median": 14.0,
+        "minimum": 14,
+        "mode": 14,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "attack_mean_delta": 0.0,
+      "attack_mode_delta": 0,
+      "calibration": {
+        "maximum": 14,
+        "mean": 14.0,
+        "median": 14.0,
+        "minimum": 14,
+        "mode": 14,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "validation": {
+        "maximum": 14,
+        "mean": 14.0,
+        "median": 14.0,
+        "minimum": 14,
+        "mode": 14,
+        "mode_count": 5000,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      }
+    },
+    "retired_stores": {
+      "attack": {
+        "maximum": 10,
+        "mean": 10.0,
+        "median": 10.0,
+        "minimum": 10,
+        "mode": 10,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "attack_mean_delta": 0.0,
+      "attack_mode_delta": 0,
+      "calibration": {
+        "maximum": 10,
+        "mean": 10.0,
+        "median": 10.0,
+        "minimum": 10,
+        "mode": 10,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "validation": {
+        "maximum": 10,
+        "mean": 10.0,
+        "median": 10.0,
+        "minimum": 10,
+        "mode": 10,
+        "mode_count": 5000,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      }
+    }
+  },
+  "false_positive_metrics": {
+    "false_positive_rate": 0.0,
+    "false_positives": 0,
+    "first_false_positive_samples": [],
+    "fpr_one_sided_95_percent_upper_bound": 0.0005989670023149134,
+    "valid_validation_samples": 5000
+  },
+  "model": {
+    "calibration_consistency": {
+      "branches": {
+        "expected": 9,
+        "matching_rate": 1.0,
+        "matching_samples": 500,
+        "maximum": 9,
+        "minimum": 9,
+        "valid_samples": 500
+      },
+      "instructions": {
+        "expected": 68,
+        "matching_rate": 1.0,
+        "matching_samples": 500,
+        "maximum": 68,
+        "minimum": 68,
+        "valid_samples": 500
+      },
+      "retired_loads": {
+        "expected": 14,
+        "matching_rate": 1.0,
+        "matching_samples": 500,
+        "maximum": 14,
+        "minimum": 14,
+        "valid_samples": 500
+      },
+      "retired_stores": {
+        "expected": 10,
+        "matching_rate": 1.0,
+        "matching_samples": 500,
+        "maximum": 10,
+        "minimum": 10,
+        "valid_samples": 500
+      }
+    },
+    "detector": "exact_modal_equality",
+    "events": [
+      "instructions",
+      "branches",
+      "retired_loads",
+      "retired_stores"
+    ],
+    "expected": {
+      "branches": 9,
+      "instructions": 68,
+      "retired_loads": 14,
+      "retired_stores": 10
+    },
+    "fault_injection_counted": false,
+    "fault_model": "stuck-at-1 at bit 11 of one arithmetic input share ga1[i], followed by the unchanged A2B carry-chain code",
+    "measurement_window": "the original 16-bit first-order masked-Kyber A2B conversion after its arithmetic input shares have been produced; the stuck-at-1 data value is established before PMU enable",
+    "minimum_running_percent": 95.0,
+    "runtime_attack_branch_counted": false,
+    "scope": "coefficient-level masked Decode/A2B propagation oracle; not a full belief-propagation key-recovery run",
+    "target": [
+      17,
+      11
+    ]
+  },
+  "semantic_metrics": {
+    "full_fault_propagation_oracle_successes": 500,
+    "success_rate": 1.0,
+    "valid_attack_samples": 500
+  },
+  "true_positive_metrics": {
+    "detected_attacks": 0,
+    "first_detected_attack_samples": [],
+    "tpr_one_sided_95_percent_lower_bound": 0.0,
+    "true_positive_rate": 0.0,
+    "valid_attack_samples": 500
+  }
+}

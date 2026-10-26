@@ -1,0 +1,23 @@
+{
+  "calibration_consistency": {
+    "instructions": {
+      "expected": 43,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 43,
+      "minimum": 43,
+      "valid_samples": 500
+    }
+  },
+  "chosen_ciphertext_manipulation": "compressed v[target] += 4 mod 16 (Eq. 12)",
+  "detector": "exact_modal_equality",
+  "events": [
+    "instructions"
+  ],
+  "expected": {
+    "instructions": 43
+  },
+  "fault_model": "first-order arithmetic masking; final INTT layer; skip a+b on one share (Table 4 instruction 2)",
+  "minimum_running_percent": 95.0,
+  "target_coeff": 17
+}

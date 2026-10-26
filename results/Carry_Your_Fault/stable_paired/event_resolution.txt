@@ -1,0 +1,16 @@
+=== Carry Your Fault microarchitectural event resolution ===
+  L1D_REPLACEMENTS             cpu_core/event=0x51,period=0x186a3,umask=0x1/ type=4 config=0x151
+  L2_REQUEST_MISSES            cpu_core/event=0x24,period=0x30d43,umask=0x3f/ type=4 config=0x3f24
+  LONG_LATENCY_LOADS           cpu_core/event=0xcd,period=0x186a7,umask=0x1,ldlat=0x20/ type=4 config=0x1cd
+  LOAD_L1_HIT                  cpu_core/event=0xd1,period=0xf4243,umask=0x1/ type=4 config=0x1d1
+  LOAD_L2_HIT                  cpu_core/event=0xd1,period=0x30d43,umask=0x2/ type=4 config=0x2d1
+  LOAD_L3_HIT                  cpu_core/event=0xd1,period=0x186b5,umask=0x4/ type=4 config=0x4d1
+  LOAD_L1_MISS                 cpu_core/event=0xd1,period=0x30d43,umask=0x8/ type=4 config=0x8d1
+  LOAD_L2_MISS                 cpu_core/event=0xd1,period=0x186b5,umask=0x10/ type=4 config=0x10d1
+  LOAD_L3_MISS                 cpu_core/event=0xd1,period=0xc365,umask=0x20/ type=4 config=0x20d1
+  STALLS_L1D_MISS              cpu_core/event=0xa3,cmask=0xc,period=0xf4243,umask=0xc/ type=4 config=0xc000ca3
+  STALLS_MEM_ANY               cpu_core/event=0xa3,cmask=0x4,period=0xf4243,umask=0x4/ type=4 config=0x40004a3
+  MACHINE_CLEARS               cpu_core/event=0xc3,cmask=0x1,edge=0x1,period=0x186a3,umask=0x1/ type=4 config=0x10401c3
+  MEMORY_ORDERING_CLEARS       cpu_core/event=0xc3,period=0x186a3,umask=0x2/ type=4 config=0x2c3
+  RECOVERY_CYCLES              cpu_core/event=0xad,period=0x7a129,umask=0x1/ type=4 config=0x1ad
+  RECOVERY_CYCLES_ANY          unavailable

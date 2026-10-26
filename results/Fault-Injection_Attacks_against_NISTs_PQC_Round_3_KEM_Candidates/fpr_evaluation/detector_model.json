@@ -1,0 +1,51 @@
+{
+  "calibration_consistency": {
+    "branches": {
+      "expected": 42,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 42,
+      "minimum": 42,
+      "valid_samples": 500
+    },
+    "instructions": {
+      "expected": 333,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 333,
+      "minimum": 333,
+      "valid_samples": 500
+    },
+    "retired-loads": {
+      "expected": 72,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 72,
+      "minimum": 72,
+      "valid_samples": 500
+    },
+    "retired-stores": {
+      "expected": 40,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 40,
+      "minimum": 40,
+      "valid_samples": 500
+    }
+  },
+  "detector": "exact_modal_equality",
+  "events": [
+    "instructions",
+    "branches",
+    "retired-loads",
+    "retired-stores"
+  ],
+  "expected": {
+    "branches": 42,
+    "instructions": 333,
+    "retired-loads": 72,
+    "retired-stores": 40
+  },
+  "fault_model": "skip_entire_failure_handling_cmov_call",
+  "minimum_running_percent": 95.0
+}

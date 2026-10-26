@@ -1,0 +1,375 @@
+{
+  "attack": "skip MOVS effect -> branch not taken -> loop abort",
+  "experiment": "Mind the Faulty KECCAK",
+  "instruction_detector": {
+    "attack_samples": 2000,
+    "baseline_mode": 25073,
+    "baseline_samples": 2000,
+    "false_positives": 2,
+    "fpr": 0.001,
+    "tpr": 1.0,
+    "true_positives": 2000
+  },
+  "passes": {
+    "structural-branch-misses": {
+      "attack": {
+        "maximum": 3,
+        "mean": 1.007,
+        "median": 1.0,
+        "minimum": 0,
+        "mode": 1,
+        "n": 2000,
+        "p05": 1.0,
+        "p95": 1.0,
+        "stdev": 0.09977964716811989
+      },
+      "baseline": {
+        "maximum": 10,
+        "mean": 1.2585,
+        "median": 1.0,
+        "minimum": 0,
+        "mode": 1,
+        "n": 2000,
+        "p05": 1.0,
+        "p95": 2.0,
+        "stdev": 0.5897895182502984
+      },
+      "cycles_attack": {
+        "maximum": 3833,
+        "mean": 1816.0575,
+        "median": 1783.0,
+        "minimum": 1673,
+        "mode": 1776,
+        "n": 2000,
+        "p05": 1760.0,
+        "p95": 1971.0,
+        "stdev": 130.2786799940055
+      },
+      "cycles_baseline": {
+        "maximum": 9681,
+        "mean": 4809.9045,
+        "median": 4734.0,
+        "minimum": 4614,
+        "mode": 4720,
+        "n": 2000,
+        "p05": 4668.95,
+        "p95": 5148.1,
+        "stdev": 325.94162414598946
+      },
+      "cycles_median_delta": -2951.0,
+      "event": "branch_misses",
+      "median_delta": 0.0,
+      "mode_delta": 0,
+      "per_session": [
+        {
+          "cycle_median_delta": -2946.5,
+          "event_median_delta": -1.0,
+          "session": 0
+        },
+        {
+          "cycle_median_delta": -2962.0,
+          "event_median_delta": 0.0,
+          "session": 1
+        },
+        {
+          "cycle_median_delta": -2939.0,
+          "event_median_delta": 0.0,
+          "session": 2
+        },
+        {
+          "cycle_median_delta": -2958.5,
+          "event_median_delta": 0.0,
+          "session": 3
+        }
+      ]
+    },
+    "structural-branches": {
+      "attack": {
+        "maximum": 626,
+        "mean": 626.0,
+        "median": 626.0,
+        "minimum": 626,
+        "mode": 626,
+        "n": 2000,
+        "p05": 626.0,
+        "p95": 626.0,
+        "stdev": 0.0
+      },
+      "baseline": {
+        "maximum": 1859,
+        "mean": 1858.0015,
+        "median": 1858.0,
+        "minimum": 1858,
+        "mode": 1858,
+        "n": 2000,
+        "p05": 1858.0,
+        "p95": 1858.0,
+        "stdev": 0.038710454009541304
+      },
+      "cycles_attack": {
+        "maximum": 4317,
+        "mean": 1829.4565,
+        "median": 1786.0,
+        "minimum": 1669,
+        "mode": 1775,
+        "n": 2000,
+        "p05": 1757.0,
+        "p95": 1985.05,
+        "stdev": 140.39048347974244
+      },
+      "cycles_baseline": {
+        "maximum": 10136,
+        "mean": 4829.2775,
+        "median": 4749.0,
+        "minimum": 4593,
+        "mode": 4714,
+        "n": 2000,
+        "p05": 4671.0,
+        "p95": 5173.0,
+        "stdev": 361.7133502756483
+      },
+      "cycles_median_delta": -2963.0,
+      "event": "branches",
+      "median_delta": -1232.0,
+      "mode_delta": -1232,
+      "per_session": [
+        {
+          "cycle_median_delta": -3002.0,
+          "event_median_delta": -1232.0,
+          "session": 0
+        },
+        {
+          "cycle_median_delta": -2937.0,
+          "event_median_delta": -1232.0,
+          "session": 1
+        },
+        {
+          "cycle_median_delta": -2961.5,
+          "event_median_delta": -1232.0,
+          "session": 2
+        },
+        {
+          "cycle_median_delta": -2927.5,
+          "event_median_delta": -1232.0,
+          "session": 3
+        }
+      ]
+    },
+    "structural-instructions": {
+      "attack": {
+        "maximum": 8385,
+        "mean": 8384.0005,
+        "median": 8384.0,
+        "minimum": 8384,
+        "mode": 8384,
+        "n": 2000,
+        "p05": 8384.0,
+        "p95": 8384.0,
+        "stdev": 0.022360679774997897
+      },
+      "baseline": {
+        "maximum": 25074,
+        "mean": 25073.001,
+        "median": 25073.0,
+        "minimum": 25073,
+        "mode": 25073,
+        "n": 2000,
+        "p05": 25073.0,
+        "p95": 25073.0,
+        "stdev": 0.031614865963260665
+      },
+      "cycles_attack": {
+        "maximum": 3969,
+        "mean": 1825.8775,
+        "median": 1791.0,
+        "minimum": 1665,
+        "mode": 1782,
+        "n": 2000,
+        "p05": 1766.0,
+        "p95": 1974.05,
+        "stdev": 102.00989904662072
+      },
+      "cycles_baseline": {
+        "maximum": 24341,
+        "mean": 4866.3035,
+        "median": 4787.0,
+        "minimum": 4620,
+        "mode": 4762,
+        "n": 2000,
+        "p05": 4697.95,
+        "p95": 5178.0,
+        "stdev": 517.7418398141076
+      },
+      "cycles_median_delta": -2996.0,
+      "event": "instructions",
+      "median_delta": -16689.0,
+      "mode_delta": -16689,
+      "per_session": [
+        {
+          "cycle_median_delta": -2984.5,
+          "event_median_delta": -16689.0,
+          "session": 0
+        },
+        {
+          "cycle_median_delta": -3026.0,
+          "event_median_delta": -16689.0,
+          "session": 1
+        },
+        {
+          "cycle_median_delta": -2953.0,
+          "event_median_delta": -16689.0,
+          "session": 2
+        },
+        {
+          "cycle_median_delta": -3019.0,
+          "event_median_delta": -16689.0,
+          "session": 3
+        }
+      ]
+    },
+    "structural-loads": {
+      "attack": {
+        "maximum": 1826,
+        "mean": 1825.0005,
+        "median": 1825.0,
+        "minimum": 1825,
+        "mode": 1825,
+        "n": 2000,
+        "p05": 1825.0,
+        "p95": 1825.0,
+        "stdev": 0.022360679774997897
+      },
+      "baseline": {
+        "maximum": 5458,
+        "mean": 5457.002,
+        "median": 5457.0,
+        "minimum": 5457,
+        "mode": 5457,
+        "n": 2000,
+        "p05": 5457.0,
+        "p95": 5457.0,
+        "stdev": 0.044687789151507874
+      },
+      "cycles_attack": {
+        "maximum": 3703,
+        "mean": 1748.645,
+        "median": 1741.0,
+        "minimum": 1662,
+        "mode": 1744,
+        "n": 2000,
+        "p05": 1693.0,
+        "p95": 1822.0,
+        "stdev": 96.13635147038303
+      },
+      "cycles_baseline": {
+        "maximum": 9916,
+        "mean": 4779.221,
+        "median": 4735.0,
+        "minimum": 4593,
+        "mode": 4686,
+        "n": 2000,
+        "p05": 4661.0,
+        "p95": 5003.0,
+        "stdev": 310.1706918586023
+      },
+      "cycles_median_delta": -2994.0,
+      "event": "retired_loads",
+      "median_delta": -3632.0,
+      "mode_delta": -3632,
+      "per_session": [
+        {
+          "cycle_median_delta": -2990.0,
+          "event_median_delta": -3632.0,
+          "session": 0
+        },
+        {
+          "cycle_median_delta": -3047.5,
+          "event_median_delta": -3632.0,
+          "session": 1
+        },
+        {
+          "cycle_median_delta": -2963.0,
+          "event_median_delta": -3632.0,
+          "session": 2
+        },
+        {
+          "cycle_median_delta": -2986.0,
+          "event_median_delta": -3632.0,
+          "session": 3
+        }
+      ]
+    },
+    "structural-stores": {
+      "attack": {
+        "maximum": 801,
+        "mean": 801.0,
+        "median": 801.0,
+        "minimum": 801,
+        "mode": 801,
+        "n": 2000,
+        "p05": 801.0,
+        "p95": 801.0,
+        "stdev": 0.0
+      },
+      "baseline": {
+        "maximum": 2385,
+        "mean": 2385.0,
+        "median": 2385.0,
+        "minimum": 2385,
+        "mode": 2385,
+        "n": 2000,
+        "p05": 2385.0,
+        "p95": 2385.0,
+        "stdev": 0.0
+      },
+      "cycles_attack": {
+        "maximum": 3728,
+        "mean": 1755.712,
+        "median": 1746.0,
+        "minimum": 1656,
+        "mode": 1747,
+        "n": 2000,
+        "p05": 1692.0,
+        "p95": 1832.0,
+        "stdev": 101.86025629216702
+      },
+      "cycles_baseline": {
+        "maximum": 9950,
+        "mean": 4807.845,
+        "median": 4765.0,
+        "minimum": 4573,
+        "mode": 4773,
+        "n": 2000,
+        "p05": 4667.95,
+        "p95": 5057.099999999999,
+        "stdev": 244.04149257872118
+      },
+      "cycles_median_delta": -3019.0,
+      "event": "retired_stores",
+      "median_delta": -1584.0,
+      "mode_delta": -1584,
+      "per_session": [
+        {
+          "cycle_median_delta": -2997.5,
+          "event_median_delta": -1584.0,
+          "session": 0
+        },
+        {
+          "cycle_median_delta": -2984.0,
+          "event_median_delta": -1584.0,
+          "session": 1
+        },
+        {
+          "cycle_median_delta": -2984.0,
+          "event_median_delta": -1584.0,
+          "session": 2
+        },
+        {
+          "cycle_median_delta": -3145.0,
+          "event_median_delta": -1584.0,
+          "session": 3
+        }
+      ]
+    }
+  }
+}

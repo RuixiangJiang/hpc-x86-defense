@@ -1,0 +1,2 @@
+executable	sha256	fault_family	pmu_pass
+/home/ruixiang/hpc-x86-defense/build/bin/secret_in_onepiece/sio_single	de498c8c6801e1cac4c710bff7693bafad919bc69da4bc3db1d92907a0cd35b2	skip-or-operation	structural-instructions

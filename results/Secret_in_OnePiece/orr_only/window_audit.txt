@@ -1,0 +1,8 @@
+Window verification passed:
+  exactly one executable exists: /home/ruixiang/hpc-x86-defense/build/bin/secret_in_onepiece/sio_single
+  the only exercised fault family is skip-or-operation
+  the only exercised PMU pass is structural-instructions
+  baseline retains load, clear, OR, and writeback
+  attack retains load, clear, and writeback but omits exactly the target OR
+  static target-helper instruction difference: -1
+  semantic oracles, comparisons, CPU checks, and CSV output remain outside the PMU window

@@ -1,0 +1,4461 @@
+{
+  "datasets": "paired development and paired independent test datasets",
+  "experiment": "Carry Your Fault",
+  "minimum_running_percent": 95.0,
+  "passes": {
+    "cache": {
+      "dataset_audit": {
+        "development": {
+          "attack": {
+            "accepted_rows": 1000,
+            "available_mask": 63,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/cache/attack_development.csv",
+            "total_rows": 1000
+          },
+          "attack_only_rows": 0,
+          "baseline": {
+            "accepted_rows": 1000,
+            "available_mask": 63,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/cache/baseline_attack_development.csv",
+            "total_rows": 1000
+          },
+          "baseline_only_rows": 0,
+          "paired_rows": 1000
+        },
+        "test": {
+          "attack": {
+            "accepted_rows": 1000,
+            "available_mask": 63,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/cache/attack_test.csv",
+            "total_rows": 1000
+          },
+          "attack_only_rows": 0,
+          "baseline": {
+            "accepted_rows": 1000,
+            "available_mask": 63,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/cache/baseline_attack_test.csv",
+            "total_rows": 1000
+          },
+          "baseline_only_rows": 0,
+          "paired_rows": 1000
+        }
+      },
+      "events": {
+        "cycles": {
+          "absolute_delta": {
+            "mean": -15.168499999999995,
+            "median": -10.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 362.0,
+            "mean": 184.405,
+            "median": 177.0,
+            "minimum": 158.0,
+            "mode": 162,
+            "n": 2000,
+            "p05": 162.0,
+            "p95": 220.0,
+            "stdev": 23.083704288996834,
+            "zero_rate": 0.0
+          },
+          "baseline": {
+            "maximum": 23205.0,
+            "mean": 199.5735,
+            "median": 187.0,
+            "minimum": 158.0,
+            "mode": 162,
+            "n": 2000,
+            "p05": 162.0,
+            "p95": 218.0,
+            "stdev": 515.1111310546669,
+            "zero_rate": 0.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 31.0,
+            "median": -1.0,
+            "minimum": -36.0,
+            "negative": 12,
+            "positive": 6,
+            "zero": 2
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 156.0,
+            "mean": -15.1685,
+            "median": -2.0,
+            "minimum": -23009.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": -42.0,
+            "p95": 36.0,
+            "stdev": 515.0336318423432,
+            "zero_rate": 0.0435
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 326.0,
+                "mean": 182.696,
+                "median": 175.0,
+                "minimum": 158.0,
+                "mode": 162,
+                "n": 1000,
+                "p05": 161.0,
+                "p95": 220.0,
+                "stdev": 22.713817413669187,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 23205.0,
+                "mean": 216.707,
+                "median": 195.0,
+                "minimum": 161.0,
+                "mode": 195,
+                "n": 1000,
+                "p05": 162.0,
+                "p95": 220.04999999999995,
+                "stdev": 727.9657267002686,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 118.0,
+                "mean": -34.011,
+                "median": -11.0,
+                "minimum": -23009.0,
+                "mode": -1,
+                "n": 1000,
+                "p05": -43.05,
+                "p95": 25.09999999999991,
+                "stdev": 727.616126887734,
+                "zero_rate": 0.044
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 362.0,
+                "mean": 186.114,
+                "median": 182.0,
+                "minimum": 160.0,
+                "mode": 162,
+                "n": 1000,
+                "p05": 162.0,
+                "p95": 220.0,
+                "stdev": 23.334169954971347,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 313.0,
+                "mean": 182.44,
+                "median": 175.5,
+                "minimum": 158.0,
+                "mode": 162,
+                "n": 1000,
+                "p05": 162.0,
+                "p95": 215.04999999999995,
+                "stdev": 20.56110792635356,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 156.0,
+                "mean": 3.674,
+                "median": 1.0,
+                "minimum": -82.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": -38.0,
+                "p95": 41.0,
+                "stdev": 25.471366561582723,
+                "zero_rate": 0.043
+              }
+            }
+          }
+        },
+        "dtlb_read_misses": {
+          "absolute_delta": {
+            "mean": 0.0,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0,
+            "zero_rate": 1.0
+          },
+          "baseline": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0,
+            "zero_rate": 1.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "negative": 0,
+            "positive": 0,
+            "zero": 20
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0,
+            "zero_rate": 1.0
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              },
+              "baseline": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              },
+              "baseline": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            }
+          }
+        },
+        "instructions": {
+          "absolute_delta": {
+            "mean": 0.0,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 89.0,
+            "mean": 89.0,
+            "median": 89.0,
+            "minimum": 89.0,
+            "mode": 89,
+            "n": 2000,
+            "p05": 89.0,
+            "p95": 89.0,
+            "stdev": 0.0,
+            "zero_rate": 0.0
+          },
+          "baseline": {
+            "maximum": 89.0,
+            "mean": 89.0,
+            "median": 89.0,
+            "minimum": 89.0,
+            "mode": 89,
+            "n": 2000,
+            "p05": 89.0,
+            "p95": 89.0,
+            "stdev": 0.0,
+            "zero_rate": 0.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "negative": 0,
+            "positive": 0,
+            "zero": 20
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0,
+            "zero_rate": 1.0
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            }
+          }
+        },
+        "l1d_read_misses": {
+          "absolute_delta": {
+            "mean": -0.11399999999999999,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 10.0,
+            "mean": 0.602,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 2.0,
+            "stdev": 0.93756894026993,
+            "zero_rate": 0.578
+          },
+          "baseline": {
+            "maximum": 10.0,
+            "mean": 0.716,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 2.0,
+            "stdev": 0.9042968961785831,
+            "zero_rate": 0.5025
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "negative": 0,
+            "positive": 0,
+            "zero": 20
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 9.0,
+            "mean": -0.114,
+            "median": 0.0,
+            "minimum": -8.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": -1.0,
+            "p95": 1.0,
+            "stdev": 1.0087183731736966,
+            "zero_rate": 0.581
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 8.0,
+                "mean": 0.621,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 2.0,
+                "stdev": 0.9274800371001088,
+                "zero_rate": 0.573
+              },
+              "baseline": {
+                "maximum": 10.0,
+                "mean": 0.687,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 2.0,
+                "stdev": 0.8864630938831107,
+                "zero_rate": 0.52
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 8.0,
+                "mean": -0.066,
+                "median": 0.0,
+                "minimum": -8.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": -1.0,
+                "p95": 1.0,
+                "stdev": 1.000322270393219,
+                "zero_rate": 0.591
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 10.0,
+                "mean": 0.583,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 2.0,
+                "stdev": 0.9476333726758513,
+                "zero_rate": 0.583
+              },
+              "baseline": {
+                "maximum": 7.0,
+                "mean": 0.745,
+                "median": 1.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 2.0,
+                "stdev": 0.9213163538241487,
+                "zero_rate": 0.485
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 9.0,
+                "mean": -0.162,
+                "median": 0.0,
+                "minimum": -7.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": -2.0,
+                "p95": 1.0,
+                "stdev": 1.0152767045425533,
+                "zero_rate": 0.571
+              }
+            }
+          }
+        },
+        "l1i_read_misses": {
+          "absolute_delta": {
+            "mean": -3.3979999999999997,
+            "median": -1.0,
+            "mode": 1
+          },
+          "attack": {
+            "maximum": 52.0,
+            "mean": 14.7915,
+            "median": 14.0,
+            "minimum": 2.0,
+            "mode": 14,
+            "n": 2000,
+            "p05": 7.0,
+            "p95": 23.0,
+            "stdev": 5.411531214457006,
+            "zero_rate": 0.0
+          },
+          "baseline": {
+            "maximum": 51.0,
+            "mean": 18.1895,
+            "median": 15.0,
+            "minimum": 7.0,
+            "mode": 13,
+            "n": 2000,
+            "p05": 9.0,
+            "p95": 36.0,
+            "stdev": 7.78639221346131,
+            "zero_rate": 0.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 10.0,
+            "median": -1.5,
+            "minimum": -23.0,
+            "negative": 10,
+            "positive": 7,
+            "zero": 3
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 29.0,
+            "mean": -3.398,
+            "median": -1.0,
+            "minimum": -31.0,
+            "mode": 2,
+            "n": 2000,
+            "p05": -19.0,
+            "p95": 10.0,
+            "stdev": 9.073188931058878,
+            "zero_rate": 0.038
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 52.0,
+                "mean": 13.837,
+                "median": 13.0,
+                "minimum": 2.0,
+                "mode": 12,
+                "n": 1000,
+                "p05": 3.0,
+                "p95": 22.0,
+                "stdev": 5.5720264247828615,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 43.0,
+                "mean": 17.484,
+                "median": 15.0,
+                "minimum": 7.0,
+                "mode": 9,
+                "n": 1000,
+                "p05": 9.0,
+                "p95": 35.0,
+                "stdev": 8.04938112754866,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 29.0,
+                "mean": -3.647,
+                "median": -2.0,
+                "minimum": -28.0,
+                "mode": 2,
+                "n": 1000,
+                "p05": -17.0,
+                "p95": 8.0,
+                "stdev": 8.3006802306975,
+                "zero_rate": 0.034
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 41.0,
+                "mean": 15.746,
+                "median": 15.0,
+                "minimum": 5.0,
+                "mode": 14,
+                "n": 1000,
+                "p05": 8.0,
+                "p95": 24.0,
+                "stdev": 5.072199839439611,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 51.0,
+                "mean": 18.895,
+                "median": 16.0,
+                "minimum": 8.0,
+                "mode": 13,
+                "n": 1000,
+                "p05": 12.0,
+                "p95": 37.0,
+                "stdev": 7.451677831368081,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 27.0,
+                "mean": -3.149,
+                "median": -1.0,
+                "minimum": -31.0,
+                "mode": 1,
+                "n": 1000,
+                "p05": -23.0,
+                "p95": 10.0,
+                "stdev": 9.782765534423357,
+                "zero_rate": 0.042
+              }
+            }
+          }
+        },
+        "llc_read_misses": {
+          "absolute_delta": {
+            "mean": 0.0,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0,
+            "zero_rate": 1.0
+          },
+          "baseline": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0,
+            "zero_rate": 1.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "negative": 0,
+            "positive": 0,
+            "zero": 20
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0,
+            "zero_rate": 1.0
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              },
+              "baseline": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              },
+              "baseline": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            }
+          }
+        }
+      },
+      "unavailable_events": []
+    },
+    "cache-detail": {
+      "dataset_audit": {
+        "development": {
+          "attack": {
+            "accepted_rows": 1000,
+            "available_mask": 63,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/cache-detail/attack_development.csv",
+            "total_rows": 1000
+          },
+          "attack_only_rows": 0,
+          "baseline": {
+            "accepted_rows": 1000,
+            "available_mask": 63,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/cache-detail/baseline_attack_development.csv",
+            "total_rows": 1000
+          },
+          "baseline_only_rows": 0,
+          "paired_rows": 1000
+        },
+        "test": {
+          "attack": {
+            "accepted_rows": 1000,
+            "available_mask": 63,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/cache-detail/attack_test.csv",
+            "total_rows": 1000
+          },
+          "attack_only_rows": 0,
+          "baseline": {
+            "accepted_rows": 1000,
+            "available_mask": 63,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/cache-detail/baseline_attack_test.csv",
+            "total_rows": 1000
+          },
+          "baseline_only_rows": 0,
+          "paired_rows": 1000
+        }
+      },
+      "events": {
+        "cache_misses": {
+          "absolute_delta": {
+            "mean": 0.0025,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 3.0,
+            "mean": 0.003,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.08363311095866464,
+            "zero_rate": 0.9985
+          },
+          "baseline": {
+            "maximum": 1.0,
+            "mean": 0.0005,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.022360679774997897,
+            "zero_rate": 0.9995
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "negative": 0,
+            "positive": 0,
+            "zero": 20
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 3.0,
+            "mean": 0.0025,
+            "median": 0.0,
+            "minimum": -1.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.08658809819700793,
+            "zero_rate": 0.998
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 3.0,
+                "mean": 0.005,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.11396485417876859,
+                "zero_rate": 0.998
+              },
+              "baseline": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 3.0,
+                "mean": 0.005,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.11396485417876859,
+                "zero_rate": 0.998
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 1.0,
+                "mean": 0.001,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.03162277660168379,
+                "zero_rate": 0.999
+              },
+              "baseline": {
+                "maximum": 1.0,
+                "mean": 0.001,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.03162277660168379,
+                "zero_rate": 0.999
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 1.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": -1.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.04474373701426829,
+                "zero_rate": 0.998
+              }
+            }
+          }
+        },
+        "cache_references": {
+          "absolute_delta": {
+            "mean": 0.005500000000000001,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 8.0,
+            "mean": 0.031,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.3861522455954247,
+            "zero_rate": 0.99
+          },
+          "baseline": {
+            "maximum": 15.0,
+            "mean": 0.0255,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.4230120797445445,
+            "zero_rate": 0.992
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "negative": 0,
+            "positive": 0,
+            "zero": 20
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 7.0,
+            "mean": 0.0055,
+            "median": 0.0,
+            "minimum": -15.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.5409399763643047,
+            "zero_rate": 0.985
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 8.0,
+                "mean": 0.03,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.38891033831881,
+                "zero_rate": 0.992
+              },
+              "baseline": {
+                "maximum": 15.0,
+                "mean": 0.037,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.5458286626121139,
+                "zero_rate": 0.99
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 7.0,
+                "mean": -0.007,
+                "median": 0.0,
+                "minimum": -15.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.6175211189362938,
+                "zero_rate": 0.987
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 7.0,
+                "mean": 0.032,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.383566321674783,
+                "zero_rate": 0.988
+              },
+              "baseline": {
+                "maximum": 7.0,
+                "mean": 0.014,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.24467092974823115,
+                "zero_rate": 0.994
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 7.0,
+                "mean": 0.018,
+                "median": 0.0,
+                "minimum": -7.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.45153059683689195,
+                "zero_rate": 0.983
+              }
+            }
+          }
+        },
+        "cycles": {
+          "absolute_delta": {
+            "mean": -6.0815000000000055,
+            "median": -14.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 555.0,
+            "mean": 184.7065,
+            "median": 177.0,
+            "minimum": 158.0,
+            "mode": 162,
+            "n": 2000,
+            "p05": 162.0,
+            "p95": 218.0,
+            "stdev": 23.887814290675337,
+            "zero_rate": 0.0
+          },
+          "baseline": {
+            "maximum": 481.0,
+            "mean": 190.788,
+            "median": 191.0,
+            "minimum": 158.0,
+            "mode": 162,
+            "n": 2000,
+            "p05": 162.0,
+            "p95": 225.0,
+            "stdev": 22.744905393531106,
+            "zero_rate": 0.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 32.0,
+            "median": -9.0,
+            "minimum": -40.0,
+            "negative": 13,
+            "positive": 5,
+            "zero": 2
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 338.0,
+            "mean": -6.0815,
+            "median": -7.0,
+            "minimum": -195.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": -45.0,
+            "p95": 38.0,
+            "stdev": 28.88045876019111,
+            "zero_rate": 0.0375
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 369.0,
+                "mean": 180.335,
+                "median": 174.0,
+                "minimum": 161.0,
+                "mode": 162,
+                "n": 1000,
+                "p05": 162.0,
+                "p95": 216.0,
+                "stdev": 21.84980982043526,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 481.0,
+                "mean": 187.362,
+                "median": 184.0,
+                "minimum": 159.0,
+                "mode": 162,
+                "n": 1000,
+                "p05": 161.0,
+                "p95": 224.0,
+                "stdev": 23.539521343159574,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 170.0,
+                "mean": -7.027,
+                "median": -5.0,
+                "minimum": -195.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": -45.0,
+                "p95": 38.0,
+                "stdev": 27.02236998265473,
+                "zero_rate": 0.049
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 555.0,
+                "mean": 189.078,
+                "median": 184.0,
+                "minimum": 158.0,
+                "mode": 162,
+                "n": 1000,
+                "p05": 162.0,
+                "p95": 223.0,
+                "stdev": 25.023070756205563,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 302.0,
+                "mean": 194.214,
+                "median": 194.0,
+                "minimum": 158.0,
+                "mode": 173,
+                "n": 1000,
+                "p05": 163.0,
+                "p95": 225.0,
+                "stdev": 21.390927417383654,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 338.0,
+                "mean": -5.136,
+                "median": -8.0,
+                "minimum": -91.0,
+                "mode": -1,
+                "n": 1000,
+                "p05": -46.0,
+                "p95": 37.0,
+                "stdev": 30.610431269462744,
+                "zero_rate": 0.026
+              }
+            }
+          }
+        },
+        "instructions": {
+          "absolute_delta": {
+            "mean": 0.0,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 89.0,
+            "mean": 89.0,
+            "median": 89.0,
+            "minimum": 89.0,
+            "mode": 89,
+            "n": 2000,
+            "p05": 89.0,
+            "p95": 89.0,
+            "stdev": 0.0,
+            "zero_rate": 0.0
+          },
+          "baseline": {
+            "maximum": 89.0,
+            "mean": 89.0,
+            "median": 89.0,
+            "minimum": 89.0,
+            "mode": 89,
+            "n": 2000,
+            "p05": 89.0,
+            "p95": 89.0,
+            "stdev": 0.0,
+            "zero_rate": 0.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "negative": 0,
+            "positive": 0,
+            "zero": 20
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0,
+            "zero_rate": 1.0
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            }
+          }
+        },
+        "l1d_replacements": {
+          "absolute_delta": {
+            "mean": -0.08050000000000002,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 15.0,
+            "mean": 1.353,
+            "median": 1.0,
+            "minimum": 0.0,
+            "mode": 1,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 4.0,
+            "stdev": 1.5692744537382801,
+            "zero_rate": 0.3185
+          },
+          "baseline": {
+            "maximum": 16.0,
+            "mean": 1.4335,
+            "median": 1.0,
+            "minimum": 0.0,
+            "mode": 1,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 4.0,
+            "stdev": 1.4413939635918902,
+            "zero_rate": 0.27
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 1.0,
+            "median": 0.0,
+            "minimum": -1.0,
+            "negative": 3,
+            "positive": 1,
+            "zero": 16
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 14.0,
+            "mean": -0.0805,
+            "median": 0.0,
+            "minimum": -13.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": -2.0,
+            "p95": 2.0,
+            "stdev": 1.6094455279548068,
+            "zero_rate": 0.395
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 15.0,
+                "mean": 1.287,
+                "median": 1.0,
+                "minimum": 0.0,
+                "mode": 1,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 4.0,
+                "stdev": 1.5745190091294896,
+                "zero_rate": 0.339
+              },
+              "baseline": {
+                "maximum": 16.0,
+                "mean": 1.414,
+                "median": 1.0,
+                "minimum": 0.0,
+                "mode": 1,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 4.0,
+                "stdev": 1.4597036462017674,
+                "zero_rate": 0.275
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 14.0,
+                "mean": -0.127,
+                "median": 0.0,
+                "minimum": -13.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": -2.0,
+                "p95": 2.0,
+                "stdev": 1.5859969692235816,
+                "zero_rate": 0.411
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 15.0,
+                "mean": 1.419,
+                "median": 1.0,
+                "minimum": 0.0,
+                "mode": 1,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 4.0,
+                "stdev": 1.5620111647740802,
+                "zero_rate": 0.298
+              },
+              "baseline": {
+                "maximum": 14.0,
+                "mean": 1.453,
+                "median": 1.0,
+                "minimum": 0.0,
+                "mode": 1,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 4.0,
+                "stdev": 1.4233119183147511,
+                "zero_rate": 0.265
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 14.0,
+                "mean": -0.034,
+                "median": 0.0,
+                "minimum": -13.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": -2.0,
+                "p95": 2.0,
+                "stdev": 1.6320255842074007,
+                "zero_rate": 0.379
+              }
+            }
+          }
+        },
+        "l2_request_misses": {
+          "absolute_delta": {
+            "mean": 0.0155,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 8.0,
+            "mean": 0.058,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.5699108695222437,
+            "zero_rate": 0.985
+          },
+          "baseline": {
+            "maximum": 15.0,
+            "mean": 0.0425,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.5097290082297803,
+            "zero_rate": 0.9885
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "negative": 0,
+            "positive": 0,
+            "zero": 20
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 8.0,
+            "mean": 0.0155,
+            "median": 0.0,
+            "minimum": -15.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.6719267019150029,
+            "zero_rate": 0.9795
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 8.0,
+                "mean": 0.05,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.5584011208905403,
+                "zero_rate": 0.991
+              },
+              "baseline": {
+                "maximum": 15.0,
+                "mean": 0.055,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.6231880642016208,
+                "zero_rate": 0.986
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 7.0,
+                "mean": -0.005,
+                "median": 0.0,
+                "minimum": -15.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.7560069751970193,
+                "zero_rate": 0.982
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 8.0,
+                "mean": 0.066,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.581362177976846,
+                "zero_rate": 0.979
+              },
+              "baseline": {
+                "maximum": 7.0,
+                "mean": 0.03,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.36225851436678647,
+                "zero_rate": 0.991
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 8.0,
+                "mean": 0.036,
+                "median": 0.0,
+                "minimum": -5.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.5753564417255055,
+                "zero_rate": 0.977
+              }
+            }
+          }
+        }
+      },
+      "unavailable_events": []
+    },
+    "load-hits": {
+      "dataset_audit": {
+        "development": {
+          "attack": {
+            "accepted_rows": 1000,
+            "available_mask": 3,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/load-hits/attack_development.csv",
+            "total_rows": 1000
+          },
+          "attack_only_rows": 0,
+          "baseline": {
+            "accepted_rows": 1000,
+            "available_mask": 3,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/load-hits/baseline_attack_development.csv",
+            "total_rows": 1000
+          },
+          "baseline_only_rows": 0,
+          "paired_rows": 1000
+        },
+        "test": {
+          "attack": {
+            "accepted_rows": 1000,
+            "available_mask": 3,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/load-hits/attack_test.csv",
+            "total_rows": 1000
+          },
+          "attack_only_rows": 0,
+          "baseline": {
+            "accepted_rows": 1000,
+            "available_mask": 3,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/load-hits/baseline_attack_test.csv",
+            "total_rows": 1000
+          },
+          "baseline_only_rows": 0,
+          "paired_rows": 1000
+        }
+      },
+      "events": {
+        "cycles": {
+          "absolute_delta": {
+            "mean": 0.29899999999997817,
+            "median": 5.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 645.0,
+            "mean": 171.498,
+            "median": 170.0,
+            "minimum": 159.0,
+            "mode": 162,
+            "n": 2000,
+            "p05": 162.0,
+            "p95": 188.0,
+            "stdev": 18.12355449722286,
+            "zero_rate": 0.0
+          },
+          "baseline": {
+            "maximum": 387.0,
+            "mean": 171.199,
+            "median": 165.0,
+            "minimum": 158.0,
+            "mode": 162,
+            "n": 2000,
+            "p05": 162.0,
+            "p95": 189.04999999999995,
+            "stdev": 16.05762506292044,
+            "zero_rate": 0.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 6.0,
+            "median": 0.0,
+            "minimum": -2.0,
+            "negative": 5,
+            "positive": 9,
+            "zero": 6
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 348.0,
+            "mean": 0.299,
+            "median": 0.0,
+            "minimum": -171.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": -19.0,
+            "p95": 16.0,
+            "stdev": 14.966983807773397,
+            "zero_rate": 0.114
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 645.0,
+                "mean": 172.09,
+                "median": 169.0,
+                "minimum": 160.0,
+                "mode": 162,
+                "n": 1000,
+                "p05": 162.0,
+                "p95": 188.0,
+                "stdev": 21.43033268895187,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 387.0,
+                "mean": 170.537,
+                "median": 165.0,
+                "minimum": 160.0,
+                "mode": 162,
+                "n": 1000,
+                "p05": 161.0,
+                "p95": 187.0,
+                "stdev": 15.679939141829967,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 348.0,
+                "mean": 1.553,
+                "median": 1.0,
+                "minimum": -130.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": -14.0,
+                "p95": 16.0,
+                "stdev": 16.632011748877968,
+                "zero_rate": 0.112
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 313.0,
+                "mean": 170.906,
+                "median": 170.0,
+                "minimum": 159.0,
+                "mode": 162,
+                "n": 1000,
+                "p05": 162.0,
+                "p95": 187.0,
+                "stdev": 14.046154579046126,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 333.0,
+                "mean": 171.861,
+                "median": 166.0,
+                "minimum": 158.0,
+                "mode": 162,
+                "n": 1000,
+                "p05": 162.0,
+                "p95": 192.04999999999995,
+                "stdev": 16.40776931498898,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 46.0,
+                "mean": -0.955,
+                "median": 0.0,
+                "minimum": -171.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": -21.0,
+                "p95": 15.0,
+                "stdev": 12.979732217902203,
+                "zero_rate": 0.116
+              }
+            }
+          }
+        },
+        "instructions": {
+          "absolute_delta": {
+            "mean": 0.0,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 89.0,
+            "mean": 89.0,
+            "median": 89.0,
+            "minimum": 89.0,
+            "mode": 89,
+            "n": 2000,
+            "p05": 89.0,
+            "p95": 89.0,
+            "stdev": 0.0,
+            "zero_rate": 0.0
+          },
+          "baseline": {
+            "maximum": 89.0,
+            "mean": 89.0,
+            "median": 89.0,
+            "minimum": 89.0,
+            "mode": 89,
+            "n": 2000,
+            "p05": 89.0,
+            "p95": 89.0,
+            "stdev": 0.0,
+            "zero_rate": 0.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "negative": 0,
+            "positive": 0,
+            "zero": 20
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0,
+            "zero_rate": 1.0
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            }
+          }
+        }
+      },
+      "unavailable_events": [
+        "load_l1_hit",
+        "load_l2_hit",
+        "load_l3_hit",
+        "load_l3_miss"
+      ]
+    },
+    "load-misses-latency": {
+      "dataset_audit": {
+        "development": {
+          "attack": {
+            "accepted_rows": 1000,
+            "available_mask": 3,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/load-misses-latency/attack_development.csv",
+            "total_rows": 1000
+          },
+          "attack_only_rows": 0,
+          "baseline": {
+            "accepted_rows": 1000,
+            "available_mask": 3,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/load-misses-latency/baseline_attack_development.csv",
+            "total_rows": 1000
+          },
+          "baseline_only_rows": 0,
+          "paired_rows": 1000
+        },
+        "test": {
+          "attack": {
+            "accepted_rows": 1000,
+            "available_mask": 3,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/load-misses-latency/attack_test.csv",
+            "total_rows": 1000
+          },
+          "attack_only_rows": 0,
+          "baseline": {
+            "accepted_rows": 1000,
+            "available_mask": 3,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/load-misses-latency/baseline_attack_test.csv",
+            "total_rows": 1000
+          },
+          "baseline_only_rows": 0,
+          "paired_rows": 1000
+        }
+      },
+      "events": {
+        "cycles": {
+          "absolute_delta": {
+            "mean": 11.297499999999985,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 23305.0,
+            "mean": 183.944,
+            "median": 170.0,
+            "minimum": 160.0,
+            "mode": 162,
+            "n": 2000,
+            "p05": 162.0,
+            "p95": 192.0,
+            "stdev": 517.6232237495556,
+            "zero_rate": 0.0
+          },
+          "baseline": {
+            "maximum": 318.0,
+            "mean": 172.6465,
+            "median": 170.0,
+            "minimum": 159.0,
+            "mode": 162,
+            "n": 2000,
+            "p05": 162.0,
+            "p95": 195.0,
+            "stdev": 15.27881732593985,
+            "zero_rate": 0.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 8.0,
+            "median": 0.0,
+            "minimum": -8.0,
+            "negative": 8,
+            "positive": 6,
+            "zero": 6
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 23099.0,
+            "mean": 11.2975,
+            "median": 0.0,
+            "minimum": -98.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": -19.0,
+            "p95": 16.0,
+            "stdev": 516.7378000211861,
+            "zero_rate": 0.1205
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 23305.0,
+                "mean": 195.336,
+                "median": 169.0,
+                "minimum": 160.0,
+                "mode": 162,
+                "n": 1000,
+                "p05": 162.0,
+                "p95": 194.0,
+                "stdev": 731.8967850783388,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 318.0,
+                "mean": 172.619,
+                "median": 170.0,
+                "minimum": 159.0,
+                "mode": 162,
+                "n": 1000,
+                "p05": 162.0,
+                "p95": 195.0,
+                "stdev": 15.771194297502316,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 23099.0,
+                "mean": 22.717,
+                "median": 0.0,
+                "minimum": -98.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": -19.0,
+                "p95": 16.0,
+                "stdev": 730.7016243137651,
+                "zero_rate": 0.128
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 337.0,
+                "mean": 172.552,
+                "median": 171.0,
+                "minimum": 160.0,
+                "mode": 162,
+                "n": 1000,
+                "p05": 162.0,
+                "p95": 190.04999999999995,
+                "stdev": 14.25083795369179,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 288.0,
+                "mean": 172.674,
+                "median": 170.0,
+                "minimum": 161.0,
+                "mode": 162,
+                "n": 1000,
+                "p05": 162.0,
+                "p95": 195.0,
+                "stdev": 14.777892613972742,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 74.0,
+                "mean": -0.122,
+                "median": 0.0,
+                "minimum": -39.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": -18.049999999999997,
+                "p95": 15.049999999999955,
+                "stdev": 10.828590599629038,
+                "zero_rate": 0.113
+              }
+            }
+          }
+        },
+        "instructions": {
+          "absolute_delta": {
+            "mean": 0.0,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 89.0,
+            "mean": 89.0,
+            "median": 89.0,
+            "minimum": 89.0,
+            "mode": 89,
+            "n": 2000,
+            "p05": 89.0,
+            "p95": 89.0,
+            "stdev": 0.0,
+            "zero_rate": 0.0
+          },
+          "baseline": {
+            "maximum": 89.0,
+            "mean": 89.0,
+            "median": 89.0,
+            "minimum": 89.0,
+            "mode": 89,
+            "n": 2000,
+            "p05": 89.0,
+            "p95": 89.0,
+            "stdev": 0.0,
+            "zero_rate": 0.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "negative": 0,
+            "positive": 0,
+            "zero": 20
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0,
+            "zero_rate": 1.0
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            }
+          }
+        }
+      },
+      "unavailable_events": [
+        "load_l1_miss",
+        "load_l2_miss",
+        "load_l3_miss",
+        "long_latency_loads"
+      ]
+    },
+    "recovery": {
+      "dataset_audit": {
+        "development": {
+          "attack": {
+            "accepted_rows": 1000,
+            "available_mask": 31,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/recovery/attack_development.csv",
+            "total_rows": 1000
+          },
+          "attack_only_rows": 0,
+          "baseline": {
+            "accepted_rows": 1000,
+            "available_mask": 31,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/recovery/baseline_attack_development.csv",
+            "total_rows": 1000
+          },
+          "baseline_only_rows": 0,
+          "paired_rows": 1000
+        },
+        "test": {
+          "attack": {
+            "accepted_rows": 1000,
+            "available_mask": 31,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/recovery/attack_test.csv",
+            "total_rows": 1000
+          },
+          "attack_only_rows": 0,
+          "baseline": {
+            "accepted_rows": 1000,
+            "available_mask": 31,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/recovery/baseline_attack_test.csv",
+            "total_rows": 1000
+          },
+          "baseline_only_rows": 0,
+          "paired_rows": 1000
+        }
+      },
+      "events": {
+        "cycles": {
+          "absolute_delta": {
+            "mean": 2.01400000000001,
+            "median": 10.0,
+            "mode": 32
+          },
+          "attack": {
+            "maximum": 650.0,
+            "mean": 189.794,
+            "median": 194.0,
+            "minimum": 150.0,
+            "mode": 194,
+            "n": 2000,
+            "p05": 161.0,
+            "p95": 219.0,
+            "stdev": 23.937022674661602,
+            "zero_rate": 0.0
+          },
+          "baseline": {
+            "maximum": 342.0,
+            "mean": 187.78,
+            "median": 184.0,
+            "minimum": 159.0,
+            "mode": 162,
+            "n": 2000,
+            "p05": 162.0,
+            "p95": 221.04999999999995,
+            "stdev": 22.424072322166527,
+            "zero_rate": 0.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 33.0,
+            "median": 1.25,
+            "minimum": -46.0,
+            "negative": 7,
+            "positive": 13,
+            "zero": 0
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 472.0,
+            "mean": 2.014,
+            "median": 2.0,
+            "minimum": -180.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": -47.0,
+            "p95": 41.0,
+            "stdev": 31.56729400860189,
+            "zero_rate": 0.0355
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 650.0,
+                "mean": 187.035,
+                "median": 186.0,
+                "minimum": 158.0,
+                "mode": 162,
+                "n": 1000,
+                "p05": 160.0,
+                "p95": 219.0,
+                "stdev": 26.610371791594474,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 342.0,
+                "mean": 184.406,
+                "median": 181.0,
+                "minimum": 159.0,
+                "mode": 162,
+                "n": 1000,
+                "p05": 162.0,
+                "p95": 217.0,
+                "stdev": 20.7386415961908,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 472.0,
+                "mean": 2.629,
+                "median": 1.0,
+                "minimum": -180.0,
+                "mode": 32,
+                "n": 1000,
+                "p05": -43.0,
+                "p95": 41.049999999999955,
+                "stdev": 32.484189717177514,
+                "zero_rate": 0.023
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 357.0,
+                "mean": 192.553,
+                "median": 195.0,
+                "minimum": 150.0,
+                "mode": 195,
+                "n": 1000,
+                "p05": 162.0,
+                "p95": 219.0,
+                "stdev": 20.571445631636475,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 327.0,
+                "mean": 191.154,
+                "median": 194.0,
+                "minimum": 159.0,
+                "mode": 162,
+                "n": 1000,
+                "p05": 162.0,
+                "p95": 225.04999999999995,
+                "stdev": 23.522320965066,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 188.0,
+                "mean": 1.399,
+                "median": 2.0,
+                "minimum": -132.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": -51.0,
+                "p95": 41.0,
+                "stdev": 30.626880428878238,
+                "zero_rate": 0.048
+              }
+            }
+          }
+        },
+        "instructions": {
+          "absolute_delta": {
+            "mean": 0.0,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 89.0,
+            "mean": 89.0,
+            "median": 89.0,
+            "minimum": 89.0,
+            "mode": 89,
+            "n": 2000,
+            "p05": 89.0,
+            "p95": 89.0,
+            "stdev": 0.0,
+            "zero_rate": 0.0
+          },
+          "baseline": {
+            "maximum": 89.0,
+            "mean": 89.0,
+            "median": 89.0,
+            "minimum": 89.0,
+            "mode": 89,
+            "n": 2000,
+            "p05": 89.0,
+            "p95": 89.0,
+            "stdev": 0.0,
+            "zero_rate": 0.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "negative": 0,
+            "positive": 0,
+            "zero": 20
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0,
+            "zero_rate": 1.0
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            }
+          }
+        },
+        "machine_clears": {
+          "absolute_delta": {
+            "mean": 0.0005,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 1.0,
+            "mean": 0.0005,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.022360679774997897,
+            "zero_rate": 0.9995
+          },
+          "baseline": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0,
+            "zero_rate": 1.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "negative": 0,
+            "positive": 0,
+            "zero": 20
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 1.0,
+            "mean": 0.0005,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.022360679774997897,
+            "zero_rate": 0.9995
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 1.0,
+                "mean": 0.001,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.03162277660168379,
+                "zero_rate": 0.999
+              },
+              "baseline": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 1.0,
+                "mean": 0.001,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.03162277660168379,
+                "zero_rate": 0.999
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              },
+              "baseline": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            }
+          }
+        },
+        "memory_ordering_clears": {
+          "absolute_delta": {
+            "mean": 0.0,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0,
+            "zero_rate": 1.0
+          },
+          "baseline": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0,
+            "zero_rate": 1.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "negative": 0,
+            "positive": 0,
+            "zero": 20
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0,
+            "zero_rate": 1.0
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              },
+              "baseline": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              },
+              "baseline": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            }
+          }
+        },
+        "recovery_cycles": {
+          "absolute_delta": {
+            "mean": -0.061500000000000554,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 28.0,
+            "mean": 9.9125,
+            "median": 10.0,
+            "minimum": 2.0,
+            "mode": 10,
+            "n": 2000,
+            "p05": 4.0,
+            "p95": 16.0,
+            "stdev": 4.126906762905464,
+            "zero_rate": 0.0
+          },
+          "baseline": {
+            "maximum": 28.0,
+            "mean": 9.974,
+            "median": 10.0,
+            "minimum": 2.0,
+            "mode": 10,
+            "n": 2000,
+            "p05": 4.0,
+            "p95": 16.0,
+            "stdev": 4.0770866213092445,
+            "zero_rate": 0.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": -2.0,
+            "negative": 3,
+            "positive": 0,
+            "zero": 17
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 21.0,
+            "mean": -0.0615,
+            "median": 0.0,
+            "minimum": -18.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": -10.0,
+            "p95": 10.0,
+            "stdev": 5.651343786507475,
+            "zero_rate": 0.1355
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 28.0,
+                "mean": 9.96,
+                "median": 10.0,
+                "minimum": 2.0,
+                "mode": 10,
+                "n": 1000,
+                "p05": 4.0,
+                "p95": 16.0,
+                "stdev": 4.243631511854959,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 28.0,
+                "mean": 10.032,
+                "median": 10.0,
+                "minimum": 2.0,
+                "mode": 10,
+                "n": 1000,
+                "p05": 4.0,
+                "p95": 16.0,
+                "stdev": 4.110458839578846,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 21.0,
+                "mean": -0.072,
+                "median": 0.0,
+                "minimum": -18.0,
+                "mode": -2,
+                "n": 1000,
+                "p05": -10.0,
+                "p95": 10.0,
+                "stdev": 5.7230734373734515,
+                "zero_rate": 0.127
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 25.0,
+                "mean": 9.865,
+                "median": 10.0,
+                "minimum": 2.0,
+                "mode": 10,
+                "n": 1000,
+                "p05": 4.0,
+                "p95": 16.0,
+                "stdev": 4.008346522176176,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 23.0,
+                "mean": 9.916,
+                "median": 10.0,
+                "minimum": 2.0,
+                "mode": 10,
+                "n": 1000,
+                "p05": 4.0,
+                "p95": 16.0,
+                "stdev": 4.04466355872813,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 16.0,
+                "mean": -0.051,
+                "median": 0.0,
+                "minimum": -14.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": -10.0,
+                "p95": 10.0,
+                "stdev": 5.581536755460144,
+                "zero_rate": 0.144
+              }
+            }
+          }
+        }
+      },
+      "unavailable_events": [
+        "recovery_cycles_any"
+      ]
+    },
+    "stalls": {
+      "dataset_audit": {
+        "development": {
+          "attack": {
+            "accepted_rows": 1000,
+            "available_mask": 51,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/stalls/attack_development.csv",
+            "total_rows": 1000
+          },
+          "attack_only_rows": 0,
+          "baseline": {
+            "accepted_rows": 1000,
+            "available_mask": 51,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/stalls/baseline_attack_development.csv",
+            "total_rows": 1000
+          },
+          "baseline_only_rows": 0,
+          "paired_rows": 1000
+        },
+        "test": {
+          "attack": {
+            "accepted_rows": 1000,
+            "available_mask": 51,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/stalls/attack_test.csv",
+            "total_rows": 1000
+          },
+          "attack_only_rows": 0,
+          "baseline": {
+            "accepted_rows": 1000,
+            "available_mask": 51,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/stalls/baseline_attack_test.csv",
+            "total_rows": 1000
+          },
+          "baseline_only_rows": 0,
+          "paired_rows": 1000
+        }
+      },
+      "events": {
+        "cycles": {
+          "absolute_delta": {
+            "mean": -9.663999999999987,
+            "median": -13.0,
+            "mode": -33
+          },
+          "attack": {
+            "maximum": 777.0,
+            "mean": 186.0405,
+            "median": 183.0,
+            "minimum": 150.0,
+            "mode": 162,
+            "n": 2000,
+            "p05": 161.0,
+            "p95": 218.0,
+            "stdev": 25.545197950283328,
+            "zero_rate": 0.0
+          },
+          "baseline": {
+            "maximum": 358.0,
+            "mean": 195.7045,
+            "median": 196.0,
+            "minimum": 159.0,
+            "mode": 195,
+            "n": 2000,
+            "p05": 162.0,
+            "p95": 221.0,
+            "stdev": 20.032569272707704,
+            "zero_rate": 0.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 34.0,
+            "median": -11.75,
+            "minimum": -34.0,
+            "negative": 10,
+            "positive": 7,
+            "zero": 3
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 522.0,
+            "mean": -9.664,
+            "median": -11.0,
+            "minimum": -184.0,
+            "mode": -32,
+            "n": 2000,
+            "p05": -44.0,
+            "p95": 35.0,
+            "stdev": 29.692118734732937,
+            "zero_rate": 0.03
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 350.0,
+                "mean": 183.498,
+                "median": 177.0,
+                "minimum": 150.0,
+                "mode": 162,
+                "n": 1000,
+                "p05": 161.0,
+                "p95": 217.0,
+                "stdev": 21.499633258040244,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 335.0,
+                "mean": 196.764,
+                "median": 197.0,
+                "minimum": 159.0,
+                "mode": 195,
+                "n": 1000,
+                "p05": 162.0,
+                "p95": 222.0,
+                "stdev": 19.882696638676194,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 155.0,
+                "mean": -13.266,
+                "median": -24.0,
+                "minimum": -115.0,
+                "mode": -33,
+                "n": 1000,
+                "p05": -46.0,
+                "p95": 36.0,
+                "stdev": 29.33431004379932,
+                "zero_rate": 0.009
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 777.0,
+                "mean": 188.583,
+                "median": 194.0,
+                "minimum": 158.0,
+                "mode": 162,
+                "n": 1000,
+                "p05": 161.0,
+                "p95": 219.0,
+                "stdev": 28.819987902542614,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 358.0,
+                "mean": 194.645,
+                "median": 195.0,
+                "minimum": 161.0,
+                "mode": 195,
+                "n": 1000,
+                "p05": 162.0,
+                "p95": 220.04999999999995,
+                "stdev": 20.135551033319537,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 522.0,
+                "mean": -6.062,
+                "median": -2.0,
+                "minimum": -184.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": -42.0,
+                "p95": 33.0,
+                "stdev": 29.625154949903735,
+                "zero_rate": 0.051
+              }
+            }
+          }
+        },
+        "instructions": {
+          "absolute_delta": {
+            "mean": 0.0,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 89.0,
+            "mean": 89.0,
+            "median": 89.0,
+            "minimum": 89.0,
+            "mode": 89,
+            "n": 2000,
+            "p05": 89.0,
+            "p95": 89.0,
+            "stdev": 0.0,
+            "zero_rate": 0.0
+          },
+          "baseline": {
+            "maximum": 89.0,
+            "mean": 89.0,
+            "median": 89.0,
+            "minimum": 89.0,
+            "mode": 89,
+            "n": 2000,
+            "p05": 89.0,
+            "p95": 89.0,
+            "stdev": 0.0,
+            "zero_rate": 0.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "negative": 0,
+            "positive": 0,
+            "zero": 20
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0,
+            "zero_rate": 1.0
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            }
+          }
+        },
+        "stalls_l1d_miss": {
+          "absolute_delta": {
+            "mean": -0.2410000000000001,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 50.0,
+            "mean": 1.2825,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 7.0,
+            "stdev": 3.828187725364355,
+            "zero_rate": 0.8205
+          },
+          "baseline": {
+            "maximum": 48.0,
+            "mean": 1.5235,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 8.0,
+            "stdev": 3.4896327196796983,
+            "zero_rate": 0.744
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "negative": 0,
+            "positive": 0,
+            "zero": 20
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 50.0,
+            "mean": -0.241,
+            "median": 0.0,
+            "minimum": -48.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": -7.0,
+            "p95": 4.0,
+            "stdev": 4.072248838823906,
+            "zero_rate": 0.708
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 50.0,
+                "mean": 1.364,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 8.0,
+                "stdev": 4.067191419892362,
+                "zero_rate": 0.813
+              },
+              "baseline": {
+                "maximum": 37.0,
+                "mean": 1.605,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 8.0,
+                "stdev": 3.453534696785585,
+                "zero_rate": 0.731
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 50.0,
+                "mean": -0.241,
+                "median": 0.0,
+                "minimum": -37.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": -7.0,
+                "p95": 5.0,
+                "stdev": 4.2271488958620544,
+                "zero_rate": 0.688
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 36.0,
+                "mean": 1.201,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 7.0,
+                "stdev": 3.573425299116853,
+                "zero_rate": 0.828
+              },
+              "baseline": {
+                "maximum": 48.0,
+                "mean": 1.442,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 8.0,
+                "stdev": 3.525203974674808,
+                "zero_rate": 0.757
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 36.0,
+                "mean": -0.241,
+                "median": 0.0,
+                "minimum": -48.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": -7.0,
+                "p95": 4.0,
+                "stdev": 3.9133404187769347,
+                "zero_rate": 0.728
+              }
+            }
+          }
+        },
+        "stalls_mem_any": {
+          "absolute_delta": {
+            "mean": -9.481500000000011,
+            "median": -20.0,
+            "mode": -35
+          },
+          "attack": {
+            "maximum": 688.0,
+            "mean": 122.606,
+            "median": 116.0,
+            "minimum": 85.0,
+            "mode": 100,
+            "n": 2000,
+            "p05": 100.0,
+            "p95": 152.0,
+            "stdev": 23.74863707418682,
+            "zero_rate": 0.0
+          },
+          "baseline": {
+            "maximum": 276.0,
+            "mean": 132.0875,
+            "median": 136.0,
+            "minimum": 98.0,
+            "mode": 135,
+            "n": 2000,
+            "p05": 102.0,
+            "p95": 155.0,
+            "stdev": 17.914835037119477,
+            "zero_rate": 0.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 34.0,
+            "median": -14.0,
+            "minimum": -35.0,
+            "negative": 11,
+            "positive": 8,
+            "zero": 1
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 510.0,
+            "mean": -9.4815,
+            "median": -10.0,
+            "minimum": -168.0,
+            "mode": -34,
+            "n": 2000,
+            "p05": -42.0,
+            "p95": 35.0,
+            "stdev": 28.973114752114927,
+            "zero_rate": 0.0265
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 273.0,
+                "mean": 119.821,
+                "median": 112.0,
+                "minimum": 85.0,
+                "mode": 100,
+                "n": 1000,
+                "p05": 100.0,
+                "p95": 149.0,
+                "stdev": 19.32191230948157,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 251.0,
+                "mean": 132.617,
+                "median": 136.0,
+                "minimum": 98.0,
+                "mode": 135,
+                "n": 1000,
+                "p05": 102.0,
+                "p95": 155.0,
+                "stdev": 17.84215944479966,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 138.0,
+                "mean": -12.796,
+                "median": -27.0,
+                "minimum": -110.0,
+                "mode": -34,
+                "n": 1000,
+                "p05": -44.0,
+                "p95": 36.049999999999955,
+                "stdev": 29.100570908956875,
+                "zero_rate": 0.006
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 688.0,
+                "mean": 125.391,
+                "median": 127.5,
+                "minimum": 97.0,
+                "mode": 134,
+                "n": 1000,
+                "p05": 100.0,
+                "p95": 153.0,
+                "stdev": 27.19734940788927,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 276.0,
+                "mean": 131.558,
+                "median": 135.0,
+                "minimum": 100.0,
+                "mode": 134,
+                "n": 1000,
+                "p05": 102.0,
+                "p95": 154.0,
+                "stdev": 17.980543260311574,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 510.0,
+                "mean": -6.167,
+                "median": -3.0,
+                "minimum": -168.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": -39.0,
+                "p95": 33.0,
+                "stdev": 28.476060068011463,
+                "zero_rate": 0.047
+              }
+            }
+          }
+        }
+      },
+      "unavailable_events": [
+        "stalled_frontend_cycles",
+        "stalled_backend_cycles"
+      ]
+    },
+    "structural": {
+      "dataset_audit": {
+        "development": {
+          "attack": {
+            "accepted_rows": 1000,
+            "available_mask": 63,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/structural/attack_development.csv",
+            "total_rows": 1000
+          },
+          "attack_only_rows": 0,
+          "baseline": {
+            "accepted_rows": 1000,
+            "available_mask": 63,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/structural/baseline_attack_development.csv",
+            "total_rows": 1000
+          },
+          "baseline_only_rows": 0,
+          "paired_rows": 1000
+        },
+        "test": {
+          "attack": {
+            "accepted_rows": 1000,
+            "available_mask": 63,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/structural/attack_test.csv",
+            "total_rows": 1000
+          },
+          "attack_only_rows": 0,
+          "baseline": {
+            "accepted_rows": 1000,
+            "available_mask": 63,
+            "excluded": {},
+            "path": "/home/ruixiang/hpc-x86-defense/results/Carry_Your_Fault/two_window/exact-a2b/structural/baseline_attack_test.csv",
+            "total_rows": 1000
+          },
+          "baseline_only_rows": 0,
+          "paired_rows": 1000
+        }
+      },
+      "events": {
+        "branch_misses": {
+          "absolute_delta": {
+            "mean": 0.006000000000000005,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 3.0,
+            "mean": 1.0345,
+            "median": 1.0,
+            "minimum": 1.0,
+            "mode": 1,
+            "n": 2000,
+            "p05": 1.0,
+            "p95": 1.0,
+            "stdev": 0.2287704481767247,
+            "zero_rate": 0.0
+          },
+          "baseline": {
+            "maximum": 3.0,
+            "mean": 1.0285,
+            "median": 1.0,
+            "minimum": 0.0,
+            "mode": 1,
+            "n": 2000,
+            "p05": 1.0,
+            "p95": 1.0,
+            "stdev": 0.22070819208408762,
+            "zero_rate": 0.0015
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "negative": 0,
+            "positive": 0,
+            "zero": 20
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 1.0,
+            "mean": 0.006,
+            "median": 0.0,
+            "minimum": -1.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.15803951481867456,
+            "zero_rate": 0.975
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 3.0,
+                "mean": 1.035,
+                "median": 1.0,
+                "minimum": 1.0,
+                "mode": 1,
+                "n": 1000,
+                "p05": 1.0,
+                "p95": 1.0,
+                "stdev": 0.23201040672527778,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 3.0,
+                "mean": 1.033,
+                "median": 1.0,
+                "minimum": 1.0,
+                "mode": 1,
+                "n": 1000,
+                "p05": 1.0,
+                "p95": 1.0,
+                "stdev": 0.22351948675889752,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 1.0,
+                "mean": 0.002,
+                "median": 0.0,
+                "minimum": -1.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.16740377541747387,
+                "zero_rate": 0.972
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 3.0,
+                "mean": 1.034,
+                "median": 1.0,
+                "minimum": 1.0,
+                "mode": 1,
+                "n": 1000,
+                "p05": 1.0,
+                "p95": 1.0,
+                "stdev": 0.22559896917959288,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 3.0,
+                "mean": 1.024,
+                "median": 1.0,
+                "minimum": 0.0,
+                "mode": 1,
+                "n": 1000,
+                "p05": 1.0,
+                "p95": 1.0,
+                "stdev": 0.21787948841382815,
+                "zero_rate": 0.003
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 1.0,
+                "mean": 0.01,
+                "median": 0.0,
+                "minimum": -1.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.14806053465364064,
+                "zero_rate": 0.978
+              }
+            }
+          }
+        },
+        "branches": {
+          "absolute_delta": {
+            "mean": 0.0,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 10.0,
+            "mean": 10.0,
+            "median": 10.0,
+            "minimum": 10.0,
+            "mode": 10,
+            "n": 2000,
+            "p05": 10.0,
+            "p95": 10.0,
+            "stdev": 0.0,
+            "zero_rate": 0.0
+          },
+          "baseline": {
+            "maximum": 10.0,
+            "mean": 10.0,
+            "median": 10.0,
+            "minimum": 10.0,
+            "mode": 10,
+            "n": 2000,
+            "p05": 10.0,
+            "p95": 10.0,
+            "stdev": 0.0,
+            "zero_rate": 0.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "negative": 0,
+            "positive": 0,
+            "zero": 20
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0,
+            "zero_rate": 1.0
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 10.0,
+                "mean": 10.0,
+                "median": 10.0,
+                "minimum": 10.0,
+                "mode": 10,
+                "n": 1000,
+                "p05": 10.0,
+                "p95": 10.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 10.0,
+                "mean": 10.0,
+                "median": 10.0,
+                "minimum": 10.0,
+                "mode": 10,
+                "n": 1000,
+                "p05": 10.0,
+                "p95": 10.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 10.0,
+                "mean": 10.0,
+                "median": 10.0,
+                "minimum": 10.0,
+                "mode": 10,
+                "n": 1000,
+                "p05": 10.0,
+                "p95": 10.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 10.0,
+                "mean": 10.0,
+                "median": 10.0,
+                "minimum": 10.0,
+                "mode": 10,
+                "n": 1000,
+                "p05": 10.0,
+                "p95": 10.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            }
+          }
+        },
+        "cycles": {
+          "absolute_delta": {
+            "mean": -0.21399999999999864,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 428.0,
+            "mean": 196.701,
+            "median": 197.0,
+            "minimum": 158.0,
+            "mode": 195,
+            "n": 2000,
+            "p05": 162.0,
+            "p95": 225.0,
+            "stdev": 21.318438894967407,
+            "zero_rate": 0.0
+          },
+          "baseline": {
+            "maximum": 303.0,
+            "mean": 196.915,
+            "median": 197.0,
+            "minimum": 161.0,
+            "mode": 195,
+            "n": 2000,
+            "p05": 163.0,
+            "p95": 224.0,
+            "stdev": 19.49353159093917,
+            "zero_rate": 0.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 40.5,
+            "median": 0.0,
+            "minimum": -32.5,
+            "negative": 8,
+            "positive": 6,
+            "zero": 6
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 212.0,
+            "mean": -0.214,
+            "median": 0.0,
+            "minimum": -136.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": -37.0,
+            "p95": 41.049999999999955,
+            "stdev": 23.80164833013915,
+            "zero_rate": 0.0475
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 428.0,
+                "mean": 197.004,
+                "median": 197.0,
+                "minimum": 158.0,
+                "mode": 195,
+                "n": 1000,
+                "p05": 162.0,
+                "p95": 225.0,
+                "stdev": 21.92296970304435,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 303.0,
+                "mean": 202.14,
+                "median": 202.0,
+                "minimum": 170.0,
+                "mode": 195,
+                "n": 1000,
+                "p05": 180.0,
+                "p95": 225.0,
+                "stdev": 15.030912425010277,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 212.0,
+                "mean": -5.136,
+                "median": -2.0,
+                "minimum": -93.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": -40.05,
+                "p95": 25.0,
+                "stdev": 21.425418375204544,
+                "zero_rate": 0.042
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 332.0,
+                "mean": 196.398,
+                "median": 197.0,
+                "minimum": 161.0,
+                "mode": 195,
+                "n": 1000,
+                "p05": 162.0,
+                "p95": 224.0,
+                "stdev": 20.702806626208975,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 302.0,
+                "mean": 191.69,
+                "median": 195.0,
+                "minimum": 161.0,
+                "mode": 162,
+                "n": 1000,
+                "p05": 162.0,
+                "p95": 222.0999999999999,
+                "stdev": 21.904147819344438,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 112.0,
+                "mean": 4.708,
+                "median": 1.0,
+                "minimum": -136.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": -34.0,
+                "p95": 47.0,
+                "stdev": 25.02108692264968,
+                "zero_rate": 0.053
+              }
+            }
+          }
+        },
+        "instructions": {
+          "absolute_delta": {
+            "mean": 0.0,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 89.0,
+            "mean": 89.0,
+            "median": 89.0,
+            "minimum": 89.0,
+            "mode": 89,
+            "n": 2000,
+            "p05": 89.0,
+            "p95": 89.0,
+            "stdev": 0.0,
+            "zero_rate": 0.0
+          },
+          "baseline": {
+            "maximum": 89.0,
+            "mean": 89.0,
+            "median": 89.0,
+            "minimum": 89.0,
+            "mode": 89,
+            "n": 2000,
+            "p05": 89.0,
+            "p95": 89.0,
+            "stdev": 0.0,
+            "zero_rate": 0.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "negative": 0,
+            "positive": 0,
+            "zero": 20
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0,
+            "zero_rate": 1.0
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 89.0,
+                "mean": 89.0,
+                "median": 89.0,
+                "minimum": 89.0,
+                "mode": 89,
+                "n": 1000,
+                "p05": 89.0,
+                "p95": 89.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            }
+          }
+        },
+        "retired_loads": {
+          "absolute_delta": {
+            "mean": 0.0,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 21.0,
+            "mean": 21.0,
+            "median": 21.0,
+            "minimum": 21.0,
+            "mode": 21,
+            "n": 2000,
+            "p05": 21.0,
+            "p95": 21.0,
+            "stdev": 0.0,
+            "zero_rate": 0.0
+          },
+          "baseline": {
+            "maximum": 21.0,
+            "mean": 21.0,
+            "median": 21.0,
+            "minimum": 21.0,
+            "mode": 21,
+            "n": 2000,
+            "p05": 21.0,
+            "p95": 21.0,
+            "stdev": 0.0,
+            "zero_rate": 0.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "negative": 0,
+            "positive": 0,
+            "zero": 20
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0,
+            "zero_rate": 1.0
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 21.0,
+                "mean": 21.0,
+                "median": 21.0,
+                "minimum": 21.0,
+                "mode": 21,
+                "n": 1000,
+                "p05": 21.0,
+                "p95": 21.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 21.0,
+                "mean": 21.0,
+                "median": 21.0,
+                "minimum": 21.0,
+                "mode": 21,
+                "n": 1000,
+                "p05": 21.0,
+                "p95": 21.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 21.0,
+                "mean": 21.0,
+                "median": 21.0,
+                "minimum": 21.0,
+                "mode": 21,
+                "n": 1000,
+                "p05": 21.0,
+                "p95": 21.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 21.0,
+                "mean": 21.0,
+                "median": 21.0,
+                "minimum": 21.0,
+                "mode": 21,
+                "n": 1000,
+                "p05": 21.0,
+                "p95": 21.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            }
+          }
+        },
+        "retired_stores": {
+          "absolute_delta": {
+            "mean": 0.0,
+            "median": 0.0,
+            "mode": 0
+          },
+          "attack": {
+            "maximum": 16.0,
+            "mean": 16.0,
+            "median": 16.0,
+            "minimum": 16.0,
+            "mode": 16,
+            "n": 2000,
+            "p05": 16.0,
+            "p95": 16.0,
+            "stdev": 0.0,
+            "zero_rate": 0.0
+          },
+          "baseline": {
+            "maximum": 16.0,
+            "mean": 16.0,
+            "median": 16.0,
+            "minimum": 16.0,
+            "mode": 16,
+            "n": 2000,
+            "p05": 16.0,
+            "p95": 16.0,
+            "stdev": 0.0,
+            "zero_rate": 0.0
+          },
+          "block_median_delta_summary": {
+            "blocks": 20,
+            "maximum": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "negative": 0,
+            "positive": 0,
+            "zero": 20
+          },
+          "n": 2000,
+          "paired_delta": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "median": 0.0,
+            "minimum": 0.0,
+            "mode": 0,
+            "n": 2000,
+            "p05": 0.0,
+            "p95": 0.0,
+            "stdev": 0.0,
+            "zero_rate": 1.0
+          },
+          "splits": {
+            "development": {
+              "attack": {
+                "maximum": 16.0,
+                "mean": 16.0,
+                "median": 16.0,
+                "minimum": 16.0,
+                "mode": 16,
+                "n": 1000,
+                "p05": 16.0,
+                "p95": 16.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 16.0,
+                "mean": 16.0,
+                "median": 16.0,
+                "minimum": 16.0,
+                "mode": 16,
+                "n": 1000,
+                "p05": 16.0,
+                "p95": 16.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            },
+            "test": {
+              "attack": {
+                "maximum": 16.0,
+                "mean": 16.0,
+                "median": 16.0,
+                "minimum": 16.0,
+                "mode": 16,
+                "n": 1000,
+                "p05": 16.0,
+                "p95": 16.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "baseline": {
+                "maximum": 16.0,
+                "mean": 16.0,
+                "median": 16.0,
+                "minimum": 16.0,
+                "mode": 16,
+                "n": 1000,
+                "p05": 16.0,
+                "p95": 16.0,
+                "stdev": 0.0,
+                "zero_rate": 0.0
+              },
+              "n": 1000,
+              "paired_delta": {
+                "maximum": 0.0,
+                "mean": 0.0,
+                "median": 0.0,
+                "minimum": 0.0,
+                "mode": 0,
+                "n": 1000,
+                "p05": 0.0,
+                "p95": 0.0,
+                "stdev": 0.0,
+                "zero_rate": 1.0
+              }
+            }
+          }
+        }
+      },
+      "unavailable_events": []
+    }
+  },
+  "window": "exact-a2b"
+}

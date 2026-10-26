@@ -1,0 +1,23 @@
+{
+  "batching": "non-overlapping; no batch crosses a run directory",
+  "created_utc": "2026-07-15T17:59:31.696988+00:00",
+  "data_domain": "0x434d6ac4",
+  "hostname": "cares-pc",
+  "pair_order": "seeded randomized AB/BA independently for development and test blocks",
+  "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+  "process_isolation": "each collection block is executed by a separate target process",
+  "run_id": 4,
+  "samples": {
+    "calibration": 300000,
+    "collection_block": 1000,
+    "development_per_mode": 100000,
+    "test_per_mode": 100000,
+    "threshold": 300000,
+    "validation": 300000
+  },
+  "schedule_seed": 2026490417,
+  "window_collection_order": [
+    "exact-a2b",
+    "post-fault"
+  ]
+}

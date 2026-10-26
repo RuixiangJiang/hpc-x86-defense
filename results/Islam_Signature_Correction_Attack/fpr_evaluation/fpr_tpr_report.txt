@@ -1,0 +1,30 @@
+Islam Signature Correction victim-side FPR/TPR evaluation
+=========================================================
+Fault: one expanded s1 coefficient bit flipped before NTT(s1)
+PMU window: original polyvecl_ntt(&s1); XOR is outside window
+Target: (0, 17, 0)
+Detector: instructions == 114026, branches == 14376, retired-loads == 24669, retired-stores == 14537
+
+Calibration: 500/500 valid
+Validation:  5000/5000 valid
+Attack:      500/500 valid
+
+False positives: 23/5000 (FPR=0.460000%)
+One-sided 95% FPR upper bound: 0.651083%
+Detected attacks: 4/500 (TPR=0.800000%)
+One-sided 95% TPR lower bound: 0.273712%
+
+Exact one-bit faults: 500/500
+Faulty signatures rejected: 500/500
+Corrected signatures accepted: 500/500
+Architectural modal signature identical: True
+
+[modal counter signature]
+cycles          :      25580 ->      25501 (delta -79)
+instructions    :     114026 ->     114026 (delta +0)
+branches        :      14376 ->      14376 (delta +0)
+branch-misses   :         89 ->         91 (delta +2)
+retired-loads   :      24669 ->      24669 (delta +0)
+retired-stores  :      14537 ->      14537 (delta +0)
+
+[interpretation] The faithful data-only bit flip is architecturally indistinguishable in this victim window. Do not add the software XOR to the PMU interval merely to manufacture an instruction-count signal.

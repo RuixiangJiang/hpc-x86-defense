@@ -1,0 +1,47 @@
+{
+  "calibration_consistency": {
+    "branches": {
+      "expected": 9,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 9,
+      "minimum": 9,
+      "valid_samples": 500
+    },
+    "instructions": {
+      "expected": 44,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 44,
+      "minimum": 44,
+      "valid_samples": 500
+    },
+    "retired-loads": {
+      "expected": 10,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 10,
+      "minimum": 10,
+      "valid_samples": 500
+    },
+    "retired-stores": {
+      "expected": 10,
+      "matching_rate": 1.0,
+      "matching_samples": 500,
+      "maximum": 10,
+      "minimum": 10,
+      "valid_samples": 500
+    }
+  },
+  "detector": "exact_modal_instruction_count",
+  "event": "instructions",
+  "expected": 44,
+  "minimum_running_percent": 95.0,
+  "signature_expected": {
+    "branches": 9,
+    "instructions": 44,
+    "retired-loads": 10,
+    "retired-stores": 10
+  },
+  "target_coeff": 1
+}

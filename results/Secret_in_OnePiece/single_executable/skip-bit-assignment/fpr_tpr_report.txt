@@ -1,0 +1,73 @@
+=== Secret in OnePiece: skip-bit-assignment baseline=single threshold=worst-session ===
+Available candidate features: 34; development-selected features: 8
+  structural-stores.retired_stores                           direction=- dev_auc=1.000000 effect=1.000 session_consistency=1.000 weight=0.2563
+  structural-instructions.instructions                       direction=- dev_auc=0.999253 effect=1.000 session_consistency=1.000 weight=0.2559
+  stalls-mem-any.stalls_mem_any                              direction=+ dev_auc=0.697419 effect=2.023 session_consistency=1.000 weight=0.2048
+  branch-mispred-conditional.conditional_branch_mispredicts  direction=+ dev_auc=0.773278 effect=1.000 session_consistency=0.750 weight=0.1401
+  frontend-uops-undelivered.idq_uops_not_delivered           direction=- dev_auc=0.648566 effect=0.751 session_consistency=1.000 weight=0.0572
+  uops-issued.uops_issued_any                                direction=+ dev_auc=0.644514 effect=0.543 session_consistency=0.750 weight=0.0402
+  structural-instructions.cycles                             direction=+ dev_auc=0.585790 effect=0.523 session_consistency=0.750 weight=0.0230
+  uops-retired.uops_retired_slots                            direction=- dev_auc=0.597269 effect=0.450 session_consistency=0.750 weight=0.0224
+
+Primary sparse directional detector:
+  Single threshold: FP=130/20000 upper=0.007515; threshold=1.065172
+  Validation: FP=38/6000 FPR=0.006333333; attack TP=284/1000 TPR=0.284000000; AUC=0.974800
+  Batch-10 metric=mean-directional-score direction=+
+  Batch threshold: FP=2/2000 upper=0.003145; threshold=0.607866
+  Batch validation: FP=0/600 FPR=0.000000000; attack TP=93/100 TPR=0.930000000; AUC=0.999900
+  Cross-session single validation FPR:
+    s00: 13/2000 (0.006500); first=0.008000 second=0.005000
+    s01: 13/2000 (0.006500); first=0.008000 second=0.005000
+    s02: 12/2000 (0.006000); first=0.007000 second=0.005000
+  Worst-session single FPR=0.006500
+  Cross-session batch validation FPR:
+    s00: 0/200 (0.000000)
+    s01: 0/200 (0.000000)
+    s02: 0/200 (0.000000)
+  Cross-session batch attack TPR:
+    s00: 43/50 (0.860000)
+    s01: 50/50 (1.000000)
+  Worst-session batch FPR=0.000000
+
+Structural-only comparison detector:
+  Single threshold: FP=38/20000 upper=0.002490; threshold=0.000000
+  Validation: FP=21/6000 FPR=0.003500000; attack TP=1000/1000 TPR=1.000000000; AUC=0.999993
+  Batch-10 metric=mean-directional-score direction=+
+  Batch threshold: FP=0/2000 upper=0.001497; threshold=0.025000
+  Batch validation: FP=0/600 FPR=0.000000000; attack TP=100/100 TPR=1.000000000; AUC=1.000000
+  Cross-session single validation FPR:
+    s00: 7/2000 (0.003500); first=0.003000 second=0.004000
+    s01: 8/2000 (0.004000); first=0.004000 second=0.004000
+    s02: 6/2000 (0.003000); first=0.003000 second=0.003000
+  Worst-session single FPR=0.004000
+  Cross-session batch validation FPR:
+    s00: 0/200 (0.000000)
+    s01: 0/200 (0.000000)
+    s02: 0/200 (0.000000)
+  Cross-session batch attack TPR:
+    s00: 50/50 (1.000000)
+    s01: 50/50 (1.000000)
+  Worst-session batch FPR=0.000000
+
+Fault semantic success: 1000/1000
+Largest normalized median shifts on final attack sessions:
+  stalls-mem-any.stalls_mem_any                              session_z_delta=+1.460
+  structural-instructions.cycles                             session_z_delta=+1.295
+  uops-issued.uops_issued_any                                session_z_delta=+1.143
+  structural-instructions.instructions                       session_z_delta=-1.000
+  structural-branch-misses.branch_misses                     session_z_delta=+1.000
+  structural-stores.retired_stores                           session_z_delta=-1.000
+  frontend-mite-uops.mite_uops                               session_z_delta=-0.762
+  uops-executed.uops_executed_thread                         session_z_delta=+0.487
+  resource-stalls-scoreboard.resource_stalls_scoreboard      session_z_delta=+0.450
+  frontend-uops-undelivered.idq_uops_not_delivered           session_z_delta=-0.398
+  cache-l1i.l1i_read_misses                                  session_z_delta=+0.337
+  frontend-dsb-uops.dsb_uops                                 session_z_delta=-0.311
+  recovery-cycles-any.recovery_cycles_any                    session_z_delta=+0.202
+  recovery-cycles.recovery_cycles                            session_z_delta=-0.169
+  uops-retired.uops_retired_slots                            session_z_delta=-0.150
+  execution-bound-loads.execution_bound_on_loads             session_z_delta=+0.049
+  structural-branches.branches                               session_z_delta=+0.000
+  structural-loads.retired_loads                             session_z_delta=+0.000
+  cache-l1d.l1d_read_misses                                  session_z_delta=+0.000
+  cache-llc.llc_read_misses                                  session_z_delta=+0.000

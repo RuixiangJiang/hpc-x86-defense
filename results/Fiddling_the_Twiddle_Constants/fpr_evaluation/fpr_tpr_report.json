@@ -1,0 +1,333 @@
+{
+  "datasets": {
+    "attack": {
+      "collected": 500,
+      "excluded": 0,
+      "exclusion_rate": 0.0,
+      "exclusion_reasons": {},
+      "mode": "zero-twiddle",
+      "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/fpr_evaluation/attack_zero_twiddle.csv",
+      "target": [
+        0,
+        8
+      ],
+      "valid": 500
+    },
+    "calibration": {
+      "collected": 500,
+      "excluded": 0,
+      "exclusion_rate": 0.0,
+      "exclusion_reasons": {},
+      "mode": "baseline",
+      "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/fpr_evaluation/baseline_calibration.csv",
+      "target": [
+        0,
+        8
+      ],
+      "valid": 500
+    },
+    "validation": {
+      "collected": 5000,
+      "excluded": 0,
+      "exclusion_rate": 0.0,
+      "exclusion_reasons": {},
+      "mode": "baseline",
+      "path": "/home/ruixiang/hpc-x86-defense/results/Fiddling_the_Twiddle_Constants/fpr_evaluation/baseline_validation.csv",
+      "target": [
+        0,
+        8
+      ],
+      "valid": 5000
+    }
+  },
+  "event_signatures": {
+    "branch_misses": {
+      "attack": {
+        "maximum": 2,
+        "mean": 1.008,
+        "median": 1.0,
+        "minimum": 0,
+        "mode": 1,
+        "mode_count": 494,
+        "mode_rate": 0.988,
+        "sample_stdev": 0.10936141842386353
+      },
+      "attack_mean_delta": 0.0,
+      "attack_mode_delta": 0,
+      "calibration": {
+        "maximum": 2,
+        "mean": 1.008,
+        "median": 1.0,
+        "minimum": 0,
+        "mode": 1,
+        "mode_count": 494,
+        "mode_rate": 0.988,
+        "sample_stdev": 0.10936141842386353
+      },
+      "validation": {
+        "maximum": 4,
+        "mean": 1.0172,
+        "median": 1.0,
+        "minimum": 0,
+        "mode": 1,
+        "mode_count": 4897,
+        "mode_rate": 0.9794,
+        "sample_stdev": 0.15527067268598815
+      }
+    },
+    "branches": {
+      "attack": {
+        "maximum": 58,
+        "mean": 58.0,
+        "median": 58.0,
+        "minimum": 58,
+        "mode": 58,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "attack_mean_delta": 0.0,
+      "attack_mode_delta": 0,
+      "calibration": {
+        "maximum": 58,
+        "mean": 58.0,
+        "median": 58.0,
+        "minimum": 58,
+        "mode": 58,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "validation": {
+        "maximum": 59,
+        "mean": 58.0002,
+        "median": 58.0,
+        "minimum": 58,
+        "mode": 58,
+        "mode_count": 4999,
+        "mode_rate": 0.9998,
+        "sample_stdev": 0.01414213562373095
+      }
+    },
+    "cycles": {
+      "attack": {
+        "maximum": 387,
+        "mean": 262.664,
+        "median": 261.0,
+        "minimum": 251,
+        "mode": 258,
+        "mode_count": 49,
+        "mode_rate": 0.098,
+        "sample_stdev": 8.801479197961232
+      },
+      "attack_mean_delta": -14.038000000000011,
+      "attack_mode_delta": -23,
+      "calibration": {
+        "maximum": 310,
+        "mean": 276.702,
+        "median": 281.0,
+        "minimum": 258,
+        "mode": 281,
+        "mode_count": 70,
+        "mode_rate": 0.14,
+        "sample_stdev": 9.996452076022594
+      },
+      "validation": {
+        "maximum": 729,
+        "mean": 267.0382,
+        "median": 264.0,
+        "minimum": 247,
+        "mode": 260,
+        "mode_count": 440,
+        "mode_rate": 0.088,
+        "sample_stdev": 12.696069423083632
+      }
+    },
+    "instructions": {
+      "attack": {
+        "maximum": 451,
+        "mean": 451.0,
+        "median": 451.0,
+        "minimum": 451,
+        "mode": 451,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "attack_mean_delta": -2.0,
+      "attack_mode_delta": -2,
+      "calibration": {
+        "maximum": 453,
+        "mean": 453.0,
+        "median": 453.0,
+        "minimum": 453,
+        "mode": 453,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "validation": {
+        "maximum": 454,
+        "mean": 453.0002,
+        "median": 453.0,
+        "minimum": 453,
+        "mode": 453,
+        "mode_count": 4999,
+        "mode_rate": 0.9998,
+        "sample_stdev": 0.01414213562373095
+      }
+    },
+    "retired_loads": {
+      "attack": {
+        "maximum": 98,
+        "mean": 98.0,
+        "median": 98.0,
+        "minimum": 98,
+        "mode": 98,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "attack_mean_delta": -1.0,
+      "attack_mode_delta": -1,
+      "calibration": {
+        "maximum": 99,
+        "mean": 99.0,
+        "median": 99.0,
+        "minimum": 99,
+        "mode": 99,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "validation": {
+        "maximum": 100,
+        "mean": 99.0002,
+        "median": 99.0,
+        "minimum": 99,
+        "mode": 99,
+        "mode_count": 4999,
+        "mode_rate": 0.9998,
+        "sample_stdev": 0.01414213562373095
+      }
+    },
+    "retired_stores": {
+      "attack": {
+        "maximum": 65,
+        "mean": 65.0,
+        "median": 65.0,
+        "minimum": 65,
+        "mode": 65,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "attack_mean_delta": 0.0,
+      "attack_mode_delta": 0,
+      "calibration": {
+        "maximum": 65,
+        "mean": 65.0,
+        "median": 65.0,
+        "minimum": 65,
+        "mode": 65,
+        "mode_count": 500,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      },
+      "validation": {
+        "maximum": 65,
+        "mean": 65.0,
+        "median": 65.0,
+        "minimum": 65,
+        "mode": 65,
+        "mode_count": 5000,
+        "mode_rate": 1.0,
+        "sample_stdev": 0.0
+      }
+    }
+  },
+  "false_positive_metrics": {
+    "false_positive_rate": 0.0002,
+    "false_positives": 1,
+    "first_false_positive_samples": [
+      2433
+    ],
+    "fpr_one_sided_95_percent_upper_bound": 0.0009484177700057,
+    "specificity": 0.9998,
+    "valid_validation_samples": 5000
+  },
+  "model": {
+    "calibration_consistency": {
+      "branches": {
+        "expected": 58,
+        "matching_rate": 1.0,
+        "matching_samples": 500,
+        "maximum": 58,
+        "minimum": 58,
+        "valid_samples": 500
+      },
+      "instructions": {
+        "expected": 453,
+        "matching_rate": 1.0,
+        "matching_samples": 500,
+        "maximum": 453,
+        "minimum": 453,
+        "valid_samples": 500
+      },
+      "retired_loads": {
+        "expected": 99,
+        "matching_rate": 1.0,
+        "matching_samples": 500,
+        "maximum": 99,
+        "minimum": 99,
+        "valid_samples": 500
+      },
+      "retired_stores": {
+        "expected": 65,
+        "matching_rate": 1.0,
+        "matching_samples": 500,
+        "maximum": 65,
+        "minimum": 65,
+        "valid_samples": 500
+      }
+    },
+    "detector": "exact_modal_equality",
+    "events": [
+      "instructions",
+      "branches",
+      "retired_loads",
+      "retired_stores"
+    ],
+    "expected": {
+      "branches": 58,
+      "instructions": 453,
+      "retired_loads": 99,
+      "retired_stores": 65
+    },
+    "fault_injection_counted": false,
+    "fault_model": "instruction skip/corruption of the target twiddle load, leaving a stale zero twiddle while preserving NTT control flow",
+    "measurement_window": "one Dilithium2 forward-NTT twiddle group; baseline includes the original twiddle load; attack omits that load and runs all butterflies with stale zero",
+    "minimum_running_percent": 95.0,
+    "runtime_attack_branch_counted": false,
+    "target": [
+      0,
+      8
+    ]
+  },
+  "semantic_attack_metrics": {
+    "full_oracle_success_rate": 1.0,
+    "full_oracle_successes": 500,
+    "invalid_faulty_signature_rate": 1.0,
+    "invalid_faulty_signatures": 500,
+    "local_fault_semantic_rate": 1.0,
+    "local_fault_semantic_successes": 500
+  },
+  "true_positive_metrics": {
+    "detected_attacks": 500,
+    "false_negative_rate": 0.0,
+    "first_false_negative_samples": [],
+    "tpr_one_sided_95_percent_lower_bound": 0.9940264484836452,
+    "true_positive_rate": 1.0,
+    "valid_attack_samples": 500
+  }
+}

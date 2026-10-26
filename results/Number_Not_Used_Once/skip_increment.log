@@ -1,0 +1,2 @@
+[audit] mode=skip-increment target=4 used=3 expected=4 duplicate=3 progression-errors=4 duplicate-output-equal=1 semantic-valid=1
+[done] mode=skip-increment samples=500 output=/home/ruixiang/hpc-x86-defense/results/Number_Not_Used_Once/skip_increment.csv

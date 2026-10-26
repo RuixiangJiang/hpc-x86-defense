@@ -1,0 +1,35 @@
+================================================================
+Pessl/Prokop skip-shift: independent FPR/TPR evaluation
+================================================================
+
+[frozen detector]
+  rule: flag a sample if retired instructions differs from its modal calibration value
+  instructions     expected=44       calibration-match=500/500 (100.00%)
+  branches         expected=9        calibration-match=500/500 (100.00%)
+  retired-loads    expected=10       calibration-match=500/500 (100.00%)
+  retired-stores   expected=10       calibration-match=500/500 (100.00%)
+
+[datasets]
+  calibration  collected=500    valid=500    excluded=0      exclusion-rate=0.0000%
+  validation   collected=5000   valid=5000   excluded=0      exclusion-rate=0.0000%
+  attack       collected=500    valid=500    excluded=0      exclusion-rate=0.0000%
+
+[semantic oracle]
+  formula changes target bit: 235/500 (47.00%)
+  effective faults (ss mismatch): 235/500 (47.00%)
+  oracle consistency: yes
+
+[false-positive evaluation]
+  false positives: 0/5000
+  observed FPR:    0.000000%
+  specificity:     100.000000%
+  one-sided 95% Clopper-Pearson FPR upper bound: 0.059897%
+
+[attack evaluation]
+  true positives:  500/500
+  observed TPR:    100.000000%
+  observed FNR:    0.000000%
+  one-sided 95% Clopper-Pearson TPR lower bound: 99.402645%
+  exact (-1 instruction, same branch/load/store) signature: 500/500 (100.00%)
+  effective   detections: 235/235 (100.00%)
+  ineffective detections: 265/265 (100.00%)

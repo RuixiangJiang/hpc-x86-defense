@@ -1,0 +1,28 @@
+[fixed detector]
+  events: instructions, branches, retired-loads, retired-stores
+  instructions: expected=333 calibration_match=500/500
+  branches: expected=42 calibration_match=500/500
+  retired-loads: expected=72 calibration_match=500/500
+  retired-stores: expected=40 calibration_match=500/500
+
+[FPR]
+  false positives: 0/5000
+  observed FPR: 0.00000000%
+  one-sided 95% FPR upper bound: 0.05989670%
+
+[attack detection]
+  true positives: 500/500
+  observed TPR: 100.00000000%
+  one-sided 95% TPR lower bound: 99.40264485%
+  fault oracle: 500/500
+
+[observed modal deltas]
+  instructions: -300
+  branches: -35
+  retired-loads: -65
+  retired-stores: -33
+
+[excluded rows]
+  calibration: 0 {}
+  validation: 0 {}
+  attack: 0 {}

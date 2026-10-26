@@ -1,0 +1,460 @@
+{
+  "criteria": {
+    "minimum_direction_consistency": 0.8,
+    "minimum_median_auc": 0.8,
+    "minimum_reportable_runs": 3,
+    "minimum_run_auc": 0.6
+  },
+  "experiment": "Carry Your Fault independent batch replication",
+  "runs_discovered": [
+    "run_000_seed_2026071501",
+    "run_001_seed_2026176230",
+    "run_002_seed_2026280959",
+    "run_003_seed_2026385688",
+    "run_004_seed_2026490417"
+  ],
+  "window_comparisons": {
+    "1000": {
+      "batch_size": 1000,
+      "median_bootstrap_ci_95": [
+        0.11130000000000007,
+        0.24614999999999998
+      ],
+      "median_difference": 0.18130000000000002,
+      "paired_runs": [
+        "run_000_seed_2026071501",
+        "run_001_seed_2026176230",
+        "run_002_seed_2026280959",
+        "run_003_seed_2026385688",
+        "run_004_seed_2026490417"
+      ],
+      "post_minus_exact_auc": [
+        0.16454999999999997,
+        0.24614999999999998,
+        0.11130000000000007,
+        0.2031,
+        0.18130000000000002
+      ]
+    }
+  },
+  "windows": {
+    "exact-a2b": {
+      "1000": {
+        "batch_size": 1000,
+        "direction_consistency": 0.0,
+        "dominant_direction": null,
+        "measured_runs": 5,
+        "order_strata": {
+          "AB": {
+            "all_direction_match": false,
+            "median_auc_across_runs": null,
+            "median_effect_across_runs": null,
+            "runs": 0,
+            "total_blocks": 0
+          },
+          "BA": {
+            "all_direction_match": false,
+            "median_auc_across_runs": null,
+            "median_effect_across_runs": null,
+            "runs": 0,
+            "total_blocks": 0
+          }
+        },
+        "pooled_operating_point": {
+          "attack_batches": 0,
+          "baseline_batches": 0,
+          "false_positives": 0,
+          "fpr": null,
+          "fpr_ci_95": [
+            null,
+            null
+          ],
+          "note": "Counts are pooled only after each run independently learned direction and froze its own threshold. Per-run operating points remain the primary evidence.",
+          "tpr": null,
+          "tpr_ci_95": [
+            null,
+            null
+          ],
+          "true_positives": 0
+        },
+        "reason": "too few independently reportable runs",
+        "reportable_runs": 0,
+        "run_auc": {
+          "maximum": null,
+          "median": null,
+          "median_bootstrap_ci_95": [
+            null,
+            null
+          ],
+          "minimum": null,
+          "values": []
+        },
+        "runs": [
+          {
+            "AB": {
+              "auc": 0.5316,
+              "blocks": 50,
+              "direction_match": true,
+              "mean_effect": -0.0015600000000000002,
+              "median_effect": -0.0014999999999999979
+            },
+            "BA": {
+              "auc": 0.4884,
+              "blocks": 50,
+              "direction_match": false,
+              "mean_effect": 0.0005799999999999997,
+              "median_effect": 0.0009999999999999996
+            },
+            "attack_batches": 100,
+            "auc": 0.5076,
+            "auc_ci_95": [
+              0.43739625000000004,
+              0.5787599999999998
+            ],
+            "baseline_batches": 300,
+            "direction": "decrease",
+            "false_positives": 6,
+            "order_guard_pass": false,
+            "reportable": false,
+            "run": "run_000_seed_2026071501",
+            "status": "PAIR_ORDER_GENERALIZATION_FAILURE",
+            "true_positives": 4
+          },
+          {
+            "AB": {
+              "auc": 0.4878,
+              "blocks": 50,
+              "direction_match": true,
+              "mean_effect": -0.0005600000000000006,
+              "median_effect": -0.0010000000000000009
+            },
+            "BA": {
+              "auc": 0.4872,
+              "blocks": 50,
+              "direction_match": true,
+              "mean_effect": 0.0010400000000000006,
+              "median_effect": -3.469446951953614e-18
+            },
+            "attack_batches": 100,
+            "auc": 0.49075,
+            "auc_ci_95": [
+              0.42635,
+              0.5525212499999999
+            ],
+            "baseline_batches": 300,
+            "direction": "decrease",
+            "false_positives": 7,
+            "order_guard_pass": false,
+            "reportable": false,
+            "run": "run_001_seed_2026176230",
+            "status": "PAIR_ORDER_GENERALIZATION_FAILURE",
+            "true_positives": 5
+          },
+          {
+            "AB": {
+              "auc": 0.6134,
+              "blocks": 50,
+              "direction_match": true,
+              "mean_effect": 0.01104,
+              "median_effect": 0.006999999999999997
+            },
+            "BA": {
+              "auc": 0.5888,
+              "blocks": 50,
+              "direction_match": true,
+              "mean_effect": 0.0071,
+              "median_effect": 0.0049999999999999975
+            },
+            "attack_batches": 100,
+            "auc": 0.5991,
+            "auc_ci_95": [
+              0.52858,
+              0.66705125
+            ],
+            "baseline_batches": 300,
+            "direction": "increase",
+            "false_positives": 4,
+            "order_guard_pass": true,
+            "reportable": false,
+            "run": "run_002_seed_2026280959",
+            "status": "NO_INDEPENDENT_BATCH_SEPARATION",
+            "true_positives": 1
+          },
+          {
+            "AB": {
+              "auc": 0.5228,
+              "blocks": 50,
+              "direction_match": true,
+              "mean_effect": -0.0004999999999999996,
+              "median_effect": 0.0030000000000000027
+            },
+            "BA": {
+              "auc": 0.474,
+              "blocks": 50,
+              "direction_match": false,
+              "mean_effect": -0.0018400000000000005,
+              "median_effect": -0.003999999999999997
+            },
+            "attack_batches": 100,
+            "auc": 0.4987,
+            "auc_ci_95": [
+              0.4144,
+              0.57805125
+            ],
+            "baseline_batches": 300,
+            "direction": "increase",
+            "false_positives": 2,
+            "order_guard_pass": false,
+            "reportable": false,
+            "run": "run_003_seed_2026385688",
+            "status": "PAIR_ORDER_GENERALIZATION_FAILURE",
+            "true_positives": 1
+          },
+          {
+            "AB": {
+              "auc": 0.5118,
+              "blocks": 50,
+              "direction_match": false,
+              "mean_effect": 0.00252,
+              "median_effect": 0.0
+            },
+            "BA": {
+              "auc": 0.5098,
+              "blocks": 50,
+              "direction_match": true,
+              "mean_effect": 0.0008799999999999997,
+              "median_effect": 0.0025000000000000022
+            },
+            "attack_batches": 100,
+            "auc": 0.5084,
+            "auc_ci_95": [
+              0.43493875,
+              0.58036125
+            ],
+            "baseline_batches": 300,
+            "direction": "increase",
+            "false_positives": 3,
+            "order_guard_pass": false,
+            "reportable": false,
+            "run": "run_004_seed_2026490417",
+            "status": "PAIR_ORDER_GENERALIZATION_FAILURE",
+            "true_positives": 1
+          }
+        ],
+        "status": "INSUFFICIENT_REPORTABLE_REPLICATES"
+      }
+    },
+    "post-fault": {
+      "1000": {
+        "batch_size": 1000,
+        "direction_consistency": 1.0,
+        "dominant_direction": "increase",
+        "measured_runs": 5,
+        "order_strata": {
+          "AB": {
+            "all_direction_match": true,
+            "median_auc_across_runs": 0.7112,
+            "median_effect_across_runs": 0.007499999999999999,
+            "runs": 5,
+            "total_blocks": 250
+          },
+          "BA": {
+            "all_direction_match": true,
+            "median_auc_across_runs": 0.6688,
+            "median_effect_across_runs": 0.006000000000000001,
+            "runs": 5,
+            "total_blocks": 250
+          }
+        },
+        "pooled_operating_point": {
+          "attack_batches": 500,
+          "baseline_batches": 1500,
+          "false_positives": 19,
+          "fpr": 0.012666666666666666,
+          "fpr_ci_95": [
+            0.007642918539199881,
+            0.019710167820816575
+          ],
+          "note": "Counts are pooled only after each run independently learned direction and froze its own threshold. Per-run operating points remain the primary evidence.",
+          "tpr": 0.05,
+          "tpr_ci_95": [
+            0.03261518014931475,
+            0.07292762165047845
+          ],
+          "true_positives": 25
+        },
+        "reason": "median run AUC falls below the replication criterion",
+        "reportable_runs": 5,
+        "run_auc": {
+          "maximum": 0.7369,
+          "median": 0.7018,
+          "median_bootstrap_ci_95": [
+            0.67215,
+            0.7369
+          ],
+          "minimum": 0.67215,
+          "values": [
+            0.67215,
+            0.7369,
+            0.7104,
+            0.7018,
+            0.6897
+          ]
+        },
+        "runs": [
+          {
+            "AB": {
+              "auc": 0.7112,
+              "blocks": 50,
+              "direction_match": true,
+              "mean_effect": 0.00834,
+              "median_effect": 0.007499999999999999
+            },
+            "BA": {
+              "auc": 0.6308,
+              "blocks": 50,
+              "direction_match": true,
+              "mean_effect": 0.00588,
+              "median_effect": 0.004999999999999999
+            },
+            "attack_batches": 100,
+            "auc": 0.67215,
+            "auc_ci_95": [
+              0.6019487499999999,
+              0.7397575
+            ],
+            "baseline_batches": 300,
+            "direction": "increase",
+            "false_positives": 3,
+            "order_guard_pass": true,
+            "reportable": true,
+            "run": "run_000_seed_2026071501",
+            "status": "REPORTABLE_BATCH_POINT",
+            "true_positives": 5
+          },
+          {
+            "AB": {
+              "auc": 0.759,
+              "blocks": 50,
+              "direction_match": true,
+              "mean_effect": 0.011040000000000001,
+              "median_effect": 0.0115
+            },
+            "BA": {
+              "auc": 0.7126,
+              "blocks": 50,
+              "direction_match": true,
+              "mean_effect": 0.00782,
+              "median_effect": 0.008
+            },
+            "attack_batches": 100,
+            "auc": 0.7369,
+            "auc_ci_95": [
+              0.6769975,
+              0.7959025000000001
+            ],
+            "baseline_batches": 300,
+            "direction": "increase",
+            "false_positives": 3,
+            "order_guard_pass": true,
+            "reportable": true,
+            "run": "run_001_seed_2026176230",
+            "status": "REPORTABLE_BATCH_POINT",
+            "true_positives": 2
+          },
+          {
+            "AB": {
+              "auc": 0.6194,
+              "blocks": 50,
+              "direction_match": true,
+              "mean_effect": 0.00464,
+              "median_effect": 0.0029999999999999996
+            },
+            "BA": {
+              "auc": 0.7982,
+              "blocks": 50,
+              "direction_match": true,
+              "mean_effect": 0.01202,
+              "median_effect": 0.011000000000000003
+            },
+            "attack_batches": 100,
+            "auc": 0.7104,
+            "auc_ci_95": [
+              0.6264987499999999,
+              0.7865537499999999
+            ],
+            "baseline_batches": 300,
+            "direction": "increase",
+            "false_positives": 5,
+            "order_guard_pass": true,
+            "reportable": true,
+            "run": "run_002_seed_2026280959",
+            "status": "REPORTABLE_BATCH_POINT",
+            "true_positives": 6
+          },
+          {
+            "AB": {
+              "auc": 0.771,
+              "blocks": 50,
+              "direction_match": true,
+              "mean_effect": 0.01018,
+              "median_effect": 0.012
+            },
+            "BA": {
+              "auc": 0.6312,
+              "blocks": 50,
+              "direction_match": true,
+              "mean_effect": 0.006020000000000001,
+              "median_effect": 0.0015000000000000005
+            },
+            "attack_batches": 100,
+            "auc": 0.7018,
+            "auc_ci_95": [
+              0.6186137500000001,
+              0.7763049999999999
+            ],
+            "baseline_batches": 300,
+            "direction": "increase",
+            "false_positives": 4,
+            "order_guard_pass": true,
+            "reportable": true,
+            "run": "run_003_seed_2026385688",
+            "status": "REPORTABLE_BATCH_POINT",
+            "true_positives": 7
+          },
+          {
+            "AB": {
+              "auc": 0.71,
+              "blocks": 50,
+              "direction_match": true,
+              "mean_effect": 0.00776,
+              "median_effect": 0.005000000000000001
+            },
+            "BA": {
+              "auc": 0.6688,
+              "blocks": 50,
+              "direction_match": true,
+              "mean_effect": 0.00768,
+              "median_effect": 0.006000000000000001
+            },
+            "attack_batches": 100,
+            "auc": 0.6897,
+            "auc_ci_95": [
+              0.61522625,
+              0.7591587499999999
+            ],
+            "baseline_batches": 300,
+            "direction": "increase",
+            "false_positives": 4,
+            "order_guard_pass": true,
+            "reportable": true,
+            "run": "run_004_seed_2026490417",
+            "status": "REPORTABLE_BATCH_POINT",
+            "true_positives": 5
+          }
+        ],
+        "status": "REPLICATE_MEDIAN_AUC_FAILURE"
+      }
+    }
+  }
+}
