@@ -1,18 +1,21 @@
-# Wang et al., “Secret in OnePiece” — OR-skip only
+# Wang et al., “Secret in OnePiece” — OR-skip experiment
 
-This directory now implements exactly one software fault simulation from Wang et
-al., **“Secret in OnePiece: Single-Bit Fault Attack on Kyber”**:
+This directory implements one software fault simulation corresponding to the
+single-bit stuck-at-0 mechanism discussed in Wang et al., **“Secret in OnePiece:
+Single-Bit Fault Attack on Kyber”**:
 
 ```text
 skip the target OR instruction
 ```
 
-The previous `skip-bit-assignment` experiment and the multi-feature detector are
-not part of this experiment anymore.
+The experiment no longer includes the earlier `skip-bit-assignment` variant or
+the multi-feature anomaly detector. It measures only the retired-instruction
+count of the complete decoder region and compares a canonical execution with an
+execution in which exactly one target `OR` instruction is omitted.
 
-## Fault semantics
+## 1. Fault model
 
-The measured target sequence is:
+The normal target sequence is:
 
 ```asm
 movzwl  (dst), reg
@@ -21,49 +24,41 @@ orl     TARGET_BIT, reg      # target instruction
 movw    reg, (dst)
 ```
 
-The simulated faulty sequence is:
+The faulted target sequence is:
 
 ```asm
 movzwl  (dst), reg
 andl    CLEAR_MASK, reg
-                              # OR omitted
+                              # target OR skipped
 movw    reg, (dst)
 ```
 
-The target bit is cleared but not reinserted, while the incomplete destination
-word is still written back. The semantic oracle therefore expects exactly one
-changed output bit.
+The load, target-bit clear, and destination writeback are preserved. Only the
+instruction that reinserts the decoded bit is removed.
 
-The expected execution-structure difference is:
+The input generator forces:
 
 ```text
-retired instructions = baseline - 1
+source target bit          = 1
+pre-target destination bit = 0
 ```
 
-Only the generic retired-instruction counter is collected. No store, branch,
-cache, stall, frontend, or uop detector is used.
-
-## Measurement boundary
-
-For each trace:
+Consequently, the normal execution writes `1`, while the OR-skip execution
+writes `0`. The semantic result is a deterministic single-bit stuck-at-0 fault:
 
 ```text
-outside PMU window:
-    generate masked input
-    initialize destination
-    select baseline or attack mode
+changed words = 1
+changed bits  = 1
+```
 
-inside PMU window:
-    reset and enable PMU
-    run complete decoder prefix
-    execute normal OR target or OR-omitted target
-    run complete decoder suffix
-    disable and read PMU
+## 2. Fixed decoder target
 
-outside PMU window:
-    run semantic oracle
-    compare output
-    write CSV row
+The simulated decoder reconstructs 128 destination words with 16 bits per word:
+
+```text
+SIO_NWORDS           = 128
+SIO_WORD_BITS        = 16
+SIO_TOTAL_INSERTIONS = 2048
 ```
 
 The fixed target is:
@@ -71,25 +66,139 @@ The fixed target is:
 ```text
 target word         = 17
 target bit          = 5
-target linear index = 277
+target linear index = 17 × 16 + 5 = 277
 ```
 
-The input generator forces the source bit to 1 and the pre-target destination
-bit to 0. Omitting the OR therefore produces a deterministic stuck-at-0 effect.
+The measured decoder therefore consists of:
 
-## Run
+```text
+277 normal prefix insertions
+1 target insertion
+1770 normal suffix insertions
+```
+
+No per-iteration `if index == target` branch is placed inside the measured
+window.
+
+## 3. Expected retired-instruction effect
+
+Because the faulty helper differs from the normal helper by exactly one omitted
+machine instruction, the expected structural difference is:
+
+```text
+attack retired instructions = baseline retired instructions - 1
+```
+
+Only the Linux generic hardware event
+`PERF_COUNT_HW_INSTRUCTIONS` is collected. Store, branch, cache, stall,
+frontend, and uop events are not used by this experiment.
+
+The verification script checks the generated binary before collection and
+requires that:
+
+1. the baseline helper contains the target `orl`;
+2. the fault helper contains no target `orl`;
+3. both helpers retain the destination load and bit-clear operation;
+4. the fault helper retains the destination writeback;
+5. the fault helper contains exactly one fewer machine instruction than the
+   baseline helper;
+6. semantic validation succeeds for both baseline and attack modes.
+
+## 4. Measurement boundary
+
+For every trace:
+
+```text
+outside the PMU window:
+    generate the masked source words
+    initialize the destination words
+    select the already compiled baseline or attack target
+    prepare semantic-validation state
+
+inside the PMU window:
+    reset and enable the PMU group
+    copy the initial destination
+    execute the complete normal prefix
+    execute the normal target or the OR-omitted target
+    execute the complete normal suffix
+    disable and read the PMU group
+
+outside the PMU window:
+    execute the trusted semantic oracle
+    compare measured and intended outputs
+    count changed words and bits
+    verify CPU affinity and PMU validity
+    write the CSV record
+```
+
+Mode selection, output comparison, hashing, CSV formatting, and semantic-oracle
+operations are therefore excluded from the retired-instruction measurement.
+
+## 5. Measured result
+
+The reported experiment collected 1,000 valid baseline traces and 1,000 valid
+OR-skip traces.
+
+| Metric | Baseline | Skip OR | Attack − baseline |
+|---|---:|---:|---:|
+| Valid samples | 1000 | 1000 | — |
+| Median retired instructions | 43,709 | 43,708 | **−1** |
+| Mean retired instructions | 43,709.001 | 43,708.003 | **−0.998** |
+
+For traces paired by sample index:
+
+```text
+paired common samples = 1000
+paired median delta   = -1
+paired mean delta     = -0.998
+```
+
+The paired delta distribution was:
+
+| Attack − baseline retired instructions | Traces | Rate |
+|---:|---:|---:|
+| `-2` | 1 | 0.10% |
+| `-1` | 996 | 99.60% |
+| `0` | 3 | 0.30% |
+
+Thus, **99.60% of paired measurements reproduced the exact expected
+one-instruction deficit**. The median difference was exactly `-1`, and the mean
+difference was `-0.998`, which is consistent with the semantic construction of
+the fault.
+
+All included traces passed the semantic checks, so the four non-`-1` PMU deltas
+do not represent a different simulated fault effect. They are isolated
+retired-instruction counter deviations around an otherwise deterministic
+one-instruction difference. This distinction is important: the semantic oracle
+confirms that the target bit was stuck at zero, while the PMU records the
+hardware-level retired-instruction observation.
+
+These results support the following conclusion for this controlled x86-64
+software simulation:
+
+> Skipping the single target OR instruction produces a stable one-retired-
+> instruction deficit across the complete decoder measurement region, with an
+> exact `-1` observation in 99.60% of paired traces.
+
+The result should not be interpreted as a universal physical-fault detection
+rate. It characterizes this fixed binary, PMU window, CPU placement, and
+software-emulated instruction omission.
+
+## 6. Running the experiment
+
+Run verification, collection, and analysis:
 
 ```bash
 scripts/Secret_in_OnePiece/run.sh full
 ```
 
-Optional sample count:
+Set the number of traces collected for each mode:
 
 ```bash
 SIO_OR_SAMPLES=5000 scripts/Secret_in_OnePiece/run.sh full
 ```
 
-Other actions:
+Run individual stages:
 
 ```bash
 scripts/Secret_in_OnePiece/run.sh verify
@@ -97,7 +206,13 @@ scripts/Secret_in_OnePiece/run.sh collect
 scripts/Secret_in_OnePiece/run.sh analyze
 ```
 
-## Outputs
+Pin the experiment to a specific CPU when necessary:
+
+```bash
+SIO_CPU_CORE=2 scripts/Secret_in_OnePiece/run.sh full
+```
+
+## 7. Output files
 
 Results are written to:
 
@@ -105,7 +220,7 @@ Results are written to:
 results/Secret_in_OnePiece/orr_only/
 ```
 
-Main files:
+Main artifacts:
 
 ```text
 baseline.csv
@@ -116,21 +231,29 @@ retired_instructions_comparison.txt
 window_audit.txt
 collector_disassembly.txt
 binary_audit.tsv
+cpu_affinity.json
 ```
 
-The comparison report includes baseline and attack sample counts, minimum,
-median, mean, maximum, standard deviation, paired instruction-count deltas, and
-the fraction of paired traces whose attack-minus-baseline difference is exactly
-`-1`.
+The comparison reports include:
 
-## Required environment
+- valid sample counts;
+- minimum, median, mean, maximum, and population standard deviation;
+- unpaired baseline/attack differences;
+- sample-index-paired instruction-count differences;
+- the exact `-1` rate;
+- a histogram of all paired deltas.
 
-The experiment uses Linux `perf_event_open`. The selected CPU must permit access
-to hardware performance counters. When needed, specify a CPU explicitly:
+## 8. Environment requirements
 
-```bash
-SIO_CPU_CORE=2 scripts/Secret_in_OnePiece/run.sh full
+The experiment uses Linux `perf_event_open` and requires access to a hardware
+retired-instruction counter. If PMU initialization fails, check:
+
+```text
+/proc/sys/kernel/perf_event_paranoid
+CPU affinity
+PMU availability on the selected core
+virtual-machine PMU exposure, if applicable
 ```
 
-If PMU initialization fails, check `perf_event_paranoid`, CPU affinity, and PMU
-availability on the selected core.
+Only traces with successful semantic validation, stable CPU affinity, valid PMU
+status, and sufficient PMU running time are included in the comparison.
